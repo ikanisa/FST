@@ -7,7 +7,7 @@ import { siteConfig } from "../../lib/site-config";
 import { ResponsiveImage } from "../components/ResponsiveImage";
 import { BreadcrumbJsonLd } from "../components/JsonLd";
 
-export const metadata = pageMetadata({ title: "Contact FST Advisory", description: "Contact FST on WhatsApp or book a focused advisory meeting about management, tax, accounting, corporate, loan or funding application support.", path: "/contact" });
+export const metadata = pageMetadata({ title: "Contact FST Advisory", description: "Contact FST on WhatsApp or book a focused meeting about management, audit, tax, accounting, corporate, loan or funding application support.", path: "/contact" });
 
 export default function ContactPage() {
   return (

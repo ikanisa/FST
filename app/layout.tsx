@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     template: "%s | FST",
   },
   description:
-    "Management, risk, tax, accounting, corporate, loan application support and funding application support organised around executable outcomes.",
+    "Management, audit, assurance, tax, accounting, corporate and consolidated loan and funding application support organised around executable outcomes.",
   alternates: { canonical: "/" },
   applicationName: "FST",
   category: "professional services",
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "FST | Make the next move workable",
     description:
-      "Management, risk, tax, accounting, corporate, loan application support and funding application support organised around executable outcomes.",
+      "Management, audit, assurance, tax, accounting, corporate and consolidated loan and funding application support organised around executable outcomes.",
     url: "/",
     siteName: "FST",
     locale: "en_MT",
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "FST | Make the next move workable",
     description:
-      "Management, risk, tax, accounting, corporate, loan application support and funding application support organised around executable outcomes.",
+      "Management, audit, assurance, tax, accounting, corporate and consolidated loan and funding application support organised around executable outcomes.",
     images: ["/og.jpg"],
   },
 };
@@ -82,7 +82,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         },
         image: `${siteUrl}/og.jpg`,
         description:
-          "Management, risk, tax, accounting, corporate, loan application support and funding application support organised around executable outcomes.",
+          "Management, audit, assurance, tax, accounting, corporate and consolidated loan and funding application support organised around executable outcomes.",
         areaServed: [
           { "@type": "Country", name: "Malta" },
           { "@type": "Place", name: "International" },
@@ -98,13 +98,15 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         knowsAbout: [
           "Management advisory and business planning",
           "Risk management",
-          "Internal audit and internal controls",
+          "Statutory and voluntary financial statement audit",
+          "Assurance and agreed-upon procedures",
+          "Internal audit and internal controls assurance",
+          "Grant, donor, NGO and project audit",
           "Taxation",
           "Accounting and financial reporting",
           "Payroll",
           "Corporate and administrative services",
-          "Loan application support",
-          "Funding application support",
+          "Loan and funding application support",
         ],
       },
       {

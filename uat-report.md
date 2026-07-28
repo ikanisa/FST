@@ -12,8 +12,9 @@ Profiles: desktop 1440 × 900 and mobile 390 × 844
 | KMFINCO public-asset fingerprint separation | Pass |
 | Clearly named service categories | Pass |
 | Full component lists | Pass |
-| Funding Application Support | Pass |
-| Removed external/statutory audit, investment and fiduciary services | Pass |
+| Consolidated Loan & Funding Application Support | Pass |
+| Audit & Assurance content and professional safeguards | Pass |
+| Removed investment and fiduciary services | Pass |
 | Desktop responsive layout | Pass |
 | Mobile responsive layout and menu | Pass |
 | Broken-image sweep | Pass |
@@ -30,26 +31,26 @@ The browser sweep passed all retained public routes:
 - `/`
 - `/services`
 - `/services/management-consulting`
+- `/services/audit-assurance`
 - `/services/taxation`
 - `/services/accounting-financial-reporting`
 - `/services/corporate-services`
-- `/services/loan-application-support`
-- `/services/funding-applications`
+- `/services/loan-funding-application-support`
 - `/who-we-work-with`
 - `/about` — FST approach and field notes
 - `/contact`
 - `/book`
 
-The removed `/privacy`, `/terms`, `/services/audit-assurance`, `/services/investment-family-office`, `/services/corporate-fiduciary` and superseded `/services/tax-accounting-payroll` routes return 404.
+The removed `/privacy`, `/terms`, `/services/investment-family-office`, `/services/corporate-fiduciary` and superseded `/services/tax-accounting-payroll` routes return 404. The previous loan and funding service routes permanently redirect to the consolidated service.
 
 ## Service-content acceptance
 
-- Management Advisory, Risk & Controls includes management support, business planning and review, feasibility, budgeting and projections, strategy, operating models, risk management, internal audit, internal controls, governance, compliance, policies and performance improvement.
+- Management Advisory, Risk & Controls includes management support, business planning and review, feasibility, budgeting and projections, strategy, operating models, risk management, internal-control design, governance, compliance, policies and performance improvement.
+- Audit & Assurance includes statutory and voluntary audit, limited assurance, agreed-upon procedures, internal audit, controls assurance, operational, donor, NGO, project, compliance, regulatory, systems and special-purpose audit work, with explicit authorisation and independence safeguards.
 - Taxation includes corporate and personal income tax, VAT, payroll and FSS, social security, withholding, property and transfer taxes, international tax and transfer pricing, provisional tax, planning, refunds and MTCA support.
 - Accounting & Financial Reporting includes bookkeeping, reconciliations, management accounts, financial-statement preparation and review, budgets, projections, cash flow, payroll and close.
 - Corporate & Administrative Services includes formation, company secretarial, registers, filings, governance, beneficial ownership, corporate changes and administration.
-- Loan Application Support includes application readiness, borrowing requirement and facility fit, forms, lender financial schedules, evidence packs, queries, approval, drawdown and post-approval monitoring.
-- Funding Application Support includes route scans, eligibility, concept design, official forms, business plans, budgets, state-aid and double-funding checks, evidence packs, submission-readiness review and post-award support.
+- Loan & Funding Application Support combines readiness, route and facility fit, lender schedules, funding eligibility, project design, forms, budgets, financial models, state-aid checks, evidence packs, quality review, queries, approval, drawdown, award setup and post-approval support.
 
 ## Evidence
 

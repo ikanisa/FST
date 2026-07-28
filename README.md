@@ -5,14 +5,14 @@ system, a distinct editorial voice and clearly named service categories.
 
 ## Main service categories
 
-- **Management Advisory, Risk & Controls** — management support, business planning and review, feasibility, budgeting and projections, strategy, operating models, risk management, internal audit, internal controls, governance, compliance, policies and performance improvement.
+- **Management Advisory, Risk & Controls** — management support, business planning and review, feasibility, budgeting and projections, strategy, operating models, risk management, internal-control design, governance, compliance, policies and performance improvement.
+- **Audit & Assurance** — statutory and voluntary financial statement audit, limited assurance, agreed-upon procedures, internal audit, internal-controls assurance, operational, donor, NGO, project, compliance, regulatory, systems and special-purpose audit work.
 - **Taxation** — corporate and personal income tax, VAT, payroll and FSS, social security, withholding tax, property and transfer taxes, international tax and transfer pricing, provisional tax, planning, refunds and MTCA support.
 - **Accounting & Financial Reporting** — bookkeeping, reconciliations, payables and receivables, management accounts, financial-statement preparation and review, payroll, close, budgets, projections and cash-flow support.
 - **Corporate & Administrative Services** — company formation, company secretarial, registers, filings, board and shareholder support, beneficial ownership, corporate changes and ongoing administration.
-- **Loan Application Support** — application readiness, borrowing requirement and facility fit, forms, lender financial schedules, evidence packs, queries, approval, drawdown and post-approval monitoring.
-- **Funding Application Support** — opportunity scans, eligibility, project design, forms, business plans, budgets, state-aid checks, evidence packs, submission-readiness review and post-award support across FONDI.eu, Malta Enterprise and Xjenza Malta routes.
+- **Loan & Funding Application Support** — consolidated readiness, route and facility fit, lender schedules, funding eligibility, project design, forms, budgets, financial models, state-aid checks, evidence packs, quality review, queries, approval, drawdown, award setup and post-approval support.
 
-FST does not advertise external or statutory audit and assurance, investment or family-office services, or fiduciary services. Internal audit remains available as a management, risk and controls service.
+Statutory audit and regulated assurance work is accepted and performed only through appropriately authorised professionals and remains subject to independence, ethical, quality-management and engagement-acceptance requirements. FST does not advertise investment, family-office or fiduciary services.
 
 ## Brand assets
 
@@ -27,11 +27,11 @@ footer and structured organisation metadata.
 - `/` — firm overview
 - `/services` — connected expertise
 - `/services/management-consulting`
+- `/services/audit-assurance`
 - `/services/taxation`
 - `/services/accounting-financial-reporting`
 - `/services/corporate-services`
-- `/services/loan-application-support`
-- `/services/funding-applications`
+- `/services/loan-funding-application-support`
 - `/about` — FST approach and field notes
 - `/contact`
 - `/book` — Google Calendar and Google Meet booking

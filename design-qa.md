@@ -125,10 +125,9 @@ present. No final external form or submission was made during QA.
 ## Annotation pass — clearer funding terminology
 
 - Comment 10: broad or ambiguous use of the term is removed from public labels.
-  The precise categories are `Loan Application Support` and
-  `Funding Application Support`.
-- Existing route paths remain stable so published links and search indexing do
-  not break.
+  The current consolidated category is `Loan & Funding Application Support`.
+- Earlier separate route paths permanently redirect to the consolidated
+  canonical page so published links retain continuity.
 
 ## Annotation pass — contact channels
 
@@ -146,14 +145,14 @@ present. No final external form or submission was made during QA.
 ## Annotation pass — services index
 
 - Comments 15–16: the services-page eyebrow is removed. The unclear finance
-  label is replaced by `Loan Application Support`, with lender-ready
-  application wording beneath it.
+  label is replaced by `Loan & Funding Application Support`, with lender- and
+  funder-ready wording beneath it.
 
 ## Annotation pass — explicit application support
 
 - Comment 17: generic `loan support` and `funding support` wording is replaced
-  with the explicit terms `Loan Application Support` and
-  `Funding Application Support` across public content and service selectors.
+  with the explicit consolidated term `Loan & Funding Application Support`
+  across public content and service selectors.
 - Focused implementation evidence:
   `qa/fst-original/annotation-application-support-833x674.png` at the exact
   annotated 833 × 674 viewport.
@@ -168,11 +167,14 @@ present. No final external form or submission was made during QA.
   `qa/fst-original/annotation-tax-loan-833x674.png` at the exact annotated
   833 × 674 viewport.
 
-## Annotation pass — separated loan applications
+## Current taxonomy — consolidated finance applications
 
-- Comment 19: `Loan Application Support` is now a standalone service.
-  Business planning, plan preparation, plan review, feasibility, budgeting,
-  projections and scenarios sit under Management Advisory, Risk & Controls.
+- The latest instruction supersedes the earlier standalone loan category:
+  loan and funding application services now share one complete service page.
+- Business planning, plan preparation, plan review, feasibility, budgeting,
+  projections and scenarios remain under Management Advisory, Risk & Controls.
+- Audit & Assurance is now a dedicated category with separate independence and
+  professional-authorisation safeguards.
 
 ## Annotation pass — organisation types
 

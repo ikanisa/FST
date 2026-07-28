@@ -1,7 +1,7 @@
 import { pageMetadata } from "../../../lib/seo";
 import { ServicePage } from "../../components/ServicePage";
 
-export const metadata = pageMetadata({ title: "Management Advisory, Risk & Controls", description: "Management advisory, business planning, strategy, risk management, internal audit, internal controls, governance and performance improvement.", path: "/services/management-consulting" });
+export const metadata = pageMetadata({ title: "Management Advisory, Risk & Controls", description: "Management advisory, business planning, strategy, risk management, internal control design, governance, policies and performance improvement.", path: "/services/management-consulting" });
 
 export default function ManagementConsultingPage() {
   return <ServicePage
@@ -9,7 +9,7 @@ export default function ManagementConsultingPage() {
     path="/services/management-consulting"
     eyebrow="Management Advisory, Risk & Controls"
     title="Build an organisation that can decide and deliver."
-    lede="Hands-on support for leaders strengthening business planning, strategy, performance, governance, risk management, internal audit and internal controls."
+    lede="Hands-on support for leaders strengthening business planning, strategy, performance, governance, risk management and internal control design."
     image="/fst-management.webp"
     imageAlt="A leadership workshop mapping actions and operating priorities"
     sectionImages={{
@@ -29,12 +29,11 @@ export default function ManagementConsultingPage() {
       { title: "Strategy & transformation", description: "Strategic choices translated into initiatives, milestones, owners and an operating cadence teams can use." },
       { title: "Operating model design", description: "Practical redesign of roles, decision rights, workflows and management information for the next stage of growth." },
       { title: "Risk management", description: "Risk identification, appetite, assessment, treatment and reporting built into planning and everyday decisions." },
-      { title: "Internal audit", description: "Risk-based plans, focused reviews, clear findings and tracked actions that give management useful assurance." },
-      { title: "Internal controls", description: "Process walkthroughs, control design, documentation, testing, gap remediation and control-owner coaching." },
+      { title: "Internal controls", description: "Process walkthroughs, control design, documentation, gap remediation and control-owner coaching; independent testing is scoped under Audit & Assurance." },
       { title: "Governance & compliance", description: "Committees, delegations, reporting lines and compliance responsibilities made proportionate and workable." },
       { title: "Performance improvement", description: "Root-cause analysis, process redesign, indicators and accountability routines that lift delivery performance." },
       { title: "Policies & procedures", description: "Usable policies, standard procedures, matrices and control evidence designed around how work is actually done." },
     ]}
-    outcomes={["An executable business and management plan", "Decisions with named owners", "Visible risks and tested controls", "An operating rhythm that holds"]}
+    outcomes={["An executable business and management plan", "Decisions with named owners", "Visible risks and designed controls", "An operating rhythm that holds"]}
   />;
 }

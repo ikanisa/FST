@@ -6,9 +6,10 @@ Updated: 28 July 2026
 
 - FST branding across visible copy, metadata, structured data, booking, legal pages and runtime configuration.
 - Clearly separated service categories with detailed component lists.
-- Dedicated end-to-end Funding Application Support across FONDI.eu, Malta Enterprise and Xjenza Malta routes.
-- Internal audit positioned only within Management Advisory, Risk & Controls.
-- External and statutory audit and assurance, investment and family-office, and fiduciary services removed from the public routes, sitemap, assets and copy.
+- Dedicated Audit & Assurance category covering statutory and voluntary audit, assurance, agreed-upon procedures, internal audit, controls, operational, donor, NGO, project, compliance, regulatory, systems and special-purpose work.
+- Statutory and regulated assurance wording includes explicit Malta authorisation, independence, ethics, quality-management and engagement-acceptance safeguards.
+- Consolidated Loan & Funding Application Support across lender, FONDI.eu, Malta Enterprise and Xjenza Malta routes.
+- Investment, family-office and fiduciary services remain removed from public routes, sitemap, assets and copy.
 - First-party `/book` flow with input validation, availability checking and Google Meet event creation when approved Calendar credentials are configured.
 - Responsive desktop and mobile layouts, semantic icons, accessible navigation, SEO metadata, sitemap, robots and production security headers.
 - Production dependency audit at zero known vulnerabilities after the validated overrides.
@@ -30,12 +31,14 @@ Add these hosting values only after each underlying destination has been verifie
 
 ## Human approval boundary
 
-FST may prepare and review funding, grant and finance submission packages. No filing or external submission is made without explicit recorded human approval. The website states that final submission remains with the authorised human.
+FST may prepare and review loan, funding and finance submission packages. No filing or external submission is made without explicit recorded human approval. The website states that final submission remains with the authorised applicant.
+
+Statutory audit and other regulated assurance engagements are accepted and performed only where the responsible auditor or audit firm holds the required Malta authorisation and the engagement passes conflict, independence, competence, ethics, quality-management and acceptance checks.
 
 ## Verification
 
 - `npm run lint` passes.
-- `npm test` passes the production build and all 18 rendered-route, annotation, brand-separation and booking integration tests.
+- `npm test` passes the production build and all 24 rendered-route, content, professional-safeguard, brand-separation and booking integration tests.
 - `npm audit --omit=dev` reports zero production vulnerabilities.
 - Browser QA passes at 1440 × 900 and 390 × 844 with no completed broken images or horizontal overflow.
 - All 14 retained public routes pass the browser sweep at both viewports.

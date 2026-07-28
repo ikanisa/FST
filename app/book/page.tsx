@@ -8,7 +8,7 @@ import { BreadcrumbJsonLd } from "../components/JsonLd";
 
 export const metadata = pageMetadata({
   title: "Book an FST Advisory Meeting",
-  description: "Request a focused FST advisory meeting about management, tax, accounting, corporate, loan application or funding application support.",
+  description: "Request a focused FST meeting about management, audit, tax, accounting, corporate or consolidated loan and funding application support.",
   path: "/book",
 });
 

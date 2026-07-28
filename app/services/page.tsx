@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { Buildings } from "@phosphor-icons/react/dist/ssr/Buildings";
 import { Calculator } from "@phosphor-icons/react/dist/ssr/Calculator";
-import { ChartLineUp } from "@phosphor-icons/react/dist/ssr/ChartLineUp";
 import { Compass } from "@phosphor-icons/react/dist/ssr/Compass";
 import { HandCoins } from "@phosphor-icons/react/dist/ssr/HandCoins";
 import { Receipt } from "@phosphor-icons/react/dist/ssr/Receipt";
+import { ShieldCheck } from "@phosphor-icons/react/dist/ssr/ShieldCheck";
 import { pageMetadata } from "../../lib/seo";
 import { SiteFooter } from "../components/SiteFooter";
 import { SiteHeader } from "../components/SiteHeader";
@@ -15,17 +15,17 @@ import { BreadcrumbJsonLd } from "../components/JsonLd";
 
 export const metadata = pageMetadata({
   title: "Advisory Services in Malta",
-  description: "Explore FST management, risk, tax, accounting, corporate administration, loan application and funding application support for Malta and international organisations.",
+  description: "Explore FST management, audit, assurance, tax, accounting, corporate administration and consolidated loan and funding application support.",
   path: "/services",
 });
 
 const services = [
-  { title: "Management Advisory, Risk & Controls", slug: "management-consulting", image: "/fst-management.webp", copy: "Business planning, strategy, decision support, risk management, internal audit, control improvement and hands-on management follow-through.", tone: "violet", icon: Compass },
+  { title: "Management Advisory, Risk & Controls", slug: "management-consulting", image: "/fst-management.webp", copy: "Business planning, strategy, decision support, risk management, control design and hands-on management follow-through.", tone: "violet", icon: Compass },
+  { title: "Audit & Assurance", slug: "audit-assurance", image: "/fst-insights.webp", copy: "Statutory and voluntary audit, assurance, agreed-upon procedures, internal audit, controls, compliance, donor, NGO and project audit work.", tone: "cobalt", icon: ShieldCheck },
   { title: "Taxation", slug: "taxation", image: "/fst-tax.webp", copy: "Complete Malta tax support covering corporate and personal income tax, VAT, payroll and FSS, social security, withholding, property, transfer and international tax.", tone: "orange", icon: Receipt },
   { title: "Accounting & Financial Reporting", slug: "accounting-financial-reporting", image: "/fst-accounting.webp", copy: "Finance records, close, reporting, payroll and forward-looking information prepared for management use.", tone: "blue", icon: Calculator },
   { title: "Corporate & Administrative Services", slug: "corporate-services", image: "/fst-corporate.webp", copy: "Company records, governance actions, statutory filings and recurring administration kept orderly and current.", tone: "cobalt", icon: Buildings },
-  { title: "Loan Application Support", slug: "loan-application-support", image: "/fst-finance.webp", copy: "Borrowing needs, financial schedules, application forms and evidence organised into a complete lender-ready file.", tone: "rose", icon: ChartLineUp },
-  { title: "Funding Application Support", slug: "funding-applications", image: "/funding-application-services.webp", copy: "Full funding application support across FONDI.eu, Malta Enterprise, Xjenza Malta and connected routes.", tone: "cobalt", icon: HandCoins },
+  { title: "Loan & Funding Application Support", slug: "loan-funding-application-support", image: "/fst-finance.webp", copy: "One complete financing file for bank lending, FONDI.eu, Malta Enterprise, Xjenza Malta and connected funding routes.", tone: "rose", icon: HandCoins },
 ];
 
 export default function ServicesPage() {
@@ -36,7 +36,7 @@ export default function ServicesPage() {
       <section className="index-hero image-index-hero services-index-hero">
         <div>
           <h1>Build the right team around the work.</h1>
-          <p>FST combines recurring finance and compliance services with focused advisory, loan application support and funding application support—without separating the commercial story from the evidence behind it.</p>
+          <p>FST combines management, audit, finance and compliance services with consolidated loan and funding application support—without separating the commercial story from the evidence behind it.</p>
         </div>
         <ResponsiveImage src="/fst-collaboration.webp" alt="FST specialists coordinating workstreams in an open project studio" sizes="(max-width: 900px) 100vw, 80vw" loading="eager" fetchPriority="high" />
       </section>

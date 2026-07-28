@@ -11,7 +11,7 @@ export function SiteFooter() {
         <BrandLogo />
       </Link>
       <div className="footer-summary">
-        <p>Plans, numbers, obligations and funding work—managed as a practical programme.</p>
+        <p>Plans, audits, numbers, obligations and financing work—managed as a practical programme.</p>
         <span>{siteConfig.serviceArea}</span>
       </div>
       <div className="footer-links">

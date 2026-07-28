@@ -2,13 +2,13 @@ import Link from "next/link";
 import { Briefcase } from "@phosphor-icons/react/dist/ssr/Briefcase";
 import { Buildings } from "@phosphor-icons/react/dist/ssr/Buildings";
 import { Calculator } from "@phosphor-icons/react/dist/ssr/Calculator";
-import { ChartLineUp } from "@phosphor-icons/react/dist/ssr/ChartLineUp";
 import { CirclesThreePlus } from "@phosphor-icons/react/dist/ssr/CirclesThreePlus";
 import { Compass } from "@phosphor-icons/react/dist/ssr/Compass";
 import { Ear } from "@phosphor-icons/react/dist/ssr/Ear";
 import { GlobeHemisphereWest } from "@phosphor-icons/react/dist/ssr/GlobeHemisphereWest";
 import { HandCoins } from "@phosphor-icons/react/dist/ssr/HandCoins";
 import { Receipt } from "@phosphor-icons/react/dist/ssr/Receipt";
+import { ShieldCheck } from "@phosphor-icons/react/dist/ssr/ShieldCheck";
 import { Target } from "@phosphor-icons/react/dist/ssr/Target";
 import { UsersThree } from "@phosphor-icons/react/dist/ssr/UsersThree";
 import { EditorialSlider } from "./components/EditorialSlider";
@@ -22,14 +22,26 @@ const capabilities = [
   {
     title: "Management Advisory, Risk & Controls",
     slug: "management-consulting",
-    intro: "Senior support for decisions, risk ownership, internal review and operational follow-through.",
+    intro: "Senior support for decisions, business planning, risk ownership, control design and operational follow-through.",
     items: [
       "Business planning, feasibility and operating priorities",
-      "Risk ownership and internal audit reviews",
+      "Risk ownership, governance and control design",
       "Control design and delivery improvement",
     ],
     tone: "lilac",
     icon: Compass,
+  },
+  {
+    title: "Audit & Assurance",
+    slug: "audit-assurance",
+    intro: "Independent audit and assurance work built around risk, evidence, professional judgement and clear reporting.",
+    items: [
+      "Statutory and voluntary financial statement audit",
+      "Internal audit, controls and compliance assurance",
+      "Grant, donor, NGO and project audit",
+    ],
+    tone: "sky",
+    icon: ShieldCheck,
   },
   {
     title: "Taxation",
@@ -68,27 +80,15 @@ const capabilities = [
     icon: Buildings,
   },
   {
-    title: "Loan Application Support",
-    slug: "loan-application-support",
-    intro: "A complete lender-facing application built around the borrowing need, repayment capacity, financial schedules and supporting evidence.",
+    title: "Loan & Funding Application Support",
+    slug: "loan-funding-application-support",
+    intro: "One controlled financing file for lender applications, public funding routes, financial schedules and supporting evidence.",
     items: [
-      "Loan application readiness and facility fit",
-      "Application forms, financial schedules and evidence",
-      "Lender queries, approval and drawdown support",
+      "Loan, grant, incentive and innovation-route fit",
+      "Applications, financial models, budgets and evidence",
+      "Lender or funder queries, approval and award setup",
     ],
     tone: "sand",
-    icon: ChartLineUp,
-  },
-  {
-    title: "Funding Application Support",
-    slug: "funding-applications",
-    intro: "Managed funding application support from programme fit and project design through evidence, review and award readiness.",
-    items: [
-      "Current FONDI.eu, Malta Enterprise and Xjenza routes",
-      "Project cases, eligible-cost budgets and evidence maps",
-      "Quality review, authorised submission and award setup",
-    ],
-    tone: "sky",
     icon: HandCoins,
   },
 ];
@@ -117,8 +117,8 @@ export default function Home() {
         <div className="hero-copy">
           <h1>Turn ambition into an executable plan.</h1>
           <p className="hero-lede">
-            FST brings business planning, finance, tax, governance and funding
-            application support into an accountable programme of work.
+            FST brings management, audit, finance, tax, governance and loan and
+            funding application support into an accountable programme of work.
           </p>
           <PrimaryCta className="primary-button" />
         </div>
@@ -200,7 +200,7 @@ export default function Home() {
         </div>
         <SectionVisual src="/fst-management.webp" alt="A facilitator and leadership team mapping controls on a glass wall" className="consulting-visual" />
         <div className="consulting-grid">
-          <div><span className="consulting-label">Review</span><h3>Internal audit assignments</h3><p>Targeted reviews test how work actually happens, surface exposure and track agreed corrective action.</p></div>
+          <div><span className="consulting-label">Assure</span><h3>Audit & assurance assignments</h3><p>Independent, risk-led work tests evidence, reports clear conclusions and keeps significant findings visible.</p></div>
           <div><span className="consulting-label">Govern</span><h3>Risk and control ownership</h3><p>Practical frameworks give each material risk an owner, response, indicator and reporting route.</p></div>
           <div><span className="consulting-label">Improve</span><h3>Operating model redesign</h3><p>Roles, hand-offs and decision rights are rebuilt around the result the organisation must deliver.</p></div>
           <div><span className="consulting-label">Execute</span><h3>Management follow-through</h3><p>Implementation support keeps actions visible, sequenced and connected to useful management information.</p></div>

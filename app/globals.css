@@ -1314,6 +1314,7 @@ h1 {
 .service-intro-visual { height: 430px; }
 
 .service-intro h2,
+.service-professional-note h2,
 .service-outcomes h2,
 .subpage-cta h2,
 .index-hero h1,
@@ -1322,6 +1323,31 @@ h1 {
   margin: 0;
   font-size: clamp(50px, 5.2vw, 78px);
   line-height: 0.98;
+}
+
+.service-professional-note {
+  margin-bottom: 86px;
+  padding: 42px 48px;
+  display: grid;
+  grid-template-columns: 0.55fr 1.45fr;
+  gap: 48px;
+  align-items: start;
+  border: 1px solid rgba(31, 85, 137, 0.2);
+  border-left: 4px solid var(--coral);
+  border-radius: 20px;
+  background: linear-gradient(135deg, #fffaf7, #f3f7ff);
+}
+
+.service-professional-note h2 {
+  max-width: 720px;
+  margin: 0 0 18px;
+  font-size: clamp(34px, 3.2vw, 50px);
+}
+
+.service-professional-note p:last-child {
+  max-width: 850px;
+  margin: 0;
+  color: var(--ink-soft);
 }
 
 .service-offerings-shell {
@@ -1847,7 +1873,7 @@ h1 {
   .subpage-hero { width: calc(100% - 36px); grid-template-columns: 1fr; }
   .subpage-copy { padding: 70px 36px; }
   .subpage-image-wrap { min-height: 520px; clip-path: none; }
-  .service-intro, .service-references { grid-template-columns: 1fr; gap: 20px; }
+  .service-intro, .service-references, .service-professional-note { grid-template-columns: 1fr; gap: 20px; }
   .service-offerings { grid-template-columns: 1fr 1fr; }
   .service-offerings article:nth-child(3n) { border-right: 1px solid var(--line); }
   .service-offerings article:nth-child(2n) { border-right: 0; }
@@ -1877,6 +1903,7 @@ h1 {
   .subpage-image-wrap { min-height: 360px; }
   .service-intro, .index-hero { width: calc(100% - 32px); padding: 90px 0 58px; }
   .service-references { width: calc(100% - 28px); padding: 38px 24px; }
+  .service-professional-note { width: calc(100% - 28px); padding: 34px 26px; }
   .service-intro-visual, .service-offerings-visual, .service-outcomes-visual, .subpage-cta-visual, .about-principles-visual { height: 300px; }
   .service-offerings { grid-template-columns: 1fr; }
   .service-offerings article, .service-offerings article:nth-child(3n) { border-right: 0; }

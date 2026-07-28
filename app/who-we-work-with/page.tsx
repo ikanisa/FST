@@ -25,15 +25,15 @@ const clientGroups = [
     copy: "We help small and medium-sized businesses organise growth, management information, tax, finance and control priorities around accountable owners.",
     image: "/fst-operations.webp",
     alt: "An SME leadership team coordinating operational and financial priorities",
-    priorities: ["Management and business planning", "Accounting, tax and working capital", "Risk, internal controls and performance"],
+    priorities: ["Management and business planning", "Accounting, tax and working capital", "Audit, risk, internal controls and performance"],
     className: "client-group-smes",
   },
   {
     title: "Established businesses & finance teams",
-    copy: "FST joins management, finance, tax, governance and transaction evidence when a major decision, change programme or financing requirement is ahead.",
+    copy: "FST joins management, audit, finance, tax, governance and transaction evidence when a major decision, change programme or financing requirement is ahead.",
     image: "/fst-finance.webp",
     alt: "A finance team preparing management and lender evidence for a major decision",
-    priorities: ["Management advisory and transformation", "Reporting, taxation and corporate administration", "Loan and funding application support"],
+    priorities: ["Management advisory and transformation", "Audit, reporting, taxation and corporate administration", "Loan and funding application support"],
     className: "client-group-established",
   },
   {
@@ -41,7 +41,7 @@ const clientGroups = [
     copy: "We support mission-led organisations with proportionate governance, funding applications, budgets, controls, reporting and accountable programme delivery.",
     image: "/fst-collaboration.webp",
     alt: "A voluntary organisation team reviewing programme delivery and accountability",
-    priorities: ["Governance, policies and internal controls", "Funding applications and grant budgets", "Financial reporting and programme accountability"],
+    priorities: ["Governance, internal audit and controls", "Loan and funding applications with grant budgets", "Project audit, financial reporting and accountability"],
     className: "client-group-nonprofits",
   },
   {
@@ -49,7 +49,7 @@ const clientGroups = [
     copy: "For cross-border or accountability-intensive work, we provide a locally attentive team for governance, reporting, funding and delivery evidence.",
     image: "/fst-international.webp",
     alt: "An international programme team reviewing delivery and reporting evidence",
-    priorities: ["Programme delivery and management support", "Financial reporting and accountability", "Funding application support and post-award files"],
+    priorities: ["Programme delivery and management support", "Donor, project and compliance audit", "Funding application support and post-award files"],
     className: "client-group-organisations",
   },
 ];

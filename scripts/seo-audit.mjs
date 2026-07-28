@@ -68,7 +68,9 @@ for (const url of urls) {
 
 for (const [legacyPath, canonicalPath] of [
   ["/services/tax-vat", "/services/taxation"],
-  ["/services/business-planning-finance-applications", "/services/loan-application-support"],
+  ["/services/business-planning-finance-applications", "/services/loan-funding-application-support"],
+  ["/services/loan-application-support", "/services/loan-funding-application-support"],
+  ["/services/funding-applications", "/services/loan-funding-application-support"],
 ]) {
   const response = await fetch(`${baseUrl}${legacyPath}`, { redirect: "manual" });
   assert([301, 308].includes(response.status), `${legacyPath} returned ${response.status} instead of a permanent redirect`, failures);

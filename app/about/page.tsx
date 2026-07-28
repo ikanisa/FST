@@ -26,7 +26,7 @@ export default function AboutPage() {
         <div className="subpage-copy">
           <p className="eyebrow">The FST approach</p>
           <h1>Your question. The relevant expertise.</h1>
-          <p>We assemble management, risk, tax, accounting, corporate, finance and funding expertise around the result you need to achieve.</p>
+          <p>We assemble management, audit, assurance, risk, tax, accounting, corporate and finance expertise around the result you need to achieve.</p>
           <PrimaryCta className="primary-button" />
         </div>
         <div className="subpage-image-wrap"><ResponsiveImage src="/fst-collaboration.webp" alt="A multidisciplinary FST team working through a client priority" className="subpage-image" sizes="(max-width: 900px) 100vw, 52vw" loading="eager" fetchPriority="high" decoding="async" /></div>
@@ -38,7 +38,7 @@ export default function AboutPage() {
         <SectionVisual src="/fst-management.webp" alt="A facilitated workshop connecting evidence, owners and next actions" className="about-principles-visual" />
         <div className="principle-grid">
           <article><span className="item-icon principle-icon" aria-hidden="true"><Binoculars size={21} weight="regular" /></span><h3>Read the whole situation</h3><p>We establish the decision, constraints, owners and available evidence before proposing a workstream.</p></article>
-          <article><span className="item-icon principle-icon" aria-hidden="true"><CirclesThreePlus size={21} weight="regular" /></span><h3>Work across boundaries</h3><p>The plan keeps tax, reporting, controls, corporate requirements, finance and funding dependencies in one view.</p></article>
+          <article><span className="item-icon principle-icon" aria-hidden="true"><CirclesThreePlus size={21} weight="regular" /></span><h3>Work across boundaries</h3><p>The plan keeps audit, tax, reporting, controls, corporate requirements and financing dependencies in one view.</p></article>
           <article><span className="item-icon principle-icon" aria-hidden="true"><Target size={21} weight="regular" /></span><h3>Leave an executable route</h3><p>Outputs identify what must happen, who owns it, what evidence is needed and how progress will be reviewed.</p></article>
         </div>
       </section>
@@ -52,7 +52,7 @@ export default function AboutPage() {
         <div className="combined-field-notes-heading">
           <p className="section-index">Field notes</p>
           <h2 id="field-notes-title">Working notes for decisions in motion.</h2>
-          <p>Short, evidence-led perspectives drawn from FST’s management, finance, tax, reporting and funding work.</p>
+          <p>Short, evidence-led perspectives drawn from FST’s management, audit, finance, tax, reporting and funding work.</p>
         </div>
         <div className="article-grid">
           {fieldNotes.map((article) => (

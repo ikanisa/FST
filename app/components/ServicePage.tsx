@@ -35,6 +35,10 @@ type ServicePageProps = {
   outcomes: string[];
   accent: "cobalt" | "violet" | "orange" | "rose" | "blue";
   referenceLinks?: Array<{ label: string; href: string; description: string }>;
+  professionalNote?: {
+    title: string;
+    description: string;
+  };
   sectionImages: {
     intro: { src: string; alt: string };
     offerings: { src: string; alt: string };
@@ -85,6 +89,7 @@ export function ServicePage({
   accent,
   sectionImages,
   referenceLinks,
+  professionalNote,
 }: ServicePageProps) {
   return (
     <main id="main-content" tabIndex={-1}>
@@ -122,6 +127,16 @@ export function ServicePage({
         </div>
         <SectionVisual src={sectionImages.intro.src} alt={sectionImages.intro.alt} className="service-intro-visual" />
       </section>
+
+      {professionalNote && (
+        <aside className="service-professional-note section-shell" aria-labelledby="professional-note-title">
+          <p className="section-index">Professional requirements</p>
+          <div>
+            <h2 id="professional-note-title">{professionalNote.title}</h2>
+            <p>{professionalNote.description}</p>
+          </div>
+        </aside>
+      )}
 
       {referenceLinks && (
         <section className="service-references section-shell" aria-labelledby="service-reference-title">
