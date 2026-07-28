@@ -27,10 +27,10 @@ footer and structured organisation metadata.
 - `/` — firm overview
 - `/services` — connected expertise
 - `/services/management-consulting`
-- `/services/tax-vat`
+- `/services/taxation`
 - `/services/accounting-financial-reporting`
 - `/services/corporate-services`
-- `/services/business-planning-finance-applications`
+- `/services/loan-application-support`
 - `/services/funding-applications`
 - `/about` — FST approach and field notes
 - `/contact`

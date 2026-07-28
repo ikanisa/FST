@@ -4,12 +4,15 @@ import { SiteFooter } from "../components/SiteFooter";
 import { SiteHeader } from "../components/SiteHeader";
 import { TrackedLink } from "../components/TrackedLink";
 import { siteConfig } from "../../lib/site-config";
+import { ResponsiveImage } from "../components/ResponsiveImage";
+import { BreadcrumbJsonLd } from "../components/JsonLd";
 
-export const metadata = pageMetadata({ title: "Contact", description: "Contact FST on WhatsApp or book a Google Calendar meeting.", path: "/contact" });
+export const metadata = pageMetadata({ title: "Contact FST Advisory", description: "Contact FST on WhatsApp or book a focused advisory meeting about management, tax, accounting, corporate, loan or funding application support.", path: "/contact" });
 
 export default function ContactPage() {
   return (
     <main id="main-content" tabIndex={-1}>
+      <BreadcrumbJsonLd items={[{ name: "Home", path: "/" }, { name: "Contact", path: "/contact" }]} />
       <SiteHeader />
       <section className="contact-page section-shell">
         <div className="contact-page-intro">
@@ -19,7 +22,7 @@ export default function ContactPage() {
           <div className="contact-options" aria-label="Direct contact options">
             <TrackedLink href={siteConfig.whatsappUrl} event="contact_whatsapp_click" target="_blank" rel="noreferrer"><span>WhatsApp</span><strong>{siteConfig.whatsappDisplay}</strong></TrackedLink>
           </div>
-          <img src="/fst-consultation.webp" alt="A private first conversation with an FST adviser" width="1536" height="1024" loading="lazy" decoding="async" />
+          <ResponsiveImage src="/fst-consultation.webp" alt="A private first conversation with an FST adviser" sizes="(max-width: 900px) 100vw, 60vw" loading="lazy" decoding="async" />
         </div>
         <aside className="contact-page-form contact-booking-card" aria-labelledby="contact-booking-title">
           <p className="eyebrow">Schedule a first discussion</p>

@@ -2,13 +2,15 @@ import { pageMetadata } from "../../../lib/seo";
 import { ServicePage } from "../../components/ServicePage";
 
 export const metadata = pageMetadata({
-  title: "Funding Application Support",
+  title: "Malta Funding Application Support",
   description: "End-to-end funding application support across FONDI.eu, Malta Enterprise and Xjenza Malta programmes.",
   path: "/services/funding-applications",
 });
 
 export default function FundingApplicationsPage() {
   return <ServicePage
+    serviceName="Funding Application Support"
+    path="/services/funding-applications"
     eyebrow="Funding Application Support"
     title="Convert an eligible project into a complete funding application."
     lede="Full funding application preparation and review support for relevant FONDI.eu, Malta Enterprise and Xjenza Malta routes—from call screening through authorised human submission."

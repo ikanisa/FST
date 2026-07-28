@@ -4,16 +4,18 @@ import { BookingForm } from "../components/BookingForm";
 import { SiteFooter } from "../components/SiteFooter";
 import { SiteHeader } from "../components/SiteHeader";
 import { TrackedLink } from "../components/TrackedLink";
+import { BreadcrumbJsonLd } from "../components/JsonLd";
 
 export const metadata = pageMetadata({
-  title: "Arrange a call",
-  description: "Request an FST advisory meeting through Google Calendar and Google Meet.",
+  title: "Book an FST Advisory Meeting",
+  description: "Request a focused FST advisory meeting about management, tax, accounting, corporate, loan application or funding application support.",
   path: "/book",
 });
 
 export default function BookPage() {
   return (
     <main id="main-content" tabIndex={-1}>
+      <BreadcrumbJsonLd items={[{ name: "Home", path: "/" }, { name: "Book a Meeting", path: "/book" }]} />
       <SiteHeader />
       <section className="booking-page section-shell">
         <div className="booking-intro">

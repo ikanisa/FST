@@ -2,9 +2,11 @@ import { pageMetadata } from "../../lib/seo";
 import { SiteFooter } from "../components/SiteFooter";
 import { SiteHeader } from "../components/SiteHeader";
 import { PrimaryCta } from "../components/PrimaryCta";
+import { ResponsiveImage } from "../components/ResponsiveImage";
+import { BreadcrumbJsonLd } from "../components/JsonLd";
 
 export const metadata = pageMetadata({
-  title: "Organisations",
+  title: "Businesses & Organisations We Support",
   description: "Senior-led support for start-ups, self-employed professionals, SMEs, established businesses, NGOs, voluntary organisations and international programmes.",
   path: "/who-we-work-with",
 });
@@ -55,6 +57,7 @@ const clientGroups = [
 export default function WhoWeWorkWithPage() {
   return (
     <main id="main-content" tabIndex={-1}>
+      <BreadcrumbJsonLd items={[{ name: "Home", path: "/" }, { name: "Organisations", path: "/who-we-work-with" }]} />
       <SiteHeader />
 
       <section className="client-hero">
@@ -67,7 +70,7 @@ export default function WhoWeWorkWithPage() {
           </div>
         </div>
         <div className="client-hero-visual">
-          <img src="/fst-collaboration.webp" alt="A diverse advisory team working alongside organisational leaders" width="1536" height="1024" loading="eager" fetchPriority="high" decoding="async" />
+          <ResponsiveImage src="/fst-collaboration.webp" alt="A diverse advisory team working alongside organisational leaders" sizes="(max-width: 900px) 100vw, 60vw" loading="eager" fetchPriority="high" decoding="async" />
           <aside>
             <strong>A joined-up working file.</strong>
             <span>A shared objective, named owners and evidence that can be reviewed.</span>
@@ -83,7 +86,7 @@ export default function WhoWeWorkWithPage() {
         <div className="client-groups-grid">
           {clientGroups.map((group) => (
             <article className={`client-group-card ${group.className}`} key={group.title}>
-              <img src={group.image} alt={group.alt} width="1536" height="1024" loading="lazy" decoding="async" />
+              <ResponsiveImage src={group.image} alt={group.alt} sizes="(max-width: 720px) 100vw, 50vw" loading="lazy" decoding="async" />
               <div>
                 <h3>{group.title}</h3>
                 <p>{group.copy}</p>
@@ -103,7 +106,7 @@ export default function WhoWeWorkWithPage() {
           <p>Tell us what must be decided, financed, filed, controlled or delivered. We will map the relevant FST workstreams around it.</p>
           <PrimaryCta className="primary-button" />
         </div>
-        <img src="/fst-consultation.webp" alt="A private first meeting focused on a business outcome" width="1536" height="1024" loading="lazy" decoding="async" />
+        <ResponsiveImage src="/fst-consultation.webp" alt="A private first meeting focused on a business outcome" sizes="(max-width: 900px) 100vw, 45vw" loading="lazy" decoding="async" />
       </section>
 
       <SiteFooter />

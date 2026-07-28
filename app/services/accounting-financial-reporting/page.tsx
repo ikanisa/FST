@@ -2,13 +2,15 @@ import { pageMetadata } from "../../../lib/seo";
 import { ServicePage } from "../../components/ServicePage";
 
 export const metadata = pageMetadata({
-  title: "Accounting & Financial Reporting",
+  title: "Accounting & Financial Reporting Services",
   description: "Bookkeeping, reconciliations, management accounts, payroll, budgets, projections and financial statement preparation and review.",
   path: "/services/accounting-financial-reporting",
 });
 
 export default function AccountingFinancialReportingPage() {
   return <ServicePage
+    serviceName="Accounting & Financial Reporting"
+    path="/services/accounting-financial-reporting"
     eyebrow="Accounting & Financial Reporting"
     title="Make the numbers usable, not merely complete."
     lede="Bookkeeping, close, payroll and reporting support that converts transaction records into management information and review-ready statements."

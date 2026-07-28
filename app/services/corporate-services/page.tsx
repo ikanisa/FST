@@ -2,13 +2,15 @@ import { pageMetadata } from "../../../lib/seo";
 import { ServicePage } from "../../components/ServicePage";
 
 export const metadata = pageMetadata({
-  title: "Corporate & Administrative Services",
+  title: "Malta Corporate & Administrative Services",
   description: "Company formation, corporate administration, company secretarial, statutory records, filings and administrative support.",
   path: "/services/corporate-services",
 });
 
 export default function CorporateServicesPage() {
   return <ServicePage
+    serviceName="Corporate & Administrative Services"
+    path="/services/corporate-services"
     eyebrow="Corporate & Administrative Services"
     title="Keep the corporate record aligned with the business."
     lede="Formation, governance, company-secretarial and administrative support for orderly decisions, records, filings and change."

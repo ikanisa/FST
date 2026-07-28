@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { ResponsiveImage } from "./ResponsiveImage";
 
 const slides = [
   {
@@ -56,20 +57,26 @@ export function EditorialSlider() {
           <h2 id="slider-title">Advice that stays connected to delivery.</h2>
         </div>
         <div className="slider-controls" aria-label="Story controls">
-          <button type="button" onClick={selectPrevious} aria-label="Show the previous story">Back</button>
+          <button type="button" onClick={selectPrevious} aria-label="Back — show the previous story">Back</button>
           {!reducedMotion && (
             <button type="button" onClick={() => setPaused((value) => !value)} aria-pressed={paused}>
               {paused ? "Resume" : "Hold"}
             </button>
           )}
-          <button type="button" onClick={selectNext} aria-label="Show the next story">Forward</button>
+          <button type="button" onClick={selectNext} aria-label="Forward — show the next story">Forward</button>
         </div>
       </div>
       <div className="slider-viewport">
         <div className="slider-track" style={{ transform: `translate3d(-${current * 100}%, 0, 0)` }}>
           {slides.map((slide, index) => (
             <figure className="slider-slide" key={slide.src} aria-hidden={current !== index}>
-              <img src={slide.src} alt={slide.alt} width="1536" height="1024" loading="lazy" decoding="async" />
+              <ResponsiveImage
+                src={slide.src}
+                alt={slide.alt}
+                sizes="(max-width: 720px) 100vw, 80vw"
+                loading="lazy"
+                decoding="async"
+              />
               <figcaption>
                 <span>{slide.eyebrow}</span>
                 <strong>{slide.title}</strong>

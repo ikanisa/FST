@@ -16,6 +16,7 @@ import { PrimaryCta } from "./components/PrimaryCta";
 import { SectionVisual } from "./components/SectionVisual";
 import { SiteFooter } from "./components/SiteFooter";
 import { SiteHeader } from "./components/SiteHeader";
+import { ResponsiveImage } from "./components/ResponsiveImage";
 
 const capabilities = [
   {
@@ -32,7 +33,7 @@ const capabilities = [
   },
   {
     title: "Taxation",
-    slug: "tax-vat",
+    slug: "taxation",
     intro: "Complete Malta tax support across direct, indirect, employment, property, transaction and international tax obligations.",
     items: [
       "Corporate and personal income tax",
@@ -68,7 +69,7 @@ const capabilities = [
   },
   {
     title: "Loan Application Support",
-    slug: "business-planning-finance-applications",
+    slug: "loan-application-support",
     intro: "A complete lender-facing application built around the borrowing need, repayment capacity, financial schedules and supporting evidence.",
     items: [
       "Loan application readiness and facility fit",
@@ -123,12 +124,11 @@ export default function Home() {
         </div>
 
         <div className="hero-visual" aria-label="FST team shaping a client work programme">
-          <img
+          <ResponsiveImage
             className="hero-image"
             src="/fst-hero.webp"
             alt="Advisers standing at a planning wall in a Malta office"
-            width={1536}
-            height={1024}
+            sizes="(max-width: 900px) 100vw, 55vw"
             loading="eager"
             fetchPriority="high"
             decoding="async"

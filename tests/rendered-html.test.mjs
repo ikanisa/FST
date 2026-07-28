@@ -135,7 +135,7 @@ test("uses direct service labels on the services index", async () => {
 });
 
 test("uses explicit loan and funding application support wording across public routes", async () => {
-  const routes = ["/", "/services", "/who-we-work-with", "/services/business-planning-finance-applications", "/services/funding-applications"];
+  const routes = ["/", "/services", "/who-we-work-with", "/services/loan-application-support", "/services/funding-applications"];
   const combined = (await Promise.all(routes.map(async (pathname) => (await (await render(pathname)).text())))).join("\n");
   assert.match(combined, /Loan Application Support/i);
   assert.match(combined, /Funding Application Support/i);
@@ -144,7 +144,7 @@ test("uses explicit loan and funding application support wording across public r
 
 test("covers Malta taxation beyond VAT and corporate income tax", async () => {
   const index = await (await render("/services")).text();
-  const detail = await (await render("/services/tax-vat")).text();
+  const detail = await (await render("/services/taxation")).text();
   assert.match(index, /Complete Malta tax support/i);
   for (const label of [
     "Corporate income tax",
@@ -163,7 +163,7 @@ test("covers Malta taxation beyond VAT and corporate income tax", async () => {
 
 test("keeps business planning under management advisory and loan applications separate", async () => {
   const management = await (await render("/services/management-consulting")).text();
-  const loan = await (await render("/services/business-planning-finance-applications")).text();
+  const loan = await (await render("/services/loan-application-support")).text();
   assert.match(management, /Business planning &amp; feasibility/i);
   assert.match(management, /Business-plan preparation/i);
   assert.match(management, /Business-plan review/i);
@@ -213,10 +213,10 @@ test("removes the inherited green palette from live source", async () => {
 test("lists all requested components under their clear service categories", async () => {
   const expectations = [
     ["/services/management-consulting", ["Management support", "Business planning &amp; feasibility", "Business-plan preparation", "Business-plan review", "Budgeting, projections &amp; scenarios", "Risk management", "Internal audit", "Internal controls", "Policies &amp; procedures"]],
-    ["/services/tax-vat", ["Tax registrations &amp; taxpayer setup", "Corporate income tax", "Personal &amp; self-employed income tax", "VAT returns &amp; reconciliations", "Payroll tax, FSS &amp; social security", "International tax &amp; transfer pricing"]],
+    ["/services/taxation", ["Tax registrations &amp; taxpayer setup", "Corporate income tax", "Personal &amp; self-employed income tax", "VAT returns &amp; reconciliations", "Payroll tax, FSS &amp; social security", "International tax &amp; transfer pricing"]],
     ["/services/accounting-financial-reporting", ["Bookkeeping &amp; general ledger", "Financial statement preparation", "Financial statement review", "Budgets &amp; projections", "Payroll &amp; FSS support"]],
     ["/services/corporate-services", ["Company formation", "Company secretarial", "Statutory registers &amp; filings", "Administrative support"]],
-    ["/services/business-planning-finance-applications", ["Loan application readiness assessment", "Borrowing requirement &amp; facility fit", "Loan application forms", "Lender financial schedules", "Loan application evidence pack", "Approval &amp; drawdown support"]],
+    ["/services/loan-application-support", ["Loan application readiness assessment", "Borrowing requirement &amp; facility fit", "Loan application forms", "Lender financial schedules", "Loan application evidence pack", "Approval &amp; drawdown support"]],
     ["/services/funding-applications", ["Funding opportunity scan", "Route fit &amp; eligibility", "Narrative &amp; forms", "Budget &amp; co-financing", "Submission-readiness review", "Post-award support"]],
   ];
   for (const [pathname, labels] of expectations) {
@@ -236,7 +236,7 @@ test("funding application support uses the three official routes and retains hum
 });
 
 test("every rendered public image exists and none matches a KMFINCO public asset", async () => {
-  const routes = ["/", "/services", "/about", "/who-we-work-with", "/contact", "/services/management-consulting", "/services/tax-vat", "/services/accounting-financial-reporting", "/services/corporate-services", "/services/business-planning-finance-applications", "/services/funding-applications"];
+  const routes = ["/", "/services", "/about", "/who-we-work-with", "/contact", "/services/management-consulting", "/services/taxation", "/services/accounting-financial-reporting", "/services/corporate-services", "/services/loan-application-support", "/services/funding-applications"];
   const used = new Set(["/favicon.svg", "/og.jpg"]);
   for (const pathname of routes) {
     const html = await (await render(pathname)).text();
@@ -249,7 +249,7 @@ test("every rendered public image exists and none matches a KMFINCO public asset
   }
   const publicFiles = await readdir(path.join(root, "public"));
   assert.ok(
-    publicFiles.every((name) => /^(fst-|funding-|favicon\.svg$|og\.jpg$|apple-touch-icon\.png$|icon-(?:192|512)\.png$|brand$)/.test(name)),
+    publicFiles.every((name) => /^(fst-|funding-|_headers$|favicon\.svg$|og\.jpg$|apple-touch-icon\.png$|icon-(?:192|512)\.png$|brand$)/.test(name)),
     "public should contain only FST/funding exports and core brand files",
   );
 });
@@ -288,6 +288,48 @@ test("removed legacy, legal and merged routes return 404", async () => {
   for (const pathname of ["/services/audit-assurance", "/services/investment-family-office", "/services/corporate-fiduciary", "/services/tax-accounting-payroll", "/insights", "/privacy", "/terms"]) {
     assert.equal((await render(pathname)).status, 404);
   }
+});
+
+test("uses clear canonical service URLs and preserves legacy link authority", async () => {
+  const [tax, loan, legacyTax, legacyLoan, sitemapResponse] = await Promise.all([
+    render("/services/taxation"),
+    render("/services/loan-application-support"),
+    render("/services/tax-vat"),
+    render("/services/business-planning-finance-applications"),
+    render("/sitemap.xml"),
+  ]);
+  assert.equal(tax.status, 200);
+  assert.equal(loan.status, 200);
+  assert.equal(legacyTax.status, 308);
+  assert.equal(legacyLoan.status, 308);
+  assert.equal(new URL(legacyTax.headers.get("location")).pathname, "/services/taxation");
+  assert.equal(new URL(legacyLoan.headers.get("location")).pathname, "/services/loan-application-support");
+  const sitemap = await sitemapResponse.text();
+  assert.match(sitemap, /https:\/\/fst\.ikanisa\.com\/services\/taxation/);
+  assert.match(sitemap, /https:\/\/fst\.ikanisa\.com\/services\/loan-application-support/);
+  assert.doesNotMatch(sitemap, /services\/tax-vat|business-planning-finance-applications/);
+});
+
+test("publishes page-level SEO schema, one primary heading and responsive images", async () => {
+  const home = await (await render("/")).text();
+  assert.equal((home.match(/<h1(?:\s|>)/gi) || []).length, 1);
+  assert.match(home, /"@type":"WebSite"/);
+  assert.match(home, /"@id":"https:\/\/fst\.ikanisa\.com\/#organization"/);
+  assert.match(home, /srcset="\/fst-hero-640\.webp 640w, \/fst-hero-960\.webp 960w, \/fst-hero\.webp 1536w"/i);
+
+  const service = await (await render("/services/taxation")).text();
+  assert.match(service, /"@type":"Service"/);
+  assert.match(service, /"@type":"BreadcrumbList"/);
+  assert.match(service, /"@id":"https:\/\/fst\.ikanisa\.com\/services\/taxation#service"/);
+  assert.match(service, /<link rel="canonical" href="https:\/\/fst\.ikanisa\.com\/services\/taxation"/i);
+});
+
+test("defines durable Cloudflare caching for fingerprinted and image assets", async () => {
+  const headers = await readFile(path.join(root, "public/_headers"), "utf8");
+  assert.match(headers, /\/assets\/\*/);
+  assert.match(headers, /max-age=31536000,\s*immutable/i);
+  assert.match(headers, /\/\*\.webp/);
+  assert.match(headers, /stale-while-revalidate=86400/i);
 });
 
 test("contact, SEO and discovery routes render production signals", async () => {

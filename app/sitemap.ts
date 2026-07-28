@@ -3,13 +3,13 @@ import { siteUrl } from "../lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
-    { path: "", priority: 1, changeFrequency: "monthly" as const },
+    { path: "/", priority: 1, changeFrequency: "monthly" as const },
     { path: "/services", priority: 0.9, changeFrequency: "monthly" as const },
     { path: "/services/management-consulting", priority: 0.8, changeFrequency: "monthly" as const },
-    { path: "/services/tax-vat", priority: 0.8, changeFrequency: "monthly" as const },
+    { path: "/services/taxation", priority: 0.8, changeFrequency: "monthly" as const },
     { path: "/services/accounting-financial-reporting", priority: 0.8, changeFrequency: "monthly" as const },
     { path: "/services/corporate-services", priority: 0.8, changeFrequency: "monthly" as const },
-    { path: "/services/business-planning-finance-applications", priority: 0.8, changeFrequency: "monthly" as const },
+    { path: "/services/loan-application-support", priority: 0.8, changeFrequency: "monthly" as const },
     { path: "/services/funding-applications", priority: 0.8, changeFrequency: "monthly" as const },
     { path: "/who-we-work-with", priority: 0.8, changeFrequency: "monthly" as const },
     { path: "/about", priority: 0.7, changeFrequency: "monthly" as const },

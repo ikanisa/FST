@@ -8,6 +8,7 @@ import "./globals.css";
 import { siteUrl } from "../lib/seo";
 import { siteConfig } from "../lib/site-config";
 import { AnalyticsConsent } from "./components/AnalyticsConsent";
+import { JsonLd } from "./components/JsonLd";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -28,16 +29,31 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
   manifest: "/manifest.webmanifest",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
     title: "FST | Make the next move workable",
     description:
       "Management, risk, tax, accounting, corporate, loan application support and funding application support organised around executable outcomes.",
+    url: "/",
+    siteName: "FST",
+    locale: "en_MT",
     type: "website",
     images: [
       {
         url: "/og.jpg",
         width: 1200,
         height: 630,
+        type: "image/jpeg",
         alt: "FST — Make the next move workable.",
       },
     ],
@@ -54,30 +70,51 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const structuredData = {
     "@context": "https://schema.org",
-    "@type": ["Organization", "ProfessionalService"],
-    name: "FST",
-    url: siteUrl,
-    logo: `${siteUrl}/brand/fst-logo.svg`,
-    image: `${siteUrl}/og.jpg`,
-    description:
-      "Management, risk, tax, accounting, corporate, loan application support and funding application support organised around executable outcomes.",
-    areaServed: "International",
-    contactPoint: {
-      "@type": "ContactPoint",
-      contactType: "customer service",
-      availableLanguage: ["English"],
-    },
-    sameAs: siteConfig.linkedInUrl ? [siteConfig.linkedInUrl] : undefined,
-    knowsAbout: [
-      "Management advisory and business planning",
-      "Risk management",
-      "Internal audit and internal controls",
-      "Taxation",
-      "Accounting and financial reporting",
-      "Payroll",
-      "Corporate and administrative services",
-      "Loan application support",
-      "Funding application support",
+    "@graph": [
+      {
+        "@type": ["Organization", "ProfessionalService"],
+        "@id": `${siteUrl}/#organization`,
+        name: "FST",
+        url: `${siteUrl}/`,
+        logo: {
+          "@type": "ImageObject",
+          url: `${siteUrl}/brand/fst-logo.svg`,
+        },
+        image: `${siteUrl}/og.jpg`,
+        description:
+          "Management, risk, tax, accounting, corporate, loan application support and funding application support organised around executable outcomes.",
+        areaServed: [
+          { "@type": "Country", name: "Malta" },
+          { "@type": "Place", name: "International" },
+        ],
+        contactPoint: {
+          "@type": "ContactPoint",
+          telephone: siteConfig.whatsappDisplay,
+          url: siteConfig.whatsappUrl,
+          contactType: "client enquiries",
+          availableLanguage: ["English"],
+        },
+        sameAs: siteConfig.linkedInUrl ? [siteConfig.linkedInUrl] : undefined,
+        knowsAbout: [
+          "Management advisory and business planning",
+          "Risk management",
+          "Internal audit and internal controls",
+          "Taxation",
+          "Accounting and financial reporting",
+          "Payroll",
+          "Corporate and administrative services",
+          "Loan application support",
+          "Funding application support",
+        ],
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${siteUrl}/#website`,
+        url: `${siteUrl}/`,
+        name: "FST",
+        publisher: { "@id": `${siteUrl}/#organization` },
+        inLanguage: "en",
+      },
     ],
   };
 
@@ -87,10 +124,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <a className="skip-link" href="#main-content">Skip to main content</a>
         {children}
         <AnalyticsConsent />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-        />
+        <JsonLd data={structuredData} />
       </body>
     </html>
   );

@@ -30,10 +30,10 @@ The browser sweep passed all retained public routes:
 - `/`
 - `/services`
 - `/services/management-consulting`
-- `/services/tax-vat`
+- `/services/taxation`
 - `/services/accounting-financial-reporting`
 - `/services/corporate-services`
-- `/services/business-planning-finance-applications`
+- `/services/loan-application-support`
 - `/services/funding-applications`
 - `/who-we-work-with`
 - `/about` — FST approach and field notes

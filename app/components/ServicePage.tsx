@@ -19,8 +19,12 @@ import { SectionVisual } from "./SectionVisual";
 import { SiteFooter } from "./SiteFooter";
 import { SiteHeader } from "./SiteHeader";
 import { PrimaryCta } from "./PrimaryCta";
+import { ResponsiveImage } from "./ResponsiveImage";
+import { ServiceJsonLd } from "./JsonLd";
 
 type ServicePageProps = {
+  serviceName: string;
+  path: string;
   eyebrow: string;
   title: string;
   lede: string;
@@ -68,6 +72,8 @@ function iconForService(title: string) {
 }
 
 export function ServicePage({
+  serviceName,
+  path,
   eyebrow,
   title,
   lede,
@@ -82,6 +88,12 @@ export function ServicePage({
 }: ServicePageProps) {
   return (
     <main id="main-content" tabIndex={-1}>
+      <ServiceJsonLd
+        name={serviceName}
+        path={path}
+        description={lede}
+        services={services}
+      />
       <SiteHeader />
       <section className={`subpage-hero accent-${accent}`}>
         <div className="subpage-copy">
@@ -91,7 +103,15 @@ export function ServicePage({
           <PrimaryCta className="primary-button" />
         </div>
         <div className="subpage-image-wrap">
-          <img src={image} alt={imageAlt} className="subpage-image" width="1600" height="1000" loading="eager" fetchPriority="high" decoding="async" />
+          <ResponsiveImage
+            src={image}
+            alt={imageAlt}
+            className="subpage-image"
+            sizes="(max-width: 900px) 100vw, 52vw"
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
+          />
         </div>
       </section>
 

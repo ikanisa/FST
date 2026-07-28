@@ -2479,7 +2479,7 @@ h1 {
 .consent-secondary { border: 1px solid rgba(255, 255, 255, 0.28); background: transparent; color: white; }
 
 .loading-shell { min-height: 70vh; padding: 130px 24px; display: grid; place-content: center; text-align: center; }
-.loading-shell h1 { margin: 12px 0; font-size: clamp(52px, 8vw, 92px); }
+.loading-title { margin: 12px 0; font-family: var(--font-editorial); font-size: clamp(52px, 8vw, 92px); line-height: 0.98; }
 .loading-progress { width: min(320px, 70vw); height: 3px; margin: 26px auto; overflow: hidden; border-radius: 999px; background: rgba(45, 109, 163, 0.14); }
 .loading-progress::after { content: ""; display: block; width: 45%; height: 100%; background: var(--coral); animation: loading-progress 1.2s ease-in-out infinite alternate; }
 @keyframes loading-progress { from { transform: translateX(-100%); } to { transform: translateX(220%); } }

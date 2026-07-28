@@ -5,6 +5,8 @@ export const metadata = pageMetadata({ title: "Management Advisory, Risk & Contr
 
 export default function ManagementConsultingPage() {
   return <ServicePage
+    serviceName="Management Advisory, Risk & Controls"
+    path="/services/management-consulting"
     eyebrow="Management Advisory, Risk & Controls"
     title="Build an organisation that can decide and deliver."
     lede="Hands-on support for leaders strengthening business planning, strategy, performance, governance, risk management, internal audit and internal controls."

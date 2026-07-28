@@ -6,8 +6,10 @@ import { SiteFooter } from "../components/SiteFooter";
 import { SiteHeader } from "../components/SiteHeader";
 import { SectionVisual } from "../components/SectionVisual";
 import { PrimaryCta } from "../components/PrimaryCta";
+import { ResponsiveImage } from "../components/ResponsiveImage";
+import { BreadcrumbJsonLd } from "../components/JsonLd";
 
-export const metadata = pageMetadata({ title: "Our Approach", description: "How FST combines senior attention, connected expertise and implementation-focused advice, with evidence-led field notes for management and finance.", path: "/about" });
+export const metadata = pageMetadata({ title: "Our Advisory Approach", description: "How FST combines senior attention, connected expertise and implementation-focused advice, with evidence-led field notes for management and finance.", path: "/about" });
 
 const fieldNotes = [
   { category: "Controls in practice", title: "What a useful internal-control review should leave behind", summary: "A field guide to process ownership, testable evidence and actions that management can actually close.", image: "/fst-management.webp", imageAlt: "A controls workshop assigning owners and actions", tone: "violet" },
@@ -18,6 +20,7 @@ const fieldNotes = [
 export default function AboutPage() {
   return (
     <main id="main-content" tabIndex={-1}>
+      <BreadcrumbJsonLd items={[{ name: "Home", path: "/" }, { name: "Our Approach", path: "/about" }]} />
       <SiteHeader />
       <section className="subpage-hero accent-cobalt">
         <div className="subpage-copy">
@@ -26,7 +29,7 @@ export default function AboutPage() {
           <p>We assemble management, risk, tax, accounting, corporate, finance and funding expertise around the result you need to achieve.</p>
           <PrimaryCta className="primary-button" />
         </div>
-        <div className="subpage-image-wrap"><img src="/fst-collaboration.webp" alt="A multidisciplinary FST team working through a client priority" className="subpage-image" width="1536" height="1024" loading="eager" fetchPriority="high" decoding="async" /></div>
+        <div className="subpage-image-wrap"><ResponsiveImage src="/fst-collaboration.webp" alt="A multidisciplinary FST team working through a client priority" className="subpage-image" sizes="(max-width: 900px) 100vw, 52vw" loading="eager" fetchPriority="high" decoding="async" /></div>
       </section>
 
       <section className="about-principles section-shell">
@@ -41,7 +44,7 @@ export default function AboutPage() {
       </section>
 
       <section className="about-story section-shell">
-        <div className="about-story-image"><img src="/fst-international.webp" alt="An international programme team coordinating delivery and accountability" width="1536" height="1024" loading="lazy" decoding="async" /></div>
+        <div className="about-story-image"><ResponsiveImage src="/fst-international.webp" alt="An international programme team coordinating delivery and accountability" sizes="(max-width: 720px) 100vw, 50vw" loading="lazy" decoding="async" /></div>
         <div><p className="section-index">The connected file</p><h2>No hand-off gaps between services.</h2><p>A plan affects cash. Cash affects finance. Structure affects tax and governance. Funding rules affect budgets and delivery evidence. FST keeps those links visible, so each workstream strengthens the others.</p></div>
       </section>
 
@@ -54,7 +57,7 @@ export default function AboutPage() {
         <div className="article-grid">
           {fieldNotes.map((article) => (
             <article className={`article-card accent-${article.tone}`} key={article.title}>
-              <img src={article.image} alt={article.imageAlt} width="1536" height="1024" loading="lazy" decoding="async" />
+              <ResponsiveImage src={article.image} alt={article.imageAlt} sizes="(max-width: 720px) 100vw, 33vw" loading="lazy" decoding="async" />
               <div><span>{article.category}</span><h3>{article.title}</h3><p>{article.summary}</p></div>
             </article>
           ))}
