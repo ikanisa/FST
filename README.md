@@ -33,7 +33,7 @@ FST does not advertise external or statutory audit and assurance, investment or 
 ## First-party integrations
 
 - `/api/book` validates meeting requests, checks Google Calendar free/busy availability, and creates a Calendar event with Google Meet and attendee notifications.
-- Every primary website action uses the label “Arrange a Call” and routes to `/book`.
+- Every primary website action uses the label “Book a Meeting” and routes to `/book`.
 - Confirmed Calendar events invite the prospective client and FST’s approved scheduling contact with `sendUpdates=all`.
 - No contact form, `mailto:` action or website email workflow is included; the public email is informational text only.
 - Booking fails safely when production credentials are absent by producing a dated Google Calendar invitation.

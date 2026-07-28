@@ -24,7 +24,7 @@ labels and original photography.
 4. Typography: large serif display text, compact tracked eyebrow and restrained
    sans-serif body hierarchy remain consistent with the accepted layout.
 5. CTA treatment: the coral gradient, button dimensions, shadow and placement
-   remain faithful while the label changes to `Arrange a Call`.
+   remain faithful; the annotated label is `Book a Meeting`.
 6. Section transition: the first content panel still overlaps the hero at the
    same visual depth, preserving the established page rhythm.
 7. Image direction: the former seated boardroom photograph is replaced by an
@@ -67,6 +67,17 @@ was made during QA.
 - Completed broken images: 0 on all 30 route/viewport checks.
 - Browser console warnings/errors after the navigation test: 0.
 - New public asset fingerprints do not match any KMFINCO public asset fingerprint.
-- Lint, production build and 9 automated route/integration tests pass.
+- Lint, production build and 10 automated route/integration tests pass.
 - Cloudflare Wrangler dry-run packages 89 static assets and a 656.05 KiB Worker
   module set without publishing.
+
+## Annotation pass — homepage CTA and eyebrow
+
+- Comment 1: all primary CTA instances now retain the requested `Book a Meeting`
+  label while continuing to route to `/book`.
+- Comment 2: the homepage `Advisory · Finance · Applications` eyebrow is removed
+  from the DOM, leaving the hero to begin directly with its main heading.
+- Focused implementation evidence:
+  `qa/fst-original/annotation-cta-eyebrow-833x674.png` at the exact annotated
+  833 × 674 viewport.
+- Automated rendered-HTML coverage protects both requirements.

@@ -86,7 +86,7 @@ test("renders the new FST identity, navigation and six-category model", async ()
     "Business Planning &amp; Finance Applications",
     "Funding Application Services",
   ]) assert.match(html, new RegExp(label, "i"));
-  assert.match(html, /href="\/book"[^>]*>Arrange a Call</i);
+  assert.match(html, /href="\/book"[^>]*>Book a Meeting</i);
   assert.match(html, /Services/);
   assert.match(html, /Organisations/);
   assert.match(html, /Field Notes/);
@@ -97,12 +97,18 @@ test("renders the new FST identity, navigation and six-category model", async ()
 
 test("does not expose removed practices or inherited KMFINCO language", async () => {
   const routes = ["/", "/services", "/about", "/who-we-work-with", "/insights", "/contact", "/privacy", "/terms"];
-  const forbidden = /KMFINCO|K Mi|Audit &amp; Assurance|External audit|Statutory audit|Investment &amp; Family Office|Fiduciary|Clarity for what comes next|Close enough to understand|Advice shaped around your reality|Useful thinking for consequential decisions|Book a Meeting/i;
+  const forbidden = /KMFINCO|K Mi|Audit &amp; Assurance|External audit|Statutory audit|Investment &amp; Family Office|Fiduciary|Clarity for what comes next|Close enough to understand|Advice shaped around your reality|Useful thinking for consequential decisions/i;
   for (const pathname of routes) {
     const response = await render(pathname);
     assert.equal(response.status, 200, `${pathname} should render`);
     assert.doesNotMatch(await response.text(), forbidden, `${pathname} should be brand-separated`);
   }
+});
+
+test("honours the annotated homepage copy requirements", async () => {
+  const html = await (await render("/")).text();
+  assert.match(html, /href="\/book"[^>]*>Book a Meeting</i);
+  assert.doesNotMatch(html, /Advisory\s*(?:<[^>]+>\s*)*·\s*(?:<[^>]+>\s*)*Finance\s*(?:<[^>]+>\s*)*·\s*(?:<[^>]+>\s*)*Applications/i);
 });
 
 test("lists all requested components under their clear service categories", async () => {

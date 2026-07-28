@@ -7,7 +7,7 @@ export const siteConfig = {
   whatsappUrl: "https://wa.me/35679428604",
   linkedInUrl: process.env.NEXT_PUBLIC_LINKEDIN_URL || "",
   bookingUrl: "/book",
-  primaryCtaLabel: "Arrange a Call",
+  primaryCtaLabel: "Book a Meeting",
   bookingRecipients: ["bosco@ikanisa.com"],
   appointmentScheduleUrl: process.env.NEXT_PUBLIC_GOOGLE_BOOKING_URL || "",
   serviceArea:

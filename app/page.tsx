@@ -114,7 +114,6 @@ export default function Home() {
 
       <section className="hero" id="top">
         <div className="hero-copy">
-          <p className="eyebrow">Advisory <span>·</span> Finance <span>·</span> Applications</p>
           <h1>Turn ambition into an executable plan.</h1>
           <p className="hero-lede">
             FST brings business planning, finance, tax, governance and funding
