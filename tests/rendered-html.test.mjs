@@ -309,6 +309,21 @@ test("contact, SEO and discovery routes render production signals", async () => 
   assert.match(robots, /Sitemap: https:\/\/fst\.ikanisa\.com\/sitemap\.xml/);
 });
 
+test("publishes only through the FST Cloudflare custom domain", async () => {
+  const config = JSON.parse(await readFile(path.join(root, "wrangler.jsonc"), "utf8"));
+  assert.equal(config.workers_dev, false);
+  assert.deepEqual(config.routes, [
+    {
+      pattern: "fst.ikanisa.com",
+      custom_domain: true,
+    },
+  ]);
+  await assert.rejects(
+    readFile(path.join(root, ".openai", "hosting.json")),
+    { code: "ENOENT" },
+  );
+});
+
 test("native booking validates input and fails safely without credentials", async () => {
   const invalid = await post("/api/book", { name: "", email: "not-an-email", start: "invalid", duration: 30, privacy_consent: false });
   assert.equal(invalid.status, 400);
