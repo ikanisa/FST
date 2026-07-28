@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://fst.ikanisa.com").replace(/\/$/, "");
+export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://fst-advisory.ikanisa.chatgpt.site").replace(/\/$/, "");
 
 type PageMetadataInput = {
   title: string;

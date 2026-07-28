@@ -19,7 +19,7 @@ Add these hosting values only after each underlying destination has been verifie
 
 | Requirement | Environment value | Safe fallback |
 | --- | --- | --- |
-| Canonical public origin | `NEXT_PUBLIC_SITE_URL` | Currently targets `https://fst.ikanisa.com`; confirm DNS before custom-domain launch |
+| Canonical public origin | `NEXT_PUBLIC_SITE_URL` | Defaults to the deployed Sites URL; replace only after a custom domain is attached and validated |
 | Public contact email | `NEXT_PUBLIC_CONTACT_EMAIL` | Currently displays `hello@fst.ikanisa.com` as informational text only |
 | Google Calendar API | `GOOGLE_CALENDAR_CLIENT_ID`, `GOOGLE_CALENDAR_CLIENT_SECRET`, `GOOGLE_CALENDAR_REFRESH_TOKEN`, `GOOGLE_CALENDAR_ID`, `GOOGLE_CALENDAR_TIMEZONE` | Booking fails safely when credentials are absent |
 | Public appointment schedule | `NEXT_PUBLIC_GOOGLE_BOOKING_URL` | Optional and hidden when absent |

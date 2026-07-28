@@ -46,7 +46,7 @@ test("server-renders the FST homepage and social metadata", async () => {
   assert.match(html, /<title>FST \| Clarity for what comes next<\/title>/i);
   assert.match(
     html,
-    /property="og:image" content="https:\/\/fst\.ikanisa\.com\/og\.jpg"/i,
+    /property="og:image" content="https:\/\/fst-advisory\.ikanisa\.chatgpt\.site\/og\.jpg"/i,
   );
   assert.match(html, /Clarity for what comes next\./);
   assert.match(html, /Management Advisory, Risk &amp; Controls/);
@@ -260,10 +260,10 @@ test("renders production SEO signals", async () => {
   const sitemap = await sitemapResponse.text();
   const robots = await robotsResponse.text();
 
-  assert.match(home, /rel="canonical" href="https:\/\/fst\.ikanisa\.com\/"/i);
+  assert.match(home, /rel="canonical" href="https:\/\/fst-advisory\.ikanisa\.chatgpt\.site\/"/i);
   assert.match(home, /"@type":\["Organization","ProfessionalService"\]/);
   assert.match(consulting, /Management advisory, strategy, risk management, internal audit/i);
-  assert.match(consulting, /rel="canonical" href="https:\/\/fst\.ikanisa\.com\/services\/management-consulting"/i);
+  assert.match(consulting, /rel="canonical" href="https:\/\/fst-advisory\.ikanisa\.chatgpt\.site\/services\/management-consulting"/i);
   assert.equal(sitemapResponse.status, 200);
   assert.doesNotMatch(sitemap, /services\/audit-assurance/);
   assert.doesNotMatch(sitemap, /services\/investment-family-office/);
@@ -273,12 +273,12 @@ test("renders production SEO signals", async () => {
   assert.match(sitemap, /services\/accounting-financial-reporting/);
   assert.match(sitemap, /services\/business-planning-finance-applications/);
   assert.match(sitemap, /services\/funding-applications/);
-  assert.match(sitemap, /<loc>https:\/\/fst\.ikanisa\.com\/privacy<\/loc>/);
-  assert.match(sitemap, /<loc>https:\/\/fst\.ikanisa\.com\/who-we-work-with<\/loc>/);
-  assert.match(sitemap, /<loc>https:\/\/fst\.ikanisa\.com\/terms<\/loc>/);
-  assert.match(sitemap, /<loc>https:\/\/fst\.ikanisa\.com\/book<\/loc>/);
+  assert.match(sitemap, /<loc>https:\/\/fst-advisory\.ikanisa\.chatgpt\.site\/privacy<\/loc>/);
+  assert.match(sitemap, /<loc>https:\/\/fst-advisory\.ikanisa\.chatgpt\.site\/who-we-work-with<\/loc>/);
+  assert.match(sitemap, /<loc>https:\/\/fst-advisory\.ikanisa\.chatgpt\.site\/terms<\/loc>/);
+  assert.match(sitemap, /<loc>https:\/\/fst-advisory\.ikanisa\.chatgpt\.site\/book<\/loc>/);
   assert.equal(robotsResponse.status, 200);
-  assert.match(robots, /Sitemap: https:\/\/fst\.ikanisa\.com\/sitemap\.xml/);
+  assert.match(robots, /Sitemap: https:\/\/fst-advisory\.ikanisa\.chatgpt\.site\/sitemap\.xml/);
 });
 
 test("native booking validates input and fails safely without credentials", async () => {

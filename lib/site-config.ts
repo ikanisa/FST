@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: "FST",
-  url: (process.env.NEXT_PUBLIC_SITE_URL || "https://fst.ikanisa.com").replace(/\/$/, ""),
+  url: (process.env.NEXT_PUBLIC_SITE_URL || "https://fst-advisory.ikanisa.chatgpt.site").replace(/\/$/, ""),
   email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "hello@fst.ikanisa.com",
   phoneDisplay: "+356 7942 8604",
   phoneE164: "+35679428604",
