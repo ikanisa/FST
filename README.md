@@ -14,6 +14,14 @@ system, a distinct editorial voice and clearly named service categories.
 
 FST does not advertise external or statutory audit and assurance, investment or family-office services, or fiduciary services. Internal audit remains available as a management, risk and controls service.
 
+## Brand assets
+
+The approved FST identity uses an ink-navy wordmark with an orange monogram
+accent. Production assets are served from `/public/brand/` and include the
+horizontal logo, standalone mark and reverse logo. The same identity is applied
+to the favicon, Apple touch icon, web-app icons, Open Graph image, header,
+footer and structured organisation metadata.
+
 ## Routes
 
 - `/` — firm overview
@@ -27,7 +35,6 @@ FST does not advertise external or statutory audit and assurance, investment or 
 - `/about` — FST approach and field notes
 - `/contact`
 - `/book` — Google Calendar and Google Meet booking
-- `/privacy`
 
 ## First-party integrations
 

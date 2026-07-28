@@ -17,7 +17,7 @@ export default function CorporateServicesPage() {
     sectionImages={{
       intro: { src: "/fst-corporate.webp", alt: "Statutory records and a corporate action checklist" },
       offerings: { src: "/fst-collaboration.webp", alt: "Advisers coordinating corporate responsibilities with management" },
-      outcomes: { src: "/fst-legal.webp", alt: "A structured document review workspace" },
+      outcomes: { src: "/fst-operations.webp", alt: "An orderly operating file reviewed with management" },
       cta: { src: "/fst-consultation.webp", alt: "A business owner discussing an upcoming corporate change" },
     }}
     introduction="FST keeps legal structure, governance actions and administrative evidence working as a dependable corporate file."

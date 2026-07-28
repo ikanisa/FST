@@ -25,7 +25,9 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
+  manifest: "/manifest.webmanifest",
   openGraph: {
     title: "FST | Make the next move workable",
     description:
@@ -55,6 +57,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     "@type": ["Organization", "ProfessionalService"],
     name: "FST",
     url: siteUrl,
+    logo: `${siteUrl}/brand/fst-logo.svg`,
     image: `${siteUrl}/og.jpg`,
     description:
       "Management, risk, tax, accounting, corporate, loan application support and funding application support organised around executable outcomes.",

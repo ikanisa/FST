@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const storageKey = "fst-analytics-consent";
@@ -48,7 +47,7 @@ export function AnalyticsConsent() {
       <div>
         <strong>Optional website measurement</strong>
         <p>
-          Anonymous analytics help us identify slow or unclear pages. Refusing them does not change site access. Read the <Link href="/privacy">data notice</Link>.
+          Anonymous analytics help us identify slow or unclear pages. Refusing them does not change site access.
         </p>
       </div>
       <div className="consent-actions">

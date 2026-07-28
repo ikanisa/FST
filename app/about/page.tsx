@@ -7,7 +7,7 @@ import { SiteHeader } from "../components/SiteHeader";
 import { SectionVisual } from "../components/SectionVisual";
 import { PrimaryCta } from "../components/PrimaryCta";
 
-export const metadata = pageMetadata({ title: "Approach & Field Notes", description: "How FST combines senior attention, connected expertise and implementation-focused advice, with evidence-led field notes for management and finance.", path: "/about" });
+export const metadata = pageMetadata({ title: "Our Approach", description: "How FST combines senior attention, connected expertise and implementation-focused advice, with evidence-led field notes for management and finance.", path: "/about" });
 
 const fieldNotes = [
   { category: "Controls in practice", title: "What a useful internal-control review should leave behind", summary: "A field guide to process ownership, testable evidence and actions that management can actually close.", image: "/fst-management.webp", imageAlt: "A controls workshop assigning owners and actions", tone: "violet" },

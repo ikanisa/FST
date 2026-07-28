@@ -1,12 +1,15 @@
 import Link from "next/link";
 import { siteConfig } from "../../lib/site-config";
+import { BrandLogo } from "./BrandLogo";
 import { PrimaryCta } from "./PrimaryCta";
 import { TrackedLink } from "./TrackedLink";
 
 export function SiteFooter() {
   return (
     <footer className="site-footer">
-      <Link className="wordmark footer-mark" href="/">FST</Link>
+      <Link className="brand-logo brand-logo-footer" href="/" aria-label="Go to the FST homepage">
+        <BrandLogo />
+      </Link>
       <div className="footer-summary">
         <p>Plans, numbers, obligations and funding work—managed as a practical programme.</p>
         <span>{siteConfig.serviceArea}</span>
@@ -15,10 +18,8 @@ export function SiteFooter() {
         <nav aria-label="Footer links">
           <Link href="/services">Services</Link>
           <Link href="/who-we-work-with">Organisations</Link>
-          <Link href="/about">Approach & field notes</Link>
+          <Link href="/about">Our Approach</Link>
           <Link href="/contact">Get in touch</Link>
-          <Link href="/privacy">Data notice</Link>
-          <Link href="/terms">Site rules</Link>
         </nav>
         <div className="footer-contact">
           <TrackedLink href={siteConfig.whatsappUrl} event="contact_whatsapp_click" target="_blank" rel="noreferrer">WhatsApp · {siteConfig.whatsappDisplay}</TrackedLink>

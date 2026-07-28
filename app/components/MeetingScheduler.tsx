@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { CalendarBlank } from "@phosphor-icons/react/dist/csr/CalendarBlank";
 import { CalendarCheck } from "@phosphor-icons/react/dist/csr/CalendarCheck";
 import { UserCircle } from "@phosphor-icons/react/dist/csr/UserCircle";
@@ -198,7 +197,7 @@ export function MeetingScheduler() {
           <label className="scheduler-field"><span>Organisation or project (optional)</span><input name="organisation" autoComplete="organization" /></label>
           <label className="scheduler-consent">
             <input type="checkbox" required />
-            <span>I accept the <Link href="/privacy">data notice</Link> and <Link href="/terms">site rules</Link>.</span>
+            <span>I permit FST to use these details to prepare and respond to this scheduling request.</span>
           </label>
           <div className="scheduler-actions">
             <button className="scheduler-secondary" type="button" onClick={() => setStep(1)}>Change slot</button>

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Fragment, useEffect, useState } from "react";
+import { BrandLogo } from "./BrandLogo";
 import { PrimaryCta } from "./PrimaryCta";
 
 export function SiteHeader() {
@@ -33,11 +34,13 @@ export function SiteHeader() {
   return (
     <Fragment>
       <header className={scrolled ? "site-header is-scrolled" : "site-header"} aria-label="Website navigation">
-        <Link className="wordmark" href="/" onClick={closeMenu} aria-label="Go to the FST homepage">FST</Link>
+        <Link className="brand-logo brand-logo-header" href="/" onClick={closeMenu} aria-label="Go to the FST homepage">
+          <BrandLogo priority />
+        </Link>
         <nav id="primary-navigation" className={menuOpen ? "nav-links is-open" : "nav-links"} aria-label="Main links">
           <Link href="/services" onClick={closeMenu}>Services</Link>
           <Link href="/who-we-work-with" onClick={closeMenu}>Organisations</Link>
-          <Link href="/about" onClick={closeMenu}>Approach & Field Notes</Link>
+          <Link href="/about" onClick={closeMenu}>Our Approach</Link>
           <PrimaryCta className="nav-cta" onClick={closeMenu} />
         </nav>
         <button

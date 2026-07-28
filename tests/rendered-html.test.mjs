@@ -89,14 +89,15 @@ test("renders the new FST identity, navigation and service-category model", asyn
   assert.match(html, /href="\/book"[^>]*>Book a Meeting</i);
   assert.match(html, /Services/);
   assert.match(html, /Organisations/);
-  assert.match(html, /Approach &amp; Field Notes/);
+  assert.match(html, /Our Approach/);
+  assert.match(html, /src="\/brand\/fst-logo\.svg"/);
   assert.doesNotMatch(html, /href="\/insights"/i);
   assert.match(html, /src="\/fst-hero\.webp"/);
   assert.equal(response.headers.get("x-content-type-options"), "nosniff");
 });
 
 test("does not expose removed practices or inherited KMFINCO language", async () => {
-  const routes = ["/", "/services", "/about", "/who-we-work-with", "/contact", "/privacy", "/terms"];
+  const routes = ["/", "/services", "/about", "/who-we-work-with", "/contact"];
   const forbidden = /KMFINCO|K Mi|Audit &amp; Assurance|External audit|Statutory audit|Investment &amp; Family Office|Fiduciary|Clarity for what comes next|Close enough to understand|Advice shaped around your reality|Useful thinking for consequential decisions/i;
   for (const pathname of routes) {
     const response = await render(pathname);
@@ -235,7 +236,7 @@ test("funding application support uses the three official routes and retains hum
 });
 
 test("every rendered public image exists and none matches a KMFINCO public asset", async () => {
-  const routes = ["/", "/services", "/about", "/who-we-work-with", "/contact", "/privacy", "/terms", "/services/management-consulting", "/services/tax-vat", "/services/accounting-financial-reporting", "/services/corporate-services", "/services/business-planning-finance-applications", "/services/funding-applications"];
+  const routes = ["/", "/services", "/about", "/who-we-work-with", "/contact", "/services/management-consulting", "/services/tax-vat", "/services/accounting-financial-reporting", "/services/corporate-services", "/services/business-planning-finance-applications", "/services/funding-applications"];
   const used = new Set(["/favicon.svg", "/og.jpg"]);
   for (const pathname of routes) {
     const html = await (await render(pathname)).text();
@@ -247,21 +248,54 @@ test("every rendered public image exists and none matches a KMFINCO public asset
     assert.ok(!kmfincoPublicBlobIds.has(gitBlobId(buffer)), `${source} must not reuse a KMFINCO asset`);
   }
   const publicFiles = await readdir(path.join(root, "public"));
-  assert.ok(publicFiles.every((name) => /^(fst-|funding-|favicon\.svg$|og\.jpg$)/.test(name)), "public should contain only FST/funding exports and core brand files");
+  assert.ok(
+    publicFiles.every((name) => /^(fst-|funding-|favicon\.svg$|og\.jpg$|apple-touch-icon\.png$|icon-(?:192|512)\.png$|brand$)/.test(name)),
+    "public should contain only FST/funding exports and core brand files",
+  );
 });
 
-test("removed legacy and merged routes return 404", async () => {
-  for (const pathname of ["/services/audit-assurance", "/services/investment-family-office", "/services/corporate-fiduciary", "/services/tax-accounting-payroll", "/insights"]) {
+test("publishes the approved FST logo and browser asset family", async () => {
+  const expected = [
+    "public/brand/fst-logo.svg",
+    "public/brand/fst-logo-reverse.svg",
+    "public/brand/fst-mark.svg",
+    "public/favicon.svg",
+    "public/apple-touch-icon.png",
+    "public/icon-192.png",
+    "public/icon-512.png",
+    "public/og.jpg",
+  ];
+  for (const file of expected) {
+    const buffer = await readFile(path.join(root, file));
+    assert.ok(buffer.length > 0, `${file} should not be empty`);
+  }
+  const [logo, mark, favicon] = await Promise.all([
+    readFile(path.join(root, "public/brand/fst-logo.svg"), "utf8"),
+    readFile(path.join(root, "public/brand/fst-mark.svg"), "utf8"),
+    readFile(path.join(root, "public/favicon.svg"), "utf8"),
+  ]);
+  for (const svg of [logo, mark, favicon]) {
+    assert.match(svg, /#102635/i);
+    assert.match(svg, /#FF6845/i);
+    assert.match(svg, /viewBox=/i);
+  }
+  const manifest = await render("/manifest.webmanifest");
+  assert.equal(manifest.status, 200);
+  assert.match(await manifest.text(), /icon-192\.png/);
+});
+
+test("removed legacy, legal and merged routes return 404", async () => {
+  for (const pathname of ["/services/audit-assurance", "/services/investment-family-office", "/services/corporate-fiduciary", "/services/tax-accounting-payroll", "/insights", "/privacy", "/terms"]) {
     assert.equal((await render(pathname)).status, 404);
   }
 });
 
-test("contact, legal, SEO and discovery routes render production signals", async () => {
-  const [contactResponse, privacyResponse, termsResponse, sitemapResponse, robotsResponse] = await Promise.all([
-    render("/contact"), render("/privacy"), render("/terms"), render("/sitemap.xml"), render("/robots.txt"),
+test("contact, SEO and discovery routes render production signals", async () => {
+  const [contactResponse, sitemapResponse, robotsResponse] = await Promise.all([
+    render("/contact"), render("/sitemap.xml"), render("/robots.txt"),
   ]);
-  const [contact, privacy, terms, sitemap, robots] = await Promise.all([
-    contactResponse.text(), privacyResponse.text(), termsResponse.text(), sitemapResponse.text(), robotsResponse.text(),
+  const [contact, sitemap, robots] = await Promise.all([
+    contactResponse.text(), sitemapResponse.text(), robotsResponse.text(),
   ]);
   assert.match(contact, /wa\.me\/35699152999/);
   assert.match(contact, />\+35699152999</);
@@ -270,10 +304,8 @@ test("contact, legal, SEO and discovery routes render production signals", async
   assert.doesNotMatch(contact, /7942\s*8604|79428604/);
   assert.doesNotMatch(contact, /hello@fst\.ikanisa\.com/i);
   assert.doesNotMatch(contact, /mailto:/i);
-  assert.match(privacy, /src="\/fst-legal\.webp"/);
-  assert.match(terms, /src="\/fst-legal\.webp"/);
   assert.match(sitemap, /services\/funding-applications/);
-  assert.doesNotMatch(sitemap, /services\/audit-assurance|investment-family-office|corporate-fiduciary|\/insights/);
+  assert.doesNotMatch(sitemap, /services\/audit-assurance|investment-family-office|corporate-fiduciary|\/insights|\/privacy|\/terms/);
   assert.match(robots, /Sitemap: https:\/\/fst-advisory\.ikanisa\.chatgpt\.site\/sitemap\.xml/);
 });
 

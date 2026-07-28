@@ -1,0 +1,26 @@
+{
+  "brand": "FST",
+  "selectedConcept": "Refined FST Wordmark",
+  "source": "fst-selected-wordmark-orange.png",
+  "palette": {
+    "inkNavy": "#102635",
+    "fstOrange": "#FF6845",
+    "ivory": "#FBFAF7"
+  },
+  "exports": [
+    "exports/fst-logo.svg",
+    "exports/fst-logo-reverse.svg",
+    "exports/fst-mark.svg",
+    "exports/favicon.svg",
+    "exports/apple-touch-icon.png",
+    "exports/icon-192.png",
+    "exports/icon-512.png",
+    "exports/og.jpg"
+  ],
+  "usage": {
+    "header": "/brand/fst-logo.svg",
+    "footer": "/brand/fst-logo.svg",
+    "favicon": "/favicon.svg",
+    "socialCard": "/og.jpg"
+  }
+}

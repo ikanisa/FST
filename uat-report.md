@@ -25,7 +25,7 @@ Profiles: desktop 1440 × 900 and mobile 390 × 844
 
 ## Route matrix
 
-The browser sweep passed all 14 retained public routes:
+The browser sweep passed all retained public routes:
 
 - `/`
 - `/services`
@@ -39,10 +39,8 @@ The browser sweep passed all 14 retained public routes:
 - `/about` — FST approach and field notes
 - `/contact`
 - `/book`
-- `/privacy`
-- `/terms`
 
-The removed `/services/audit-assurance`, `/services/investment-family-office`, `/services/corporate-fiduciary` and superseded `/services/tax-accounting-payroll` routes return 404.
+The removed `/privacy`, `/terms`, `/services/audit-assurance`, `/services/investment-family-office`, `/services/corporate-fiduciary` and superseded `/services/tax-accounting-payroll` routes return 404.
 
 ## Service-content acceptance
 

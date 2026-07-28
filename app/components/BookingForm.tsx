@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { trackConversion } from "../../lib/analytics";
 import { googleCalendarTemplateUrl, siteConfig } from "../../lib/site-config";
@@ -109,7 +108,7 @@ export function BookingForm() {
       <label>What must be decided or completed?<textarea name="context" rows={4} /></label>
       <label className="consent-check">
         <input type="checkbox" name="privacy_consent" value="agreed" required />
-        <span>I permit FST to use these details to process and respond to this scheduling request, as set out in the <Link href="/privacy">data notice</Link>.</span>
+        <span>I permit FST to use these details to process and respond to this scheduling request.</span>
       </label>
       {status === "error" && <p className="form-error" role="alert">{result.error === "slot_unavailable" ? "That slot has just been taken. Select a different one." : "The request could not be completed. Try again or use the phone or WhatsApp channel."}</p>}
       <button className="submit-button" type="submit" disabled={status === "submitting"}>{status === "submitting" ? "Checking the requested slot…" : siteConfig.primaryCtaLabel}</button>

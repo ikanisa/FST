@@ -60,13 +60,13 @@ present. No final external form or submission was made during QA.
 
 ## Technical QA
 
-- Fifteen retained routes passed at both viewports.
+- Twelve retained content routes passed at both viewports.
 - Every route had a rendered `main` and page-specific `h1`.
-- Horizontal overflow: 0 px on all 28 route/viewport checks.
-- Completed broken images: 0 on all 28 route/viewport checks.
+- Horizontal overflow: 0 px on the focused desktop and mobile identity checks.
+- Completed broken images: 0 after the full lazy-image traversal.
 - Browser console warnings/errors after the navigation test: 0.
 - New public asset fingerprints do not match any KMFINCO public asset fingerprint.
-- Lint, production build and 18 automated route/integration tests pass.
+- Lint, production build and 19 automated route/integration tests pass.
 - Cloudflare Wrangler dry-run packages 89 static assets and a 656.05 KiB Worker
   module set without publishing.
 
@@ -183,8 +183,64 @@ present. No final external form or submission was made during QA.
 ## Annotation pass — combined approach and field notes
 
 - Comment 21: `Field Notes` and `FST Approach` are merged into the single
-  `Approach & Field Notes` page at `/about`.
+  `Our Approach` page at `/about`.
 - The former `/insights` page, navigation item and sitemap entry are removed.
 - Focused implementation evidence:
   `qa/fst-original/annotation-merged-approach-notes-833x674.png` at the exact
   annotated 833 × 674 viewport.
+
+## Annotation pass — approach label
+
+- Comment 22: the combined `/about` page is labelled `Our Approach` in the
+  header, footer and page metadata. The Field Notes content remains within the
+  page without competing for space in the primary navigation.
+
+## Annotation pass — legal-page removal
+
+- Comments 23–24: `Data notice` and `Site rules` are removed from the footer,
+  sitemap and retained route set. Their former `/privacy` and `/terms` pages
+  now return 404, and booking consent remains clear without dead links.
+
+## Annotation pass — FST brand identity
+
+- Comment 25: the text-only FST wordmark is replaced with the selected Refined
+  FST Wordmark, using ink navy and the requested FST orange accent.
+- The source-approved mark is vector traced into production SVG assets rather
+  than recreated with CSS, inline SVG or a substitute typeface.
+- The new identity is applied consistently to the header, footer, favicon,
+  Apple touch icon, web-app icons, Open Graph card, web manifest and structured
+  organisation metadata.
+
+### Identity fidelity evidence
+
+- Source visual truth:
+  `creative-production/fst-brand-system/fst-selected-wordmark-orange.png`
+  at 1749 × 899 pixels.
+- Browser-rendered implementation:
+  `qa/fst-original/annotation-brand-logo-our-approach-833x674.png`
+  at an 833 × 674 CSS-pixel viewport and 1× capture density.
+- Combined comparison:
+  `qa/fst-original/brand-logo-source-vs-implementation.png`
+  at 1600 × 760 pixels. This places the approved source and rendered header in
+  one review surface.
+- Focused mobile evidence:
+  `qa/fst-original/brand-logo-mobile-390x844.png` and
+  `qa/fst-original/brand-logo-mobile-menu-390x844.png`.
+- State: `/about`, desktop navigation visible; mobile navigation tested closed
+  and open.
+- Typography: the selected custom letterforms are retained as SVG paths, so no
+  substitute font or browser font rendering changes the identity.
+- Spacing and layout rhythm: the header lockup renders at 118 × 29.9 CSS pixels
+  and the footer lockup at 142 × 36 CSS pixels without altering surrounding
+  navigation spacing.
+- Colours: the production paths use ink navy `#102635` and the selected orange
+  `#FF6845`; no cobalt remains in the mark.
+- Image quality: SVG paths remain crisp at header, footer and favicon sizes;
+  PNG exports use the same approved geometry.
+- Copy: the exact brand name `FST` is present in accessible image text.
+- Interaction and accessibility: the logo links to the homepage with a clear
+  accessible name, the mobile menu opens and closes, horizontal overflow is
+  zero, completed broken images are zero and browser console errors are zero.
+- Findings: P0 none; P1 none; P2 none. The approved source and implementation
+  preserve the same mark, wordmark, proportions and orange accent.
+- final result: passed
