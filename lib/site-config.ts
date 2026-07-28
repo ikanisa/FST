@@ -7,11 +7,11 @@ export const siteConfig = {
   whatsappUrl: "https://wa.me/35679428604",
   linkedInUrl: process.env.NEXT_PUBLIC_LINKEDIN_URL || "",
   bookingUrl: "/book",
-  primaryCtaLabel: "Book a Meeting",
+  primaryCtaLabel: "Arrange a Call",
   bookingRecipients: ["bosco@ikanisa.com"],
   appointmentScheduleUrl: process.env.NEXT_PUBLIC_GOOGLE_BOOKING_URL || "",
   serviceArea:
-    "Serving international organisations, leadership teams and privately held businesses across borders. Meetings are available online and by appointment.",
+    "Supporting Malta-based and international businesses, finance teams and institutions through online and appointment-led engagements.",
 } as const;
 
 export function googleCalendarTemplateUrl({

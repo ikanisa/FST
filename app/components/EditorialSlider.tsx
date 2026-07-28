@@ -4,22 +4,22 @@ import { useEffect, useState } from "react";
 
 const slides = [
   {
-    src: "/home-consulting-v2.webp",
-    alt: "Senior advisers shaping a practical transformation plan with a client team",
-    eyebrow: "Connected expertise",
-    title: "Strategy that moves into action.",
+    src: "/fst-management.webp",
+    alt: "A standing team mapping operational risks and controls on a glass wall",
+    eyebrow: "Work the problem",
+    title: "Move from diagnosis to accountable action.",
   },
   {
-    src: "/home-audience-v2.webp",
-    alt: "International business leaders in a focused multidisciplinary advisory discussion",
-    eyebrow: "Senior attention",
-    title: "Advice grounded in your reality.",
+    src: "/fst-operations.webp",
+    alt: "A business owner and adviser reviewing operations on a production floor",
+    eyebrow: "Stay close to operations",
+    title: "Make the numbers useful where work happens.",
   },
   {
-    src: "/home-approach-v2.webp",
-    alt: "A senior adviser listening carefully before agreeing a clear next step",
-    eyebrow: "Practical progress",
-    title: "Clarity that leads somewhere useful.",
+    src: "/fst-consultation.webp",
+    alt: "A senior adviser listening during a private working conversation",
+    eyebrow: "Own the next move",
+    title: "Leave every session with decisions and owners.",
   },
 ] as const;
 
@@ -52,17 +52,17 @@ export function EditorialSlider() {
     <section className="editorial-slider section-shell" aria-labelledby="slider-title" aria-roledescription="carousel">
       <div className="slider-heading">
         <div>
-          <p className="section-index">Perspective in motion</p>
-          <h2 id="slider-title">One team around the whole decision.</h2>
+          <p className="section-index">How FST works</p>
+          <h2 id="slider-title">Advice that stays connected to delivery.</h2>
         </div>
-        <div className="slider-controls" aria-label="Image slider controls">
-          <button type="button" onClick={selectPrevious} aria-label="Show previous image">Previous</button>
+        <div className="slider-controls" aria-label="Story controls">
+          <button type="button" onClick={selectPrevious} aria-label="Show the previous story">Back</button>
           {!reducedMotion && (
             <button type="button" onClick={() => setPaused((value) => !value)} aria-pressed={paused}>
-              {paused ? "Play" : "Pause"}
+              {paused ? "Resume" : "Hold"}
             </button>
           )}
-          <button type="button" onClick={selectNext} aria-label="Show next image">Next</button>
+          <button type="button" onClick={selectNext} aria-label="Show the next story">Forward</button>
         </div>
       </div>
       <div className="slider-viewport">

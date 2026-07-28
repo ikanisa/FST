@@ -12,17 +12,17 @@ import { SectionVisual } from "../components/SectionVisual";
 import { PrimaryCta } from "../components/PrimaryCta";
 
 export const metadata = pageMetadata({
-  title: "Expertise",
-  description: "Connected management advisory, tax, accounting, corporate, business-planning, finance and funding-application expertise.",
+  title: "Services",
+  description: "Six FST workstreams covering management, risk, tax, accounting, corporate administration, finance and funding applications.",
   path: "/services",
 });
 
 const services = [
-  { title: "Management Advisory, Risk & Controls", slug: "management-consulting", image: "/management-consulting.webp", copy: "Management advisory, strategy, risk management, internal audit, internal controls and performance support.", tone: "violet", icon: Compass },
-  { title: "Tax & VAT", slug: "tax-vat", image: "/insights-tax-v2.webp", copy: "VAT, corporate income tax, compliance, return preparation, review and practical tax advisory.", tone: "orange", icon: Receipt },
-  { title: "Accounting & Financial Reporting", slug: "accounting-financial-reporting", image: "/accounting-financial-reporting.webp", copy: "Bookkeeping, reconciliations, financial statements, management accounts, projections and payroll.", tone: "blue", icon: Calculator },
-  { title: "Corporate & Administrative Services", slug: "corporate-services", image: "/corporate-services.webp", copy: "Company formation, secretarial support, registers, filings, governance and reliable administration.", tone: "green", icon: Buildings },
-  { title: "Business Planning & Finance Applications", slug: "business-planning-finance-applications", image: "/who-we-work-with-business-v2.webp", copy: "Business plans, budgets, projections, loan readiness and complete lender-application support.", tone: "rose", icon: ChartLineUp },
+  { title: "Management Advisory, Risk & Controls", slug: "management-consulting", image: "/fst-management.webp", copy: "Decision support, risk frameworks, internal audit, control improvement and hands-on management follow-through.", tone: "violet", icon: Compass },
+  { title: "Tax & VAT", slug: "tax-vat", image: "/fst-tax.webp", copy: "Malta VAT and corporate tax work organised around accurate positions, complete support and filing deadlines.", tone: "orange", icon: Receipt },
+  { title: "Accounting & Financial Reporting", slug: "accounting-financial-reporting", image: "/fst-accounting.webp", copy: "Finance records, close, reporting, payroll and forward-looking information prepared for management use.", tone: "blue", icon: Calculator },
+  { title: "Corporate & Administrative Services", slug: "corporate-services", image: "/fst-corporate.webp", copy: "Company records, governance actions, statutory filings and recurring administration kept orderly and current.", tone: "green", icon: Buildings },
+  { title: "Business Planning & Finance Applications", slug: "business-planning-finance-applications", image: "/fst-finance.webp", copy: "Commercial plans and financial models translated into lender-ready applications and evidence packs.", tone: "rose", icon: ChartLineUp },
   { title: "Funding Application Services", slug: "funding-applications", image: "/funding-application-services.webp", copy: "Full application support across FONDI.eu, Malta Enterprise, Xjenza Malta and connected routes.", tone: "green", icon: HandCoins },
 ];
 
@@ -32,11 +32,11 @@ export default function ServicesPage() {
       <SiteHeader />
       <section className="index-hero image-index-hero services-index-hero">
         <div>
-          <p className="eyebrow">Connected expertise</p>
-          <h1>One relationship.<br />More of the picture.</h1>
-          <p>Our management, tax, accounting, corporate and application specialists work as one team—so advice stays connected to the decisions, risks and opportunities around it.</p>
+          <p className="eyebrow">Six coordinated workstreams</p>
+          <h1>Build the right team around the work.</h1>
+          <p>FST combines recurring finance and compliance support with focused advisory and application work—without separating the commercial story from the evidence behind it.</p>
         </div>
-        <img src="/services-overview-hero-v2.webp" alt="A connected team of management, finance, tax and corporate specialists around one table" width="1536" height="1024" loading="eager" fetchPriority="high" />
+        <img src="/fst-collaboration.webp" alt="Five FST specialists coordinating workstreams in an open project studio" width="1536" height="1024" loading="eager" fetchPriority="high" />
       </section>
       <section className="service-index-grid section-shell" aria-label="Our services">
         {services.map((service) => {
@@ -55,12 +55,12 @@ export default function ServicesPage() {
       </section>
       <section className="subpage-cta section-shell">
         <div className="subpage-cta-copy">
-          <p className="section-index">Not sure where to start?</p>
-          <h2>Tell us what is changing.</h2>
-          <p>We’ll bring the right mix of expertise around your priorities.</p>
+          <p className="section-index">A practical first step</p>
+          <h2>Start with the outcome and the deadline.</h2>
+          <p>FST will map the disciplines, information and sequence required to get there.</p>
           <PrimaryCta className="primary-button" />
         </div>
-        <SectionVisual src="/services-cta-v2.webp" alt="A client and multidisciplinary adviser agreeing the right starting point" className="subpage-cta-visual" />
+        <SectionVisual src="/fst-consultation.webp" alt="A business owner and adviser agreeing the scope of a new engagement" className="subpage-cta-visual" />
       </section>
       <SiteFooter />
     </main>

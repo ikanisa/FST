@@ -16,12 +16,12 @@ export default function TermsPage() {
       <article className="legal-page section-shell">
         <header className="legal-hero legal-hero-terms">
           <div>
-            <p className="eyebrow">Terms of Use</p>
-            <h1>Clear terms for using this website.</h1>
-            <p>These terms govern access to FST’s website, information and online scheduling features.</p>
+            <p className="eyebrow">Site rules</p>
+            <h1>The basis on which this site is provided.</h1>
+            <p>These provisions apply when you access FST’s website, general information and online meeting features.</p>
             <small>Effective 20 July 2026</small>
           </div>
-          <img src="/terms-of-use-v2.webp" alt="Senior professionals reviewing an engagement document together" width="1536" height="1024" />
+          <img src="/fst-legal.webp" alt="Professional website terms and engagement documents under review" width="1536" height="1024" />
         </header>
 
         <div className="legal-content">

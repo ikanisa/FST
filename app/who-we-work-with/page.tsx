@@ -4,34 +4,34 @@ import { SiteHeader } from "../components/SiteHeader";
 import { PrimaryCta } from "../components/PrimaryCta";
 
 export const metadata = pageMetadata({
-  title: "Who we work with",
+  title: "Organisations",
   description: "Senior-led management, risk, tax, accounting, corporate, business-planning, finance and funding-application advice.",
   path: "/who-we-work-with",
 });
 
 const clientGroups = [
   {
-    title: "Businesses & leadership teams",
-    copy: "From ambitious owner-managed businesses to established groups, we help leaders strengthen confidence, navigate change and turn priorities into practical progress.",
-    image: "/who-we-work-with-business-v2.webp",
-    alt: "Business owners and a senior adviser reviewing a growth and governance plan",
-    priorities: ["Growth and transformation", "Governance, internal audit and controls", "Finance, funding, reporting and tax"],
+    title: "Operating businesses & leadership",
+    copy: "We help management teams organise growth, performance, finance and control priorities into a programme with accountable owners.",
+    image: "/fst-operations.webp",
+    alt: "An operating team coordinating performance and delivery priorities",
+    priorities: ["Strategy and management support", "Risk, internal audit and controls", "Reporting, tax and working capital"],
     className: "client-group-business",
   },
   {
-    title: "Owners & finance teams",
-    copy: "We connect governance, structuring, reporting, tax, business planning and finance perspectives around ownership priorities and long-term business decisions.",
-    image: "/who-we-work-with-owners-v2.webp",
-    alt: "Business owners and a finance adviser discussing long-term organisational priorities",
-    priorities: ["Ownership and succession", "Governance and structuring", "Finance and funding applications"],
+    title: "Owners, founders & finance teams",
+    copy: "FST joins the plan, numbers, corporate record and application evidence when a major investment or financing decision is ahead.",
+    image: "/fst-finance.webp",
+    alt: "Finance and business-planning evidence prepared for an owner decision",
+    priorities: ["Business plan preparation or review", "Budgets, projections and loan support", "Corporate administration and tax"],
     className: "client-group-owners",
   },
   {
-    title: "International organisations & institutions",
-    copy: "For organisations working across borders or under heightened accountability, we bring local attention and multidisciplinary support to reporting, governance and delivery.",
-    image: "/who-we-work-with-organisations-v2.webp",
-    alt: "International organisation leaders reviewing governance and reporting priorities",
-    priorities: ["Cross-border operations", "Reporting and accountability", "Risk and regulatory change"],
+    title: "International programmes & institutions",
+    copy: "For cross-border or accountability-intensive work, we provide a locally attentive team for governance, reporting, applications and delivery evidence.",
+    image: "/fst-international.webp",
+    alt: "An international programme team reviewing delivery and reporting evidence",
+    priorities: ["Programme delivery and management support", "Financial reporting and accountability", "Funding applications and post-award files"],
     className: "client-group-organisations",
   },
 ];
@@ -43,26 +43,26 @@ export default function WhoWeWorkWithPage() {
 
       <section className="client-hero">
         <div className="client-hero-copy">
-          <p className="eyebrow">Who we work with</p>
-          <h1>Advice shaped around your reality.</h1>
-          <p>Different organisations face different pressures. We start with your context, connect the right expertise and stay focused on the decisions that matter.</p>
+          <p className="eyebrow">Organisations we support</p>
+          <h1>Support matched to the pressure you are under.</h1>
+          <p>The service mix changes with the situation. The working method stays consistent: establish the decision, join the evidence and agree the route forward.</p>
           <div className="client-hero-actions">
             <PrimaryCta className="primary-button" />
           </div>
         </div>
         <div className="client-hero-visual">
-          <img src="/who-we-work-with-hero-v2.webp" alt="A diverse group of senior business leaders in a strategic advisory conversation" width="1536" height="1024" loading="eager" fetchPriority="high" decoding="async" />
+          <img src="/fst-collaboration.webp" alt="A diverse advisory team working alongside organisational leaders" width="1536" height="1024" loading="eager" fetchPriority="high" decoding="async" />
           <aside>
-            <strong>One standard of care.</strong>
-            <span>Senior attention, connected thinking and clear next steps.</span>
+            <strong>A joined-up working file.</strong>
+            <span>One objective, named owners and evidence that can be reviewed.</span>
           </aside>
         </div>
       </section>
 
       <section className="client-groups section-shell" aria-labelledby="client-groups-title">
         <div className="client-groups-heading">
-          <h2 id="client-groups-title">Different starting points. The same commitment to clarity.</h2>
-          <p>Our best work begins with a close understanding of where you are, what is changing and what a useful outcome looks like.</p>
+          <h2 id="client-groups-title">Three settings where connected support matters.</h2>
+          <p>We scope the disciplines around the decision and keep dependencies visible from the first review to the final action.</p>
         </div>
         <div className="client-groups-grid">
           {clientGroups.map((group) => (
@@ -82,12 +82,12 @@ export default function WhoWeWorkWithPage() {
 
       <section className="relationship-cta section-shell" aria-labelledby="relationship-title">
         <div className="relationship-cta-copy">
-          <p className="eyebrow">The right place to begin</p>
-          <h2 id="relationship-title">Tell us what is changing.</h2>
-          <p>You do not need to know which service comes first. Share the decision, risk or opportunity in front of you and we’ll bring the right perspective to the table.</p>
+          <p className="eyebrow">Begin with the decision</p>
+          <h2 id="relationship-title">Describe the outcome, not the service code.</h2>
+          <p>Tell us what must be decided, financed, filed, controlled or delivered. We will map the relevant FST workstreams around it.</p>
           <PrimaryCta className="primary-button" />
         </div>
-        <img src="/who-we-work-with-cta-v2.webp" alt="A senior adviser listening closely during a private first meeting" width="1536" height="1024" loading="lazy" decoding="async" />
+        <img src="/fst-consultation.webp" alt="A private first meeting focused on a business outcome" width="1536" height="1024" loading="lazy" decoding="async" />
       </section>
 
       <SiteFooter />

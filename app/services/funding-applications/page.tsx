@@ -10,8 +10,8 @@ export const metadata = pageMetadata({
 export default function FundingApplicationsPage() {
   return <ServicePage
     eyebrow="Funding Application Services"
-    title="From funding opportunity to review-ready application."
-    lede="End-to-end support across FONDI.eu, Malta Enterprise and Xjenza Malta routes—grounded in current official guidance, eligibility and evidence."
+    title="Convert an eligible project into a complete application."
+    lede="Full application support for relevant FONDI.eu, Malta Enterprise and Xjenza Malta routes—from call screening through approved human submission."
     image="/funding-application-services.webp"
     imageAlt="Funding adviser and business leaders reviewing a complete application strategy"
     sectionImages={{
@@ -20,7 +20,7 @@ export default function FundingApplicationsPage() {
       outcomes: { src: "/funding-outcomes-v2.webp", alt: "Business leaders reviewing a coherent and complete funding application pack" },
       cta: { src: "/funding-cta-v2.webp", alt: "Funding adviser listening closely during a confidential first consultation" },
     }}
-    introduction="A strong application begins with the right route, an eligible project and a source-backed case in which the narrative, budget and evidence all agree."
+    introduction="FST builds one controlled application file in which the call rules, project design, budget, claims and attachments can be checked against each other."
     accent="green"
     referenceLinks={[
       { label: "FONDI.eu", href: "https://fondi.eu/what-funding-is-available/", description: "EU and cohesion-funded calls, official guidance, application documents and beneficiary requirements." },
@@ -28,17 +28,17 @@ export default function FundingApplicationsPage() {
       { label: "Xjenza Malta", href: "https://xjenzamalta.mt/media/open-funding-schemes/", description: "Current research, innovation, digital, commercialisation and collaboration funding schemes." },
     ]}
     services={[
-      { title: "Funding opportunity scan", description: "Current-source review of relevant FONDI.eu, Malta Enterprise, Xjenza Malta and connected Malta funding routes." },
-      { title: "Route fit & eligibility", description: "Applicant, activity, timing, state-aid, sector, cost and funding-route assessment before drafting begins." },
-      { title: "Project concept & design", description: "Clear objectives, work packages, milestones, outputs, outcomes, indicators, delivery model and implementation plan." },
-      { title: "Application narrative & forms", description: "Preparation or review of official forms and narrative responses aligned to the scoring criteria and source evidence." },
-      { title: "Business plan & annexes", description: "Commercial case, market need, operating model, management capacity, sustainability and route-specific supporting annexes." },
-      { title: "Budget & co-financing", description: "Eligible-cost model, aid intensity, own contribution, quotations, cash flow, assumptions and narrative cross-checks." },
-      { title: "State aid & double-funding checks", description: "De minimis or other aid mapping, prior and pending support review, cost separation and conflict controls." },
-      { title: "Evidence & attachment pack", description: "Compliance matrix, evidence register, declarations, accounts, tax status, quotations, CVs and attachment tracking." },
-      { title: "Submission-readiness review", description: "Final completeness, consistency and portal-readiness review, with submission retained for the authorised human." },
-      { title: "Post-award support", description: "Implementation files, milestones, procurement records, claim support, reporting calendars and change-control assistance." },
+      { title: "Funding opportunity scan", description: "Live review of suitable calls and schemes from the named official Malta funding sources." },
+      { title: "Route fit & eligibility", description: "Documented screening of applicant, activity, timing, sector, costs, aid rules and threshold conditions." },
+      { title: "Project concept & design", description: "Objectives, work packages, milestones, outputs, outcomes, indicators, delivery roles and implementation logic." },
+      { title: "Application narrative & forms", description: "Drafting or review of responses and forms mapped to the scheme criteria, limits and available evidence." },
+      { title: "Business plan & annexes", description: "Market rationale, operating model, delivery capacity, sustainability case and route-specific annex preparation." },
+      { title: "Budget & co-financing", description: "Eligible-cost budget, aid intensity, own contribution, quotations, cash flow and cross-document consistency checks." },
+      { title: "State aid & double-funding checks", description: "Prior and pending aid mapping, de minimis or applicable aid treatment, cost separation and conflict checks." },
+      { title: "Evidence & attachment pack", description: "A compliance matrix and indexed set of declarations, accounts, tax records, quotations, CVs and other proof." },
+      { title: "Submission-readiness review", description: "Final portal, completeness and consistency check; the authorised human keeps approval and submission control." },
+      { title: "Post-award support", description: "Implementation file setup, procurement evidence, milestones, claims, reports and change-control support." },
     ]}
-    outcomes={["A better-matched funding route", "A coherent narrative and budget", "A complete evidence-led application pack", "Clear human approval and submission control"]}
+    outcomes={["A documented route decision", "A scored narrative and eligible budget", "A complete attachment register", "Explicit human approval before submission"]}
   />;
 }

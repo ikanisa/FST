@@ -6,29 +6,29 @@ export const metadata = pageMetadata({ title: "Management Advisory, Risk & Contr
 export default function ManagementConsultingPage() {
   return <ServicePage
     eyebrow="Management Advisory, Risk & Controls"
-    title="Turn complexity into practical progress."
-    lede="Senior support for management decisions, strategy, risk management, internal audit, internal controls and operational improvement."
-    image="/management-consulting.webp"
-    imageAlt="Management consultants and executives discussing strategy and risk"
+    title="Build an organisation that can decide and deliver."
+    lede="Hands-on support for leaders strengthening strategy, performance, governance, risk management, internal audit and internal controls."
+    image="/fst-management.webp"
+    imageAlt="A leadership workshop mapping actions and operating priorities"
     sectionImages={{
-      intro: { src: "/consulting-intro-v2.webp", alt: "Leadership team mapping strategic priorities with a senior consultant" },
-      offerings: { src: "/consulting-offerings-v2.webp", alt: "Consultants facilitating a risk, controls and transformation working session" },
-      outcomes: { src: "/consulting-outcomes-v2.webp", alt: "Executive team reviewing an improved operating model and delivery plan" },
-      cta: { src: "/consulting-cta-v2.webp", alt: "Senior consultant in a focused one-to-one discussion with a business leader" },
+      intro: { src: "/fst-collaboration.webp", alt: "Advisers and managers working through a delivery challenge" },
+      offerings: { src: "/fst-management.webp", alt: "A facilitated management, risk and controls workshop" },
+      outcomes: { src: "/fst-insights.webp", alt: "An evidence-led advisory workspace with priorities under review" },
+      cta: { src: "/fst-consultation.webp", alt: "A private consultation between an adviser and business owner" },
     }}
-    introduction="We connect management priorities with the governance, risk insight, controls and operating discipline needed to deliver them."
+    introduction="FST turns management questions into an owned programme of decisions, safeguards and measurable action."
     accent="violet"
     services={[
-      { title: "Management advisory", description: "Senior, practical support for complex decisions, priorities, performance challenges and implementation choices." },
-      { title: "Strategy & transformation", description: "Clear strategic choices, practical operating models and focused support from intent through delivery." },
-      { title: "Operating model design", description: "Roles, responsibilities, processes and ways of working aligned to strategy, scale and delivery." },
-      { title: "Risk management", description: "Proportionate frameworks, risk appetite and reporting that connect risk to real business decisions." },
-      { title: "Internal audit", description: "Risk-based internal audit planning and reviews that provide useful insight, recommendations and follow-up for management." },
-      { title: "Internal controls", description: "Control design, documentation, testing and remediation that strengthen accountability and performance." },
-      { title: "Governance & compliance", description: "Governance arrangements and compliance programmes aligned with obligations and organisational reality." },
-      { title: "Performance improvement", description: "Process, information and accountability improvements that help teams operate with greater clarity." },
-      { title: "Policies & procedures", description: "Clear, usable policies, procedures and responsibility maps that support consistent execution and control." },
+      { title: "Management support", description: "Structured decision support, issue resolution and implementation guidance for boards, owners and leadership teams." },
+      { title: "Strategy & transformation", description: "Strategic choices translated into initiatives, milestones, owners and an operating cadence teams can use." },
+      { title: "Operating model design", description: "Practical redesign of roles, decision rights, workflows and management information for the next stage of growth." },
+      { title: "Risk management", description: "Risk identification, appetite, assessment, treatment and reporting built into planning and everyday decisions." },
+      { title: "Internal audit", description: "Risk-based plans, focused reviews, clear findings and tracked actions that give management useful assurance." },
+      { title: "Internal controls", description: "Process walkthroughs, control design, documentation, testing, gap remediation and control-owner coaching." },
+      { title: "Governance & compliance", description: "Committees, delegations, reporting lines and compliance responsibilities made proportionate and workable." },
+      { title: "Performance improvement", description: "Root-cause analysis, process redesign, indicators and accountability routines that lift delivery performance." },
+      { title: "Policies & procedures", description: "Usable policies, standard procedures, matrices and control evidence designed around how work is actually done." },
     ]}
-    outcomes={["Sharper priorities and decisions", "Stronger risk and control visibility", "More practical governance", "Change that teams can sustain"]}
+    outcomes={["Decisions with named owners", "Visible risks and tested controls", "Useful internal-audit follow-through", "An operating rhythm that holds"]}
   />;
 }

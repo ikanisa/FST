@@ -44,16 +44,16 @@ export function AnalyticsConsent() {
   if (choice || !measurementId) return null;
 
   return (
-    <aside className="consent-banner" aria-label="Analytics preferences">
+    <aside className="consent-banner" aria-label="Website measurement choice">
       <div>
-        <strong>Your privacy choices</strong>
+        <strong>Optional website measurement</strong>
         <p>
-          We use optional analytics to understand website performance. You can decline without affecting the site. See our <Link href="/privacy">privacy policy</Link>.
+          Anonymous analytics help us identify slow or unclear pages. Refusing them does not change site access. Read the <Link href="/privacy">data notice</Link>.
         </p>
       </div>
       <div className="consent-actions">
-        <button type="button" className="consent-secondary" onClick={() => choose("declined")}>Decline</button>
-        <button type="button" className="consent-primary" onClick={() => choose("accepted")}>Accept analytics</button>
+        <button type="button" className="consent-secondary" onClick={() => choose("declined")}>Continue without</button>
+        <button type="button" className="consent-primary" onClick={() => choose("accepted")}>Allow measurement</button>
       </div>
     </aside>
   );

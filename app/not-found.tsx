@@ -8,12 +8,12 @@ export default function NotFound() {
     <main id="main-content" tabIndex={-1}>
       <SiteHeader />
       <section className="not-found section-shell">
-        <p className="eyebrow">404 · Page not found</p>
-        <h1>This page is no longer in view.</h1>
-        <p>The link may have moved, or the address may be incomplete. Return to FST or start a conversation with our team.</p>
+        <p className="eyebrow">404 · Route unavailable</p>
+        <h1>That address does not lead to an FST page.</h1>
+        <p>Check the link, return to the main page or arrange a call if you were looking for a specific service.</p>
         <div className="not-found-actions">
           <PrimaryCta className="primary-button" />
-          <Link className="text-link" href="/">Return home</Link>
+          <Link className="text-link" href="/">Open the main page</Link>
         </div>
       </section>
       <SiteFooter />

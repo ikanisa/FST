@@ -32,27 +32,27 @@ export function SiteHeader() {
 
   return (
     <Fragment>
-      <header className={scrolled ? "site-header is-scrolled" : "site-header"} aria-label="Main navigation">
-        <Link className="wordmark" href="/" onClick={closeMenu} aria-label="FST home">FST</Link>
-        <nav id="primary-navigation" className={menuOpen ? "nav-links is-open" : "nav-links"} aria-label="Primary">
-          <Link href="/services" onClick={closeMenu}>Expertise</Link>
-          <Link href="/who-we-work-with" onClick={closeMenu}>Who we work with</Link>
-          <Link href="/insights" onClick={closeMenu}>Insights</Link>
-          <Link href="/about" onClick={closeMenu}>About</Link>
+      <header className={scrolled ? "site-header is-scrolled" : "site-header"} aria-label="Website navigation">
+        <Link className="wordmark" href="/" onClick={closeMenu} aria-label="Go to the FST homepage">FST</Link>
+        <nav id="primary-navigation" className={menuOpen ? "nav-links is-open" : "nav-links"} aria-label="Main links">
+          <Link href="/services" onClick={closeMenu}>Services</Link>
+          <Link href="/who-we-work-with" onClick={closeMenu}>Organisations</Link>
+          <Link href="/insights" onClick={closeMenu}>Field Notes</Link>
+          <Link href="/about" onClick={closeMenu}>FST Approach</Link>
           <PrimaryCta className="nav-cta" onClick={closeMenu} />
         </nav>
         <button
           className="menu-toggle"
           type="button"
-          aria-label={menuOpen ? "Close navigation" : "Open navigation"}
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
           aria-controls="primary-navigation"
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen((open) => !open)}
         >
-          {menuOpen ? "Close" : "Menu"}
+          {menuOpen ? "Hide" : "Menu"}
         </button>
       </header>
-      {menuOpen && <button className="nav-backdrop" type="button" aria-label="Close navigation menu" onClick={closeMenu} />}
+      {menuOpen && <button className="nav-backdrop" type="button" aria-label="Dismiss menu" onClick={closeMenu} />}
     </Fragment>
   );
 }

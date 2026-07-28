@@ -119,31 +119,31 @@ export function MeetingScheduler() {
   }
 
   return (
-    <div className="meeting-scheduler" aria-label="Book a consultation">
+    <div className="meeting-scheduler" aria-label="Arrange an FST call">
       <div className="scheduler-topline">
         <div>
-          <span className="scheduler-kicker">Private consultation</span>
-          <h3>Choose a time with our team.</h3>
+          <span className="scheduler-kicker">First working call</span>
+          <h3>Find a slot for the issue.</h3>
         </div>
       </div>
 
       <ol className="scheduler-progress" aria-label="Booking progress">
-        <li className={step >= 1 ? "is-active" : ""}><span aria-hidden="true"><CalendarBlank size={14} weight="regular" /></span>Time</li>
-        <li className={step >= 2 ? "is-active" : ""}><span aria-hidden="true"><UserCircle size={14} weight="regular" /></span>Details</li>
-        <li className={step >= 3 ? "is-active" : ""}><span aria-hidden="true"><CalendarCheck size={14} weight="regular" /></span>Calendar</li>
+        <li className={step >= 1 ? "is-active" : ""}><span aria-hidden="true"><CalendarBlank size={14} weight="regular" /></span>Slot</li>
+        <li className={step >= 2 ? "is-active" : ""}><span aria-hidden="true"><UserCircle size={14} weight="regular" /></span>Context</li>
+        <li className={step >= 3 ? "is-active" : ""}><span aria-hidden="true"><CalendarCheck size={14} weight="regular" /></span>Invite</li>
       </ol>
 
       {step === 1 && (
         <div className="scheduler-step">
           <label className="scheduler-field">
-            <span>What would you like to discuss?</span>
+            <span>Which workstream is closest?</span>
             <select value={topic} onChange={(event) => setTopic(event.target.value)}>
               {topics.map((item) => <option key={item}>{item}</option>)}
             </select>
           </label>
 
           <fieldset className="date-picker">
-            <legend>Select a date</legend>
+            <legend>Pick a working day</legend>
             <div className="date-options">
               {dates.map((item) => (
                 <button
@@ -162,7 +162,7 @@ export function MeetingScheduler() {
           </fieldset>
 
           <fieldset className="time-picker">
-            <legend>Available times · Africa/Kigali</legend>
+            <legend>Proposed times · Africa/Kigali</legend>
             <div className="time-options">
               {times.map((time) => (
                 <button
@@ -179,7 +179,7 @@ export function MeetingScheduler() {
           </fieldset>
 
           <button className="scheduler-primary" type="button" disabled={!selectedTime} onClick={() => setStep(2)}>
-            Continue with {selectedTime || "a time"}
+            Continue with {selectedTime || "the slot"}
           </button>
         </div>
       )}
@@ -192,28 +192,28 @@ export function MeetingScheduler() {
             <small>Africa/Kigali · Google Meet · 45 minutes</small>
           </div>
           <div className="field-row">
-            <label className="scheduler-field"><span>Full name (optional)</span><input name="name" autoComplete="name" /></label>
-            <label className="scheduler-field"><span>Work email</span><input type="email" name="email" autoComplete="email" required /></label>
+            <label className="scheduler-field"><span>Your name (optional)</span><input name="name" autoComplete="name" /></label>
+            <label className="scheduler-field"><span>Business email</span><input type="email" name="email" autoComplete="email" required /></label>
           </div>
-          <label className="scheduler-field"><span>Organisation (optional)</span><input name="organisation" autoComplete="organization" /></label>
+          <label className="scheduler-field"><span>Organisation or project (optional)</span><input name="organisation" autoComplete="organization" /></label>
           <label className="scheduler-consent">
             <input type="checkbox" required />
-            <span>I agree to the <Link href="/privacy">Privacy Policy</Link> and <Link href="/terms">Terms of Use</Link>.</span>
+            <span>I accept the <Link href="/privacy">data notice</Link> and <Link href="/terms">site rules</Link>.</span>
           </label>
           <div className="scheduler-actions">
-            <button className="scheduler-secondary" type="button" onClick={() => setStep(1)}>Back</button>
-            <button className="scheduler-primary" type="submit">Prepare calendar invitation</button>
+            <button className="scheduler-secondary" type="button" onClick={() => setStep(1)}>Change slot</button>
+            <button className="scheduler-primary" type="submit">Build the invitation</button>
           </div>
         </form>
       )}
 
       {step === 3 && booking && (
         <div className="scheduler-step scheduler-complete" role="status">
-          <span className="scheduler-kicker">Ready for your calendar</span>
+          <span className="scheduler-kicker">Invitation prepared</span>
           <h3>{date.longLabel}<br />at {selectedTime}</h3>
-          <p>Your consultation details are prepared. Open Google Calendar to save the event and add Google Meet conferencing.</p>
-          <a className="scheduler-primary" href={calendarUrl} target="_blank" rel="noreferrer">Open Google Calendar</a>
-          <button className="scheduler-secondary" type="button" onClick={restart}>Choose another time</button>
+          <p>The meeting details are ready. Open the event, check the content and add conferencing before you save it.</p>
+          <a className="scheduler-primary" href={calendarUrl} target="_blank" rel="noreferrer">Review calendar draft</a>
+          <button className="scheduler-secondary" type="button" onClick={restart}>Start over</button>
         </div>
       )}
     </div>

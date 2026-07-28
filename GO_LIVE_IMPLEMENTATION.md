@@ -12,6 +12,8 @@ Updated: 28 July 2026
 - First-party `/book` flow with input validation, availability checking and Google Meet event creation when approved Calendar credentials are configured.
 - Responsive desktop and mobile layouts, semantic icons, accessible navigation, SEO metadata, sitemap, robots and production security headers.
 - Production dependency audit at zero known vulnerabilities after the validated overrides.
+- Twelve original FST photographs, a new favicon and a reproducible social card; no deployed public asset matches a KMFINCO source fingerprint.
+- Original FST wording and labels across navigation, service pages, contact, legal, booking and metadata surfaces.
 
 ## Activation values still required
 
@@ -34,11 +36,12 @@ FST may prepare and review funding, grant and finance application packages. No a
 ## Verification
 
 - `npm run lint` passes.
-- `npm test` passes the production build and all 11 rendered-route and booking integration tests.
+- `npm test` passes the production build and all 9 rendered-route, brand-separation and booking integration tests.
 - `npm audit --omit=dev` reports zero production vulnerabilities.
-- Browser QA passes at 1440 × 900 and 390 × 844 with no broken images or horizontal overflow.
-- All 15 retained public routes pass the browser sweep.
+- Browser QA passes at 1440 × 900 and 390 × 844 with no completed broken images or horizontal overflow.
+- All 15 retained public routes pass the browser sweep at both viewports.
 - Removed service routes return 404.
+- `npx wrangler deploy --dry-run --outdir .wrangler/fst-dry-run` completes and packages the Cloudflare Worker without publishing.
 
 ## Remaining external actions
 

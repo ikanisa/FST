@@ -8,28 +8,28 @@ export function SiteFooter() {
     <footer className="site-footer">
       <Link className="wordmark footer-mark" href="/">FST</Link>
       <div className="footer-summary">
-        <p>Management, finance, tax, corporate and application expertise—connected around what comes next.</p>
+        <p>Plans, numbers, obligations and applications—managed as one practical programme of work.</p>
         <span>{siteConfig.serviceArea}</span>
       </div>
       <div className="footer-links">
-        <nav aria-label="Footer">
-          <Link href="/services">Expertise</Link>
-          <Link href="/who-we-work-with">Who we work with</Link>
-          <Link href="/about">About</Link>
-          <Link href="/insights">Insights</Link>
-          <Link href="/contact">Contact</Link>
-          <Link href="/privacy">Privacy</Link>
-          <Link href="/terms">Terms</Link>
+        <nav aria-label="Footer links">
+          <Link href="/services">Services</Link>
+          <Link href="/who-we-work-with">Organisations</Link>
+          <Link href="/about">Our approach</Link>
+          <Link href="/insights">Field notes</Link>
+          <Link href="/contact">Get in touch</Link>
+          <Link href="/privacy">Data notice</Link>
+          <Link href="/terms">Site rules</Link>
         </nav>
         <div className="footer-contact">
           <span>{siteConfig.email}</span>
           <TrackedLink href={`tel:${siteConfig.phoneE164}`} event="contact_phone_click">{siteConfig.phoneDisplay}</TrackedLink>
-          <TrackedLink href={siteConfig.whatsappUrl} event="contact_whatsapp_click" target="_blank" rel="noreferrer">WhatsApp</TrackedLink>
+          <TrackedLink href={siteConfig.whatsappUrl} event="contact_whatsapp_click" target="_blank" rel="noreferrer">Message on WhatsApp</TrackedLink>
           <PrimaryCta />
           {siteConfig.linkedInUrl && <TrackedLink href={siteConfig.linkedInUrl} event="linkedin_click" target="_blank" rel="noreferrer">LinkedIn</TrackedLink>}
         </div>
       </div>
-      <small>© 2026 FST. All rights reserved. International advisory services; meetings online and by appointment.</small>
+      <small>© 2026 FST. Advisory support delivered online and by prior appointment.</small>
     </footer>
   );
 }

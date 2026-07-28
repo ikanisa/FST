@@ -1,6 +1,7 @@
 # FST
 
-FST is a senior-led multidisciplinary advisory website built from the KMFINCO visual and technical foundation, with a clear six-category service model.
+FST is a senior-led multidisciplinary advisory website with an original visual
+system, a distinct editorial voice and a clear six-category service model.
 
 ## Main service categories
 
@@ -32,7 +33,7 @@ FST does not advertise external or statutory audit and assurance, investment or 
 ## First-party integrations
 
 - `/api/book` validates meeting requests, checks Google Calendar free/busy availability, and creates a Calendar event with Google Meet and attendee notifications.
-- Every primary website action uses the label “Book a Meeting” and routes to `/book`.
+- Every primary website action uses the label “Arrange a Call” and routes to `/book`.
 - Confirmed Calendar events invite the prospective client and FST’s approved scheduling contact with `sendUpdates=all`.
 - No contact form, `mailto:` action or website email workflow is included; the public email is informational text only.
 - Booking fails safely when production credentials are absent by producing a dated Google Calendar invitation.
@@ -52,7 +53,10 @@ npm test
 npm run lint
 ```
 
-The production build is created with `npm run build`. Design comparison evidence is stored in `qa/`, and the final design QA record is in `design-qa.md`.
+The production build is created with `npm run build`. Current design evidence is
+stored in `qa/fst-original/`, the visual production manifest is under
+`creative-production/fst-visual-system/`, and the final design QA record is in
+`design-qa.md`.
 
 ## Cloudflare deployment
 
@@ -60,4 +64,10 @@ The production site is configured for Cloudflare Workers through Vinext:
 
 ```bash
 npm run deploy
+```
+
+For a deployment-package check that does not publish:
+
+```bash
+npx wrangler deploy --dry-run
 ```

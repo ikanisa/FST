@@ -10,29 +10,29 @@ export const metadata = pageMetadata({
 export default function BusinessPlanningFinanceApplicationsPage() {
   return <ServicePage
     eyebrow="Business Planning & Finance Applications"
-    title="Turn the plan into a credible financial case."
-    lede="Business plans, budgets, projections and loan-application support built around the decision a lender, board or funding partner needs to make."
-    image="/who-we-work-with-business-v2.webp"
-    imageAlt="Business owner and adviser reviewing a growth plan and financing requirements"
+    title="Give lenders a case they can follow."
+    lede="Business plans, budgets, projections and loan-application packs built from consistent evidence and realistic repayment logic."
+    image="/fst-finance.webp"
+    imageAlt="A financial model, business plan and lending evidence under review"
     sectionImages={{
-      intro: { src: "/insights-strategy-v2.webp", alt: "Leadership team connecting strategy, operating milestones and financial assumptions" },
-      offerings: { src: "/home-consulting-v2.webp", alt: "Advisers building a business plan, budget and finance application workplan" },
-      outcomes: { src: "/about-story-v2.webp", alt: "Business leaders reviewing a coherent plan, projections and evidence package" },
-      cta: { src: "/consulting-cta-v2.webp", alt: "Senior adviser discussing finance readiness with a business owner" },
+      intro: { src: "/fst-operations.webp", alt: "An operating team connecting delivery milestones to financing needs" },
+      offerings: { src: "/fst-finance.webp", alt: "A budget and projection model being prepared for a loan application" },
+      outcomes: { src: "/fst-accounting.webp", alt: "Reconciled accounts and evidence supporting the financial case" },
+      cta: { src: "/fst-consultation.webp", alt: "A private discussion about loan readiness and next steps" },
     }}
-    introduction="A strong finance application connects the commercial story, operating plan, evidence and numbers into one credible case."
+    introduction="FST tests the need, narrative, numbers and supporting documents before they reach the lender."
     accent="rose"
     services={[
-      { title: "Business-plan preparation", description: "End-to-end preparation of a structured business plan covering market, operations, management, risks, milestones and finances." },
-      { title: "Business-plan review", description: "Critical review of an existing plan for clarity, evidence, consistency, feasibility and lender or investor readiness." },
-      { title: "Financial projections", description: "Integrated profit and loss, balance-sheet and cash-flow projections with transparent assumptions and scenarios." },
-      { title: "Budgeting & cash planning", description: "Operating budgets, capital requirements, funding gaps, cash runway and sensitivity analysis connected to delivery milestones." },
-      { title: "Loan readiness assessment", description: "Review of borrowing need, affordability, repayment capacity, security considerations and supporting information before application." },
-      { title: "Loan application support", description: "Preparation and coordination of the lender application, business case, financial information and required declarations." },
-      { title: "Lender evidence pack", description: "Organisation of accounts, tax records, bank information, quotations, contracts and management evidence into a review-ready pack." },
-      { title: "Queries & revisions", description: "Structured responses to lender questions, revised projections and reconciled updates during the assessment process." },
-      { title: "Post-approval planning", description: "Drawdown readiness, covenant calendars, management reporting and use-of-funds tracking after approval." },
+      { title: "Business-plan preparation", description: "Full drafting across market need, offer, operations, management capability, milestones, risk and financial viability." },
+      { title: "Business-plan review", description: "A structured challenge of an existing plan’s evidence, internal logic, feasibility and lender readability." },
+      { title: "Financial projections", description: "Linked profit-and-loss, balance-sheet and cash-flow forecasts with stated drivers and scenarios." },
+      { title: "Budgeting & cash planning", description: "Operating and capital budgets, funding-gap analysis, cash runway and sensitivities tied to the delivery plan." },
+      { title: "Loan readiness assessment", description: "Early assessment of funding purpose, affordability, repayment capacity, security and information gaps." },
+      { title: "Loan application support", description: "Preparation and coordination of forms, narrative, financial data, declarations and lender requirements." },
+      { title: "Lender evidence pack", description: "Indexed accounts, tax records, bank data, contracts, quotations and management documents ready for review." },
+      { title: "Queries & revisions", description: "Controlled responses to lender questions with updated assumptions, forecasts and reconciled documents." },
+      { title: "Post-approval planning", description: "Drawdown conditions, covenant dates, use-of-funds monitoring and reporting routines prepared after approval." },
     ]}
-    outcomes={["A clearer financing case", "Reconciled plans and projections", "A complete lender-ready evidence pack", "Better visibility of affordability and risk"]}
+    outcomes={["A lender-readable business plan", "Projections that reconcile", "An indexed application file", "Visible affordability and downside cases"]}
   />;
 }

@@ -8,6 +8,8 @@ Profiles: desktop 1440 × 900 and mobile 390 × 844
 | Area | Result |
 | --- | --- |
 | FST rebrand | Pass |
+| Original FST photography and labels | Pass |
+| KMFINCO public-asset fingerprint separation | Pass |
 | Six main service categories | Pass |
 | Full component lists | Pass |
 | Funding Application Services | Pass |
@@ -19,6 +21,7 @@ Profiles: desktop 1440 × 900 and mobile 390 × 844
 | SEO, sitemap and removed-route checks | Pass |
 | Booking validation and safe unconfigured state | Pass |
 | Production dependency audit | Pass — zero known vulnerabilities |
+| Cloudflare deploy dry-run | Pass |
 
 ## Route matrix
 
@@ -53,9 +56,10 @@ The removed `/services/audit-assurance`, `/services/investment-family-office`, `
 
 ## Evidence
 
-- `qa/fst/home-desktop-1440x900.jpg`
-- `qa/fst/home-mobile-390x844.jpg`
-- `qa/fst/services-desktop-1440x900.jpg`
-- `qa/fst/services-mobile-390x844.jpg`
-- `qa/fst/funding-desktop-1440x900.jpg`
-- Source-design reference: `qa/home-desktop.png`
+- Accepted layout baseline: `qa/fst/home-desktop-1440x900.jpg`
+- Current homepage: `qa/fst-original/home-desktop-viewport-1440x900.png`
+- Current mobile homepage: `qa/fst-original/home-mobile-390x844.png`
+- Mobile menu open: `qa/fst-original/home-mobile-menu-390x844.png`
+- Current service index: `qa/fst-original/services-desktop-1440x900.png`
+- Current funding page: `qa/fst-original/funding-mobile-390x844.png`
+- Final Product Design record: `design-qa.md`

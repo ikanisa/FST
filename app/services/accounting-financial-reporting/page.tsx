@@ -10,30 +10,30 @@ export const metadata = pageMetadata({
 export default function AccountingFinancialReportingPage() {
   return <ServicePage
     eyebrow="Accounting & Financial Reporting"
-    title="Reliable numbers for everyday decisions."
-    lede="Connected bookkeeping, reporting, payroll and finance support—from accurate records through management information and annual financial statements."
-    image="/accounting-financial-reporting.webp"
-    imageAlt="Accounting professionals reviewing reconciliations and financial statements"
+    title="Make the numbers usable, not merely complete."
+    lede="Bookkeeping, close, payroll and reporting support that converts transaction records into management information and review-ready statements."
+    image="/fst-accounting.webp"
+    imageAlt="An overhead view of accounting records and reconciliations"
     sectionImages={{
-      intro: { src: "/home-expertise-v2.webp", alt: "Accounting and finance professionals connecting reliable records with management decisions" },
-      offerings: { src: "/home-capabilities-v2.webp", alt: "Finance workstreams organised around accounting, reporting and payroll responsibilities" },
-      outcomes: { src: "/tax-outcomes-v2.webp", alt: "Finance leader reviewing timely management information and financial statements" },
-      cta: { src: "/contact-conversation.webp", alt: "Accounting adviser discussing reporting priorities with a business leader" },
+      intro: { src: "/fst-collaboration.webp", alt: "Finance colleagues aligning reporting responsibilities" },
+      offerings: { src: "/fst-accounting.webp", alt: "Ledgers and reconciliations prepared for reporting" },
+      outcomes: { src: "/fst-finance.webp", alt: "A financial model and projections under analytical review" },
+      cta: { src: "/fst-consultation.webp", alt: "A finance adviser discussing reporting needs with a business owner" },
     }}
-    introduction="Good accounting turns complete records into timely information, clear accountability and financial statements that stand up to review."
+    introduction="FST connects the ledger, close process, reporting pack and forward view so finance work answers management’s real questions."
     accent="blue"
     services={[
-      { title: "Bookkeeping & general ledger", description: "Accurate transaction processing, coding and ledger maintenance tailored to the organisation’s reporting needs." },
-      { title: "Bank & balance-sheet reconciliations", description: "Routine reconciliation of bank, receivables, payables and key balance-sheet accounts, with open items followed through." },
-      { title: "Accounts payable & receivable", description: "Structured invoicing, supplier processing, collections visibility and control over outstanding balances." },
-      { title: "Management accounts", description: "Periodic profit and loss, balance sheet, cash-flow and variance reporting prepared for practical management use." },
-      { title: "Financial statement preparation", description: "Preparation of annual financial statements and supporting schedules from a complete, reconciled accounting file." },
-      { title: "Financial statement review", description: "Independent review of draft statements, disclosures, consistency and supporting balances before approval or filing." },
-      { title: "Budgets & projections", description: "Integrated budgets, forecasts and scenario projections linked to assumptions, operations and decision points." },
-      { title: "Cash-flow & working capital", description: "Cash forecasting, working-capital visibility and focused reporting on liquidity drivers and pressure points." },
-      { title: "Payroll & FSS support", description: "Payroll processing, employee records and related Malta payroll reporting and compliance support." },
-      { title: "Month-end & year-end close", description: "Close calendars, review controls and coordinated schedules that improve speed, completeness and accountability." },
+      { title: "Bookkeeping & general ledger", description: "Transaction capture, coding and ledger maintenance organised for reliable reporting and traceability." },
+      { title: "Bank & balance-sheet reconciliations", description: "Scheduled reconciliation of cash and control accounts, with aged differences assigned and cleared." },
+      { title: "Accounts payable & receivable", description: "Invoice, supplier, collection and ageing processes that improve control of amounts due and owed." },
+      { title: "Management accounts", description: "Recurring profit-and-loss, balance-sheet, cash-flow and variance packs tailored to management decisions." },
+      { title: "Financial statement preparation", description: "Annual statements and supporting schedules produced from a closed, reconciled and documented file." },
+      { title: "Financial statement review", description: "Critical review of drafts, disclosures, classifications and supporting balances before approval or filing." },
+      { title: "Budgets & projections", description: "Driver-based budgets, rolling forecasts and scenarios connected to operating assumptions." },
+      { title: "Cash-flow & working capital", description: "Liquidity forecasts and focused analysis of collections, payments, stock and short-term funding pressure." },
+      { title: "Payroll & FSS support", description: "Payroll processing, employee master data and Malta FSS reporting support with review controls." },
+      { title: "Month-end & year-end close", description: "Close timetables, account ownership, review evidence and issue logs that make completion repeatable." },
     ]}
-    outcomes={["More reliable books and records", "Timelier management information", "Review-ready financial statements", "Better cash and performance visibility"]}
+    outcomes={["A controlled close process", "Decision-ready reporting packs", "Prepared or reviewed financial statements", "Forward cash and budget visibility"]}
   />;
 }

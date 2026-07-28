@@ -12,11 +12,11 @@ import { AnalyticsConsent } from "./components/AnalyticsConsent";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "FST | Clarity for what comes next",
+    default: "FST | Make the next move workable",
     template: "%s | FST",
   },
   description:
-    "Integrated management advisory, risk, tax, accounting, corporate, business-planning, finance and funding-application expertise.",
+    "Management, risk, tax, accounting, corporate, finance and funding-application support organised around executable outcomes.",
   alternates: { canonical: "/" },
   applicationName: "FST",
   category: "professional services",
@@ -27,24 +27,24 @@ export const metadata: Metadata = {
     icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
   },
   openGraph: {
-    title: "FST | Clarity for what comes next",
+    title: "FST | Make the next move workable",
     description:
-      "Integrated management advisory, risk, tax, accounting, corporate, business-planning, finance and funding-application expertise.",
+      "Management, risk, tax, accounting, corporate, finance and funding-application support organised around executable outcomes.",
     type: "website",
     images: [
       {
         url: "/og.jpg",
         width: 1200,
         height: 630,
-        alt: "FST — Clarity for what comes next.",
+        alt: "FST — Make the next move workable.",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "FST | Clarity for what comes next",
+    title: "FST | Make the next move workable",
     description:
-      "Integrated management advisory, risk, tax, accounting, corporate, business-planning, finance and funding-application expertise.",
+      "Management, risk, tax, accounting, corporate, finance and funding-application support organised around executable outcomes.",
     images: ["/og.jpg"],
   },
 };
@@ -57,7 +57,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     url: siteUrl,
     image: `${siteUrl}/og.jpg`,
     description:
-      "Integrated management advisory, risk, tax, accounting, corporate, business-planning, finance and funding-application expertise.",
+      "Management, risk, tax, accounting, corporate, finance and funding-application support organised around executable outcomes.",
     areaServed: "International",
     email: siteConfig.email,
     telephone: siteConfig.phoneE164,

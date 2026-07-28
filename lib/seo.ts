@@ -21,7 +21,7 @@ export function pageMetadata({ title, description, path }: PageMetadataInput): M
       url: path,
       siteName: "FST",
       type: "website",
-      images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "FST — Clarity for what comes next." }],
+      images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "FST — Make the next move workable." }],
     },
     twitter: {
       card: "summary_large_image",

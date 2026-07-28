@@ -16,12 +16,12 @@ export default function PrivacyPage() {
       <article className="legal-page section-shell">
         <header className="legal-hero">
           <div>
-            <p className="eyebrow">Privacy Policy</p>
-            <h1>Your information, handled with care.</h1>
-            <p>This policy explains what information FST receives through this website, why we use it and the choices available to you.</p>
+            <p className="eyebrow">Data notice</p>
+            <h1>How website information is handled.</h1>
+            <p>This notice sets out the information FST receives through the site, the purposes for using it and the controls available to you.</p>
             <small>Effective 20 July 2026</small>
           </div>
-          <img src="/privacy-policy-v2.webp" alt="Senior advisers reviewing privacy and data-governance information" width="1536" height="1024" />
+          <img src="/fst-legal.webp" alt="A structured document review concerning data and website terms" width="1536" height="1024" />
         </header>
 
         <div className="legal-content">

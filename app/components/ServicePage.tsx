@@ -97,7 +97,7 @@ export function ServicePage({
 
       <section className="service-intro section-shell">
         <div className="service-intro-copy">
-          <p className="section-index">What we bring</p>
+          <p className="section-index">The working brief</p>
           <h2>{introduction}</h2>
         </div>
         <SectionVisual src={sectionImages.intro.src} alt={sectionImages.intro.alt} className="service-intro-visual" />
@@ -106,8 +106,8 @@ export function ServicePage({
       {referenceLinks && (
         <section className="service-references section-shell" aria-labelledby="service-reference-title">
           <div>
-            <p className="section-index">Malta funding ecosystem</p>
-            <h2 id="service-reference-title">Applications grounded in the current official route.</h2>
+            <p className="section-index">Official programme sources</p>
+            <h2 id="service-reference-title">Current routes checked before the application is shaped.</h2>
           </div>
           <div className="service-reference-links">
             {referenceLinks.map((reference) => (
@@ -138,8 +138,8 @@ export function ServicePage({
 
       <section className={`service-outcomes section-shell accent-${accent}`}>
         <div>
-          <p className="section-index">Built around the outcome</p>
-          <h2>Clearer decisions. Stronger foundations.</h2>
+          <p className="section-index">What the engagement should produce</p>
+          <h2>Work that management can use and evidence can support.</h2>
         </div>
         <ul>
           {outcomes.map((outcome) => <li key={outcome}>{outcome}</li>)}
@@ -149,9 +149,9 @@ export function ServicePage({
 
       <section className="subpage-cta section-shell">
         <div className="subpage-cta-copy">
-          <p className="section-index">Book a Meeting</p>
-          <h2>Bring us the decision in front of you.</h2>
-          <p>We’ll connect the right expertise and help make the next step clearer.</p>
+          <p className="section-index">Start with the live issue</p>
+          <h2>Share the decision, deadline or application in front of you.</h2>
+          <p>FST will define the right workstream, the information needed and a practical route forward.</p>
           <PrimaryCta className="primary-button" />
         </div>
         <SectionVisual src={sectionImages.cta.src} alt={sectionImages.cta.alt} className="subpage-cta-visual" />

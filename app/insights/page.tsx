@@ -2,12 +2,12 @@ import { pageMetadata } from "../../lib/seo";
 import { SiteFooter } from "../components/SiteFooter";
 import { SiteHeader } from "../components/SiteHeader";
 
-export const metadata = pageMetadata({ title: "Insights", description: "Practical perspectives on management consulting, risk, tax, accounting and governance.", path: "/insights" });
+export const metadata = pageMetadata({ title: "Field Notes", description: "FST perspectives on management, controls, tax, reporting, finance and applications.", path: "/insights" });
 
 const articles = [
-  { category: "Risk & governance", title: "Making risk management useful at the speed of decisions", summary: "A practical way to connect risk visibility with the decisions and uncertainties that matter now.", image: "/insights-risk-v2.webp", imageAlt: "Risk leaders mapping priorities as business conditions change", tone: "violet" },
-  { category: "Management consulting", title: "From strategy to execution without adding unnecessary complexity", summary: "How leaders can translate strategic intent into a practical operating rhythm that teams can sustain.", image: "/insights-strategy-v2.webp", imageAlt: "Leadership team turning strategic intent into a focused delivery rhythm", tone: "green" },
-  { category: "Tax & reporting", title: "Creating a more connected tax and finance calendar", summary: "A joined-up approach to obligations, reporting inputs and review can reduce surprises and improve visibility.", image: "/insights-tax-v2.webp", imageAlt: "Tax and finance specialists coordinating reporting deadlines and information", tone: "orange" },
+  { category: "Controls in practice", title: "What a useful internal-control review should leave behind", summary: "A field guide to process ownership, testable evidence and actions that management can actually close.", image: "/fst-management.webp", imageAlt: "A controls workshop assigning owners and actions", tone: "violet" },
+  { category: "Plans and finance", title: "Stress-testing a business plan before the lender does", summary: "Five connections to check across the commercial case, cash forecast, borrowing need and repayment assumptions.", image: "/fst-finance.webp", imageAlt: "A financial model and business plan being stress-tested", tone: "green" },
+  { category: "Tax operations", title: "Building a VAT file that reconciles before filing day", summary: "How a repeatable ledger-to-return review can surface missing support and classification issues earlier.", image: "/fst-tax.webp", imageAlt: "A tax specialist reconciling a VAT working file", tone: "orange" },
 ];
 
 export default function InsightsPage() {
@@ -15,8 +15,8 @@ export default function InsightsPage() {
     <main id="main-content" tabIndex={-1}>
       <SiteHeader />
       <section className="index-hero image-index-hero insights-hero">
-        <div><h1>Useful thinking for consequential decisions.</h1><p>Clear, practical perspectives from across consulting, risk, tax, accounting and governance.</p></div>
-        <img src="/insights-hero.webp" alt="Advisers reviewing research and discussing an emerging idea" width="1600" height="1000" loading="eager" fetchPriority="high" decoding="async" />
+        <div><h1>Working notes for decisions in motion.</h1><p>Short, evidence-led perspectives from FST’s management, finance, tax, reporting and application work.</p></div>
+        <img src="/fst-insights.webp" alt="An evidence-led advisory research workspace" width="1536" height="1024" loading="eager" fetchPriority="high" decoding="async" />
       </section>
       <section className="article-grid section-shell">
         {articles.map((article) => (

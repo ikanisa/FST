@@ -10,30 +10,30 @@ export const metadata = pageMetadata({
 export default function CorporateServicesPage() {
   return <ServicePage
     eyebrow="Corporate & Administrative Services"
-    title="Structures that support where you are going."
-    lede="Thoughtful corporate, governance and administrative support—from formation and records through filings, changes and ongoing coordination."
-    image="/corporate-services.webp"
-    imageAlt="Corporate adviser and business owner reviewing governance documents"
+    title="Keep the corporate record aligned with the business."
+    lede="Formation, governance, company-secretarial and administrative support for orderly decisions, records, filings and change."
+    image="/fst-corporate.webp"
+    imageAlt="Corporate records and governance documents organised for review"
     sectionImages={{
-      intro: { src: "/corporate-intro-v2.webp", alt: "Corporate adviser clarifying an ownership and governance structure" },
-      offerings: { src: "/corporate-offerings-v2.webp", alt: "Company secretarial team preparing board and statutory records" },
-      outcomes: { src: "/corporate-outcomes-v2.webp", alt: "Directors holding an orderly governance meeting with clear responsibilities" },
-      cta: { src: "/corporate-cta-v2.webp", alt: "Business owner discussing a future corporate structure with a trusted adviser" },
+      intro: { src: "/fst-corporate.webp", alt: "Statutory records and a corporate action checklist" },
+      offerings: { src: "/fst-collaboration.webp", alt: "Advisers coordinating corporate responsibilities with management" },
+      outcomes: { src: "/fst-legal.webp", alt: "A structured document review workspace" },
+      cta: { src: "/fst-consultation.webp", alt: "A business owner discussing an upcoming corporate change" },
     }}
-    introduction="The right structure should make ownership, governance and administration clearer—not more complicated."
+    introduction="FST keeps legal structure, governance actions and administrative evidence working as one dependable corporate file."
     accent="green"
     services={[
-      { title: "Company formation", description: "Practical support to establish an appropriate legal and administrative foundation." },
-      { title: "Corporate administration", description: "Dependable ongoing administration, records and coordination across the corporate lifecycle." },
-      { title: "Company secretarial", description: "Board and statutory support that helps governance remain organised, timely and effective." },
-      { title: "Statutory registers & filings", description: "Maintenance of statutory records and coordinated preparation of recurring company filings and returns." },
-      { title: "Board & shareholder support", description: "Meeting packs, resolutions, minutes and action tracking for orderly corporate decision-making." },
-      { title: "Beneficial ownership support", description: "Record and filing support for ownership information and related corporate compliance requirements." },
-      { title: "Governance support", description: "Clear responsibilities, decision processes and documentation appropriate to the organisation." },
-      { title: "Corporate changes", description: "Coordinated support for ownership, officer, capital and constitutional changes." },
-      { title: "Administrative support", description: "Structured document, correspondence, deadline and records administration that keeps corporate work moving." },
-      { title: "Corporate compliance calendar", description: "Practical calendars, owners and reminders that support timely recurring obligations." },
+      { title: "Company formation", description: "Formation workflow, document coordination and opening records for an appropriate corporate foundation." },
+      { title: "Corporate administration", description: "Ongoing management of entity records, correspondence, actions and lifecycle events." },
+      { title: "Company secretarial", description: "Board-cycle and statutory support with dates, decisions and responsibilities kept under control." },
+      { title: "Statutory registers & filings", description: "Registers, annual returns and recurring filing packs maintained against source documents." },
+      { title: "Board & shareholder support", description: "Agendas, papers, resolutions, minutes and action registers for traceable decision-making." },
+      { title: "Beneficial ownership support", description: "Ownership records and related change documentation prepared for accurate reporting." },
+      { title: "Governance support", description: "Authority schedules, meeting architecture and decision records suited to the organisation’s scale." },
+      { title: "Corporate changes", description: "Coordinated documentation for changes in officers, ownership, capital and constitutional arrangements." },
+      { title: "Administrative support", description: "Document control, deadline tracking, correspondence and practical back-office coordination." },
+      { title: "Corporate compliance calendar", description: "A monitored schedule of recurring obligations, preparation dates, reviewers and evidence." },
     ]}
-    outcomes={["Clearer ownership and responsibilities", "Reliable corporate records", "Stronger governance discipline", "Structures aligned with long-term intent"]}
+    outcomes={["An orderly statutory file", "Traceable board and owner decisions", "Corporate dates under control", "Administration ready for change"]}
   />;
 }
