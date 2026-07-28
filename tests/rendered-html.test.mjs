@@ -306,7 +306,7 @@ test("contact, SEO and discovery routes render production signals", async () => 
   assert.doesNotMatch(contact, /mailto:/i);
   assert.match(sitemap, /services\/funding-applications/);
   assert.doesNotMatch(sitemap, /services\/audit-assurance|investment-family-office|corporate-fiduciary|\/insights|\/privacy|\/terms/);
-  assert.match(robots, /Sitemap: https:\/\/fst-advisory\.ikanisa\.chatgpt\.site\/sitemap\.xml/);
+  assert.match(robots, /Sitemap: https:\/\/fst\.ikanisa\.com\/sitemap\.xml/);
 });
 
 test("native booking validates input and fails safely without credentials", async () => {

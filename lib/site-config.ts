@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: "FST",
-  url: (process.env.NEXT_PUBLIC_SITE_URL || "https://fst-advisory.ikanisa.chatgpt.site").replace(/\/$/, ""),
+  url: (process.env.NEXT_PUBLIC_SITE_URL || "https://fst.ikanisa.com").replace(/\/$/, ""),
   whatsappDisplay: "+35699152999",
   whatsappUrl: "https://wa.me/35699152999",
   linkedInUrl: process.env.NEXT_PUBLIC_LINKEDIN_URL || "",
