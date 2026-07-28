@@ -33,7 +33,7 @@ export function SiteHeader() {
   return (
     <Fragment>
       <header className={scrolled ? "site-header is-scrolled" : "site-header"} aria-label="Main navigation">
-        <Link className="wordmark" href="/" onClick={closeMenu} aria-label="KMFINCO home">KMFINCO</Link>
+        <Link className="wordmark" href="/" onClick={closeMenu} aria-label="FST home">FST</Link>
         <nav id="primary-navigation" className={menuOpen ? "nav-links is-open" : "nav-links"} aria-label="Primary">
           <Link href="/services" onClick={closeMenu}>Expertise</Link>
           <Link href="/who-we-work-with" onClick={closeMenu}>Who we work with</Link>

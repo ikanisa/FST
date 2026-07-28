@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-export const siteUrl = "https://kmfinco.com";
+export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://fst.ikanisa.com").replace(/\/$/, "");
 
 type PageMetadataInput = {
   title: string;
@@ -9,7 +9,7 @@ type PageMetadataInput = {
 };
 
 export function pageMetadata({ title, description, path }: PageMetadataInput): Metadata {
-  const socialTitle = `${title} | KMFINCO`;
+  const socialTitle = `${title} | FST`;
 
   return {
     title,
@@ -19,9 +19,9 @@ export function pageMetadata({ title, description, path }: PageMetadataInput): M
       title: socialTitle,
       description,
       url: path,
-      siteName: "KMFINCO",
+      siteName: "FST",
       type: "website",
-      images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "KMFINCO — Clarity for what comes next." }],
+      images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "FST — Clarity for what comes next." }],
     },
     twitter: {
       card: "summary_large_image",

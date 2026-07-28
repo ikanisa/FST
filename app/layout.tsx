@@ -12,13 +12,13 @@ import { AnalyticsConsent } from "./components/AnalyticsConsent";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "KMFINCO | Clarity for what comes next",
-    template: "%s | KMFINCO",
+    default: "FST | Clarity for what comes next",
+    template: "%s | FST",
   },
   description:
-    "Integrated audit, assurance, management consulting, corporate, tax, accounting and investment expertise.",
+    "Integrated management advisory, risk, tax, accounting, corporate, business-planning, finance and funding-application expertise.",
   alternates: { canonical: "/" },
-  applicationName: "KMFINCO",
+  applicationName: "FST",
   category: "professional services",
   verification: {
     google: process.env.GOOGLE_SITE_VERIFICATION || undefined,
@@ -27,24 +27,24 @@ export const metadata: Metadata = {
     icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
   },
   openGraph: {
-    title: "KMFINCO | Clarity for what comes next",
+    title: "FST | Clarity for what comes next",
     description:
-      "Integrated audit, assurance, management consulting, corporate, tax, accounting and investment expertise.",
+      "Integrated management advisory, risk, tax, accounting, corporate, business-planning, finance and funding-application expertise.",
     type: "website",
     images: [
       {
         url: "/og.jpg",
         width: 1200,
         height: 630,
-        alt: "KMFINCO — Clarity for what comes next.",
+        alt: "FST — Clarity for what comes next.",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "KMFINCO | Clarity for what comes next",
+    title: "FST | Clarity for what comes next",
     description:
-      "Integrated audit, assurance, management consulting, corporate, tax, accounting and investment expertise.",
+      "Integrated management advisory, risk, tax, accounting, corporate, business-planning, finance and funding-application expertise.",
     images: ["/og.jpg"],
   },
 };
@@ -53,11 +53,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   const structuredData = {
     "@context": "https://schema.org",
     "@type": ["Organization", "ProfessionalService"],
-    name: "KMFINCO",
+    name: "FST",
     url: siteUrl,
     image: `${siteUrl}/og.jpg`,
     description:
-      "Integrated audit, assurance, management consulting, corporate, tax, accounting and investment expertise.",
+      "Integrated management advisory, risk, tax, accounting, corporate, business-planning, finance and funding-application expertise.",
     areaServed: "International",
     email: siteConfig.email,
     telephone: siteConfig.phoneE164,
@@ -70,13 +70,15 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     },
     sameAs: siteConfig.linkedInUrl ? [siteConfig.linkedInUrl] : undefined,
     knowsAbout: [
-      "Audit and assurance",
-      "Management consulting",
-      "Internal audit",
+      "Management advisory",
       "Risk management",
-      "Tax and accounting",
-      "Corporate and fiduciary services",
-      "Investment and family office",
+      "Internal audit and internal controls",
+      "Tax and VAT",
+      "Accounting and financial reporting",
+      "Payroll",
+      "Corporate and administrative services",
+      "Business planning and loan applications",
+      "Funding applications",
     ],
   };
 

@@ -44,7 +44,7 @@ function withSecurityHeaders(response: Response, request: Request) {
 
 const worker = {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
-    globalThis.__KMFINCO_ENV__ = env as unknown as Record<string, unknown>;
+    globalThis.__FST_ENV__ = env as unknown as Record<string, unknown>;
     const url = new URL(request.url);
 
     if (url.pathname === "/_vinext/image") {

@@ -1,25 +1,20 @@
 import { Buildings } from "@phosphor-icons/react/dist/ssr/Buildings";
 import { Calculator } from "@phosphor-icons/react/dist/ssr/Calculator";
 import { ChartBar } from "@phosphor-icons/react/dist/ssr/ChartBar";
-import { ChartLineUp } from "@phosphor-icons/react/dist/ssr/ChartLineUp";
 import { Checks } from "@phosphor-icons/react/dist/ssr/Checks";
 import { ClipboardText } from "@phosphor-icons/react/dist/ssr/ClipboardText";
 import { Compass } from "@phosphor-icons/react/dist/ssr/Compass";
 import { FileText } from "@phosphor-icons/react/dist/ssr/FileText";
 import { FolderSimple } from "@phosphor-icons/react/dist/ssr/FolderSimple";
 import { Gauge } from "@phosphor-icons/react/dist/ssr/Gauge";
-import { HandHeart } from "@phosphor-icons/react/dist/ssr/HandHeart";
-import { HouseLine } from "@phosphor-icons/react/dist/ssr/HouseLine";
-import { ListChecks } from "@phosphor-icons/react/dist/ssr/ListChecks";
+import { HandCoins } from "@phosphor-icons/react/dist/ssr/HandCoins";
 import { MagnifyingGlass } from "@phosphor-icons/react/dist/ssr/MagnifyingGlass";
 import { Notebook } from "@phosphor-icons/react/dist/ssr/Notebook";
 import { Percent } from "@phosphor-icons/react/dist/ssr/Percent";
 import { Scales } from "@phosphor-icons/react/dist/ssr/Scales";
 import { ShieldCheck } from "@phosphor-icons/react/dist/ssr/ShieldCheck";
 import { ShieldWarning } from "@phosphor-icons/react/dist/ssr/ShieldWarning";
-import { SlidersHorizontal } from "@phosphor-icons/react/dist/ssr/SlidersHorizontal";
 import { TreeStructure } from "@phosphor-icons/react/dist/ssr/TreeStructure";
-import { UsersThree } from "@phosphor-icons/react/dist/ssr/UsersThree";
 import { SectionVisual } from "./SectionVisual";
 import { SiteFooter } from "./SiteFooter";
 import { SiteHeader } from "./SiteHeader";
@@ -35,6 +30,7 @@ type ServicePageProps = {
   services: Array<{ title: string; description: string }>;
   outcomes: string[];
   accent: "green" | "violet" | "orange" | "rose" | "blue";
+  referenceLinks?: Array<{ label: string; href: string; description: string }>;
   sectionImages: {
     intro: { src: string; alt: string };
     offerings: { src: string; alt: string };
@@ -46,23 +42,22 @@ type ServicePageProps = {
 function iconForService(title: string) {
   const service = title.toLowerCase();
 
-  if (service.includes("external audit") || service === "internal audit") return MagnifyingGlass;
   if (service.includes("financial statement") || service.includes("financial reporting")) return FileText;
-  if (service.includes("agreed-upon")) return ListChecks;
-  if (service.includes("other assurance")) return ShieldCheck;
-  if (service.includes("controls assurance")) return SlidersHorizontal;
+  if (service.includes("business-plan") || service.includes("application narrative") || service.includes("evidence pack")) return FileText;
+  if (service.includes("funding") || service.includes("loan application") || service.includes("co-financing")) return HandCoins;
+  if (service.includes("review") || service.includes("eligibility") || service.includes("readiness")) return MagnifyingGlass;
   if (service.includes("company formation")) return Buildings;
   if (service.includes("corporate administration")) return FolderSimple;
   if (service.includes("secretarial")) return Notebook;
   if (service.includes("governance & compliance") || service === "governance support") return Scales;
-  if (service.includes("fiduciary")) return HandHeart;
-  if (service.includes("investment advisory")) return ChartLineUp;
-  if (service.includes("family-office")) return HouseLine;
-  if (service.includes("family governance")) return UsersThree;
+  if (service.includes("corporate changes")) return TreeStructure;
+  if (service.includes("statutory compliance")) return ClipboardText;
   if (service.includes("financial planning")) return Calculator;
   if (service.includes("wealth structuring")) return TreeStructure;
+  if (service.includes("operating model")) return TreeStructure;
   if (service.includes("strategy")) return Compass;
   if (service.includes("risk management")) return ShieldWarning;
+  if (service.includes("internal audit")) return MagnifyingGlass;
   if (service.includes("internal controls")) return Checks;
   if (service.includes("performance improvement")) return Gauge;
   if (service.includes("tax advisory")) return Percent;
@@ -83,6 +78,7 @@ export function ServicePage({
   outcomes,
   accent,
   sectionImages,
+  referenceLinks,
 }: ServicePageProps) {
   return (
     <main id="main-content" tabIndex={-1}>
@@ -106,6 +102,23 @@ export function ServicePage({
         </div>
         <SectionVisual src={sectionImages.intro.src} alt={sectionImages.intro.alt} className="service-intro-visual" />
       </section>
+
+      {referenceLinks && (
+        <section className="service-references section-shell" aria-labelledby="service-reference-title">
+          <div>
+            <p className="section-index">Malta funding ecosystem</p>
+            <h2 id="service-reference-title">Applications grounded in the current official route.</h2>
+          </div>
+          <div className="service-reference-links">
+            {referenceLinks.map((reference) => (
+              <a href={reference.href} target="_blank" rel="noreferrer" key={reference.href}>
+                <strong>{reference.label}</strong>
+                <span>{reference.description}</span>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="service-offerings-shell section-shell" aria-label={`${title} services`}>
         <SectionVisual src={sectionImages.offerings.src} alt={sectionImages.offerings.alt} className="service-offerings-visual" />

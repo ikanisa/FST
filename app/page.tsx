@@ -7,7 +7,8 @@ import { CirclesThreePlus } from "@phosphor-icons/react/dist/ssr/CirclesThreePlu
 import { Compass } from "@phosphor-icons/react/dist/ssr/Compass";
 import { Ear } from "@phosphor-icons/react/dist/ssr/Ear";
 import { GlobeHemisphereWest } from "@phosphor-icons/react/dist/ssr/GlobeHemisphereWest";
-import { ShieldCheck } from "@phosphor-icons/react/dist/ssr/ShieldCheck";
+import { HandCoins } from "@phosphor-icons/react/dist/ssr/HandCoins";
+import { Receipt } from "@phosphor-icons/react/dist/ssr/Receipt";
 import { Target } from "@phosphor-icons/react/dist/ssr/Target";
 import { UsersThree } from "@phosphor-icons/react/dist/ssr/UsersThree";
 import { EditorialSlider } from "./components/EditorialSlider";
@@ -18,80 +19,91 @@ import { SiteHeader } from "./components/SiteHeader";
 
 const capabilities = [
   {
-    title: "Audit & Assurance",
-    slug: "audit-assurance",
-    intro: "Independent perspective that strengthens trust in reporting and controls.",
-    items: [
-      "External audit and financial statement assurance",
-      "Other assurance and agreed-upon procedures",
-      "Financial reporting and controls assurance",
-    ],
-    tone: "blue",
-    icon: ShieldCheck,
-  },
-  {
-    title: "Management Consulting",
+    title: "Management Advisory, Risk & Controls",
     slug: "management-consulting",
-    intro: "Practical advice that turns complexity into clear action and stronger performance.",
+    intro: "Practical management support that strengthens decisions, risk visibility and organisational performance.",
     items: [
-      "Strategy and transformation",
-      "Internal audit and controls",
-      "Risk management and regulatory compliance",
-      "Governance and operational improvement",
+      "Management advisory and strategy",
+      "Risk management and internal audit",
+      "Internal controls and performance improvement",
     ],
     tone: "lilac",
     icon: Compass,
   },
   {
-    title: "Tax, Accounting & Payroll",
-    slug: "tax-accounting-payroll",
-    intro: "Clear, connected support for reporting, compliance and confident decisions.",
+    title: "Tax & VAT",
+    slug: "tax-vat",
+    intro: "Clear, connected support for Malta VAT, corporate income tax and recurring tax obligations.",
     items: [
-      "Tax advisory and compliance",
-      "Accounting and financial reporting",
-      "Payroll and related compliance",
+      "VAT registration, returns and advisory",
+      "Corporate income tax preparation and review",
+      "Tax planning, refunds and authority support",
     ],
     tone: "peach",
+    icon: Receipt,
+  },
+  {
+    title: "Accounting & Financial Reporting",
+    slug: "accounting-financial-reporting",
+    intro: "Reliable finance operations and reporting from bookkeeping through annual financial statements.",
+    items: [
+      "Bookkeeping, reconciliations and close",
+      "Financial statement preparation and review",
+      "Management accounts, payroll and cash flow",
+    ],
+    tone: "blue",
     icon: Calculator,
   },
   {
-    title: "Corporate & Fiduciary",
-    slug: "corporate-fiduciary",
-    intro: "Thoughtful structures and dependable administration across the business lifecycle.",
+    title: "Corporate & Administrative Services",
+    slug: "corporate-services",
+    intro: "Thoughtful structures, reliable records and dependable administration across the business lifecycle.",
     items: [
       "Company formation and corporate administration",
-      "Company secretarial and governance support",
-      "Fiduciary and related corporate services",
+      "Company secretarial, registers and filings",
+      "Board, ownership and administrative support",
     ],
     tone: "sage",
     icon: Buildings,
   },
   {
-    title: "Investment & Family Office",
-    slug: "investment-family-office",
-    intro: "Long-term thinking for capital, governance and the priorities that matter most.",
+    title: "Business Planning & Finance Applications",
+    slug: "business-planning-finance-applications",
+    intro: "Credible plans, projections, budgets and finance applications built around the decision at hand.",
     items: [
-      "Investment advisory",
-      "Family-office support and governance",
-      "Financial planning and wealth structuring",
+      "Business-plan preparation and review",
+      "Budgets, cash flow and financial projections",
+      "Loan readiness and application support",
     ],
     tone: "sand",
     icon: ChartLineUp,
+  },
+  {
+    title: "Funding Application Services",
+    slug: "funding-applications",
+    intro: "End-to-end Malta funding applications grounded in route fit, official guidance and complete evidence.",
+    items: [
+      "FONDI.eu, Malta Enterprise and Xjenza Malta",
+      "Narratives, budgets and compliance matrices",
+      "Submission readiness and post-award support",
+    ],
+    tone: "sage",
+    icon: HandCoins,
   },
 ];
 
 const insights = [
   {
     category: "Risk & governance",
-    title: "Building an internal audit plan that stays relevant as risk changes",
+    title: "Making risk management useful at the speed of decisions",
   },
   {
     category: "Management consulting",
     title: "From strategy to execution: creating momentum without adding complexity",
   },
   {
-    category: "Reporting & assurance",
-    title: "What stronger controls can reveal about performance—not only compliance",
+    category: "Tax & reporting",
+    title: "Building a connected finance calendar that reduces surprises",
   },
 ];
 
@@ -102,11 +114,11 @@ export default function Home() {
 
       <section className="hero" id="top">
         <div className="hero-copy">
-          <p className="eyebrow">Strategy <span>·</span> Structure <span>·</span> Capital</p>
+          <p className="eyebrow">Strategy <span>·</span> Structure <span>·</span> Compliance</p>
           <h1>Clarity for what comes next.</h1>
           <p className="hero-lede">
-            Integrated audit, assurance, management consulting, corporate, tax,
-            accounting and investment expertise for businesses, investors and families.
+            Integrated management advisory, risk, tax, accounting, corporate,
+            business-planning and funding support for organisations and leadership teams.
           </p>
           <PrimaryCta className="primary-button" />
         </div>
@@ -155,9 +167,9 @@ export default function Home() {
       <section className="expertise-section section-shell" aria-labelledby="expertise-title">
         <div className="section-heading section-heading-no-index">
           <h2 id="expertise-title">The right perspective, at the right moment.</h2>
-          <p>Our specialists work as one team—bringing assurance, advice and execution together around the decisions that shape your organisation.</p>
+          <p>Our specialists work as one team—bringing management, finance, tax, corporate and application expertise around the decisions that shape your organisation.</p>
         </div>
-        <SectionVisual src="/home-expertise-v2.webp" alt="Assurance, tax and strategy professionals collaborating on a shared client decision" className="section-banner-visual" />
+        <SectionVisual src="/home-expertise-v2.webp" alt="Management, finance, tax and corporate professionals collaborating on a shared client decision" className="section-banner-visual" />
         <div className="expertise-card-grid" aria-label="Connected expertise">
           {capabilities.map((capability) => {
             const CapabilityIcon = capability.icon;
@@ -190,7 +202,7 @@ export default function Home() {
         </div>
         <SectionVisual src="/home-consulting-v2.webp" alt="A senior consultant facilitating a risk and transformation workshop" className="consulting-visual" />
         <div className="consulting-grid">
-          <div><span className="consulting-label">Controls</span><h3>Internal audit & controls</h3><p>Risk-based reviews, control design and assurance that improves how the organisation operates.</p></div>
+          <div><span className="consulting-label">Controls</span><h3>Internal audit & controls</h3><p>Risk-based internal audit, practical controls and clear accountability that improve how the organisation operates.</p></div>
           <div><span className="consulting-label">Change</span><h3>Strategy & transformation</h3><p>Clear choices, practical operating models and focused delivery support from intent to execution.</p></div>
           <div><span className="consulting-label">Risk</span><h3>Risk & compliance</h3><p>Proportionate frameworks that connect governance, regulatory expectations and business priorities.</p></div>
           <div><span className="consulting-label">Performance</span><h3>Performance improvement</h3><p>Sharper processes, better management information and practical change that teams can sustain.</p></div>
@@ -201,10 +213,10 @@ export default function Home() {
         <div className="section-heading compact section-heading-no-index">
           <h2 id="audience-title">Advice shaped around your reality.</h2>
         </div>
-        <SectionVisual src="/home-audience-v2.webp" alt="Business leaders, investors and international decision-makers in a focused advisory conversation" className="section-banner-visual" />
+        <SectionVisual src="/home-audience-v2.webp" alt="Business leaders, finance teams and international decision-makers in a focused advisory conversation" className="section-banner-visual" />
         <div className="audience-list">
           <article><span className="item-icon audience-icon" aria-hidden="true"><Briefcase size={21} weight="regular" /></span><h3>Businesses & leadership teams</h3><p>From growing enterprises to established groups navigating change, reporting and risk.</p></article>
-          <article><span className="item-icon audience-icon" aria-hidden="true"><UsersThree size={21} weight="regular" /></span><h3>Investors & families</h3><p>Connected support for capital, governance, succession and long-term financial priorities.</p></article>
+          <article><span className="item-icon audience-icon" aria-hidden="true"><UsersThree size={21} weight="regular" /></span><h3>Owners & finance teams</h3><p>Connected support for ownership, governance, reporting and long-term business priorities.</p></article>
           <article><span className="item-icon audience-icon" aria-hidden="true"><GlobeHemisphereWest size={21} weight="regular" /></span><h3>International organisations</h3><p>Local attention and multidisciplinary support for organisations operating across borders.</p></article>
         </div>
       </section>
@@ -216,7 +228,7 @@ export default function Home() {
         </div>
         <div className="approach-steps">
           <div><span className="approach-icon" aria-hidden="true"><Ear size={20} weight="regular" /></span><h3>Listen closely</h3><p>We start with context, priorities and the decisions that genuinely matter.</p></div>
-          <div><span className="approach-icon" aria-hidden="true"><CirclesThreePlus size={20} weight="regular" /></span><h3>Connect the expertise</h3><p>We assemble the right mix of assurance, consulting, tax and financial specialists.</p></div>
+          <div><span className="approach-icon" aria-hidden="true"><CirclesThreePlus size={20} weight="regular" /></span><h3>Connect the expertise</h3><p>We assemble the right mix of management, tax, accounting, corporate and application specialists.</p></div>
           <div><span className="approach-icon" aria-hidden="true"><Target size={20} weight="regular" /></span><h3>Make progress practical</h3><p>We turn analysis into clear actions, accountable delivery and useful outcomes.</p></div>
         </div>
         <SectionVisual src="/home-approach-v2.webp" alt="A senior adviser listening closely before guiding a practical next step" className="approach-visual" />
@@ -247,7 +259,7 @@ export default function Home() {
         <div className="contact-cta-panel">
           <p className="eyebrow">Google Calendar & Meet</p>
           <h3>Choose a time and confirm in one secure flow.</h3>
-          <p>Availability is checked before the invitation is created for you and KMFINCO’s approved scheduling contacts.</p>
+          <p>Availability is checked before the invitation is created for you and FST’s approved scheduling contacts.</p>
           <PrimaryCta className="primary-button" />
         </div>
       </section>

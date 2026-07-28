@@ -72,7 +72,7 @@ export function BookingForm() {
       <div className="booking-success" role="status">
         <p className="eyebrow">Meeting confirmed</p>
         <h2>Your invitation is on its way.</h2>
-        <p>Google Calendar has sent the invitation to you and KM FINCO’s scheduling contacts. Use the links below if you would like to open it now.</p>
+        <p>Google Calendar has sent the invitation to you and FST’s scheduling contacts. Use the links below if you would like to open it now.</p>
         <div className="booking-result-actions">
           {result.calendarUrl && <a className="text-link" href={result.calendarUrl} target="_blank" rel="noreferrer">Open Calendar event</a>}
           {result.meetUrl && <a className="text-link" href={result.meetUrl} target="_blank" rel="noreferrer">Open Google Meet</a>}
@@ -87,7 +87,7 @@ export function BookingForm() {
       <div className="booking-success" role="status">
         <p className="eyebrow">Calendar handoff</p>
         <h2>Complete this request in Google Calendar.</h2>
-        <p>The selected time is ready in a pre-addressed calendar invitation. Add Google Meet, review the details and send it to KM FINCO for confirmation.</p>
+        <p>The selected time is ready in a pre-addressed calendar invitation. Add Google Meet, review the details and send it to FST for confirmation.</p>
         {result.calendarUrl && <a className="text-link" href={result.calendarUrl} target="_blank" rel="noreferrer" onClick={() => trackConversion("booking_fallback_open")}>Open Google Calendar</a>}
         <button type="button" className="reset-button" onClick={() => setStatus("idle")}>Choose another time</button>
       </div>
@@ -109,7 +109,7 @@ export function BookingForm() {
       <label>What would you like to discuss?<textarea name="context" rows={4} /></label>
       <label className="consent-check">
         <input type="checkbox" name="privacy_consent" value="agreed" required />
-        <span>I agree that KM FINCO may use these details to arrange and respond to this meeting request, as explained in the <Link href="/privacy">privacy policy</Link>.</span>
+        <span>I agree that FST may use these details to arrange and respond to this meeting request, as explained in the <Link href="/privacy">privacy policy</Link>.</span>
       </label>
       {status === "error" && <p className="form-error" role="alert">{result.error === "slot_unavailable" ? "That time is no longer available. Please choose another." : "We could not complete the booking. Please try again or contact us by phone or WhatsApp."}</p>}
       <button className="submit-button" type="submit" disabled={status === "submitting"}>{status === "submitting" ? "Checking availability…" : siteConfig.primaryCtaLabel}</button>

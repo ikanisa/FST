@@ -7,9 +7,9 @@ type ServerBindings = {
 };
 
 declare global {
-  var __KMFINCO_ENV__: Record<string, unknown> | undefined;
+  var __FST_ENV__: Record<string, unknown> | undefined;
 }
 
 export function serverEnv(): ServerBindings {
-  return (globalThis.__KMFINCO_ENV__ || {}) as ServerBindings;
+  return (globalThis.__FST_ENV__ || {}) as ServerBindings;
 }

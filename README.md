@@ -1,16 +1,28 @@
-# KM FINCO
+# FST
 
-A premium multi-page advisory website combining audit, assurance, management consulting, tax, accounting, corporate, fiduciary, investment and family-office expertise.
+FST is a senior-led multidisciplinary advisory website built from the KMFINCO visual and technical foundation, with a clear six-category service model.
+
+## Main service categories
+
+- **Management Advisory, Risk & Controls** — management support, strategy, operating models, risk management, internal audit, internal controls, governance, compliance, policies and performance improvement.
+- **Tax & VAT** — VAT registration, VAT returns and reconciliations, VAT advisory, corporate income tax, tax planning, refunds, authority support and tax-position reviews.
+- **Accounting & Financial Reporting** — bookkeeping, reconciliations, payables and receivables, management accounts, financial-statement preparation and review, payroll, close, budgets, projections and cash-flow support.
+- **Corporate & Administrative Services** — company formation, company secretarial, registers, filings, board and shareholder support, beneficial ownership, corporate changes and ongoing administration.
+- **Business Planning & Finance Applications** — business-plan preparation and review, budgets, financial projections, cash planning, loan readiness, loan applications, lender packs and post-approval planning.
+- **Funding Application Services** — opportunity scans, eligibility, project design, forms, business plans, budgets, state-aid checks, evidence packs, submission-readiness review and post-award support across FONDI.eu, Malta Enterprise and Xjenza Malta routes.
+
+FST does not advertise external or statutory audit and assurance, investment or family-office services, or fiduciary services. Internal audit remains available as a management, risk and controls service.
 
 ## Routes
 
 - `/` — firm overview
 - `/services` — connected expertise
-- `/services/audit-assurance`
 - `/services/management-consulting`
-- `/services/tax-accounting-payroll`
-- `/services/corporate-fiduciary`
-- `/services/investment-family-office`
+- `/services/tax-vat`
+- `/services/accounting-financial-reporting`
+- `/services/corporate-services`
+- `/services/business-planning-finance-applications`
+- `/services/funding-applications`
 - `/about`
 - `/insights`
 - `/contact`
@@ -21,7 +33,7 @@ A premium multi-page advisory website combining audit, assurance, management con
 
 - `/api/book` validates meeting requests, checks Google Calendar free/busy availability, and creates a Calendar event with Google Meet and attendee notifications.
 - Every primary website action uses the label “Book a Meeting” and routes to `/book`.
-- Confirmed Calendar events invite the prospective client, `bosco@ikanisa.com`, and `kmifsud@kmconsultants.com.mt` with `sendUpdates=all`.
+- Confirmed Calendar events invite the prospective client and FST’s approved scheduling contact with `sendUpdates=all`.
 - No contact form, `mailto:` action or website email workflow is included; the public email is informational text only.
 - Booking fails safely when production credentials are absent by producing a dated Google Calendar invitation.
 - Required hosted values are listed in `.env.example` and `GO_LIVE_IMPLEMENTATION.md`.

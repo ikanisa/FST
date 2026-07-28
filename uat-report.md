@@ -1,66 +1,61 @@
-# KM FINCO production UAT and QA report
+# FST production-readiness UAT and QA report
 
-Date: 20 July 2026  
-Local test profiles: desktop 1440 × 1000, reference 960 × 689, mobile 390 × 844  
-Production URL: `https://km-finco-advisory-2026.bosco560038.chatgpt.site`
-
-The same ten-route matrix and core conversion journeys were repeated after deployment against fresh, cache-disabled production responses. Production results match the local acceptance results below.
+Date: 28 July 2026
+Profiles: desktop 1440 × 900 and mobile 390 × 844
 
 ## Acceptance summary
 
-| Route | Desktop | Mobile | Images | SEO | Result |
-| --- | --- | --- | --- | --- | --- |
-| `/` | Pass | Pass | 8/8 unique, loaded | Pass | Pass |
-| `/services` | Pass | Pass | 7/7 unique, loaded | Pass | Pass |
-| `/services/audit-assurance` | Pass | Pass | 5/5 unique, loaded | Pass | Pass |
-| `/services/management-consulting` | Pass | Pass | 5/5 unique, loaded | Pass | Pass |
-| `/services/tax-accounting-payroll` | Pass | Pass | 5/5 unique, loaded | Pass | Pass |
-| `/services/corporate-fiduciary` | Pass | Pass | 5/5 unique, loaded | Pass | Pass |
-| `/services/investment-family-office` | Pass | Pass | 5/5 unique, loaded | Pass | Pass |
-| `/about` | Pass | Pass | 3/3 unique, loaded | Pass | Pass |
-| `/insights` | Pass | Pass | 6/6 unique, loaded | Pass | Pass |
-| `/contact` | Pass | Pass | 1/1 unique, loaded | Pass | Pass |
+| Area | Result |
+| --- | --- |
+| FST rebrand | Pass |
+| Six main service categories | Pass |
+| Full component lists | Pass |
+| Funding Application Services | Pass |
+| Removed external/statutory audit, investment and fiduciary services | Pass |
+| Desktop responsive layout | Pass |
+| Mobile responsive layout and menu | Pass |
+| Broken-image sweep | Pass |
+| Horizontal-overflow sweep | Pass |
+| SEO, sitemap and removed-route checks | Pass |
+| Booking validation and safe unconfigured state | Pass |
+| Production dependency audit | Pass — zero known vulnerabilities |
 
-## Functional journeys
+## Route matrix
 
-| Journey | Acceptance check | Result |
-| --- | --- | --- |
-| Primary navigation | Desktop links resolve; mobile menu opens/closes and exposes all primary destinations | Pass |
-| Service discovery | Homepage capability rail, service disclosures and service-index cards resolve to the five service pages | Pass |
-| Audit and management consulting | Dedicated pages, offerings, outcomes and conversion sections render with unique imagery | Pass |
-| Contact validation | Empty submit focuses the first required field and preserves native validity states | Pass |
-| Contact success | Valid test data renders the live success status and “Send another note” control | Pass |
-| Keyboard | Logical initial focus order and visible 3px focus indicator | Pass |
-| Responsive | No horizontal overflow on any route at desktop or mobile profiles | Pass |
-| Runtime | No console log errors or uncaught exceptions during the full route run | Pass |
+The browser sweep passed all 15 retained public routes:
 
-## Image and performance hygiene
+- `/`
+- `/services`
+- `/services/management-consulting`
+- `/services/tax-vat`
+- `/services/accounting-financial-reporting`
+- `/services/corporate-services`
+- `/services/business-planning-finance-applications`
+- `/services/funding-applications`
+- `/who-we-work-with`
+- `/about`
+- `/insights`
+- `/contact`
+- `/book`
+- `/privacy`
+- `/terms`
 
-- 36 newly generated section images are deployed as WebP at 1536 × 1024.
-- Combined weight of the new image set: 3,298,380 bytes (3.15 MiB).
-- Hero images use explicit dimensions and eager loading; below-the-fold images use native lazy loading and async decoding.
-- Every visible content image has a descriptive `alt` attribute and a unique source within its route.
+The removed `/services/audit-assurance`, `/services/investment-family-office`, `/services/corporate-fiduciary` and superseded `/services/tax-accounting-payroll` routes return 404.
 
-## SEO acceptance
+## Service-content acceptance
 
-- Unique title and description on all ten routes.
-- Absolute canonical URLs on all ten routes.
-- Open Graph and X/Twitter metadata with absolute social image origin.
-- Organisation/ProfessionalService structured data in the root document.
-- `robots.txt` and `sitemap.xml` return HTTP 200 with correct content types.
-- Sitemap contains all ten canonical routes and points to the production origin.
-
-## Deployment note
-
-The visible contact flow is a front-end success-state demonstration. It does not transmit or persist contact data because no approved mailbox, CRM or form endpoint has been supplied.
+- Management Advisory, Risk & Controls includes management support, strategy, operating models, risk management, internal audit, internal controls, governance, compliance, policies and performance improvement.
+- Tax & VAT includes VAT registration, returns, reconciliations, advisory, corporate income tax, planning, refunds, authority support and reviews.
+- Accounting & Financial Reporting includes bookkeeping, reconciliations, management accounts, financial-statement preparation and review, budgets, projections, cash flow, payroll and close.
+- Corporate & Administrative Services includes formation, company secretarial, registers, filings, governance, beneficial ownership, corporate changes and administration.
+- Business Planning & Finance Applications includes business-plan preparation and review, projections, budgets, cash planning, loan readiness, lender applications, evidence packs and post-approval planning.
+- Funding Application Services includes route scans, eligibility, concept design, official forms, business plans, budgets, state-aid and double-funding checks, evidence packs, submission-readiness review and post-award support.
 
 ## Evidence
 
-- `qa/comparison-v3.png`
-- `qa/local-v3/desktop-contact-sheet.jpg`
-- `qa/local-v3/mobile-contact-sheet.jpg`
-- `qa/generated-sections-contact-sheet.jpg`
-- Individual route captures in `qa/local-v3/`
-
-- Final local result: passed
-- Final production result: passed
+- `qa/fst/home-desktop-1440x900.jpg`
+- `qa/fst/home-mobile-390x844.jpg`
+- `qa/fst/services-desktop-1440x900.jpg`
+- `qa/fst/services-mobile-390x844.jpg`
+- `qa/fst/funding-desktop-1440x900.jpg`
+- Source-design reference: `qa/home-desktop.png`

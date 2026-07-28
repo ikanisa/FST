@@ -24,7 +24,7 @@ function hasTrustedOrigin(request: Request) {
   const origin = request.headers.get("origin");
   if (!origin) return true;
   const requestOrigin = new URL(request.url).origin;
-  return origin === requestOrigin || origin === "https://kmfinco.com" || origin === "https://www.kmfinco.com";
+  return origin === requestOrigin || origin === siteConfig.url;
 }
 
 function isRateLimited(request: Request) {
@@ -141,7 +141,7 @@ export async function POST(request: Request) {
         method: "POST",
         headers: authorization,
         body: JSON.stringify({
-          summary: `KM FINCO advisory conversation — ${name}`,
+          summary: `FST advisory conversation — ${name}`,
           description: `Website booking request\n\nName: ${name}\nEmail: ${email}\nOrganisation: ${organisation || "Not provided"}\n\nContext:\n${context || "Not provided"}`,
           start: { dateTime: start.toISOString(), timeZone: calendarTimezone },
           end: { dateTime: end.toISOString(), timeZone: calendarTimezone },

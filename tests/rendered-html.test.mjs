@@ -37,20 +37,27 @@ async function post(pathname, payload, bindings = {}, headers = {}) {
   );
 }
 
-test("server-renders the KMFINCO homepage and social metadata", async () => {
+test("server-renders the FST homepage and social metadata", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<title>KMFINCO \| Clarity for what comes next<\/title>/i);
+  assert.match(html, /<title>FST \| Clarity for what comes next<\/title>/i);
   assert.match(
     html,
-    /property="og:image" content="https:\/\/kmfinco\.com\/og\.jpg"/i,
+    /property="og:image" content="https:\/\/fst\.ikanisa\.com\/og\.jpg"/i,
   );
   assert.match(html, /Clarity for what comes next\./);
-  assert.match(html, /Audit &amp; Assurance/);
-  assert.match(html, /Management Consulting/);
+  assert.match(html, /Management Advisory, Risk &amp; Controls/);
+  assert.match(html, /Tax &amp; VAT/);
+  assert.match(html, /Accounting &amp; Financial Reporting/);
+  assert.match(html, /Corporate &amp; Administrative Services/);
+  assert.match(html, /Business Planning &amp; Finance Applications/);
+  assert.match(html, /Funding Application Services/);
+  assert.doesNotMatch(html, /Audit &amp; Assurance/i);
+  assert.doesNotMatch(html, /Investment &amp; Family Office/i);
+  assert.doesNotMatch(html, /Fiduciary/i);
   assert.match(html, /Who we work with/);
   assert.doesNotMatch(html, /Who we help/);
   assert.match(html, /Many connected capabilities\./);
@@ -98,9 +105,8 @@ test("uses semantic icons instead of decorative numbering across content systems
   assert.match(contact, /Book a Meeting/, "contact route should provide the uniform booking action");
 });
 
-test("server-renders dedicated service, audience, booking and legal routes", async () => {
-  const [auditResponse, consultingResponse, audienceResponse, contactResponse, privacyResponse, termsResponse] = await Promise.all([
-    render("/services/audit-assurance"),
+test("server-renders retained service, audience, booking and legal routes", async () => {
+  const [consultingResponse, audienceResponse, contactResponse, privacyResponse, termsResponse] = await Promise.all([
     render("/services/management-consulting"),
     render("/who-we-work-with"),
     render("/contact"),
@@ -108,15 +114,13 @@ test("server-renders dedicated service, audience, booking and legal routes", asy
     render("/terms"),
   ]);
 
-  assert.equal(auditResponse.status, 200);
   assert.equal(consultingResponse.status, 200);
   assert.equal(audienceResponse.status, 200);
   assert.equal(contactResponse.status, 200);
   assert.equal(privacyResponse.status, 200);
   assert.equal(termsResponse.status, 200);
 
-  const [audit, consulting, audience, contact, privacy, terms] = await Promise.all([
-    auditResponse.text(),
+  const [consulting, audience, contact, privacy, terms] = await Promise.all([
     consultingResponse.text(),
     audienceResponse.text(),
     contactResponse.text(),
@@ -124,10 +128,9 @@ test("server-renders dedicated service, audience, booking and legal routes", asy
     termsResponse.text(),
   ]);
 
-  assert.match(audit, /Confidence built on clear evidence\./);
-  assert.match(audit, /src="\/audit-assurance\.webp"/);
   assert.match(consulting, /Turn complexity into practical progress\./);
   assert.match(consulting, /Risk management/);
+  assert.match(consulting, /Internal audit/);
   assert.match(consulting, /Internal controls/);
   assert.match(audience, /Advice shaped around your reality\./);
   assert.match(audience, /Businesses &amp; leadership teams/);
@@ -146,6 +149,44 @@ test("server-renders dedicated service, audience, booking and legal routes", asy
   assert.match(terms, /src="\/terms-of-use-v2\.webp"/);
 });
 
+test("removed audit, investment, fiduciary and superseded combined service routes return 404", async () => {
+  const [auditResponse, investmentResponse, fiduciaryResponse, combinedResponse] = await Promise.all([
+    render("/services/audit-assurance"),
+    render("/services/investment-family-office"),
+    render("/services/corporate-fiduciary"),
+    render("/services/tax-accounting-payroll"),
+  ]);
+  assert.equal(auditResponse.status, 404);
+  assert.equal(investmentResponse.status, 404);
+  assert.equal(fiduciaryResponse.status, 404);
+  assert.equal(combinedResponse.status, 404);
+});
+
+test("clearly presents all six service categories and their requested components", async () => {
+  const routeExpectations = [
+    ["/services/management-consulting", ["Management advisory", "Risk management", "Internal audit", "Internal controls", "Governance &amp; compliance", "Policies &amp; procedures"]],
+    ["/services/tax-vat", ["VAT registration", "VAT returns &amp; reconciliations", "VAT advisory", "Corporate income tax", "Tax planning &amp; advisory"]],
+    ["/services/accounting-financial-reporting", ["Bookkeeping &amp; general ledger", "Management accounts", "Financial statement preparation", "Financial statement review", "Budgets &amp; projections", "Payroll &amp; FSS support"]],
+    ["/services/corporate-services", ["Company formation", "Corporate administration", "Company secretarial", "Statutory registers &amp; filings", "Administrative support"]],
+    ["/services/business-planning-finance-applications", ["Business-plan preparation", "Business-plan review", "Financial projections", "Budgeting &amp; cash planning", "Loan readiness assessment", "Loan application support"]],
+    ["/services/funding-applications", ["Funding opportunity scan", "Route fit &amp; eligibility", "Application narrative &amp; forms", "Business plan &amp; annexes", "Budget &amp; co-financing", "Submission-readiness review", "Post-award support"]],
+  ];
+
+  for (const [pathname, components] of routeExpectations) {
+    const response = await render(pathname);
+    assert.equal(response.status, 200, `${pathname} should render`);
+    const html = await response.text();
+    for (const component of components) assert.match(html, new RegExp(component, "i"), `${pathname} should list ${component}`);
+    assert.doesNotMatch(html, /Audit &amp; Assurance|External audit|Statutory audit|Investment &amp; Family Office|Fiduciary/i);
+  }
+
+  const funding = await (await render("/services/funding-applications")).text();
+  assert.match(funding, /FONDI\.eu/);
+  assert.match(funding, /Malta Enterprise/);
+  assert.match(funding, /Xjenza Malta/);
+  assert.match(funding, /submission retained for the authorised human/i);
+});
+
 test("renders the insights hero without the removed Perspectives label", async () => {
   const response = await render("/insights");
   assert.equal(response.status, 200);
@@ -154,7 +195,7 @@ test("renders the insights hero without the removed Perspectives label", async (
   assert.doesNotMatch(html, />Perspectives</);
   assert.doesNotMatch(html, /Discuss this topic/i);
   const articleCards = html.match(/<article[^>]+class="article-card[^"]*"[\s\S]*?<\/article>/g) ?? [];
-  assert.equal(articleCards.length, 5);
+  assert.equal(articleCards.length, 3);
   for (const card of articleCards) assert.doesNotMatch(card, /<a\b/i, "insight cards should not render redundant CTA links");
 });
 
@@ -181,15 +222,16 @@ test("omits redundant exploratory CTA labels", async () => {
 test("every content section renders a distinct relevant image", async () => {
   const routeExpectations = [
     ["/", 8, ["home-capabilities-v2.webp", "home-expertise-v2.webp", "home-consulting-v2.webp", "home-audience-v2.webp", "home-approach-v2.webp", "home-insights-v2.webp", "home-contact-v2.webp"]],
-    ["/services", 7, ["services-overview-hero-v2.webp", "services-cta-v2.webp"]],
-    ["/services/audit-assurance", 5, ["audit-intro-v2.webp", "audit-offerings-v2.webp", "audit-outcomes-v2.webp", "audit-cta-v2.webp"]],
+    ["/services", 8, ["services-overview-hero-v2.webp", "management-consulting.webp", "insights-tax-v2.webp", "accounting-financial-reporting.webp", "corporate-services.webp", "who-we-work-with-business-v2.webp", "funding-application-services.webp", "services-cta-v2.webp"]],
     ["/services/management-consulting", 5, ["consulting-intro-v2.webp", "consulting-offerings-v2.webp", "consulting-outcomes-v2.webp", "consulting-cta-v2.webp"]],
-    ["/services/tax-accounting-payroll", 5, ["tax-intro-v2.webp", "tax-offerings-v2.webp", "tax-outcomes-v2.webp", "tax-cta-v2.webp"]],
-    ["/services/corporate-fiduciary", 5, ["corporate-intro-v2.webp", "corporate-offerings-v2.webp", "corporate-outcomes-v2.webp", "corporate-cta-v2.webp"]],
-    ["/services/investment-family-office", 5, ["investment-intro-v2.webp", "investment-offerings-v2.webp", "investment-outcomes-v2.webp", "investment-cta-v2.webp"]],
+    ["/services/tax-vat", 5, ["insights-tax-v2.webp", "tax-intro-v2.webp", "tax-offerings-v2.webp", "tax-outcomes-v2.webp", "tax-cta-v2.webp"]],
+    ["/services/accounting-financial-reporting", 5, ["accounting-financial-reporting.webp", "home-expertise-v2.webp", "home-capabilities-v2.webp", "tax-outcomes-v2.webp", "contact-conversation.webp"]],
+    ["/services/corporate-services", 5, ["corporate-intro-v2.webp", "corporate-offerings-v2.webp", "corporate-outcomes-v2.webp", "corporate-cta-v2.webp"]],
+    ["/services/business-planning-finance-applications", 5, ["who-we-work-with-business-v2.webp", "insights-strategy-v2.webp", "home-consulting-v2.webp", "about-story-v2.webp", "consulting-cta-v2.webp"]],
+    ["/services/funding-applications", 5, ["funding-application-services.webp", "funding-intro-v2.webp", "funding-offerings-v2.webp", "funding-outcomes-v2.webp", "funding-cta-v2.webp"]],
     ["/about", 3, ["about-principles-v2.webp", "about-story-v2.webp"]],
-    ["/who-we-work-with", 5, ["who-we-work-with-hero-v2.webp", "who-we-work-with-business-v2.webp", "who-we-work-with-investors-v2.webp", "who-we-work-with-organisations-v2.webp", "who-we-work-with-cta-v2.webp"]],
-    ["/insights", 6, ["insights-risk-v2.webp", "insights-controls-v2.webp", "insights-strategy-v2.webp", "insights-tax-v2.webp", "insights-family-v2.webp"]],
+    ["/who-we-work-with", 5, ["who-we-work-with-hero-v2.webp", "who-we-work-with-business-v2.webp", "who-we-work-with-owners-v2.webp", "who-we-work-with-organisations-v2.webp", "who-we-work-with-cta-v2.webp"]],
+    ["/insights", 4, ["insights-risk-v2.webp", "insights-strategy-v2.webp", "insights-tax-v2.webp"]],
     ["/contact", 1, ["contact-conversation.webp"]],
     ["/privacy", 1, ["privacy-policy-v2.webp"]],
     ["/terms", 1, ["terms-of-use-v2.webp"]],
@@ -218,18 +260,25 @@ test("renders production SEO signals", async () => {
   const sitemap = await sitemapResponse.text();
   const robots = await robotsResponse.text();
 
-  assert.match(home, /rel="canonical" href="https:\/\/kmfinco\.com\/"/i);
+  assert.match(home, /rel="canonical" href="https:\/\/fst\.ikanisa\.com\/"/i);
   assert.match(home, /"@type":\["Organization","ProfessionalService"\]/);
-  assert.match(consulting, /Management consulting for strategy, transformation, internal audit, risk management/i);
-  assert.match(consulting, /rel="canonical" href="https:\/\/kmfinco\.com\/services\/management-consulting"/i);
+  assert.match(consulting, /Management advisory, strategy, risk management, internal audit/i);
+  assert.match(consulting, /rel="canonical" href="https:\/\/fst\.ikanisa\.com\/services\/management-consulting"/i);
   assert.equal(sitemapResponse.status, 200);
-  assert.match(sitemap, /<loc>https:\/\/kmfinco\.com\/services\/audit-assurance<\/loc>/);
-  assert.match(sitemap, /<loc>https:\/\/kmfinco\.com\/privacy<\/loc>/);
-  assert.match(sitemap, /<loc>https:\/\/kmfinco\.com\/who-we-work-with<\/loc>/);
-  assert.match(sitemap, /<loc>https:\/\/kmfinco\.com\/terms<\/loc>/);
-  assert.match(sitemap, /<loc>https:\/\/kmfinco\.com\/book<\/loc>/);
+  assert.doesNotMatch(sitemap, /services\/audit-assurance/);
+  assert.doesNotMatch(sitemap, /services\/investment-family-office/);
+  assert.doesNotMatch(sitemap, /services\/corporate-fiduciary/);
+  assert.doesNotMatch(sitemap, /services\/tax-accounting-payroll/);
+  assert.match(sitemap, /services\/tax-vat/);
+  assert.match(sitemap, /services\/accounting-financial-reporting/);
+  assert.match(sitemap, /services\/business-planning-finance-applications/);
+  assert.match(sitemap, /services\/funding-applications/);
+  assert.match(sitemap, /<loc>https:\/\/fst\.ikanisa\.com\/privacy<\/loc>/);
+  assert.match(sitemap, /<loc>https:\/\/fst\.ikanisa\.com\/who-we-work-with<\/loc>/);
+  assert.match(sitemap, /<loc>https:\/\/fst\.ikanisa\.com\/terms<\/loc>/);
+  assert.match(sitemap, /<loc>https:\/\/fst\.ikanisa\.com\/book<\/loc>/);
   assert.equal(robotsResponse.status, 200);
-  assert.match(robots, /Sitemap: https:\/\/kmfinco\.com\/sitemap\.xml/);
+  assert.match(robots, /Sitemap: https:\/\/fst\.ikanisa\.com\/sitemap\.xml/);
 });
 
 test("native booking validates input and fails safely without credentials", async () => {
@@ -276,7 +325,7 @@ test("native booking creates conflict-checked Google Meet events for approved re
     assert.match(createEvent.url, /sendUpdates=all/);
     assert.match(createEvent.body, /hangoutsMeet/);
     assert.match(createEvent.body, /bosco@ikanisa\.com/);
-    assert.match(createEvent.body, /kmifsud@kmconsultants\.com\.mt/);
+    assert.doesNotMatch(createEvent.body, /kmifsud@kmconsultants\.com\.mt/);
   } finally {
     globalThis.fetch = originalFetch;
   }

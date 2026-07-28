@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "kmfinco-advisory",
+  "name": "fst-advisory",
   "compatibility_date": "2026-05-22",
   "compatibility_flags": [
     "nodejs_compat"

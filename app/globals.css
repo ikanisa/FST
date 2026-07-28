@@ -350,7 +350,7 @@ h1 {
 
 .rail-list {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .rail-list a {
@@ -557,10 +557,6 @@ h1 {
   background: rgba(255, 255, 255, 0.78);
   box-shadow: 0 18px 54px rgba(43, 62, 62, 0.08);
   transition: transform 180ms ease, box-shadow 180ms ease;
-}
-
-.expertise-card:nth-child(n + 4) {
-  grid-column: span 6;
 }
 
 .expertise-card:hover {
@@ -1346,6 +1342,48 @@ h1 {
   gap: 52px;
 }
 
+.service-references {
+  margin-bottom: 86px;
+  padding: 54px 58px;
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 54px;
+  border-radius: 24px;
+  background: linear-gradient(145deg, #f4fbf5, #f7f5ff 56%, #fff8f4);
+  box-shadow: var(--shadow-soft);
+}
+
+.service-references h2 {
+  max-width: 620px;
+  margin: 0;
+  font-size: clamp(40px, 4vw, 58px);
+  line-height: 0.98;
+}
+
+.service-reference-links {
+  display: grid;
+  border-top: 1px solid var(--line);
+}
+
+.service-reference-links a {
+  min-height: 96px;
+  padding: 20px 0;
+  display: grid;
+  gap: 5px;
+  border-bottom: 1px solid var(--line);
+}
+
+.service-reference-links strong {
+  color: var(--green);
+  font-size: 14px;
+}
+
+.service-reference-links span {
+  color: var(--ink-soft);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
 .service-offerings-visual { height: 430px; }
 
 .service-offerings {
@@ -1518,7 +1556,6 @@ h1 {
 .service-index-card .service-index-icon { color: var(--green); }
 .service-index-card h2 { margin: 10px 0; font-size: 39px; line-height: 1; }
 .service-index-card p { max-width: 560px; color: var(--ink-soft); font-size: 14px; }
-.service-index-card:last-child { grid-column: 1 / -1; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr; }
 
 .about-principles { padding: 140px 0; }
 .about-principles > h2 { max-width: 900px; }
@@ -1846,7 +1883,7 @@ h1 {
   background: linear-gradient(145deg, rgba(248, 255, 248, 0.86), rgba(255, 255, 255, 0.8));
 }
 
-.client-group-investors {
+.client-group-owners {
   grid-column: span 5;
   background: linear-gradient(145deg, rgba(255, 248, 247, 0.88), rgba(252, 250, 255, 0.82));
 }
@@ -1914,14 +1951,13 @@ h1 {
   .subpage-hero { width: calc(100% - 36px); grid-template-columns: 1fr; }
   .subpage-copy { padding: 70px 36px; }
   .subpage-image-wrap { min-height: 520px; clip-path: none; }
-  .service-intro { grid-template-columns: 1fr; gap: 20px; }
+  .service-intro, .service-references { grid-template-columns: 1fr; gap: 20px; }
   .service-offerings { grid-template-columns: 1fr 1fr; }
   .service-offerings article:nth-child(3n) { border-right: 1px solid var(--line); }
   .service-offerings article:nth-child(2n) { border-right: 0; }
   .service-outcomes, .subpage-cta, .about-story, .contact-page { grid-template-columns: 1fr; }
   .service-outcomes-visual { grid-column: auto; }
   .service-index-grid { grid-template-columns: 1fr; }
-  .service-index-card:last-child { grid-column: auto; grid-template-columns: 1fr; grid-template-rows: 58% 42%; }
   .article-card, .article-card:nth-child(even) { grid-template-columns: 1fr; }
   .article-card:nth-child(even) img { order: 0; }
   .image-index-hero { grid-template-columns: 1fr; padding: 44px; }
@@ -1929,14 +1965,12 @@ h1 {
   .client-hero-visual { min-height: 520px; clip-path: none; }
   .client-groups-heading { grid-template-columns: 1fr; gap: 18px; }
   .client-groups-heading h2, .client-groups-heading > p:last-child { grid-column: 1; }
-  .client-group-business, .client-group-investors { grid-column: 1 / -1; }
+  .client-group-business, .client-group-owners { grid-column: 1 / -1; }
   .client-group-organisations { grid-template-columns: 1fr; }
   .client-group-organisations > img { min-height: 0; height: 390px; }
   .relationship-cta { grid-template-columns: 1fr; }
   .relationship-cta > img { min-height: 0; height: 480px; }
   .expertise-card { grid-column: span 6; }
-  .expertise-card:nth-child(n + 4) { grid-column: span 6; }
-  .expertise-card:last-child { grid-column: 1 / -1; }
 }
 
 @media (max-width: 540px) {
@@ -1946,6 +1980,7 @@ h1 {
   .subpage-copy > p:not(.eyebrow) { font-size: 15px; }
   .subpage-image-wrap { min-height: 360px; }
   .service-intro, .index-hero { width: calc(100% - 32px); padding: 90px 0 58px; }
+  .service-references { width: calc(100% - 28px); padding: 38px 24px; }
   .service-intro-visual, .service-offerings-visual, .service-outcomes-visual, .subpage-cta-visual, .about-principles-visual { height: 300px; }
   .service-offerings { grid-template-columns: 1fr; }
   .service-offerings article, .service-offerings article:nth-child(3n) { border-right: 0; }
@@ -1975,14 +2010,14 @@ h1 {
   .client-groups-heading { margin-bottom: 42px; }
   .client-groups-heading h2 { font-size: 48px; }
   .client-groups-grid { grid-template-columns: 1fr; }
-  .client-group-card, .client-group-business, .client-group-investors, .client-group-organisations { grid-column: 1; }
+  .client-group-card, .client-group-business, .client-group-owners, .client-group-organisations { grid-column: 1; }
   .client-group-card > img, .client-group-organisations > img { height: 280px; }
   .client-group-card > div, .client-group-organisations > div { padding: 30px 24px 34px; }
   .relationship-cta { width: calc(100% - 28px); margin-bottom: 84px; }
   .relationship-cta-copy { padding: 54px 24px; }
   .relationship-cta h2 { font-size: 52px; }
   .relationship-cta > img { height: 320px; }
-  .expertise-card, .expertise-card:nth-child(n + 4), .expertise-card:last-child { grid-column: 1 / -1; }
+  .expertise-card { grid-column: 1 / -1; }
   .expertise-card { min-height: 0; padding: 30px 24px 26px; }
 }
 
@@ -2511,8 +2546,8 @@ h1 {
 
 .booking-intro h1 { max-width: 670px; font-size: clamp(62px, 6vw, 88px); }
 .booking-intro > p:not(.eyebrow) { max-width: 580px; color: var(--ink-soft); }
-.booking-assurances { margin: 36px 0; display: grid; border-top: 1px solid var(--line); }
-.booking-assurances span { padding: 15px 0; border-bottom: 1px solid var(--line); color: var(--green); font-size: 13px; font-weight: 600; }
+.booking-confirmations { margin: 36px 0; display: grid; border-top: 1px solid var(--line); }
+.booking-confirmations span { padding: 15px 0; border-bottom: 1px solid var(--line); color: var(--green); font-size: 13px; font-weight: 600; }
 .booking-alternative a,
 .schedule-link { color: var(--green); text-decoration: underline; text-underline-offset: 4px; }
 

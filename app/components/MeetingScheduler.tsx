@@ -7,11 +7,12 @@ import { UserCircle } from "@phosphor-icons/react/dist/csr/UserCircle";
 import { FormEvent, useMemo, useState } from "react";
 
 const topics = [
-  "Audit & assurance",
-  "Management consulting",
-  "Tax, accounting & payroll",
-  "Corporate & fiduciary",
-  "Investment & family office",
+  "Management advisory, risk & controls",
+  "Tax & VAT",
+  "Accounting & financial reporting",
+  "Corporate & administrative services",
+  "Business planning & finance applications",
+  "Funding application services",
 ];
 
 const times = ["09:00", "10:30", "13:00", "14:30", "16:00"];
@@ -80,7 +81,7 @@ export function MeetingScheduler() {
     if (!booking || !selectedTime) return "#";
     const params = new URLSearchParams({
       action: "TEMPLATE",
-      text: `KMFINCO consultation — ${topic}`,
+      text: `FST consultation — ${topic}`,
       dates: `${calendarTimestamp(selectedDate, selectedTime)}/${calendarTimestamp(selectedDate, selectedTime, 45)}`,
       ctz: "Africa/Kigali",
       location: "Google Meet",

@@ -3,7 +3,8 @@ import { Buildings } from "@phosphor-icons/react/dist/ssr/Buildings";
 import { Calculator } from "@phosphor-icons/react/dist/ssr/Calculator";
 import { ChartLineUp } from "@phosphor-icons/react/dist/ssr/ChartLineUp";
 import { Compass } from "@phosphor-icons/react/dist/ssr/Compass";
-import { ShieldCheck } from "@phosphor-icons/react/dist/ssr/ShieldCheck";
+import { HandCoins } from "@phosphor-icons/react/dist/ssr/HandCoins";
+import { Receipt } from "@phosphor-icons/react/dist/ssr/Receipt";
 import { pageMetadata } from "../../lib/seo";
 import { SiteFooter } from "../components/SiteFooter";
 import { SiteHeader } from "../components/SiteHeader";
@@ -12,16 +13,17 @@ import { PrimaryCta } from "../components/PrimaryCta";
 
 export const metadata = pageMetadata({
   title: "Expertise",
-  description: "Connected audit, assurance, management consulting, tax, corporate and investment expertise.",
+  description: "Connected management advisory, tax, accounting, corporate, business-planning, finance and funding-application expertise.",
   path: "/services",
 });
 
 const services = [
-  { title: "Audit & Assurance", slug: "audit-assurance", image: "/audit-assurance.webp", copy: "Independent perspective that strengthens confidence in reporting, controls and governance.", tone: "blue", icon: ShieldCheck },
-  { title: "Management Consulting", slug: "management-consulting", image: "/management-consulting.webp", copy: "Practical strategy, internal audit, risk and transformation support for stronger organisations.", tone: "violet", icon: Compass },
-  { title: "Tax, Accounting & Payroll", slug: "tax-accounting-payroll", image: "/tax-accounting-payroll.webp", copy: "Clear, connected support for reporting, compliance and day-to-day financial confidence.", tone: "orange", icon: Calculator },
-  { title: "Corporate & Fiduciary", slug: "corporate-fiduciary", image: "/corporate-fiduciary.webp", copy: "Thoughtful structures and dependable administration across the business lifecycle.", tone: "green", icon: Buildings },
-  { title: "Investment & Family Office", slug: "investment-family-office", image: "/investment-family-office.webp", copy: "Long-term thinking for capital, governance and the priorities that matter most.", tone: "rose", icon: ChartLineUp },
+  { title: "Management Advisory, Risk & Controls", slug: "management-consulting", image: "/management-consulting.webp", copy: "Management advisory, strategy, risk management, internal audit, internal controls and performance support.", tone: "violet", icon: Compass },
+  { title: "Tax & VAT", slug: "tax-vat", image: "/insights-tax-v2.webp", copy: "VAT, corporate income tax, compliance, return preparation, review and practical tax advisory.", tone: "orange", icon: Receipt },
+  { title: "Accounting & Financial Reporting", slug: "accounting-financial-reporting", image: "/accounting-financial-reporting.webp", copy: "Bookkeeping, reconciliations, financial statements, management accounts, projections and payroll.", tone: "blue", icon: Calculator },
+  { title: "Corporate & Administrative Services", slug: "corporate-services", image: "/corporate-services.webp", copy: "Company formation, secretarial support, registers, filings, governance and reliable administration.", tone: "green", icon: Buildings },
+  { title: "Business Planning & Finance Applications", slug: "business-planning-finance-applications", image: "/who-we-work-with-business-v2.webp", copy: "Business plans, budgets, projections, loan readiness and complete lender-application support.", tone: "rose", icon: ChartLineUp },
+  { title: "Funding Application Services", slug: "funding-applications", image: "/funding-application-services.webp", copy: "Full application support across FONDI.eu, Malta Enterprise, Xjenza Malta and connected routes.", tone: "green", icon: HandCoins },
 ];
 
 export default function ServicesPage() {
@@ -32,9 +34,9 @@ export default function ServicesPage() {
         <div>
           <p className="eyebrow">Connected expertise</p>
           <h1>One relationship.<br />More of the picture.</h1>
-          <p>Our assurance, consulting and financial specialists work as one team—so advice stays connected to the decisions, risks and opportunities around it.</p>
+          <p>Our management, tax, accounting, corporate and application specialists work as one team—so advice stays connected to the decisions, risks and opportunities around it.</p>
         </div>
-        <img src="/services-overview-hero-v2.webp" alt="A connected team of assurance, consulting and financial specialists around one table" width="1536" height="1024" loading="eager" fetchPriority="high" />
+        <img src="/services-overview-hero-v2.webp" alt="A connected team of management, finance, tax and corporate specialists around one table" width="1536" height="1024" loading="eager" fetchPriority="high" />
       </section>
       <section className="service-index-grid section-shell" aria-label="Our services">
         {services.map((service) => {

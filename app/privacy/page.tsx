@@ -5,7 +5,7 @@ import { SiteHeader } from "../components/SiteHeader";
 
 export const metadata = pageMetadata({
   title: "Privacy Policy",
-  description: "How KMFINCO collects, uses and protects personal information.",
+  description: "How FST collects, uses and protects personal information.",
   path: "/privacy",
 });
 
@@ -18,7 +18,7 @@ export default function PrivacyPage() {
           <div>
             <p className="eyebrow">Privacy Policy</p>
             <h1>Your information, handled with care.</h1>
-            <p>This policy explains what information KMFINCO receives through this website, why we use it and the choices available to you.</p>
+            <p>This policy explains what information FST receives through this website, why we use it and the choices available to you.</p>
             <small>Effective 20 July 2026</small>
           </div>
           <img src="/privacy-policy-v2.webp" alt="Senior advisers reviewing privacy and data-governance information" width="1536" height="1024" />
@@ -36,7 +36,7 @@ export default function PrivacyPage() {
           <div className="legal-copy">
             <section id="information"><h2>Information we collect</h2><p>We may receive information you provide when you contact us or prepare a meeting invitation, including your name, work email, organisation, selected service, preferred meeting time and any context you choose to share.</p><p>We may also collect limited technical information such as device type, browser, approximate location, referring page and website usage data where analytics or security tools are enabled.</p></section>
             <section id="use"><h2>How we use information</h2><p>We use information to respond to enquiries, arrange meetings, deliver and improve our services, protect the website, meet professional or legal obligations and communicate relevant updates where permitted.</p><p>Depending on the context, processing may be based on your consent, steps taken at your request, performance of a contract, legitimate business interests or compliance with legal obligations.</p></section>
-            <section id="sharing"><h2>Sharing and international transfers</h2><p>Information may be shared with KMFINCO personnel, professional advisers and carefully selected technology providers that support hosting, communications, analytics and scheduling. We do not sell personal information.</p><p>Where information is transferred across borders, we use appropriate contractual, organisational or legal safeguards suited to the countries involved.</p></section>
+            <section id="sharing"><h2>Sharing and international transfers</h2><p>Information may be shared with FST personnel, professional advisers and carefully selected technology providers that support hosting, communications, analytics and scheduling. We do not sell personal information.</p><p>Where information is transferred across borders, we use appropriate contractual, organisational or legal safeguards suited to the countries involved.</p></section>
             <section id="retention"><h2>Retention and security</h2><p>We retain information only for as long as reasonably needed for the purpose collected, professional record-keeping, dispute management and applicable legal requirements. We use proportionate administrative, technical and organisational safeguards, although no online service can guarantee absolute security.</p></section>
             <section id="rights"><h2>Your choices and rights</h2><p>Depending on applicable law, you may request access, correction, deletion, restriction, portability or objection to certain uses of your information, and may withdraw consent where processing relies on it. You may also contact the relevant data-protection authority.</p></section>
             <section id="cookies"><h2>Cookies and external services</h2><p>The website may use essential storage for core functions and, where enabled, limited analytics. External services such as Google Calendar operate under their own privacy terms when you choose to open them.</p></section>

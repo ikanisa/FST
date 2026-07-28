@@ -5,7 +5,7 @@ import { PrimaryCta } from "../components/PrimaryCta";
 
 export const metadata = pageMetadata({
   title: "Who we work with",
-  description: "Senior-led audit, consulting, tax, corporate and investment advice for businesses, leadership teams, investors, families and international organisations.",
+  description: "Senior-led management, risk, tax, accounting, corporate, business-planning, finance and funding-application advice.",
   path: "/who-we-work-with",
 });
 
@@ -15,23 +15,23 @@ const clientGroups = [
     copy: "From ambitious owner-managed businesses to established groups, we help leaders strengthen confidence, navigate change and turn priorities into practical progress.",
     image: "/who-we-work-with-business-v2.webp",
     alt: "Business owners and a senior adviser reviewing a growth and governance plan",
-    priorities: ["Growth and transformation", "Governance, controls and risk", "Reporting, tax and compliance"],
+    priorities: ["Growth and transformation", "Governance, internal audit and controls", "Finance, funding, reporting and tax"],
     className: "client-group-business",
   },
   {
-    title: "Investors, owners & families",
-    copy: "We connect investment, governance, structuring and family-office perspectives around long-term capital and the decisions that carry across generations.",
-    image: "/who-we-work-with-investors-v2.webp",
-    alt: "A family and investment adviser discussing long-term capital priorities",
-    priorities: ["Investment decisions", "Succession and ownership", "Family-office coordination"],
-    className: "client-group-investors",
+    title: "Owners & finance teams",
+    copy: "We connect governance, structuring, reporting, tax, business planning and finance perspectives around ownership priorities and long-term business decisions.",
+    image: "/who-we-work-with-owners-v2.webp",
+    alt: "Business owners and a finance adviser discussing long-term organisational priorities",
+    priorities: ["Ownership and succession", "Governance and structuring", "Finance and funding applications"],
+    className: "client-group-owners",
   },
   {
     title: "International organisations & institutions",
     copy: "For organisations working across borders or under heightened accountability, we bring local attention and multidisciplinary support to reporting, governance and delivery.",
     image: "/who-we-work-with-organisations-v2.webp",
     alt: "International organisation leaders reviewing governance and reporting priorities",
-    priorities: ["Cross-border operations", "Assurance and accountability", "Risk and regulatory change"],
+    priorities: ["Cross-border operations", "Reporting and accountability", "Risk and regulatory change"],
     className: "client-group-organisations",
   },
 ];

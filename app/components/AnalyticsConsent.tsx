@@ -3,16 +3,16 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-const storageKey = "kmfinco-analytics-consent";
+const storageKey = "fst-analytics-consent";
 const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "";
 
 function loadAnalytics() {
-  if (!measurementId || document.querySelector(`script[data-kmfinco-analytics]`)) return;
+  if (!measurementId || document.querySelector(`script[data-fst-analytics]`)) return;
 
   const script = document.createElement("script");
   script.async = true;
   script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
-  script.dataset.kmfincoAnalytics = "true";
+  script.dataset.fstAnalytics = "true";
   document.head.appendChild(script);
 
   window.dataLayer = window.dataLayer || [];

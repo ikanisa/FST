@@ -6,9 +6,9 @@ import { TrackedLink } from "./TrackedLink";
 export function SiteFooter() {
   return (
     <footer className="site-footer">
-      <Link className="wordmark footer-mark" href="/">KMFINCO</Link>
+      <Link className="wordmark footer-mark" href="/">FST</Link>
       <div className="footer-summary">
-        <p>Assurance, advice and financial expertise—connected around what comes next.</p>
+        <p>Management, finance, tax, corporate and application expertise—connected around what comes next.</p>
         <span>{siteConfig.serviceArea}</span>
       </div>
       <div className="footer-links">
@@ -29,7 +29,7 @@ export function SiteFooter() {
           {siteConfig.linkedInUrl && <TrackedLink href={siteConfig.linkedInUrl} event="linkedin_click" target="_blank" rel="noreferrer">LinkedIn</TrackedLink>}
         </div>
       </div>
-      <small>© 2026 KMFINCO. All rights reserved. International advisory services; meetings online and by appointment.</small>
+      <small>© 2026 FST. All rights reserved. International advisory services; meetings online and by appointment.</small>
     </footer>
   );
 }
