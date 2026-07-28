@@ -66,14 +66,14 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     },
     sameAs: siteConfig.linkedInUrl ? [siteConfig.linkedInUrl] : undefined,
     knowsAbout: [
-      "Management advisory",
+      "Management advisory and business planning",
       "Risk management",
       "Internal audit and internal controls",
-      "Tax and VAT",
+      "Taxation",
       "Accounting and financial reporting",
       "Payroll",
       "Corporate and administrative services",
-      "Business planning and loan application support",
+      "Loan application support",
       "Funding application support",
     ],
   };

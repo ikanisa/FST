@@ -23,7 +23,7 @@ const capabilities = [
     slug: "management-consulting",
     intro: "Senior support for decisions, risk ownership, internal review and operational follow-through.",
     items: [
-      "Decision support and operating priorities",
+      "Business planning, feasibility and operating priorities",
       "Risk ownership and internal audit reviews",
       "Control design and delivery improvement",
     ],
@@ -31,13 +31,13 @@ const capabilities = [
     icon: Compass,
   },
   {
-    title: "Tax & VAT",
+    title: "Taxation",
     slug: "tax-vat",
-    intro: "Malta VAT and corporate tax work built around defensible positions, complete files and dependable deadlines.",
+    intro: "Complete Malta tax support across direct, indirect, employment, property, transaction and international tax obligations.",
     items: [
-      "VAT setup, filings and transaction analysis",
-      "Corporate tax calculations and return review",
-      "Tax planning, refund files and query support",
+      "Corporate and personal income tax",
+      "VAT, payroll, FSS and social security",
+      "International, withholding, property and transfer taxes",
     ],
     tone: "peach",
     icon: Receipt,
@@ -67,13 +67,13 @@ const capabilities = [
     icon: Buildings,
   },
   {
-    title: "Business Planning & Loan Application Support",
+    title: "Loan Application Support",
     slug: "business-planning-finance-applications",
-    intro: "Commercial plans and numbers shaped into a finance case that lenders can assess and management can deliver.",
+    intro: "A complete lender-facing application built around the borrowing need, repayment capacity, financial schedules and supporting evidence.",
     items: [
-      "New business plans and critical plan reviews",
-      "Operating budgets, scenarios and cash forecasts",
-      "Loan application readiness and lender submissions",
+      "Loan application readiness and facility fit",
+      "Application forms, financial schedules and evidence",
+      "Lender queries, approval and drawdown support",
     ],
     tone: "sand",
     icon: ChartLineUp,
@@ -239,7 +239,7 @@ export default function Home() {
         <SectionVisual src="/fst-insights.webp" alt="An evidence-led advisory research workspace with organised notes and schedules" className="section-banner-visual" />
         <div className="insight-grid">
           {insights.map((insight, index) => (
-            <Link href="/insights" key={insight.title} className={`insight-card insight-${index + 1}`}>
+            <Link href="/about#field-notes" key={insight.title} className={`insight-card insight-${index + 1}`}>
               <span>{insight.category}</span>
               <h3>{insight.title}</h3>
             </Link>

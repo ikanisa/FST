@@ -8,10 +8,10 @@ import { FormEvent, useMemo, useState } from "react";
 
 const topics = [
   "Management advisory, risk & controls",
-  "Tax & VAT",
+  "Taxation",
   "Accounting & financial reporting",
   "Corporate & administrative services",
-  "Business planning & loan application support",
+  "Loan application support",
   "Funding application support",
 ];
 

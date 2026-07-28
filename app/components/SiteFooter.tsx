@@ -15,8 +15,7 @@ export function SiteFooter() {
         <nav aria-label="Footer links">
           <Link href="/services">Services</Link>
           <Link href="/who-we-work-with">Organisations</Link>
-          <Link href="/about">Our approach</Link>
-          <Link href="/insights">Field notes</Link>
+          <Link href="/about">Approach & field notes</Link>
           <Link href="/contact">Get in touch</Link>
           <Link href="/privacy">Data notice</Link>
           <Link href="/terms">Site rules</Link>

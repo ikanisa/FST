@@ -5,11 +5,11 @@ system, a distinct editorial voice and clearly named service categories.
 
 ## Main service categories
 
-- **Management Advisory, Risk & Controls** — management support, strategy, operating models, risk management, internal audit, internal controls, governance, compliance, policies and performance improvement.
-- **Tax & VAT** — VAT registration, VAT returns and reconciliations, VAT advisory, corporate income tax, tax planning, refunds, authority support and tax-position reviews.
+- **Management Advisory, Risk & Controls** — management support, business planning and review, feasibility, budgeting and projections, strategy, operating models, risk management, internal audit, internal controls, governance, compliance, policies and performance improvement.
+- **Taxation** — corporate and personal income tax, VAT, payroll and FSS, social security, withholding tax, property and transfer taxes, international tax and transfer pricing, provisional tax, planning, refunds and MTCA support.
 - **Accounting & Financial Reporting** — bookkeeping, reconciliations, payables and receivables, management accounts, financial-statement preparation and review, payroll, close, budgets, projections and cash-flow support.
 - **Corporate & Administrative Services** — company formation, company secretarial, registers, filings, board and shareholder support, beneficial ownership, corporate changes and ongoing administration.
-- **Business Planning & Loan Application Support** — business-plan preparation and review, budgets, financial projections, cash planning, loan application readiness, lender submissions, evidence packs and post-approval planning.
+- **Loan Application Support** — application readiness, borrowing requirement and facility fit, forms, lender financial schedules, evidence packs, queries, approval, drawdown and post-approval monitoring.
 - **Funding Application Support** — opportunity scans, eligibility, project design, forms, business plans, budgets, state-aid checks, evidence packs, submission-readiness review and post-award support across FONDI.eu, Malta Enterprise and Xjenza Malta routes.
 
 FST does not advertise external or statutory audit and assurance, investment or family-office services, or fiduciary services. Internal audit remains available as a management, risk and controls service.
@@ -24,8 +24,7 @@ FST does not advertise external or statutory audit and assurance, investment or 
 - `/services/corporate-services`
 - `/services/business-planning-finance-applications`
 - `/services/funding-applications`
-- `/about`
-- `/insights`
+- `/about` — FST approach and field notes
 - `/contact`
 - `/book` — Google Calendar and Google Meet booking
 - `/privacy`

@@ -25,7 +25,7 @@ Profiles: desktop 1440 × 900 and mobile 390 × 844
 
 ## Route matrix
 
-The browser sweep passed all 15 retained public routes:
+The browser sweep passed all 14 retained public routes:
 
 - `/`
 - `/services`
@@ -36,8 +36,7 @@ The browser sweep passed all 15 retained public routes:
 - `/services/business-planning-finance-applications`
 - `/services/funding-applications`
 - `/who-we-work-with`
-- `/about`
-- `/insights`
+- `/about` — FST approach and field notes
 - `/contact`
 - `/book`
 - `/privacy`
@@ -47,11 +46,11 @@ The removed `/services/audit-assurance`, `/services/investment-family-office`, `
 
 ## Service-content acceptance
 
-- Management Advisory, Risk & Controls includes management support, strategy, operating models, risk management, internal audit, internal controls, governance, compliance, policies and performance improvement.
-- Tax & VAT includes VAT registration, returns, reconciliations, advisory, corporate income tax, planning, refunds, authority support and reviews.
+- Management Advisory, Risk & Controls includes management support, business planning and review, feasibility, budgeting and projections, strategy, operating models, risk management, internal audit, internal controls, governance, compliance, policies and performance improvement.
+- Taxation includes corporate and personal income tax, VAT, payroll and FSS, social security, withholding, property and transfer taxes, international tax and transfer pricing, provisional tax, planning, refunds and MTCA support.
 - Accounting & Financial Reporting includes bookkeeping, reconciliations, management accounts, financial-statement preparation and review, budgets, projections, cash flow, payroll and close.
 - Corporate & Administrative Services includes formation, company secretarial, registers, filings, governance, beneficial ownership, corporate changes and administration.
-- Business Planning & Loan Application Support includes business-plan preparation and review, projections, budgets, cash planning, loan application readiness, lender submissions, evidence packs and post-approval planning.
+- Loan Application Support includes application readiness, borrowing requirement and facility fit, forms, lender financial schedules, evidence packs, queries, approval, drawdown and post-approval monitoring.
 - Funding Application Support includes route scans, eligibility, concept design, official forms, business plans, budgets, state-aid and double-funding checks, evidence packs, submission-readiness review and post-award support.
 
 ## Evidence

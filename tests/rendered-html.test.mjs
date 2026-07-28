@@ -80,23 +80,23 @@ test("renders the new FST identity, navigation and service-category model", asyn
   assert.match(html, /Specialist services\./);
   for (const label of [
     "Management Advisory, Risk &amp; Controls",
-    "Tax &amp; VAT",
+    "Taxation",
     "Accounting &amp; Financial Reporting",
     "Corporate &amp; Administrative Services",
-    "Business Planning &amp; Loan Application Support",
+    "Loan Application Support",
     "Funding Application Support",
   ]) assert.match(html, new RegExp(label, "i"));
   assert.match(html, /href="\/book"[^>]*>Book a Meeting</i);
   assert.match(html, /Services/);
   assert.match(html, /Organisations/);
-  assert.match(html, /Field Notes/);
-  assert.match(html, /FST Approach/);
+  assert.match(html, /Approach &amp; Field Notes/);
+  assert.doesNotMatch(html, /href="\/insights"/i);
   assert.match(html, /src="\/fst-hero\.webp"/);
   assert.equal(response.headers.get("x-content-type-options"), "nosniff");
 });
 
 test("does not expose removed practices or inherited KMFINCO language", async () => {
-  const routes = ["/", "/services", "/about", "/who-we-work-with", "/insights", "/contact", "/privacy", "/terms"];
+  const routes = ["/", "/services", "/about", "/who-we-work-with", "/contact", "/privacy", "/terms"];
   const forbidden = /KMFINCO|K Mi|Audit &amp; Assurance|External audit|Statutory audit|Investment &amp; Family Office|Fiduciary|Clarity for what comes next|Close enough to understand|Advice shaped around your reality|Useful thinking for consequential decisions/i;
   for (const pathname of routes) {
     const response = await render(pathname);
@@ -117,7 +117,7 @@ test("honours the annotated homepage copy requirements", async () => {
 });
 
 test("avoids numeric framing in public content labels", async () => {
-  const routes = ["/", "/services", "/about", "/who-we-work-with", "/insights", "/contact"];
+  const routes = ["/", "/services", "/about", "/who-we-work-with", "/contact"];
   const forbiddenLabels = /Six coordinated workstreams|Three settings where connected support matters|One question\. Every relevant discipline|Reserve a focused 45 minutes/i;
   for (const pathname of routes) {
     const html = await (await render(pathname)).text();
@@ -127,9 +127,10 @@ test("avoids numeric framing in public content labels", async () => {
 
 test("uses direct service labels on the services index", async () => {
   const html = await (await render("/services")).text();
-  assert.match(html, /Business Planning &amp; Loan Application Support/i);
+  assert.match(html, /Taxation/i);
+  assert.match(html, /Loan Application Support/i);
   assert.match(html, /Funding Application Support/i);
-  assert.doesNotMatch(html, /Six coordinated workstreams|Business Planning &amp; Finance Applications|Funding Application Services/i);
+  assert.doesNotMatch(html, /Six coordinated workstreams|Tax &amp; VAT|Business Planning &amp; Finance Applications|Business Planning &amp; Loan Application Support|Funding Application Services/i);
 });
 
 test("uses explicit loan and funding application support wording across public routes", async () => {
@@ -137,7 +138,60 @@ test("uses explicit loan and funding application support wording across public r
   const combined = (await Promise.all(routes.map(async (pathname) => (await (await render(pathname)).text())))).join("\n");
   assert.match(combined, /Loan Application Support/i);
   assert.match(combined, /Funding Application Support/i);
-  assert.doesNotMatch(combined, /Business Planning &amp; Loan Support|Funding &amp; Grant Support|Budgets, projections and loan support/i);
+  assert.doesNotMatch(combined, /Business Planning &amp; Loan Support|Business Planning &amp; Loan Application Support|Funding &amp; Grant Support|Budgets, projections and loan support/i);
+});
+
+test("covers Malta taxation beyond VAT and corporate income tax", async () => {
+  const index = await (await render("/services")).text();
+  const detail = await (await render("/services/tax-vat")).text();
+  assert.match(index, /Complete Malta tax support/i);
+  for (const label of [
+    "Corporate income tax",
+    "Personal &amp; self-employed income tax",
+    "VAT returns &amp; reconciliations",
+    "Payroll tax, FSS &amp; social security",
+    "Withholding tax &amp; cross-border payments",
+    "Property, capital gains &amp; transfer taxes",
+    "International tax &amp; transfer pricing",
+    "Provisional tax &amp; payment planning",
+    "Tax refunds, credits &amp; shareholder refunds",
+    "MTCA queries, reviews &amp; objections",
+  ]) assert.match(detail, new RegExp(label, "i"));
+  assert.doesNotMatch(index, /Malta VAT and corporate tax work/i);
+});
+
+test("keeps business planning under management advisory and loan applications separate", async () => {
+  const management = await (await render("/services/management-consulting")).text();
+  const loan = await (await render("/services/business-planning-finance-applications")).text();
+  assert.match(management, /Business planning &amp; feasibility/i);
+  assert.match(management, /Business-plan preparation/i);
+  assert.match(management, /Business-plan review/i);
+  assert.match(management, /Budgeting, projections &amp; scenarios/i);
+  assert.match(loan, /Loan Application Support/i);
+  assert.match(loan, /Loan application forms/i);
+  assert.match(loan, /Lender financial schedules/i);
+  assert.doesNotMatch(loan, /Business-plan preparation|Business-plan review/i);
+});
+
+test("explicitly serves start-ups, self-employed professionals, SMEs and NGOs", async () => {
+  const html = await (await render("/who-we-work-with")).text();
+  for (const label of [
+    "Start-ups &amp; self-employed professionals",
+    "SMEs &amp; growing businesses",
+    "Established businesses &amp; finance teams",
+    "NGOs, voluntary &amp; community organisations",
+    "International programmes &amp; institutions",
+  ]) assert.match(html, new RegExp(label, "i"));
+});
+
+test("combines the FST approach and field notes on one route", async () => {
+  const about = await (await render("/about")).text();
+  assert.match(about, /The FST approach/i);
+  assert.match(about, /Working notes for decisions in motion/i);
+  assert.match(about, /What a useful internal-control review should leave behind/i);
+  assert.match(about, /Building a tax working file that reconciles before filing day/i);
+  assert.doesNotMatch(about, /href="\/insights"/i);
+  assert.equal((await render("/insights")).status, 404);
 });
 
 test("removes the inherited green palette from live source", async () => {
@@ -145,7 +199,6 @@ test("removes the inherited green palette from live source", async () => {
     "app/globals.css",
     "app/page.tsx",
     "app/about/page.tsx",
-    "app/insights/page.tsx",
     "app/services/page.tsx",
     "app/components/ServicePage.tsx",
     "app/services/corporate-services/page.tsx",
@@ -158,11 +211,11 @@ test("removes the inherited green palette from live source", async () => {
 
 test("lists all requested components under their clear service categories", async () => {
   const expectations = [
-    ["/services/management-consulting", ["Management support", "Risk management", "Internal audit", "Internal controls", "Policies &amp; procedures"]],
-    ["/services/tax-vat", ["VAT registration", "VAT returns &amp; reconciliations", "Corporate income tax", "Tax planning &amp; advisory"]],
+    ["/services/management-consulting", ["Management support", "Business planning &amp; feasibility", "Business-plan preparation", "Business-plan review", "Budgeting, projections &amp; scenarios", "Risk management", "Internal audit", "Internal controls", "Policies &amp; procedures"]],
+    ["/services/tax-vat", ["Tax registrations &amp; taxpayer setup", "Corporate income tax", "Personal &amp; self-employed income tax", "VAT returns &amp; reconciliations", "Payroll tax, FSS &amp; social security", "International tax &amp; transfer pricing"]],
     ["/services/accounting-financial-reporting", ["Bookkeeping &amp; general ledger", "Financial statement preparation", "Financial statement review", "Budgets &amp; projections", "Payroll &amp; FSS support"]],
     ["/services/corporate-services", ["Company formation", "Company secretarial", "Statutory registers &amp; filings", "Administrative support"]],
-    ["/services/business-planning-finance-applications", ["Business-plan preparation", "Business-plan review", "Financial projections", "Loan application readiness assessment", "Loan application support"]],
+    ["/services/business-planning-finance-applications", ["Loan application readiness assessment", "Borrowing requirement &amp; facility fit", "Loan application forms", "Lender financial schedules", "Loan application evidence pack", "Approval &amp; drawdown support"]],
     ["/services/funding-applications", ["Funding opportunity scan", "Route fit &amp; eligibility", "Narrative &amp; forms", "Budget &amp; co-financing", "Submission-readiness review", "Post-award support"]],
   ];
   for (const [pathname, labels] of expectations) {
@@ -182,7 +235,7 @@ test("funding application support uses the three official routes and retains hum
 });
 
 test("every rendered public image exists and none matches a KMFINCO public asset", async () => {
-  const routes = ["/", "/services", "/about", "/who-we-work-with", "/insights", "/contact", "/privacy", "/terms", "/services/management-consulting", "/services/tax-vat", "/services/accounting-financial-reporting", "/services/corporate-services", "/services/business-planning-finance-applications", "/services/funding-applications"];
+  const routes = ["/", "/services", "/about", "/who-we-work-with", "/contact", "/privacy", "/terms", "/services/management-consulting", "/services/tax-vat", "/services/accounting-financial-reporting", "/services/corporate-services", "/services/business-planning-finance-applications", "/services/funding-applications"];
   const used = new Set(["/favicon.svg", "/og.jpg"]);
   for (const pathname of routes) {
     const html = await (await render(pathname)).text();
@@ -197,8 +250,8 @@ test("every rendered public image exists and none matches a KMFINCO public asset
   assert.ok(publicFiles.every((name) => /^(fst-|funding-|favicon\.svg$|og\.jpg$)/.test(name)), "public should contain only FST/funding exports and core brand files");
 });
 
-test("removed legacy service routes return 404", async () => {
-  for (const pathname of ["/services/audit-assurance", "/services/investment-family-office", "/services/corporate-fiduciary", "/services/tax-accounting-payroll"]) {
+test("removed legacy and merged routes return 404", async () => {
+  for (const pathname of ["/services/audit-assurance", "/services/investment-family-office", "/services/corporate-fiduciary", "/services/tax-accounting-payroll", "/insights"]) {
     assert.equal((await render(pathname)).status, 404);
   }
 });
@@ -220,7 +273,7 @@ test("contact, legal, SEO and discovery routes render production signals", async
   assert.match(privacy, /src="\/fst-legal\.webp"/);
   assert.match(terms, /src="\/fst-legal\.webp"/);
   assert.match(sitemap, /services\/funding-applications/);
-  assert.doesNotMatch(sitemap, /services\/audit-assurance|investment-family-office|corporate-fiduciary/);
+  assert.doesNotMatch(sitemap, /services\/audit-assurance|investment-family-office|corporate-fiduciary|\/insights/);
   assert.match(robots, /Sitemap: https:\/\/fst-advisory\.ikanisa\.chatgpt\.site\/sitemap\.xml/);
 });
 

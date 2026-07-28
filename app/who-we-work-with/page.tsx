@@ -5,26 +5,42 @@ import { PrimaryCta } from "../components/PrimaryCta";
 
 export const metadata = pageMetadata({
   title: "Organisations",
-  description: "Senior-led management, risk, tax, accounting, corporate, business-planning, loan application and funding application support.",
+  description: "Senior-led support for start-ups, self-employed professionals, SMEs, established businesses, NGOs, voluntary organisations and international programmes.",
   path: "/who-we-work-with",
 });
 
 const clientGroups = [
   {
-    title: "Operating businesses & leadership",
-    copy: "We help management teams organise growth, performance, finance and control priorities into a programme with accountable owners.",
-    image: "/fst-operations.webp",
-    alt: "An operating team coordinating performance and delivery priorities",
-    priorities: ["Strategy and management support", "Risk, internal audit and controls", "Reporting, tax and working capital"],
-    className: "client-group-business",
+    title: "Start-ups & self-employed professionals",
+    copy: "FST helps founders, sole traders and independent professionals turn an idea or growing activity into a workable business, tax and finance setup.",
+    image: "/fst-consultation.webp",
+    alt: "A founder discussing business setup and growth priorities with an adviser",
+    priorities: ["Business planning and feasibility", "Tax, VAT and accounting setup", "Loan and funding application support"],
+    className: "client-group-startups",
   },
   {
-    title: "Owners, founders & finance teams",
-    copy: "FST joins the plan, numbers, corporate record and funding evidence when a major investment or financing decision is ahead.",
+    title: "SMEs & growing businesses",
+    copy: "We help small and medium-sized businesses organise growth, management information, tax, finance and control priorities around accountable owners.",
+    image: "/fst-operations.webp",
+    alt: "An SME leadership team coordinating operational and financial priorities",
+    priorities: ["Management and business planning", "Accounting, tax and working capital", "Risk, internal controls and performance"],
+    className: "client-group-smes",
+  },
+  {
+    title: "Established businesses & finance teams",
+    copy: "FST joins management, finance, tax, governance and transaction evidence when a major decision, change programme or financing requirement is ahead.",
     image: "/fst-finance.webp",
-    alt: "Finance and business-planning evidence prepared for an owner decision",
-    priorities: ["Business plan preparation or review", "Budgets, projections and loan application support", "Corporate administration and tax"],
-    className: "client-group-owners",
+    alt: "A finance team preparing management and lender evidence for a major decision",
+    priorities: ["Management advisory and transformation", "Reporting, taxation and corporate administration", "Loan and funding application support"],
+    className: "client-group-established",
+  },
+  {
+    title: "NGOs, voluntary & community organisations",
+    copy: "We support mission-led organisations with proportionate governance, funding applications, budgets, controls, reporting and accountable programme delivery.",
+    image: "/fst-collaboration.webp",
+    alt: "A voluntary organisation team reviewing programme delivery and accountability",
+    priorities: ["Governance, policies and internal controls", "Funding applications and grant budgets", "Financial reporting and programme accountability"],
+    className: "client-group-nonprofits",
   },
   {
     title: "International programmes & institutions",
@@ -61,8 +77,8 @@ export default function WhoWeWorkWithPage() {
 
       <section className="client-groups section-shell" aria-labelledby="client-groups-title">
         <div className="client-groups-heading">
-          <h2 id="client-groups-title">Where connected support matters.</h2>
-          <p>We scope the support around the decision and keep dependencies visible from the first review to the final action.</p>
+          <h2 id="client-groups-title">Support for organisations at every stage.</h2>
+          <p>We scope the work around the organisation, the decision and the evidence required—from first setup and growth to funded programmes and institutional accountability.</p>
         </div>
         <div className="client-groups-grid">
           {clientGroups.map((group) => (

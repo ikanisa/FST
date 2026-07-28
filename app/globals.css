@@ -1564,6 +1564,27 @@ h1 {
 .about-story-image img { width: 100%; height: 100%; object-fit: cover; }
 .about-story > div:last-child > p:not(.section-index) { margin: 28px 0; color: var(--ink-soft); }
 
+.combined-field-notes {
+  padding-bottom: 10px;
+}
+
+.combined-field-notes-heading {
+  max-width: 880px;
+  margin-bottom: 64px;
+}
+
+.combined-field-notes-heading h2 {
+  margin: 14px 0 22px;
+  font-size: clamp(48px, 5vw, 72px);
+  line-height: 0.98;
+}
+
+.combined-field-notes-heading > p:last-child {
+  max-width: 680px;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+
 .article-grid { padding-bottom: 140px; display: grid; gap: 28px; }
 .article-card { display: grid; grid-template-columns: 0.8fr 1.2fr; min-height: 460px; overflow: hidden; border-radius: 26px; background: white; box-shadow: var(--shadow-soft); }
 .article-card:nth-child(even) { grid-template-columns: 1.2fr 0.8fr; }
@@ -1571,7 +1592,7 @@ h1 {
 .article-card img { width: 100%; height: 100%; object-fit: cover; }
 .article-card > div { padding: 54px; align-self: center; }
 .article-card span { color: var(--cobalt); font-size: 10px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; }
-.article-card h2 { margin: 18px 0; font-size: clamp(38px, 4vw, 58px); line-height: 0.98; }
+.article-card h2, .article-card h3 { margin: 18px 0; font-size: clamp(38px, 4vw, 58px); line-height: 0.98; }
 .article-card p { color: var(--ink-soft); }
 .contact-page {
   padding: 110px 0 130px;
@@ -1866,13 +1887,15 @@ h1 {
   color: var(--coral-dark);
 }
 
-.client-group-business {
-  grid-column: span 7;
+.client-group-startups,
+.client-group-established {
+  grid-column: span 6;
   background: linear-gradient(145deg, rgba(247, 251, 255, 0.86), rgba(255, 255, 255, 0.8));
 }
 
-.client-group-owners {
-  grid-column: span 5;
+.client-group-smes,
+.client-group-nonprofits {
+  grid-column: span 6;
   background: linear-gradient(145deg, rgba(255, 248, 247, 0.88), rgba(252, 250, 255, 0.82));
 }
 
@@ -1953,7 +1976,7 @@ h1 {
   .client-hero-visual { min-height: 520px; clip-path: none; }
   .client-groups-heading { grid-template-columns: 1fr; gap: 18px; }
   .client-groups-heading h2, .client-groups-heading > p:last-child { grid-column: 1; }
-  .client-group-business, .client-group-owners { grid-column: 1 / -1; }
+  .client-group-startups, .client-group-smes, .client-group-established, .client-group-nonprofits { grid-column: 1 / -1; }
   .client-group-organisations { grid-template-columns: 1fr; }
   .client-group-organisations > img { min-height: 0; height: 390px; }
   .relationship-cta { grid-template-columns: 1fr; }
@@ -1998,7 +2021,7 @@ h1 {
   .client-groups-heading { margin-bottom: 42px; }
   .client-groups-heading h2 { font-size: 48px; }
   .client-groups-grid { grid-template-columns: 1fr; }
-  .client-group-card, .client-group-business, .client-group-owners, .client-group-organisations { grid-column: 1; }
+  .client-group-card, .client-group-startups, .client-group-smes, .client-group-established, .client-group-nonprofits, .client-group-organisations { grid-column: 1; }
   .client-group-card > img, .client-group-organisations > img { height: 280px; }
   .client-group-card > div, .client-group-organisations > div { padding: 30px 24px 34px; }
   .relationship-cta { width: calc(100% - 28px); margin-bottom: 84px; }

@@ -19,10 +19,10 @@ or readable document text.
 |---|---|---:|---|
 | `public/fst-hero.webp` | Home hero | 1536 × 1024 | Standing multidisciplinary planning workshop at a limestone wall |
 | `public/fst-management.webp` | Management, risk and controls | 1536 × 1024 | Facilitated operating and control workshop |
-| `public/fst-tax.webp` | Tax and VAT | 1536 × 1024 | Solo tax specialist reviewing reconciled schedules |
+| `public/fst-tax.webp` | Taxation | 1536 × 1024 | Solo tax specialist reviewing reconciled schedules |
 | `public/fst-accounting.webp` | Accounting and reporting | 1536 × 1024 | Overhead accounting file, reconciliations and source records |
 | `public/fst-corporate.webp` | Corporate administration | 1536 × 1024 | Ordered statutory and governance record workspace |
-| `public/fst-finance.webp` | Plans and finance support | 1536 × 1024 | Business plan, budget and financial model under review |
+| `public/fst-finance.webp` | Loan application support | 1536 × 1024 | Loan application schedules and lender evidence under review |
 | `public/fst-collaboration.webp` | Cross-service teamwork | 1536 × 1024 | Open-studio coordination across specialist service areas |
 | `public/fst-operations.webp` | Operating organisations | 1536 × 1024 | Adviser and owner reviewing delivery on an operating floor |
 | `public/fst-international.webp` | International programmes | 1536 × 1024 | International team coordinating accountability and delivery |

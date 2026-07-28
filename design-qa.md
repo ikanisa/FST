@@ -62,11 +62,11 @@ present. No final external form or submission was made during QA.
 
 - Fifteen retained routes passed at both viewports.
 - Every route had a rendered `main` and page-specific `h1`.
-- Horizontal overflow: 0 px on all 30 route/viewport checks.
-- Completed broken images: 0 on all 30 route/viewport checks.
+- Horizontal overflow: 0 px on all 28 route/viewport checks.
+- Completed broken images: 0 on all 28 route/viewport checks.
 - Browser console warnings/errors after the navigation test: 0.
 - New public asset fingerprints do not match any KMFINCO public asset fingerprint.
-- Lint, production build and 14 automated route/integration tests pass.
+- Lint, production build and 18 automated route/integration tests pass.
 - Cloudflare Wrangler dry-run packages 89 static assets and a 656.05 KiB Worker
   module set without publishing.
 
@@ -125,8 +125,8 @@ present. No final external form or submission was made during QA.
 ## Annotation pass — clearer funding terminology
 
 - Comment 10: broad or ambiguous use of the term is removed from public labels.
-  The precise categories are `Business Planning & Loan Application Support`
-  and `Funding Application Support`.
+  The precise categories are `Loan Application Support` and
+  `Funding Application Support`.
 - Existing route paths remain stable so published links and search indexing do
   not break.
 
@@ -146,8 +146,8 @@ present. No final external form or submission was made during QA.
 ## Annotation pass — services index
 
 - Comments 15–16: the services-page eyebrow is removed. The unclear finance
-  label is replaced by `Business Planning & Loan Application Support`, with
-  lender-ready application wording beneath it.
+  label is replaced by `Loan Application Support`, with lender-ready
+  application wording beneath it.
 
 ## Annotation pass — explicit application support
 
@@ -156,4 +156,35 @@ present. No final external form or submission was made during QA.
   `Funding Application Support` across public content and service selectors.
 - Focused implementation evidence:
   `qa/fst-original/annotation-application-support-833x674.png` at the exact
+  annotated 833 × 674 viewport.
+
+## Annotation pass — comprehensive tax scope
+
+- Comment 18: the narrow VAT-and-corporate-tax summary is replaced by the
+  direct category `Taxation` and a detailed Malta scope covering income tax,
+  VAT, payroll/FSS, social security, withholding, property and transfers,
+  international tax, provisional tax, refunds, planning and MTCA support.
+- Focused implementation evidence:
+  `qa/fst-original/annotation-tax-loan-833x674.png` at the exact annotated
+  833 × 674 viewport.
+
+## Annotation pass — separated loan applications
+
+- Comment 19: `Loan Application Support` is now a standalone service.
+  Business planning, plan preparation, plan review, feasibility, budgeting,
+  projections and scenarios sit under Management Advisory, Risk & Controls.
+
+## Annotation pass — organisation types
+
+- Comment 20: the Organisations page now explicitly serves start-ups,
+  self-employed professionals, SMEs, established businesses, NGOs, voluntary
+  and community organisations, and international programmes.
+
+## Annotation pass — combined approach and field notes
+
+- Comment 21: `Field Notes` and `FST Approach` are merged into the single
+  `Approach & Field Notes` page at `/about`.
+- The former `/insights` page, navigation item and sitemap entry are removed.
+- Focused implementation evidence:
+  `qa/fst-original/annotation-merged-approach-notes-833x674.png` at the exact
   annotated 833 × 674 viewport.

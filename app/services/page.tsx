@@ -18,11 +18,11 @@ export const metadata = pageMetadata({
 });
 
 const services = [
-  { title: "Management Advisory, Risk & Controls", slug: "management-consulting", image: "/fst-management.webp", copy: "Decision support, risk frameworks, internal audit, control improvement and hands-on management follow-through.", tone: "violet", icon: Compass },
-  { title: "Tax & VAT", slug: "tax-vat", image: "/fst-tax.webp", copy: "Malta VAT and corporate tax work organised around accurate positions, complete support and filing deadlines.", tone: "orange", icon: Receipt },
+  { title: "Management Advisory, Risk & Controls", slug: "management-consulting", image: "/fst-management.webp", copy: "Business planning, strategy, decision support, risk management, internal audit, control improvement and hands-on management follow-through.", tone: "violet", icon: Compass },
+  { title: "Taxation", slug: "tax-vat", image: "/fst-tax.webp", copy: "Complete Malta tax support covering corporate and personal income tax, VAT, payroll and FSS, social security, withholding, property, transfer and international tax.", tone: "orange", icon: Receipt },
   { title: "Accounting & Financial Reporting", slug: "accounting-financial-reporting", image: "/fst-accounting.webp", copy: "Finance records, close, reporting, payroll and forward-looking information prepared for management use.", tone: "blue", icon: Calculator },
   { title: "Corporate & Administrative Services", slug: "corporate-services", image: "/fst-corporate.webp", copy: "Company records, governance actions, statutory filings and recurring administration kept orderly and current.", tone: "cobalt", icon: Buildings },
-  { title: "Business Planning & Loan Application Support", slug: "business-planning-finance-applications", image: "/fst-finance.webp", copy: "Commercial plans and financial models translated into complete loan applications and lender-ready evidence packs.", tone: "rose", icon: ChartLineUp },
+  { title: "Loan Application Support", slug: "business-planning-finance-applications", image: "/fst-finance.webp", copy: "Borrowing needs, financial schedules, application forms and evidence organised into a complete lender-ready file.", tone: "rose", icon: ChartLineUp },
   { title: "Funding Application Support", slug: "funding-applications", image: "/funding-application-services.webp", copy: "Full funding application support across FONDI.eu, Malta Enterprise, Xjenza Malta and connected routes.", tone: "cobalt", icon: HandCoins },
 ];
 

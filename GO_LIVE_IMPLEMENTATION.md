@@ -35,10 +35,10 @@ FST may prepare and review funding, grant and finance submission packages. No fi
 ## Verification
 
 - `npm run lint` passes.
-- `npm test` passes the production build and all 14 rendered-route, annotation, brand-separation and booking integration tests.
+- `npm test` passes the production build and all 18 rendered-route, annotation, brand-separation and booking integration tests.
 - `npm audit --omit=dev` reports zero production vulnerabilities.
 - Browser QA passes at 1440 × 900 and 390 × 844 with no completed broken images or horizontal overflow.
-- All 15 retained public routes pass the browser sweep at both viewports.
+- All 14 retained public routes pass the browser sweep at both viewports.
 - Removed service routes return 404.
 - `npx wrangler deploy --dry-run --outdir .wrangler/fst-dry-run` completes and packages the Cloudflare Worker without publishing.
 
