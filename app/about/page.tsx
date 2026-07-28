@@ -7,17 +7,17 @@ import { SiteHeader } from "../components/SiteHeader";
 import { SectionVisual } from "../components/SectionVisual";
 import { PrimaryCta } from "../components/PrimaryCta";
 
-export const metadata = pageMetadata({ title: "FST Approach", description: "How FST combines senior attention, connected disciplines and implementation-focused advice.", path: "/about" });
+export const metadata = pageMetadata({ title: "FST Approach", description: "How FST combines senior attention, connected expertise and implementation-focused advice.", path: "/about" });
 
 export default function AboutPage() {
   return (
     <main id="main-content" tabIndex={-1}>
       <SiteHeader />
-      <section className="subpage-hero accent-green">
+      <section className="subpage-hero accent-cobalt">
         <div className="subpage-copy">
           <p className="eyebrow">The FST approach</p>
-          <h1>One question. Every relevant discipline.</h1>
-          <p>We assemble management, risk, tax, accounting, corporate, finance and application expertise around the result you need to achieve.</p>
+          <h1>Your question. The relevant expertise.</h1>
+          <p>We assemble management, risk, tax, accounting, corporate, finance and funding expertise around the result you need to achieve.</p>
           <PrimaryCta className="primary-button" />
         </div>
         <div className="subpage-image-wrap"><img src="/fst-collaboration.webp" alt="A multidisciplinary FST team working through a client priority" className="subpage-image" width="1536" height="1024" loading="eager" fetchPriority="high" decoding="async" /></div>
@@ -36,7 +36,7 @@ export default function AboutPage() {
 
       <section className="about-story section-shell">
         <div className="about-story-image"><img src="/fst-international.webp" alt="An international programme team coordinating delivery and accountability" width="1536" height="1024" loading="lazy" decoding="async" /></div>
-        <div><p className="section-index">The connected file</p><h2>No hand-off gaps between the disciplines.</h2><p>A plan affects cash. Cash affects finance. Structure affects tax and governance. Funding rules affect budgets and delivery evidence. FST keeps those links visible, so each workstream strengthens the others.</p></div>
+        <div><p className="section-index">The connected file</p><h2>No hand-off gaps between services.</h2><p>A plan affects cash. Cash affects finance. Structure affects tax and governance. Funding rules affect budgets and delivery evidence. FST keeps those links visible, so each workstream strengthens the others.</p></div>
       </section>
       <SiteFooter />
     </main>

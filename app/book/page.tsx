@@ -19,7 +19,7 @@ export default function BookPage() {
         <div className="booking-intro">
           <p className="eyebrow">FST scheduling desk</p>
           <h1>Set aside time for the issue in front of you.</h1>
-          <p>Request a 30- or 60-minute working conversation. The selected slot is checked before a calendar invitation and meeting link are created.</p>
+          <p>Request a focused working conversation. The selected duration and slot are checked before a calendar invitation and meeting link are created.</p>
           <div className="booking-confirmations">
             <span>Requested slot checked</span>
             <span>Meeting link added when confirmed</span>

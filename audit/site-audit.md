@@ -83,7 +83,7 @@ The new site should borrow these structural principles, not their proprietary vi
 ## Design principles for the redesign
 
 - Editorial minimalism: generous whitespace, fine rules, strong typography, and very limited card chrome.
-- Premium restraint: warm off-white, near-black, a deep institutional green, and one restrained red accent inherited from Finco.
+- Premium restraint: warm off-white, near-black, a deep institutional tone, and one restrained red accent inherited from Finco.
 - Human expertise: real advisory photography or art-directed portraits, used sparingly and with purposeful crops.
 - Mobile first: no horizontal overflow; a compact disclosure menu; 44px minimum touch targets; readable line lengths.
 - Accessible by default: visible focus, semantic headings, high-contrast text, reduced-motion support, and form labels that do not rely on placeholders.

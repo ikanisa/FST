@@ -13,7 +13,7 @@ import { PrimaryCta } from "../components/PrimaryCta";
 
 export const metadata = pageMetadata({
   title: "Services",
-  description: "Six FST workstreams covering management, risk, tax, accounting, corporate administration, finance and funding applications.",
+  description: "FST services covering management, risk, tax, accounting, corporate administration, loan application support and funding application support.",
   path: "/services",
 });
 
@@ -21,9 +21,9 @@ const services = [
   { title: "Management Advisory, Risk & Controls", slug: "management-consulting", image: "/fst-management.webp", copy: "Decision support, risk frameworks, internal audit, control improvement and hands-on management follow-through.", tone: "violet", icon: Compass },
   { title: "Tax & VAT", slug: "tax-vat", image: "/fst-tax.webp", copy: "Malta VAT and corporate tax work organised around accurate positions, complete support and filing deadlines.", tone: "orange", icon: Receipt },
   { title: "Accounting & Financial Reporting", slug: "accounting-financial-reporting", image: "/fst-accounting.webp", copy: "Finance records, close, reporting, payroll and forward-looking information prepared for management use.", tone: "blue", icon: Calculator },
-  { title: "Corporate & Administrative Services", slug: "corporate-services", image: "/fst-corporate.webp", copy: "Company records, governance actions, statutory filings and recurring administration kept orderly and current.", tone: "green", icon: Buildings },
-  { title: "Business Planning & Finance Applications", slug: "business-planning-finance-applications", image: "/fst-finance.webp", copy: "Commercial plans and financial models translated into lender-ready applications and evidence packs.", tone: "rose", icon: ChartLineUp },
-  { title: "Funding Application Services", slug: "funding-applications", image: "/funding-application-services.webp", copy: "Full application support across FONDI.eu, Malta Enterprise, Xjenza Malta and connected routes.", tone: "green", icon: HandCoins },
+  { title: "Corporate & Administrative Services", slug: "corporate-services", image: "/fst-corporate.webp", copy: "Company records, governance actions, statutory filings and recurring administration kept orderly and current.", tone: "cobalt", icon: Buildings },
+  { title: "Business Planning & Loan Application Support", slug: "business-planning-finance-applications", image: "/fst-finance.webp", copy: "Commercial plans and financial models translated into complete loan applications and lender-ready evidence packs.", tone: "rose", icon: ChartLineUp },
+  { title: "Funding Application Support", slug: "funding-applications", image: "/funding-application-services.webp", copy: "Full funding application support across FONDI.eu, Malta Enterprise, Xjenza Malta and connected routes.", tone: "cobalt", icon: HandCoins },
 ];
 
 export default function ServicesPage() {
@@ -32,11 +32,10 @@ export default function ServicesPage() {
       <SiteHeader />
       <section className="index-hero image-index-hero services-index-hero">
         <div>
-          <p className="eyebrow">Six coordinated workstreams</p>
           <h1>Build the right team around the work.</h1>
-          <p>FST combines recurring finance and compliance support with focused advisory and application work—without separating the commercial story from the evidence behind it.</p>
+          <p>FST combines recurring finance and compliance services with focused advisory, loan application support and funding application support—without separating the commercial story from the evidence behind it.</p>
         </div>
-        <img src="/fst-collaboration.webp" alt="Five FST specialists coordinating workstreams in an open project studio" width="1536" height="1024" loading="eager" fetchPriority="high" />
+        <img src="/fst-collaboration.webp" alt="FST specialists coordinating workstreams in an open project studio" width="1536" height="1024" loading="eager" fetchPriority="high" />
       </section>
       <section className="service-index-grid section-shell" aria-label="Our services">
         {services.map((service) => {
@@ -57,7 +56,7 @@ export default function ServicesPage() {
         <div className="subpage-cta-copy">
           <p className="section-index">A practical first step</p>
           <h2>Start with the outcome and the deadline.</h2>
-          <p>FST will map the disciplines, information and sequence required to get there.</p>
+          <p>FST will map the specialist support, information and sequence required to get there.</p>
           <PrimaryCta className="primary-button" />
         </div>
         <SectionVisual src="/fst-consultation.webp" alt="A business owner and adviser agreeing the scope of a new engagement" className="subpage-cta-visual" />

@@ -9,7 +9,7 @@ Creative board: `4c0f59ef-38c4-451c-953b-4f5460d8bd7f`
 Original Malta- and Europe-oriented documentary business photography. The shared
 visual language uses pale limestone, navy and cobalt with restrained terracotta,
 natural Mediterranean daylight, believable professional environments and varied
-working compositions. The set intentionally excludes KMFINCO's green-suited,
+working compositions. The set intentionally excludes KMFINCO's inherited
 seated-boardroom visual treatment. No generated image contains a logo, watermark
 or readable document text.
 
@@ -22,8 +22,8 @@ or readable document text.
 | `public/fst-tax.webp` | Tax and VAT | 1536 × 1024 | Solo tax specialist reviewing reconciled schedules |
 | `public/fst-accounting.webp` | Accounting and reporting | 1536 × 1024 | Overhead accounting file, reconciliations and source records |
 | `public/fst-corporate.webp` | Corporate administration | 1536 × 1024 | Ordered statutory and governance record workspace |
-| `public/fst-finance.webp` | Plans and finance applications | 1536 × 1024 | Business plan, budget and financial model under review |
-| `public/fst-collaboration.webp` | Cross-service teamwork | 1536 × 1024 | Open-studio coordination across professional disciplines |
+| `public/fst-finance.webp` | Plans and finance support | 1536 × 1024 | Business plan, budget and financial model under review |
+| `public/fst-collaboration.webp` | Cross-service teamwork | 1536 × 1024 | Open-studio coordination across specialist service areas |
 | `public/fst-operations.webp` | Operating organisations | 1536 × 1024 | Adviser and owner reviewing delivery on an operating floor |
 | `public/fst-international.webp` | International programmes | 1536 × 1024 | International team coordinating accountability and delivery |
 | `public/fst-consultation.webp` | Contact and conversion | 1536 × 1024 | Private two-person consultation beside a Malta limestone window |

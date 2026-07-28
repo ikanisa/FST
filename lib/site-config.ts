@@ -1,10 +1,8 @@
 export const siteConfig = {
   name: "FST",
   url: (process.env.NEXT_PUBLIC_SITE_URL || "https://fst-advisory.ikanisa.chatgpt.site").replace(/\/$/, ""),
-  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "hello@fst.ikanisa.com",
-  phoneDisplay: "+356 7942 8604",
-  phoneE164: "+35679428604",
-  whatsappUrl: "https://wa.me/35679428604",
+  whatsappDisplay: "+35699152999",
+  whatsappUrl: "https://wa.me/35699152999",
   linkedInUrl: process.env.NEXT_PUBLIC_LINKEDIN_URL || "",
   bookingUrl: "/book",
   primaryCtaLabel: "Book a Meeting",

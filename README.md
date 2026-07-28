@@ -1,7 +1,7 @@
 # FST
 
 FST is a senior-led multidisciplinary advisory website with an original visual
-system, a distinct editorial voice and a clear six-category service model.
+system, a distinct editorial voice and clearly named service categories.
 
 ## Main service categories
 
@@ -9,8 +9,8 @@ system, a distinct editorial voice and a clear six-category service model.
 - **Tax & VAT** — VAT registration, VAT returns and reconciliations, VAT advisory, corporate income tax, tax planning, refunds, authority support and tax-position reviews.
 - **Accounting & Financial Reporting** — bookkeeping, reconciliations, payables and receivables, management accounts, financial-statement preparation and review, payroll, close, budgets, projections and cash-flow support.
 - **Corporate & Administrative Services** — company formation, company secretarial, registers, filings, board and shareholder support, beneficial ownership, corporate changes and ongoing administration.
-- **Business Planning & Finance Applications** — business-plan preparation and review, budgets, financial projections, cash planning, loan readiness, loan applications, lender packs and post-approval planning.
-- **Funding Application Services** — opportunity scans, eligibility, project design, forms, business plans, budgets, state-aid checks, evidence packs, submission-readiness review and post-award support across FONDI.eu, Malta Enterprise and Xjenza Malta routes.
+- **Business Planning & Loan Application Support** — business-plan preparation and review, budgets, financial projections, cash planning, loan application readiness, lender submissions, evidence packs and post-approval planning.
+- **Funding Application Support** — opportunity scans, eligibility, project design, forms, business plans, budgets, state-aid checks, evidence packs, submission-readiness review and post-award support across FONDI.eu, Malta Enterprise and Xjenza Malta routes.
 
 FST does not advertise external or statutory audit and assurance, investment or family-office services, or fiduciary services. Internal audit remains available as a management, risk and controls service.
 
@@ -35,7 +35,7 @@ FST does not advertise external or statutory audit and assurance, investment or 
 - `/api/book` validates meeting requests, checks Google Calendar free/busy availability, and creates a Calendar event with Google Meet and attendee notifications.
 - Every primary website action uses the label “Book a Meeting” and routes to `/book`.
 - Confirmed Calendar events invite the prospective client and FST’s approved scheduling contact with `sendUpdates=all`.
-- No contact form, `mailto:` action or website email workflow is included; the public email is informational text only.
+- No public email address, `mailto:` action or website email workflow is included; direct contact is handled through WhatsApp and meeting scheduling.
 - Booking fails safely when production credentials are absent by producing a dated Google Calendar invitation.
 - Required hosted values are listed in `.env.example` and `GO_LIVE_IMPLEMENTATION.md`.
 

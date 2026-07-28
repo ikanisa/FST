@@ -8,7 +8,7 @@ export function SiteFooter() {
     <footer className="site-footer">
       <Link className="wordmark footer-mark" href="/">FST</Link>
       <div className="footer-summary">
-        <p>Plans, numbers, obligations and applications—managed as one practical programme of work.</p>
+        <p>Plans, numbers, obligations and funding work—managed as a practical programme.</p>
         <span>{siteConfig.serviceArea}</span>
       </div>
       <div className="footer-links">
@@ -22,9 +22,7 @@ export function SiteFooter() {
           <Link href="/terms">Site rules</Link>
         </nav>
         <div className="footer-contact">
-          <span>{siteConfig.email}</span>
-          <TrackedLink href={`tel:${siteConfig.phoneE164}`} event="contact_phone_click">{siteConfig.phoneDisplay}</TrackedLink>
-          <TrackedLink href={siteConfig.whatsappUrl} event="contact_whatsapp_click" target="_blank" rel="noreferrer">Message on WhatsApp</TrackedLink>
+          <TrackedLink href={siteConfig.whatsappUrl} event="contact_whatsapp_click" target="_blank" rel="noreferrer">WhatsApp · {siteConfig.whatsappDisplay}</TrackedLink>
           <PrimaryCta />
           {siteConfig.linkedInUrl && <TrackedLink href={siteConfig.linkedInUrl} event="linkedin_click" target="_blank" rel="noreferrer">LinkedIn</TrackedLink>}
         </div>

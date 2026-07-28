@@ -5,7 +5,7 @@ import { PrimaryCta } from "../components/PrimaryCta";
 
 export const metadata = pageMetadata({
   title: "Organisations",
-  description: "Senior-led management, risk, tax, accounting, corporate, business-planning, finance and funding-application advice.",
+  description: "Senior-led management, risk, tax, accounting, corporate, business-planning, loan application and funding application support.",
   path: "/who-we-work-with",
 });
 
@@ -20,18 +20,18 @@ const clientGroups = [
   },
   {
     title: "Owners, founders & finance teams",
-    copy: "FST joins the plan, numbers, corporate record and application evidence when a major investment or financing decision is ahead.",
+    copy: "FST joins the plan, numbers, corporate record and funding evidence when a major investment or financing decision is ahead.",
     image: "/fst-finance.webp",
     alt: "Finance and business-planning evidence prepared for an owner decision",
-    priorities: ["Business plan preparation or review", "Budgets, projections and loan support", "Corporate administration and tax"],
+    priorities: ["Business plan preparation or review", "Budgets, projections and loan application support", "Corporate administration and tax"],
     className: "client-group-owners",
   },
   {
     title: "International programmes & institutions",
-    copy: "For cross-border or accountability-intensive work, we provide a locally attentive team for governance, reporting, applications and delivery evidence.",
+    copy: "For cross-border or accountability-intensive work, we provide a locally attentive team for governance, reporting, funding and delivery evidence.",
     image: "/fst-international.webp",
     alt: "An international programme team reviewing delivery and reporting evidence",
-    priorities: ["Programme delivery and management support", "Financial reporting and accountability", "Funding applications and post-award files"],
+    priorities: ["Programme delivery and management support", "Financial reporting and accountability", "Funding application support and post-award files"],
     className: "client-group-organisations",
   },
 ];
@@ -54,15 +54,15 @@ export default function WhoWeWorkWithPage() {
           <img src="/fst-collaboration.webp" alt="A diverse advisory team working alongside organisational leaders" width="1536" height="1024" loading="eager" fetchPriority="high" decoding="async" />
           <aside>
             <strong>A joined-up working file.</strong>
-            <span>One objective, named owners and evidence that can be reviewed.</span>
+            <span>A shared objective, named owners and evidence that can be reviewed.</span>
           </aside>
         </div>
       </section>
 
       <section className="client-groups section-shell" aria-labelledby="client-groups-title">
         <div className="client-groups-heading">
-          <h2 id="client-groups-title">Three settings where connected support matters.</h2>
-          <p>We scope the disciplines around the decision and keep dependencies visible from the first review to the final action.</p>
+          <h2 id="client-groups-title">Where connected support matters.</h2>
+          <p>We scope the support around the decision and keep dependencies visible from the first review to the final action.</p>
         </div>
         <div className="client-groups-grid">
           {clientGroups.map((group) => (

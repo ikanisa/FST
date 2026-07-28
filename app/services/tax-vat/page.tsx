@@ -20,7 +20,7 @@ export default function TaxVatPage() {
       outcomes: { src: "/fst-insights.webp", alt: "A compliance calendar and analytical workpapers arranged for review" },
       cta: { src: "/fst-consultation.webp", alt: "An adviser explaining the next tax action in a private meeting" },
     }}
-    introduction="FST brings the return, ledger, transaction evidence and commercial context into one reviewable tax position."
+    introduction="FST brings the return, ledger, transaction evidence and commercial context into a reviewable tax position."
     accent="orange"
     services={[
       { title: "VAT registration", description: "Assessment and handling support for registration, status changes and deregistration based on actual activity." },

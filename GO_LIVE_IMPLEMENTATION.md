@@ -5,8 +5,8 @@ Updated: 28 July 2026
 ## Implemented
 
 - FST branding across visible copy, metadata, structured data, booking, legal pages and runtime configuration.
-- Six clearly separated service categories with detailed component lists.
-- Dedicated end-to-end Funding Application Services across FONDI.eu, Malta Enterprise and Xjenza Malta routes.
+- Clearly separated service categories with detailed component lists.
+- Dedicated end-to-end Funding Application Support across FONDI.eu, Malta Enterprise and Xjenza Malta routes.
 - Internal audit positioned only within Management Advisory, Risk & Controls.
 - External and statutory audit and assurance, investment and family-office, and fiduciary services removed from the public routes, sitemap, assets and copy.
 - First-party `/book` flow with input validation, availability checking and Google Meet event creation when approved Calendar credentials are configured.
@@ -22,7 +22,6 @@ Add these hosting values only after each underlying destination has been verifie
 | Requirement | Environment value | Safe fallback |
 | --- | --- | --- |
 | Canonical public origin | `NEXT_PUBLIC_SITE_URL` | Defaults to the deployed Sites URL; replace only after a custom domain is attached and validated |
-| Public contact email | `NEXT_PUBLIC_CONTACT_EMAIL` | Currently displays `hello@fst.ikanisa.com` as informational text only |
 | Google Calendar API | `GOOGLE_CALENDAR_CLIENT_ID`, `GOOGLE_CALENDAR_CLIENT_SECRET`, `GOOGLE_CALENDAR_REFRESH_TOKEN`, `GOOGLE_CALENDAR_ID`, `GOOGLE_CALENDAR_TIMEZONE` | Booking fails safely when credentials are absent |
 | Public appointment schedule | `NEXT_PUBLIC_GOOGLE_BOOKING_URL` | Optional and hidden when absent |
 | LinkedIn company page | `NEXT_PUBLIC_LINKEDIN_URL` | Hidden when absent |
@@ -31,12 +30,12 @@ Add these hosting values only after each underlying destination has been verifie
 
 ## Human approval boundary
 
-FST may prepare and review funding, grant and finance application packages. No application, filing or external submission is made without explicit recorded human approval. The website states that final submission remains with the authorised human.
+FST may prepare and review funding, grant and finance submission packages. No filing or external submission is made without explicit recorded human approval. The website states that final submission remains with the authorised human.
 
 ## Verification
 
 - `npm run lint` passes.
-- `npm test` passes the production build and all 10 rendered-route, annotation, brand-separation and booking integration tests.
+- `npm test` passes the production build and all 14 rendered-route, annotation, brand-separation and booking integration tests.
 - `npm audit --omit=dev` reports zero production vulnerabilities.
 - Browser QA passes at 1440 × 900 and 390 × 844 with no completed broken images or horizontal overflow.
 - All 15 retained public routes pass the browser sweep at both viewports.

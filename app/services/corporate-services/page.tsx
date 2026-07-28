@@ -20,8 +20,8 @@ export default function CorporateServicesPage() {
       outcomes: { src: "/fst-legal.webp", alt: "A structured document review workspace" },
       cta: { src: "/fst-consultation.webp", alt: "A business owner discussing an upcoming corporate change" },
     }}
-    introduction="FST keeps legal structure, governance actions and administrative evidence working as one dependable corporate file."
-    accent="green"
+    introduction="FST keeps legal structure, governance actions and administrative evidence working as a dependable corporate file."
+    accent="cobalt"
     services={[
       { title: "Company formation", description: "Formation workflow, document coordination and opening records for an appropriate corporate foundation." },
       { title: "Corporate administration", description: "Ongoing management of entity records, correspondence, actions and lifecycle events." },

@@ -11,8 +11,8 @@ const topics = [
   "Tax & VAT",
   "Accounting & financial reporting",
   "Corporate & administrative services",
-  "Business planning & finance applications",
-  "Funding application services",
+  "Business planning & loan application support",
+  "Funding application support",
 ];
 
 const times = ["09:00", "10:30", "13:00", "14:30", "16:00"];

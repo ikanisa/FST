@@ -29,7 +29,7 @@ type ServicePageProps = {
   introduction: string;
   services: Array<{ title: string; description: string }>;
   outcomes: string[];
-  accent: "green" | "violet" | "orange" | "rose" | "blue";
+  accent: "cobalt" | "violet" | "orange" | "rose" | "blue";
   referenceLinks?: Array<{ label: string; href: string; description: string }>;
   sectionImages: {
     intro: { src: string; alt: string };
@@ -43,8 +43,8 @@ function iconForService(title: string) {
   const service = title.toLowerCase();
 
   if (service.includes("financial statement") || service.includes("financial reporting")) return FileText;
-  if (service.includes("business-plan") || service.includes("application narrative") || service.includes("evidence pack")) return FileText;
-  if (service.includes("funding") || service.includes("loan application") || service.includes("co-financing")) return HandCoins;
+  if (service.includes("business-plan") || service.includes("narrative") || service.includes("evidence pack")) return FileText;
+  if (service.includes("funding") || service.includes("loan submission") || service.includes("co-financing")) return HandCoins;
   if (service.includes("review") || service.includes("eligibility") || service.includes("readiness")) return MagnifyingGlass;
   if (service.includes("company formation")) return Buildings;
   if (service.includes("corporate administration")) return FolderSimple;
@@ -107,7 +107,7 @@ export function ServicePage({
         <section className="service-references section-shell" aria-labelledby="service-reference-title">
           <div>
             <p className="section-index">Official programme sources</p>
-            <h2 id="service-reference-title">Current routes checked before the application is shaped.</h2>
+            <h2 id="service-reference-title">Current routes checked before the funding application is shaped.</h2>
           </div>
           <div className="service-reference-links">
             {referenceLinks.map((reference) => (
@@ -150,7 +150,7 @@ export function ServicePage({
       <section className="subpage-cta section-shell">
         <div className="subpage-cta-copy">
           <p className="section-index">Start with the live issue</p>
-          <h2>Share the decision, deadline or application in front of you.</h2>
+          <h2>Share the decision, deadline or funding route in front of you.</h2>
           <p>FST will define the right workstream, the information needed and a practical route forward.</p>
           <PrimaryCta className="primary-button" />
         </div>

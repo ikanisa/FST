@@ -71,20 +71,20 @@ e586c52689d33a69ba259d30ebbc064179e146a0 e80a709f6000405e0bc5c31db3b61889202c6c4
 f02816b92852b270976c6aa5a0ae75045ffff24b
 `.trim().split(/\s+/));
 
-test("renders the new FST identity, navigation and six-category model", async () => {
+test("renders the new FST identity, navigation and service-category model", async () => {
   const response = await render("/");
   assert.equal(response.status, 200);
   const html = await response.text();
   assert.match(html, /<title>FST \| Make the next move workable<\/title>/i);
   assert.match(html, /Turn ambition into an executable plan\./);
-  assert.match(html, /Many disciplines\./);
+  assert.match(html, /Specialist services\./);
   for (const label of [
     "Management Advisory, Risk &amp; Controls",
     "Tax &amp; VAT",
     "Accounting &amp; Financial Reporting",
     "Corporate &amp; Administrative Services",
-    "Business Planning &amp; Finance Applications",
-    "Funding Application Services",
+    "Business Planning &amp; Loan Application Support",
+    "Funding Application Support",
   ]) assert.match(html, new RegExp(label, "i"));
   assert.match(html, /href="\/book"[^>]*>Book a Meeting</i);
   assert.match(html, /Services/);
@@ -108,10 +108,52 @@ test("does not expose removed practices or inherited KMFINCO language", async ()
 test("honours the annotated homepage copy requirements", async () => {
   const html = await (await render("/")).text();
   assert.match(html, /href="\/book"[^>]*>Book a Meeting</i);
-  assert.match(html, /Many disciplines\./i);
-  assert.doesNotMatch(html, /Six disciplines\./i);
+  assert.match(html, /Specialist services\./i);
+  assert.doesNotMatch(html, /\bdisciplines?\b/i);
+  assert.doesNotMatch(html, /One working plan\./i);
   assert.doesNotMatch(html, /expertise-card-label/i);
+  assert.doesNotMatch(html, /Business Planning &amp; Finance Applications|Funding Application Services/i);
   assert.doesNotMatch(html, /Advisory\s*(?:<[^>]+>\s*)*·\s*(?:<[^>]+>\s*)*Finance\s*(?:<[^>]+>\s*)*·\s*(?:<[^>]+>\s*)*Applications/i);
+});
+
+test("avoids numeric framing in public content labels", async () => {
+  const routes = ["/", "/services", "/about", "/who-we-work-with", "/insights", "/contact"];
+  const forbiddenLabels = /Six coordinated workstreams|Three settings where connected support matters|One question\. Every relevant discipline|Reserve a focused 45 minutes/i;
+  for (const pathname of routes) {
+    const html = await (await render(pathname)).text();
+    assert.doesNotMatch(html, forbiddenLabels, `${pathname} should use descriptive rather than numeric framing`);
+  }
+});
+
+test("uses direct service labels on the services index", async () => {
+  const html = await (await render("/services")).text();
+  assert.match(html, /Business Planning &amp; Loan Application Support/i);
+  assert.match(html, /Funding Application Support/i);
+  assert.doesNotMatch(html, /Six coordinated workstreams|Business Planning &amp; Finance Applications|Funding Application Services/i);
+});
+
+test("uses explicit loan and funding application support wording across public routes", async () => {
+  const routes = ["/", "/services", "/who-we-work-with", "/services/business-planning-finance-applications", "/services/funding-applications"];
+  const combined = (await Promise.all(routes.map(async (pathname) => (await (await render(pathname)).text())))).join("\n");
+  assert.match(combined, /Loan Application Support/i);
+  assert.match(combined, /Funding Application Support/i);
+  assert.doesNotMatch(combined, /Business Planning &amp; Loan Support|Funding &amp; Grant Support|Budgets, projections and loan support/i);
+});
+
+test("removes the inherited green palette from live source", async () => {
+  const paletteFiles = [
+    "app/globals.css",
+    "app/page.tsx",
+    "app/about/page.tsx",
+    "app/insights/page.tsx",
+    "app/services/page.tsx",
+    "app/components/ServicePage.tsx",
+    "app/services/corporate-services/page.tsx",
+    "app/services/funding-applications/page.tsx",
+  ];
+  const source = (await Promise.all(paletteFiles.map((file) => readFile(path.join(root, file), "utf8")))).join("\n");
+  const forbiddenPalette = /\b(?:green|sage)\b|#(?:0e382f|0f392f|103a32|103d34|113d34|154f43|174f43|1b5b4d|1f6153|397c48|65a970|65df6d|edf7ef|edf9ef|edfaef|eff9f1|f1fff3|f2f8f4|f4faf5|f4fbf5|f5fbf6|f6fbf7|f7faf8|f8faf7|f8faf8|f8fff8)\b|rgba\((?:101,\s*(?:151,\s*141|223,\s*109)|109,\s*151,\s*142|16,\s*58,\s*50|23,\s*(?:79,\s*67|91,\s*76)|25,\s*63,\s*56|26,\s*70,\s*61|35,\s*94,\s*81|4,\s*29,\s*24|7,\s*32,\s*27),/i;
+  assert.doesNotMatch(source, forbiddenPalette);
 });
 
 test("lists all requested components under their clear service categories", async () => {
@@ -120,8 +162,8 @@ test("lists all requested components under their clear service categories", asyn
     ["/services/tax-vat", ["VAT registration", "VAT returns &amp; reconciliations", "Corporate income tax", "Tax planning &amp; advisory"]],
     ["/services/accounting-financial-reporting", ["Bookkeeping &amp; general ledger", "Financial statement preparation", "Financial statement review", "Budgets &amp; projections", "Payroll &amp; FSS support"]],
     ["/services/corporate-services", ["Company formation", "Company secretarial", "Statutory registers &amp; filings", "Administrative support"]],
-    ["/services/business-planning-finance-applications", ["Business-plan preparation", "Business-plan review", "Financial projections", "Loan readiness assessment", "Loan application support"]],
-    ["/services/funding-applications", ["Funding opportunity scan", "Route fit &amp; eligibility", "Application narrative &amp; forms", "Budget &amp; co-financing", "Submission-readiness review", "Post-award support"]],
+    ["/services/business-planning-finance-applications", ["Business-plan preparation", "Business-plan review", "Financial projections", "Loan application readiness assessment", "Loan application support"]],
+    ["/services/funding-applications", ["Funding opportunity scan", "Route fit &amp; eligibility", "Narrative &amp; forms", "Budget &amp; co-financing", "Submission-readiness review", "Post-award support"]],
   ];
   for (const [pathname, labels] of expectations) {
     const response = await render(pathname);
@@ -131,7 +173,7 @@ test("lists all requested components under their clear service categories", asyn
   }
 });
 
-test("funding support uses the three official routes and retains human submission control", async () => {
+test("funding application support uses the three official routes and retains human submission control", async () => {
   const html = await (await render("/services/funding-applications")).text();
   assert.match(html, /href="https:\/\/fondi\.eu\/what-funding-is-available\/"/i);
   assert.match(html, /href="https:\/\/maltaenterprise\.com\/support"/i);
@@ -168,8 +210,12 @@ test("contact, legal, SEO and discovery routes render production signals", async
   const [contact, privacy, terms, sitemap, robots] = await Promise.all([
     contactResponse.text(), privacyResponse.text(), termsResponse.text(), sitemapResponse.text(), robotsResponse.text(),
   ]);
-  assert.match(contact, /tel:\+35679428604/);
-  assert.match(contact, /wa\.me\/35679428604/);
+  assert.match(contact, /wa\.me\/35699152999/);
+  assert.match(contact, />\+35699152999</);
+  assert.doesNotMatch(contact, /tel:/i);
+  assert.doesNotMatch(contact, /Open FST WhatsApp/i);
+  assert.doesNotMatch(contact, /7942\s*8604|79428604/);
+  assert.doesNotMatch(contact, /hello@fst\.ikanisa\.com/i);
   assert.doesNotMatch(contact, /mailto:/i);
   assert.match(privacy, /src="\/fst-legal\.webp"/);
   assert.match(terms, /src="\/fst-legal\.webp"/);

@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     template: "%s | FST",
   },
   description:
-    "Management, risk, tax, accounting, corporate, finance and funding-application support organised around executable outcomes.",
+    "Management, risk, tax, accounting, corporate, loan application support and funding application support organised around executable outcomes.",
   alternates: { canonical: "/" },
   applicationName: "FST",
   category: "professional services",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "FST | Make the next move workable",
     description:
-      "Management, risk, tax, accounting, corporate, finance and funding-application support organised around executable outcomes.",
+      "Management, risk, tax, accounting, corporate, loan application support and funding application support organised around executable outcomes.",
     type: "website",
     images: [
       {
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "FST | Make the next move workable",
     description:
-      "Management, risk, tax, accounting, corporate, finance and funding-application support organised around executable outcomes.",
+      "Management, risk, tax, accounting, corporate, loan application support and funding application support organised around executable outcomes.",
     images: ["/og.jpg"],
   },
 };
@@ -57,15 +57,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     url: siteUrl,
     image: `${siteUrl}/og.jpg`,
     description:
-      "Management, risk, tax, accounting, corporate, finance and funding-application support organised around executable outcomes.",
+      "Management, risk, tax, accounting, corporate, loan application support and funding application support organised around executable outcomes.",
     areaServed: "International",
-    email: siteConfig.email,
-    telephone: siteConfig.phoneE164,
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "customer service",
-      email: siteConfig.email,
-      telephone: siteConfig.phoneE164,
       availableLanguage: ["English"],
     },
     sameAs: siteConfig.linkedInUrl ? [siteConfig.linkedInUrl] : undefined,
@@ -77,8 +73,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       "Accounting and financial reporting",
       "Payroll",
       "Corporate and administrative services",
-      "Business planning and loan applications",
-      "Funding applications",
+      "Business planning and loan application support",
+      "Funding application support",
     ],
   };
 

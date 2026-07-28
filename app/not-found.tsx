@@ -8,7 +8,7 @@ export default function NotFound() {
     <main id="main-content" tabIndex={-1}>
       <SiteHeader />
       <section className="not-found section-shell">
-        <p className="eyebrow">404 · Route unavailable</p>
+        <p className="eyebrow">Route unavailable</p>
         <h1>That address does not lead to an FST page.</h1>
         <p>Check the link, return to the main page or arrange a call if you were looking for a specific service.</p>
         <div className="not-found-actions">

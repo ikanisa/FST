@@ -63,31 +63,31 @@ const capabilities = [
       "Secretarial records, registers and submissions",
       "Board actions, ownership updates and deadlines",
     ],
-    tone: "sage",
+    tone: "sky",
     icon: Buildings,
   },
   {
-    title: "Business Planning & Finance Applications",
+    title: "Business Planning & Loan Application Support",
     slug: "business-planning-finance-applications",
     intro: "Commercial plans and numbers shaped into a finance case that lenders can assess and management can deliver.",
     items: [
       "New business plans and critical plan reviews",
       "Operating budgets, scenarios and cash forecasts",
-      "Borrowing readiness and lender submissions",
+      "Loan application readiness and lender submissions",
     ],
     tone: "sand",
     icon: ChartLineUp,
   },
   {
-    title: "Funding Application Services",
+    title: "Funding Application Support",
     slug: "funding-applications",
-    intro: "A managed application process from programme fit and project design through evidence, review and award readiness.",
+    intro: "Managed funding application support from programme fit and project design through evidence, review and award readiness.",
     items: [
       "Current FONDI.eu, Malta Enterprise and Xjenza routes",
       "Project cases, eligible-cost budgets and evidence maps",
       "Quality review, authorised submission and award setup",
     ],
-    tone: "sage",
+    tone: "sky",
     icon: HandCoins,
   },
 ];
@@ -117,7 +117,7 @@ export default function Home() {
           <h1>Turn ambition into an executable plan.</h1>
           <p className="hero-lede">
             FST brings business planning, finance, tax, governance and funding
-            applications into one accountable programme of work.
+            application support into an accountable programme of work.
           </p>
           <PrimaryCta className="primary-button" />
         </div>
@@ -126,7 +126,7 @@ export default function Home() {
           <img
             className="hero-image"
             src="/fst-hero.webp"
-            alt="Four advisers standing at a planning wall in a Malta office"
+            alt="Advisers standing at a planning wall in a Malta office"
             width={1536}
             height={1024}
             loading="eager"
@@ -147,7 +147,7 @@ export default function Home() {
 
       <section className="capability-rail" id="expertise" aria-labelledby="capability-heading">
         <div className="rail-intro">
-          <h2 id="capability-heading">Many disciplines.<br /><em>One working plan.</em></h2>
+          <h2 id="capability-heading">Specialist services.<br /><em>A connected working plan.</em></h2>
         </div>
         <div className="rail-list">
           {capabilities.map((capability) => {
@@ -160,7 +160,7 @@ export default function Home() {
             );
           })}
         </div>
-        <SectionVisual src="/fst-collaboration.webp" alt="Five specialists coordinating multiple workstreams in one studio" className="rail-section-visual" />
+        <SectionVisual src="/fst-collaboration.webp" alt="Specialists coordinating connected workstreams in a project studio" className="rail-section-visual" />
       </section>
 
       <section className="expertise-section section-shell" aria-labelledby="expertise-title">
@@ -226,7 +226,7 @@ export default function Home() {
         </div>
         <div className="approach-steps">
           <div><span className="approach-icon" aria-hidden="true"><Ear size={20} weight="regular" /></span><h3>Frame the brief</h3><p>Define the decision, constraints, deadline and minimum evidence before work expands.</p></div>
-          <div><span className="approach-icon" aria-hidden="true"><CirclesThreePlus size={20} weight="regular" /></span><h3>Build the working team</h3><p>Assign only the disciplines needed and keep assumptions consistent across every workstream.</p></div>
+          <div><span className="approach-icon" aria-hidden="true"><CirclesThreePlus size={20} weight="regular" /></span><h3>Build the working team</h3><p>Assign only the specialist services needed and keep assumptions consistent across every workstream.</p></div>
           <div><span className="approach-icon" aria-hidden="true"><Target size={20} weight="regular" /></span><h3>Stay through delivery</h3><p>Track actions, answer review points and leave management with a usable operating file.</p></div>
         </div>
         <SectionVisual src="/fst-finance.webp" alt="A founder and adviser shaping a delivery plan at an easel" className="approach-visual" />

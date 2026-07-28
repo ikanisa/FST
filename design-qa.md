@@ -42,9 +42,8 @@ labels and original photography.
 
 The mobile menu opens, exposes all five destinations, changes to a close state,
 and returns to the closed state. The Services link was activated from the open
-menu and navigated to `/services`. The booking path, direct phone path and
-WhatsApp path remain present. No final external form or application submission
-was made during QA.
+menu and navigated to `/services`. The booking path and WhatsApp path remain
+present. No final external form or submission was made during QA.
 
 ## Findings and iteration history
 
@@ -67,7 +66,7 @@ was made during QA.
 - Completed broken images: 0 on all 30 route/viewport checks.
 - Browser console warnings/errors after the navigation test: 0.
 - New public asset fingerprints do not match any KMFINCO public asset fingerprint.
-- Lint, production build and 10 automated route/integration tests pass.
+- Lint, production build and 14 automated route/integration tests pass.
 - Cloudflare Wrangler dry-run packages 89 static assets and a 656.05 KiB Worker
   module set without publishing.
 
@@ -84,9 +83,9 @@ was made during QA.
 
 ## Annotation pass — capability heading and promise card
 
-- Comment 3: the capability heading now reads `Many disciplines. One working
-  plan.` while the six clearly named service categories remain listed below it.
-- Comment 4: the inherited green promise-card surface is replaced by an
+- Comment 3: the capability heading was simplified while the clearly named
+  service categories remain listed below it.
+- Comment 4: the inherited promise-card surface is replaced by an
   FST-specific cobalt-to-navy gradient with a restrained terracotta highlight.
 - Comment 5: the repeated `Service line` labels are removed from all six
   homepage service cards; each icon now leads directly into the service name.
@@ -95,3 +94,66 @@ was made during QA.
   annotated 833 × 674 viewport.
 - Automated rendered-HTML coverage protects the revised heading and removed
   repeated label.
+
+## Annotation pass — inherited palette and contact number
+
+- Comment 6: all inherited dark-green tokens, hard-coded colour values,
+  semantic class names and live component treatments are removed from the
+  website source. Cobalt, navy, sky and terracotta now carry those roles.
+- Comment 7: the displayed WhatsApp number and deep link now use
+  `+35699152999`.
+- Focused implementation evidence:
+  `qa/fst-original/annotation-no-green-833x674.png` at the exact annotated
+  833 × 674 viewport.
+- Automated source and rendered-HTML checks protect both requirements.
+
+## Annotation pass — descriptive labels
+
+- Comment 8: numeric copywriting frames are removed from public headings,
+  eyebrows, summaries and image descriptions. Labels now describe the subject
+  directly, while operational durations, legal dates and service facts remain
+  explicit where users need them.
+- Automated rendered-HTML checks protect the revised public labels.
+
+## Annotation pass — direct service language
+
+- Comment 9: the abstract term formerly used for service areas is removed from
+  public copy and replaced with direct wording such as `service`, `specialist
+  support` and `expertise`.
+- Automated rendered-HTML checks protect the revised homepage heading.
+
+## Annotation pass — clearer funding terminology
+
+- Comment 10: broad or ambiguous use of the term is removed from public labels.
+  The precise categories are `Business Planning & Loan Application Support`
+  and `Funding Application Support`.
+- Existing route paths remain stable so published links and search indexing do
+  not break.
+
+## Annotation pass — contact channels
+
+- Comment 11: the former public FST email address is removed from the contact
+  page, footer, runtime configuration and structured data.
+- WhatsApp uses `+35699152999`; the meeting route remains available separately.
+
+## Annotation pass — WhatsApp-only direct contact
+
+- Comments 12–14: the email card and separate WhatsApp card are removed. The
+  remaining number card is the sole direct-contact card and opens WhatsApp.
+- Footer contact is consolidated to the same WhatsApp deep link; direct-call
+  links and telephone structured data are removed.
+
+## Annotation pass — services index
+
+- Comments 15–16: the services-page eyebrow is removed. The unclear finance
+  label is replaced by `Business Planning & Loan Application Support`, with
+  lender-ready application wording beneath it.
+
+## Annotation pass — explicit application support
+
+- Comment 17: generic `loan support` and `funding support` wording is replaced
+  with the explicit terms `Loan Application Support` and
+  `Funding Application Support` across public content and service selectors.
+- Focused implementation evidence:
+  `qa/fst-original/annotation-application-support-833x674.png` at the exact
+  annotated 833 × 674 viewport.

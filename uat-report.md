@@ -10,9 +10,9 @@ Profiles: desktop 1440 × 900 and mobile 390 × 844
 | FST rebrand | Pass |
 | Original FST photography and labels | Pass |
 | KMFINCO public-asset fingerprint separation | Pass |
-| Six main service categories | Pass |
+| Clearly named service categories | Pass |
 | Full component lists | Pass |
-| Funding Application Services | Pass |
+| Funding Application Support | Pass |
 | Removed external/statutory audit, investment and fiduciary services | Pass |
 | Desktop responsive layout | Pass |
 | Mobile responsive layout and menu | Pass |
@@ -51,8 +51,8 @@ The removed `/services/audit-assurance`, `/services/investment-family-office`, `
 - Tax & VAT includes VAT registration, returns, reconciliations, advisory, corporate income tax, planning, refunds, authority support and reviews.
 - Accounting & Financial Reporting includes bookkeeping, reconciliations, management accounts, financial-statement preparation and review, budgets, projections, cash flow, payroll and close.
 - Corporate & Administrative Services includes formation, company secretarial, registers, filings, governance, beneficial ownership, corporate changes and administration.
-- Business Planning & Finance Applications includes business-plan preparation and review, projections, budgets, cash planning, loan readiness, lender applications, evidence packs and post-approval planning.
-- Funding Application Services includes route scans, eligibility, concept design, official forms, business plans, budgets, state-aid and double-funding checks, evidence packs, submission-readiness review and post-award support.
+- Business Planning & Loan Application Support includes business-plan preparation and review, projections, budgets, cash planning, loan application readiness, lender submissions, evidence packs and post-approval planning.
+- Funding Application Support includes route scans, eligibility, concept design, official forms, business plans, budgets, state-aid and double-funding checks, evidence packs, submission-readiness review and post-award support.
 
 ## Evidence
 
