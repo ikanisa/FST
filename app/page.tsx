@@ -147,7 +147,7 @@ export default function Home() {
 
       <section className="capability-rail" id="expertise" aria-labelledby="capability-heading">
         <div className="rail-intro">
-          <h2 id="capability-heading">Six disciplines.<br /><em>One working plan.</em></h2>
+          <h2 id="capability-heading">Many disciplines.<br /><em>One working plan.</em></h2>
         </div>
         <div className="rail-list">
           {capabilities.map((capability) => {
@@ -177,7 +177,6 @@ export default function Home() {
                 <div>
                   <span className="expertise-card-heading">
                     <span className={`item-icon ${capability.tone}`} aria-hidden="true"><CapabilityIcon size={20} weight="regular" /></span>
-                    <span className="expertise-card-label">Service line</span>
                   </span>
                   <h3>{capability.title}</h3>
                   <p>{capability.intro}</p>

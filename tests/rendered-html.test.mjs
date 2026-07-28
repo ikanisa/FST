@@ -77,7 +77,7 @@ test("renders the new FST identity, navigation and six-category model", async ()
   const html = await response.text();
   assert.match(html, /<title>FST \| Make the next move workable<\/title>/i);
   assert.match(html, /Turn ambition into an executable plan\./);
-  assert.match(html, /Six disciplines\./);
+  assert.match(html, /Many disciplines\./);
   for (const label of [
     "Management Advisory, Risk &amp; Controls",
     "Tax &amp; VAT",
@@ -108,6 +108,9 @@ test("does not expose removed practices or inherited KMFINCO language", async ()
 test("honours the annotated homepage copy requirements", async () => {
   const html = await (await render("/")).text();
   assert.match(html, /href="\/book"[^>]*>Book a Meeting</i);
+  assert.match(html, /Many disciplines\./i);
+  assert.doesNotMatch(html, /Six disciplines\./i);
+  assert.doesNotMatch(html, /expertise-card-label/i);
   assert.doesNotMatch(html, /Advisory\s*(?:<[^>]+>\s*)*·\s*(?:<[^>]+>\s*)*Finance\s*(?:<[^>]+>\s*)*·\s*(?:<[^>]+>\s*)*Applications/i);
 });
 

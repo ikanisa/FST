@@ -81,3 +81,17 @@ was made during QA.
   `qa/fst-original/annotation-cta-eyebrow-833x674.png` at the exact annotated
   833 × 674 viewport.
 - Automated rendered-HTML coverage protects both requirements.
+
+## Annotation pass — capability heading and promise card
+
+- Comment 3: the capability heading now reads `Many disciplines. One working
+  plan.` while the six clearly named service categories remain listed below it.
+- Comment 4: the inherited green promise-card surface is replaced by an
+  FST-specific cobalt-to-navy gradient with a restrained terracotta highlight.
+- Comment 5: the repeated `Service line` labels are removed from all six
+  homepage service cards; each icon now leads directly into the service name.
+- Focused implementation evidence:
+  `qa/fst-original/annotation-disciplines-card-833x674.png` at the exact
+  annotated 833 × 674 viewport.
+- Automated rendered-HTML coverage protects the revised heading and removed
+  repeated label.
