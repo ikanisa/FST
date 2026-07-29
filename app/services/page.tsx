@@ -15,7 +15,7 @@ import { BreadcrumbJsonLd } from "../components/JsonLd";
 
 export const metadata = pageMetadata({
   title: "Advisory Services in Malta",
-  description: "Explore FST management, audit, assurance, tax, accounting, corporate administration and consolidated loan and funding application support.",
+  description: "Explore FST management, audit, assurance, tax, accounting, corporate administration and funding support, or compare individual services and indicative fees.",
   path: "/services",
 });
 
@@ -39,6 +39,16 @@ export default function ServicesPage() {
           <p>FST combines management, audit, finance and compliance services with consolidated loan and funding application support—without separating the commercial story from the evidence behind it.</p>
         </div>
         <ResponsiveImage src="/fst-collaboration.webp" alt="FST specialists coordinating workstreams in an open project studio" sizes="(max-width: 900px) 100vw, 80vw" loading="eager" fetchPriority="high" />
+      </section>
+      <section className="services-catalogue-invitation section-shell">
+        <div>
+          <p className="section-index">Need one specific service?</p>
+          <h2>Compare individual services and indicative fees.</h2>
+        </div>
+        <div>
+          <p>Search the full catalogue, combine several work items and send one order enquiry. Every request starts with a free scope and fee check.</p>
+          <Link className="primary-button" href="/services/catalogue">Browse the Service Catalogue</Link>
+        </div>
       </section>
       <section className="service-index-grid section-shell" aria-label="Our services">
         {services.map((service) => {

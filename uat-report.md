@@ -1,6 +1,6 @@
 # FST production-readiness UAT and QA report
 
-Date: 28 July 2026
+Date: 29 July 2026
 Profiles: desktop 1440 × 900 and mobile 390 × 844
 
 ## Acceptance summary
@@ -14,6 +14,7 @@ Profiles: desktop 1440 × 900 and mobile 390 × 844
 | Full component lists | Pass |
 | Consolidated Loan & Funding Application Support | Pass |
 | Audit & Assurance content and professional safeguards | Pass |
+| Supervised AI agent team page and human-approval boundary | Pass |
 | Removed investment and fiduciary services | Pass |
 | Desktop responsive layout | Pass |
 | Mobile responsive layout and menu | Pass |
@@ -38,6 +39,7 @@ The browser sweep passed all retained public routes:
 - `/services/loan-funding-application-support`
 - `/who-we-work-with`
 - `/about` — FST approach and field notes
+- `/ai-agent-team` — supervised IKANISA agent team and workpack model
 - `/contact`
 - `/book`
 

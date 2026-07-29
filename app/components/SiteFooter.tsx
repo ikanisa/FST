@@ -17,8 +17,10 @@ export function SiteFooter() {
       <div className="footer-links">
         <nav aria-label="Footer links">
           <Link href="/services">Services</Link>
+          <Link href="/services/catalogue">Service Catalogue</Link>
           <Link href="/who-we-work-with">Organisations</Link>
           <Link href="/about">Our Approach</Link>
+          <Link href="/ai-agent-team">Meet Our AI Agent Team</Link>
           <Link href="/contact">Get in touch</Link>
         </nav>
         <div className="footer-contact">

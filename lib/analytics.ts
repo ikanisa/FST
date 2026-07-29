@@ -5,6 +5,7 @@ export type ConversionEvent =
   | "booking_form_submit"
   | "booking_created"
   | "booking_fallback_open"
+  | "service_catalogue_order"
   | "linkedin_click";
 
 declare global {

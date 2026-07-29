@@ -39,8 +39,10 @@ export function SiteHeader() {
         </Link>
         <nav id="primary-navigation" className={menuOpen ? "nav-links is-open" : "nav-links"} aria-label="Main links">
           <Link href="/services" onClick={closeMenu}>Services</Link>
+          <Link href="/services/catalogue" onClick={closeMenu}>Catalogue</Link>
           <Link href="/who-we-work-with" onClick={closeMenu}>Organisations</Link>
           <Link href="/about" onClick={closeMenu}>Our Approach</Link>
+          <Link href="/ai-agent-team" onClick={closeMenu}>AI Agent Team</Link>
           <PrimaryCta className="nav-cta" onClick={closeMenu} />
         </nav>
         <button

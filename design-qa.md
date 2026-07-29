@@ -1,6 +1,111 @@
-# FST design QA
+# FST service catalogue design QA
 
 final result: passed
+
+Date: 29 July 2026
+State tested: catalogue landing view, service search, service selection, desktop order panel, mobile order tray and mobile order form
+Source visual truth: `qa/fst/services-desktop-1440x900.jpg`
+Implementation screenshot: `qa/service-catalogue-desktop-viewport-1440x900.png`
+Combined comparison: `qa/service-catalogue-source-vs-implementation.jpg`
+Viewport: 1440 × 900 CSS px at 1× density; responsive pass at 390 × 844 CSS px at 1× density
+Source pixels: 1440 × 900; implementation pixels: 1440 × 900; mobile implementation pixels: 390 × 844
+
+## Full-view comparison evidence
+
+The existing FST Services page is the visual authority for the new catalogue.
+The source and implementation were placed in one 2880 × 960 comparison image
+before judgement. The implementation intentionally changes the hero composition
+to support pricing and ordering, while preserving FST's inset rounded header,
+large editorial serif, tightly tracked eyebrow, ivory canvas, cobalt/navy
+palette, coral action colour, restrained radii and soft elevation system.
+
+The catalogue's first viewport maintains the source's whitespace, premium
+editorial scale and two-part hero balance. The pricing panel is visually
+subordinate to the main proposition while remaining immediately legible.
+Navigation, hero and CTA rhythm align with the accepted desktop system.
+
+## Focused-region comparison evidence
+
+- Service grid and desktop order panel:
+  `qa/service-catalogue-desktop-cards-1440x900.png`
+- Mobile first viewport:
+  `qa/service-catalogue-mobile-390x844.png`
+- Mobile filters and cards:
+  `qa/service-catalogue-mobile-filters-390x844.png` and
+  `qa/service-catalogue-mobile-cards-390x844.png`
+- Mobile order form:
+  `qa/service-catalogue-mobile-order-390x844.png`
+
+Focused evidence was required because the source page does not contain search,
+selection or order-form states. The service cards use the same serif/sans
+hierarchy and border/shadow restraint as the source. The mobile order sheet
+uses the same navy/cobalt professional surface and coral primary action.
+
+## Required fidelity surfaces
+
+- Fonts and typography: Cormorant Garamond remains the display face and Manrope
+  the UI/body face. Display weight, line height and wrapping match FST's
+  editorial character. Small labels use tracked uppercase text without leaking
+  implementation language.
+- Spacing and layout rhythm: 28 px outer radii, inset page margins, 16–34 px
+  card/grid gaps and a sticky order rail create a clear hierarchy. Desktop and
+  mobile checks show zero horizontal overflow.
+- Colors and visual tokens: the implementation reuses `--navy`, `--cobalt`,
+  `--coral`, `--ivory`, `--paper`, `--line` and the existing shadow tokens.
+  Text/background combinations remain legible in the tested states.
+- Image quality and asset fidelity: no decorative image was required for this
+  information-dense product flow. The design uses typography and existing
+  brand tokens rather than a placeholder, imitation illustration or fake icon.
+  Phosphor icons match the site's established icon system.
+- Copy and content: service names, units, safeguards, fee qualifiers and order
+  instructions are concrete. “From” prices never imply payment or automatic
+  professional acceptance. The 50% statement is framed as an approximate
+  pricing-design target and not a universal market guarantee.
+
+## Findings and comparison history
+
+- P0: none.
+- P1: none.
+- P2, resolved: singular search results initially rendered as `1 services`.
+  The result label now switches correctly between `service` and `services`.
+- P2, resolved: the first mobile order overlay exposed two controls with the
+  same accessible close name. The backdrop and explicit close control now have
+  distinct accessible names.
+- P2, resolved: the mobile overlay initially lacked explicit focus containment.
+  Focus now opens on the close control, Tab/Shift+Tab remain within the sheet,
+  Escape closes it, and background body scrolling is locked while open.
+- P3: the catalogue is intentionally long when the `All` filter is active.
+  Search, category counts and the sticky order rail make this acceptable; future
+  usage analytics can determine whether a popular-only default is preferable.
+
+## Interaction and browser evidence
+
+- Search for `privacy` returned exactly one service: `Privacy and cookie policy`.
+- Adding `Monthly bookkeeping` produced one selected card and one matching
+  desktop order item.
+- Adding a statutory audit on mobile displayed the one-service order bar and
+  opened the correct modal order item.
+- The mobile order form exposed name, email, organisation, timing, context,
+  consent, WhatsApp continuation and a prefilled email fallback.
+- No WhatsApp message, email, payment, filing or external submission was made.
+- Browser console warnings/errors after the tested interactions: 0.
+- Primary desktop and mobile implementation checks show 0 px horizontal
+  overflow.
+
+## Implementation checklist
+
+- [x] Search and category filters are keyboard reachable and stateful.
+- [x] Add/remove controls expose pressed state and descriptive accessible names.
+- [x] Desktop order summary stays visible without covering the catalogue.
+- [x] Mobile order controls, focus behaviour and body-scroll lock work.
+- [x] Regulated-service safeguards and fee exclusions are visible.
+- [x] Reduced-motion preferences inherit the site's global treatment.
+
+---
+
+# Prior site-wide FST design QA
+
+historical result: passed
 
 Date: 28 July 2026
 State tested: production build, default homepage, mobile menu open/closed, all public routes

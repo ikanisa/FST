@@ -33,6 +33,7 @@ footer and structured organisation metadata.
 - `/services/corporate-services`
 - `/services/loan-funding-application-support`
 - `/about` — FST approach and field notes
+- `/ai-agent-team` — how FST uses IKANISA’s supervised AI agent team
 - `/contact`
 - `/book` — Google Calendar and Google Meet booking
 

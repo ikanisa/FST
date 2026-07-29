@@ -107,6 +107,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           "Payroll",
           "Corporate and administrative services",
           "Loan and funding application support",
+          "Supervised AI-assisted professional workpack preparation",
         ],
       },
       {

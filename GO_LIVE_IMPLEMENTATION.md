@@ -1,6 +1,6 @@
 # FST go-live implementation
 
-Updated: 28 July 2026
+Updated: 29 July 2026
 
 ## Implemented
 
@@ -12,6 +12,7 @@ Updated: 28 July 2026
 - Investment, family-office and fiduciary services remain removed from public routes, sitemap, assets and copy.
 - First-party `/book` flow with input validation, availability checking and Google Meet event creation when approved Calendar credentials are configured.
 - Responsive desktop and mobile layouts, semantic icons, accessible navigation, SEO metadata, sitemap, robots and production security headers.
+- Dedicated `/ai-agent-team` page explaining FST’s supervised use of IKANISA’s Patrick, Sofia, Matthew, Claire and Emma agents, the workpacks they prepare and the professional approval boundary.
 - Production dependency audit at zero known vulnerabilities after the validated overrides.
 - Twelve original FST photographs, a new favicon and a reproducible social card; no deployed public asset matches a KMFINCO source fingerprint.
 - Original FST wording and labels across navigation, service pages, contact, legal, booking and metadata surfaces.
@@ -38,7 +39,7 @@ Statutory audit and other regulated assurance engagements are accepted and perfo
 ## Verification
 
 - `npm run lint` passes.
-- `npm test` passes the production build and all 24 rendered-route, content, professional-safeguard, brand-separation and booking integration tests.
+- `npm test` passes the production build and all 26 rendered-route, content, professional-safeguard, brand-separation and booking integration tests.
 - `npm audit --omit=dev` reports zero production vulnerabilities.
 - Browser QA passes at 1440 × 900 and 390 × 844 with no completed broken images or horizontal overflow.
 - All 14 retained public routes pass the browser sweep at both viewports.
