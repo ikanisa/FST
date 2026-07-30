@@ -1,20 +1,25 @@
 "use client";
 
 import Link from "next/link";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { BrandLogo } from "./BrandLogo";
 import { PrimaryCta } from "./PrimaryCta";
 
 export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const scrollSentinelRef = useRef<HTMLSpanElement>(null);
   const closeMenu = () => setMenuOpen(false);
 
   useEffect(() => {
-    const updateHeader = () => setScrolled(window.scrollY > 24);
-    updateHeader();
-    window.addEventListener("scroll", updateHeader, { passive: true });
-    return () => window.removeEventListener("scroll", updateHeader);
+    const sentinel = scrollSentinelRef.current;
+    if (!sentinel) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setScrolled(!entry.isIntersecting),
+      { threshold: 0 },
+    );
+    observer.observe(sentinel);
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -33,6 +38,7 @@ export function SiteHeader() {
 
   return (
     <Fragment>
+      <span ref={scrollSentinelRef} className="header-scroll-sentinel" aria-hidden="true" />
       <header className={scrolled ? "site-header is-scrolled" : "site-header"} aria-label="Website navigation">
         <Link className="brand-logo brand-logo-header" href="/" onClick={closeMenu} aria-label="Go to the FST homepage">
           <BrandLogo priority />

@@ -42,7 +42,7 @@ export const catalogueCategories = [
     id: "legal-contracts",
     label: "Legal & contract support",
     shortLabel: "Contracts",
-    description: "Commercial document drafting, review and plain-language risk support for everyday business needs.",
+    description: "Contract drafting, legal document preparation and review for everyday business needs.",
     regulatedNote: "Legal advice, opinions and Malta-law work requiring an advocate are reviewed or delivered by an appropriately warranted legal professional.",
   },
 ] as const;
@@ -706,6 +706,26 @@ export const catalogueServices: CatalogueService[] = [
     tags: ["grant claim", "donor report", "expenditure", "evidence"],
   },
 
+  {
+    id: "contract-drafting",
+    category: "legal-contracts",
+    title: "Contract drafting",
+    description: "First draft of a standard commercial contract tailored to the transaction, responsibilities, fees, risk allocation and exit terms.",
+    from: 150,
+    unit: "per document",
+    regulated: true,
+    tags: ["contract drafting", "commercial contract", "agreement drafting", "legal document"],
+  },
+  {
+    id: "legal-document-drafting",
+    category: "legal-contracts",
+    title: "Legal document drafting",
+    description: "Drafting of business letters, notices, declarations, consents, policies and other legal documents, with warranted review where required.",
+    from: 125,
+    unit: "per document",
+    regulated: true,
+    tags: ["legal document drafting", "legal letters", "notices", "declarations", "consents", "policies"],
+  },
   {
     id: "contract-review",
     category: "legal-contracts",

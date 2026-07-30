@@ -62,7 +62,6 @@ export default function ServiceCataloguePage() {
 
       <section className="catalogue-hero">
         <div className="catalogue-hero-copy">
-          <p className="eyebrow">FST service catalogue <span>·</span> Indicative fees</p>
           <h1>Choose the work. See the starting fee. Build one order.</h1>
           <p>Browse individual services across audit, accounting, tax, company administration, management, funding and contracts. Add everything you need, then send one coordinated brief.</p>
           <a className="catalogue-hero-link" href="#catalogue-start">
@@ -70,7 +69,6 @@ export default function ServiceCataloguePage() {
           </a>
         </div>
         <div className="catalogue-hero-pricing">
-          <span className="catalogue-hero-kicker">AI-enabled professional delivery</span>
           <strong>≈50% less</strong>
           <p>Our standard starting fees are designed around roughly half the conventional full-service benchmark for comparable routine scope.</p>
           <small>Final fees depend on complexity, volume, records, deadlines and professional acceptance.</small>
@@ -80,7 +78,7 @@ export default function ServiceCataloguePage() {
       <section className="catalogue-trust-rail section-shell" aria-label="How catalogue pricing works">
         <article>
           <CurrencyEur size={24} aria-hidden="true" />
-          <div><strong>Clear “From” fees</strong><span>EUR, excluding VAT, official fees and third-party costs unless stated.</span></div>
+          <div><strong>Clear fees</strong><span>EUR, excluding VAT, official fees and third-party costs unless stated.</span></div>
         </article>
         <article>
           <ClockCountdown size={24} aria-hidden="true" />

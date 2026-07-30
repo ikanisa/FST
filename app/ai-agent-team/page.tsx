@@ -26,21 +26,21 @@ export const metadata = pageMetadata({
 
 const pressures = [
   {
-    title: "Capacity pressure",
+    title: "More capacity for client work",
     description:
-      "Partners and managers spend too much time chasing documents, cleaning books, preparing schedules and drafting first versions.",
+      "Our specialist agents organise documents, clean data, prepare schedules and produce first drafts so FST professionals can focus on judgement and client decisions.",
     icon: Lightning,
   },
   {
-    title: "Evidence pressure",
+    title: "Clearer evidence by design",
     description:
-      "Audit, tax, AML/CFT, corporate, insurance and regulatory files need clearer source trails, stronger documentation and better review discipline.",
+      "We use AI to index sources, flag gaps, cross-reference schedules and maintain visible review trails across audit, tax, corporate, insurance and regulatory work.",
     icon: FileMagnifyingGlass,
   },
   {
-    title: "Regulatory complexity",
+    title: "Faster, controlled delivery",
     description:
-      "MFSA, FIAU, MBR, MTCA, QAU and EU requirements increase the evidence and oversight expected across professional-service workflows.",
+      "FST professionals define the scope, supervise each agent, resolve exceptions and approve every output before it is relied on, communicated or submitted.",
     icon: Buildings,
   },
 ];
@@ -221,8 +221,8 @@ export default function AiAgentTeamPage() {
 
       <section className="ai-pressure section-shell" aria-labelledby="ai-pressure-title">
         <h2 id="ai-pressure-title">
-          Professional firms are being asked to do more, with less capacity and
-          more scrutiny.
+          FST uses supervised AI to increase capacity, strengthen evidence and
+          keep professional judgement in human hands.
         </h2>
         <div className="ai-pressure-grid">
           {pressures.map((pressure) => {

@@ -1,15 +1,16 @@
 "use client";
 
-import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Check } from "@phosphor-icons/react/Check";
 import { MagnifyingGlass } from "@phosphor-icons/react/MagnifyingGlass";
 import { Minus } from "@phosphor-icons/react/Minus";
 import { Plus } from "@phosphor-icons/react/Plus";
-import { SealCheck } from "@phosphor-icons/react/SealCheck";
+import { ShoppingCartSimple } from "@phosphor-icons/react/ShoppingCartSimple";
+import { WhatsappLogoIcon } from "@phosphor-icons/react/WhatsappLogo";
 import { X } from "@phosphor-icons/react/X";
 import { catalogueCategories, catalogueServices, formatCataloguePrice, type CatalogueCategoryId } from "../../lib/service-catalogue";
-import { siteConfig } from "../../lib/site-config";
 import { trackConversion } from "../../lib/analytics";
+import { siteConfig } from "../../lib/site-config";
 
 const allCategory = "all";
 
@@ -18,6 +19,7 @@ export function ServiceCatalogue() {
   const [query, setQuery] = useState("");
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [mobileOrderOpen, setMobileOrderOpen] = useState(false);
+  const [cartAnnouncement, setCartAnnouncement] = useState("");
   const mobileOrderRef = useRef<HTMLDivElement>(null);
 
   const selectedServices = useMemo(
@@ -67,43 +69,20 @@ export function ServiceCatalogue() {
   }, [activeCategory, query]);
 
   function toggleService(id: string) {
-    setSelectedIds((current) =>
-      current.includes(id) ? current.filter((serviceId) => serviceId !== id) : [...current, id],
-    );
+    const service = catalogueServices.find((item) => item.id === id);
+    setSelectedIds((current) => {
+      const isRemoving = current.includes(id);
+      const next = isRemoving ? current.filter((serviceId) => serviceId !== id) : [...current, id];
+      setCartAnnouncement(
+        `${service?.title || "Service"} ${isRemoving ? "removed from" : "added to"} your order. ${next.length} ${next.length === 1 ? "service" : "services"} selected.`,
+      );
+      return next;
+    });
   }
-
-  function submitOrder(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (!selectedServices.length) return;
-    const values = new FormData(event.currentTarget);
-    const lines = selectedServices.map((service, index) =>
-      service ? `${index + 1}. ${service.title} — ${formatCataloguePrice(service)} ${service.unit}` : "",
-    );
-    const message = [
-      "Hello FST, I would like an indicative scope and fee for:",
-      "",
-      ...lines,
-      "",
-      `Name: ${String(values.get("name") || "")}`,
-      `Email: ${String(values.get("email") || "")}`,
-      `Organisation: ${String(values.get("organisation") || "Not provided")}`,
-      `Timing: ${String(values.get("timing") || "Flexible")}`,
-      `Context: ${String(values.get("context") || "No additional context")}`,
-      "",
-      "I understand that these are indicative starting fees and that no work begins until FST confirms scope, professional acceptance and a final quote.",
-    ].join("\n");
-    const whatsappUrl = `${siteConfig.whatsappUrl}?text=${encodeURIComponent(message)}`;
-    trackConversion("service_catalogue_order");
-    window.location.assign(whatsappUrl);
-  }
-
-  const emailSummary = selectedServices
-    .map((service, index) => service ? `${index + 1}. ${service.title} — ${formatCataloguePrice(service)} ${service.unit}` : "")
-    .join("\n");
-  const emailUrl = `mailto:${siteConfig.bookingRecipients[0]}?subject=${encodeURIComponent("FST service order enquiry")}&body=${encodeURIComponent(`Hello FST,\n\nI would like an indicative scope and fee for:\n${emailSummary}\n\nPlease contact me to confirm the engagement scope.`)}`;
 
   return (
     <>
+      <p className="sr-only" role="status" aria-live="polite" aria-atomic="true">{cartAnnouncement}</p>
       <section className="catalogue-toolbar section-shell" aria-label="Find a service">
         <label className="catalogue-search">
           <MagnifyingGlass size={20} aria-hidden="true" />
@@ -162,10 +141,6 @@ export function ServiceCatalogue() {
                   <article className={`catalogue-card ${selected ? "is-selected" : ""}`} key={service.id}>
                     <div className="catalogue-card-topline">
                       <span>{category?.shortLabel}</span>
-                      <div>
-                        {service.popular && <span className="catalogue-popular">Popular</span>}
-                        {service.regulated && <span className="catalogue-regulated" title="Professional acceptance conditions apply"><SealCheck size={15} aria-hidden="true" /> Reviewed</span>}
-                      </div>
                     </div>
                     <h2>{service.title}</h2>
                     <p>{service.description}</p>
@@ -202,8 +177,6 @@ export function ServiceCatalogue() {
           <OrderPanel
             selectedServices={selectedServices}
             removeService={toggleService}
-            submitOrder={submitOrder}
-            emailUrl={emailUrl}
           />
         </aside>
       </section>
@@ -230,8 +203,6 @@ export function ServiceCatalogue() {
             <OrderPanel
               selectedServices={selectedServices}
               removeService={toggleService}
-              submitOrder={submitOrder}
-              emailUrl={emailUrl}
               titleId="mobile-order-title"
             />
           </div>
@@ -244,24 +215,40 @@ export function ServiceCatalogue() {
 function OrderPanel({
   selectedServices,
   removeService,
-  submitOrder,
-  emailUrl,
   titleId,
 }: {
   selectedServices: Array<(typeof catalogueServices)[number] | undefined>;
   removeService: (id: string) => void;
-  submitOrder: (event: FormEvent<HTMLFormElement>) => void;
-  emailUrl: string;
   titleId?: string;
 }) {
+  const startingTotal = selectedServices.reduce((total, service) => total + (service?.from || 0), 0);
+  const orderLines = selectedServices.flatMap((service, index) =>
+    service ? [`${index + 1}. ${service.title} — ${formatCataloguePrice(service)} · ${service.unit}`] : [],
+  );
+  const whatsappMessage = [
+    "Hello FST, I would like to request the following services:",
+    "",
+    ...orderLines,
+    "",
+    `Indicative starting total: €${startingTotal.toLocaleString("en-IE")}`,
+    "",
+    "Please confirm the scope, availability and final fee before work starts.",
+  ].join("\n");
+  const whatsappOrderUrl = `${siteConfig.serviceOrderWhatsappUrl}?text=${encodeURIComponent(whatsappMessage)}`;
+
   return (
     <div className="catalogue-order-panel">
-      <p className="eyebrow">Your FST order</p>
-      <h2 id={titleId}>Build one coordinated brief.</h2>
+      <div className="catalogue-cart-heading">
+        <div>
+          <p className="eyebrow">Service cart</p>
+          <h2 id={titleId}>Your FST order</h2>
+        </div>
+        <span aria-label={`${selectedServices.length} services in cart`}>{selectedServices.length}</span>
+      </div>
       {!selectedServices.length ? (
         <div className="catalogue-order-empty">
-          <Plus size={22} aria-hidden="true" />
-          <p>Add any service. FST will confirm fit, scope, delivery timing and a fixed quote before work starts.</p>
+          <ShoppingCartSimple size={28} aria-hidden="true" />
+          <p>Your cart is empty. Add services from the catalogue to build one order.</p>
         </div>
       ) : (
         <>
@@ -278,44 +265,23 @@ function OrderPanel({
               </li>
             ))}
           </ul>
-          <form className="catalogue-order-form" onSubmit={submitOrder}>
-            <div className="catalogue-order-fields">
-              <label>
-                Name
-                <input name="name" autoComplete="name" required />
-              </label>
-              <label>
-                Email
-                <input name="email" type="email" autoComplete="email" required />
-              </label>
-              <label>
-                Organisation <span>Optional</span>
-                <input name="organisation" autoComplete="organization" />
-              </label>
-              <label>
-                Preferred timing
-                <select name="timing" defaultValue="Within 2–4 weeks">
-                  <option>As soon as possible</option>
-                  <option>Within 2–4 weeks</option>
-                  <option>Within 1–3 months</option>
-                  <option>Flexible</option>
-                </select>
-              </label>
-              <label>
-                Helpful context <span>Optional</span>
-                <textarea name="context" rows={3} placeholder="Deadline, organisation size, reporting period or funding call…" />
-              </label>
-              <label className="catalogue-order-consent">
-                <input type="checkbox" required />
-                <span>I agree to share this enquiry with FST and understand that the displayed fees are indicative starting prices, not a binding quote.</span>
-              </label>
-            </div>
-            <button className="catalogue-order-submit" type="submit">
-              Continue order on WhatsApp
-            </button>
-            <a className="catalogue-order-email" href={emailUrl}>Prefer email? Send this service list</a>
-          </form>
-          <p className="catalogue-order-note">No payment is taken here. Your free scope and fee check comes first.</p>
+          <div className="catalogue-cart-total">
+            <span>Indicative starting total</span>
+            <strong>€{startingTotal.toLocaleString("en-IE")}</strong>
+          </div>
+          <a
+            className="catalogue-order-submit"
+            href={whatsappOrderUrl}
+            target="_blank"
+            rel="noreferrer"
+            onClick={() => trackConversion("service_catalogue_order")}
+          >
+            <WhatsappLogoIcon size={20} weight="fill" aria-hidden="true" />
+            Send order on WhatsApp
+          </a>
+          <p className="catalogue-order-note">
+            WhatsApp opens with your service list ready to send to FST at {siteConfig.serviceOrderWhatsappDisplay}. No contact form or payment at this stage.
+          </p>
         </>
       )}
     </div>

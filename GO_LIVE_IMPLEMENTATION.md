@@ -25,6 +25,7 @@ Add these hosting values only after each underlying destination has been verifie
 | --- | --- | --- |
 | Canonical public origin | `NEXT_PUBLIC_SITE_URL` | Defaults to the production Cloudflare domain `https://fst.ikanisa.com` |
 | Google Calendar API | `GOOGLE_CALENDAR_CLIENT_ID`, `GOOGLE_CALENDAR_CLIENT_SECRET`, `GOOGLE_CALENDAR_REFRESH_TOKEN`, `GOOGLE_CALENDAR_ID`, `GOOGLE_CALENDAR_TIMEZONE` | Booking fails safely when credentials are absent |
+| Service-order WhatsApp | `https://wa.me/35677186193` (`+356 7718 6193`) | The catalogue creates a prefilled order link without a server-side binding |
 | Public appointment schedule | `NEXT_PUBLIC_GOOGLE_BOOKING_URL` | Optional and hidden when absent |
 | LinkedIn company page | `NEXT_PUBLIC_LINKEDIN_URL` | Hidden when absent |
 | Google Analytics 4 | `NEXT_PUBLIC_GA_MEASUREMENT_ID` | Analytics and consent banner remain off |
@@ -39,7 +40,7 @@ Statutory audit and other regulated assurance engagements are accepted and perfo
 ## Verification
 
 - `npm run lint` passes.
-- `npm test` passes the production build and all 26 rendered-route, content, professional-safeguard, brand-separation and booking integration tests.
+- `npm test` passes the production build and all 27 rendered-route, content, professional-safeguard, brand-separation, WhatsApp-order and booking integration tests.
 - `npm audit --omit=dev` reports zero production vulnerabilities.
 - Browser QA passes at 1440 × 900 and 390 × 844 with no completed broken images or horizontal overflow.
 - All 14 retained public routes pass the browser sweep at both viewports.
@@ -49,7 +50,6 @@ Statutory audit and other regulated assurance engagements are accepted and perfo
 ## Remaining external actions
 
 1. Confirm the final public domain and attach it to the production deployment.
-2. Verify the public email account and its SPF, DKIM and DMARC configuration before relying on it.
-3. Add approved Google Calendar, LinkedIn, analytics and Search Console values if required.
-4. Complete an authorised test booking after production Calendar credentials are supplied.
+2. Add approved Google Calendar, LinkedIn, analytics and Search Console values if required.
+3. Complete an authorised test booking after production Calendar credentials are supplied.
 5. Obtain legal/privacy approval for the final controller identity, jurisdiction and retention wording.

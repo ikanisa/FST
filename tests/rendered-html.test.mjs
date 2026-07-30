@@ -161,14 +161,26 @@ test("publishes a searchable multi-service catalogue with indicative prices and 
     "Malta company formation",
     "Business-plan preparation",
     "Grant application drafting",
+    "Contract drafting",
+    "Legal document drafting",
     "Contract review",
     "Privacy and cookie policy",
   ]) assert.match(html, new RegExp(service, "i"));
   assert.match(html, /From €100/);
+  assert.match(html, />Clear fees</);
+  assert.doesNotMatch(html, /Clear [“"]From[”"] fees/);
   assert.match(html, /Free scope check/i);
-  assert.match(html, /Build one coordinated brief/i);
+  assert.match(html, /Your FST order/i);
+  assert.match(html, /Your cart is empty/i);
   assert.match(html, /required Malta authorisation|appropriately authorised Malta auditor|appropriately warranted legal professional/i);
   assert.match(html, /not a guarantee against every market provider/i);
+  const cartSource = await readFile(path.join(root, "app/components/ServiceCatalogue.tsx"), "utf8");
+  assert.match(cartSource, /Send order on WhatsApp/);
+  assert.match(cartSource, /wa\.me\/35677186193|serviceOrderWhatsappUrl/);
+  assert.match(cartSource, /Indicative starting total/);
+  assert.doesNotMatch(cartSource, /api\/service-order|<form|mailto:|name="email"|emailed directly/i);
+  assert.doesNotMatch(cartSource, /catalogue-popular|catalogue-regulated|>Popular<|>Reviewed</);
+  assert.doesNotMatch(html, /FST service catalogue <span>|AI-enabled professional delivery/i);
 });
 
 test("uses explicit loan and funding application support wording across public routes", async () => {
@@ -237,7 +249,11 @@ test("presents the supervised IKANISA AI agent team with a clear human approval 
   assert.equal(response.status, 200);
   const html = await response.text();
   assert.match(html, /Meet our AI agent team\./i);
-  assert.match(html, /Professional firms are being asked to do more, with less capacity and more scrutiny\./i);
+  assert.match(html, /FST uses supervised AI to increase capacity, strengthen evidence and keep professional judgement in human hands\./i);
+  assert.match(html, /More capacity for client work/i);
+  assert.match(html, /Clearer evidence by design/i);
+  assert.match(html, /Faster, controlled delivery/i);
+  assert.doesNotMatch(html, /Professional firms are being asked to do more/i);
   assert.match(html, /Agents prepare\. Professionals approve\./i);
   for (const [name, route] of [
     ["Patrick", "patrick"],
@@ -458,10 +474,26 @@ test("publishes only through the FST Cloudflare custom domain", async () => {
       custom_domain: true,
     },
   ]);
+  assert.equal(config.send_email, undefined);
   await assert.rejects(
     readFile(path.join(root, ".openai", "hosting.json")),
     { code: "ENOENT" },
   );
+});
+
+test("service cart creates a WhatsApp order link for the dedicated order number", async () => {
+  const cartSource = await readFile(path.join(root, "app/components/ServiceCatalogue.tsx"), "utf8");
+  const siteConfigSource = await readFile(path.join(root, "lib/site-config.ts"), "utf8");
+  await assert.rejects(
+    readFile(path.join(root, "app/api/service-order/route.ts"), "utf8"),
+    { code: "ENOENT" },
+  );
+  assert.match(siteConfigSource, /serviceOrderWhatsappDisplay: "\+356 7718 6193"/);
+  assert.match(siteConfigSource, /serviceOrderWhatsappUrl: "https:\/\/wa\.me\/35677186193"/);
+  assert.match(cartSource, /Hello FST, I would like to request the following services/);
+  assert.match(cartSource, /encodeURIComponent\(whatsappMessage\)/);
+  assert.match(cartSource, /target="_blank"/);
+  assert.match(cartSource, /Send order on WhatsApp/);
 });
 
 test("native booking validates input and fails safely without credentials", async () => {

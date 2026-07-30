@@ -41,14 +41,20 @@ for (const url of urls) {
   const canonical = match(html, /<link[^>]+rel="canonical"[^>]+href="([^"]*)"/i);
   const h1Count = (html.match(/<h1(?:\s|>)/gi) || []).length;
   const robots = match(html, /<meta[^>]+name="robots"[^>]+content="([^"]*)"/i);
+  const language = match(html, /<html[^>]+lang="([^"]*)"/i);
+  const viewport = match(html, /<meta[^>]+name="viewport"[^>]+content="([^"]*)"/i);
+  const ogImage = match(html, /<meta[^>]+property="og:image"[^>]+content="([^"]*)"/i);
   const jsonLdBlocks = [...html.matchAll(/<script[^>]+type="application\/ld\+json"[^>]*>(.*?)<\/script>/gis)];
 
   assert(title.length >= 10 && title.length <= 65, `${url} title length is ${title.length}`, failures);
   assert(description.length >= 70 && description.length <= 180, `${url} description length is ${description.length}`, failures);
   assert(canonical === url, `${url} canonical is ${canonical || "missing"}`, failures);
   assert(h1Count === 1, `${url} has ${h1Count} H1 elements`, failures);
+  assert(language === "en", `${url} HTML language is ${language || "missing"}`, failures);
+  assert(/width=device-width/i.test(viewport), `${url} is missing a responsive viewport`, failures);
   assert(!/noindex|nofollow/i.test(robots), `${url} is not indexable`, failures);
   assert(/property="og:title"/i.test(html), `${url} is missing og:title`, failures);
+  assert(/^https:\/\//i.test(ogImage), `${url} og:image is not an absolute HTTPS URL`, failures);
   assert(/name="twitter:card"/i.test(html), `${url} is missing twitter:card`, failures);
   assert(jsonLdBlocks.length > 0, `${url} is missing JSON-LD`, failures);
 

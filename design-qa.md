@@ -1,4 +1,119 @@
-# FST service catalogue design QA
+# FST WhatsApp service-order QA
+
+final result: passed
+
+Date: 30 July 2026
+State tested: two selected services, desktop sticky cart, mobile review sheet and prefilled WhatsApp deep link
+Viewports: desktop default and 390 × 844 CSS px
+
+## Order handoff
+
+- `Monthly bookkeeping` and `VAT return and reconciliation` appear in the
+  order with their individual starting fees and a €145 indicative total.
+- The primary action is `Send order on WhatsApp` and targets the dedicated
+  order number `+356 7718 6193`.
+- The encoded WhatsApp message contains both selected services, their units,
+  the indicative total and a request to confirm scope, availability and the
+  final fee.
+- Desktop and mobile layouts retain the accepted cart hierarchy, with no
+  contact form, email handoff, payment step, collision or horizontal overflow.
+
+No actionable P0, P1 or P2 differences remain.
+
+---
+
+# FST catalogue and AI-team annotation QA
+
+final result: passed
+
+Date: 29 July 2026
+State tested: annotated catalogue hero, Contracts filter, service cards, desktop cart and FST AI capacity section
+Viewport: 1084 × 699 CSS px
+
+## Annotation closure
+
+- Removed the two annotated hero micro-labels without changing the accepted
+  hero structure or pricing message.
+- Replaced the Contracts summary with a shorter, service-specific description.
+- Removed the `POPULAR` and `REVIEWED` card labels across all catalogue states.
+- Added `Contract drafting` and `Legal document drafting`; the Contracts filter
+  now returns 14 services and the full catalogue returns 82.
+- Verified one selected contract service appears in the cart with its
+  indicative fee and the order action.
+- Rewrote the annotated AI-capacity section around FST's own operating model:
+  supervised preparation, visible evidence and professional approval.
+
+No actionable P0, P1 or P2 differences remain. The targeted desktop layouts
+remain aligned, readable and free of label collisions at the annotated
+viewport.
+
+---
+
+# FST service cart design QA
+
+final result: passed
+
+Date: 29 July 2026
+State tested: one selected service, desktop sticky cart, mobile order tray and mobile cart sheet
+Source visual truth: `qa/service-catalogue-mobile-order-390x844.png`
+Implementation screenshot: `qa/service-catalogue-cart-mobile-390x844.png`
+Combined comparison: `qa/service-catalogue-cart-comparison-820x884.jpg`
+Viewport: 390 × 844 CSS px at 1× density; desktop interaction pass at 1440 × 900 CSS px
+Source pixels: 390 × 844; implementation pixels: 390 × 844; combined comparison pixels: 820 × 884
+
+## Full-view comparison evidence
+
+The previous mobile order form and redesigned cart were normalized to the same
+390 × 844 state and reviewed together. The redesigned cart removes the long
+contact-form stack, preserves the accepted navy/cobalt surface and coral
+primary action, and exposes the service, price, total and send action within
+one compact mobile sheet. Desktop retains the same catalogue grid and sticky
+order-panel proportions without horizontal overflow.
+
+## Focused-region comparison evidence
+
+The combined comparison is itself a focused order-sheet comparison. A separate
+crop was unnecessary because the selected service, total, remove control,
+primary action and supporting note are all legible at the normalized size.
+
+## Required fidelity surfaces
+
+- Fonts and typography: the Cormorant/Manrope hierarchy is preserved; the cart
+  title is shorter and clearer than the prior enquiry headline.
+- Spacing and layout rhythm: the removal of form rows produces a compact,
+  balanced sheet with clear service, total and action bands.
+- Colors and visual tokens: existing navy, cobalt, coral, translucent borders
+  and semantic success/error colors remain consistent.
+- Image and icon quality: the existing FST logo is unchanged and Phosphor cart,
+  send, remove and success icons remain sharp at both tested densities.
+- Copy and content: contact-form language and WhatsApp handoff are removed;
+  the UI now says Service cart, Indicative starting total and Send order.
+
+## Comparison history
+
+- Initial P2: the cart-count badge overlapped the mobile close control.
+- Fix: hide the redundant count badge inside the mobile sheet while retaining
+  the count in the persistent mobile review bar.
+- Post-fix evidence: `qa/service-catalogue-cart-mobile-390x844.png` shows an
+  unobstructed close control, no horizontal overflow and no form inputs.
+
+## Findings
+
+No actionable P0, P1 or P2 differences remain.
+
+## Interaction evidence
+
+- Service add/remove and selected-card state verified.
+- Indicative starting total verified at €100 for monthly bookkeeping.
+- Desktop cart and mobile order-sheet responsive states verified.
+- No name, email, organisation, timing or context inputs remain.
+- The send action was not triggered in browser QA, so no external email was
+  transmitted during visual validation; server delivery was verified with a
+  mocked binding in the automated suite.
+
+---
+
+# Historical FST service catalogue design QA
 
 final result: passed
 

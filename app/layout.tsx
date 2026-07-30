@@ -1,9 +1,12 @@
-import type { Metadata } from "next";
-import "@fontsource/manrope/400.css";
-import "@fontsource/manrope/500.css";
-import "@fontsource/manrope/600.css";
-import "@fontsource/cormorant-garamond/500.css";
-import "@fontsource/cormorant-garamond/500-italic.css";
+import type { Metadata, Viewport } from "next";
+import "@fontsource/manrope/latin-400.css";
+import "@fontsource/manrope/latin-500.css";
+import "@fontsource/manrope/latin-600.css";
+import "@fontsource/cormorant-garamond/latin-500.css";
+import "@fontsource/cormorant-garamond/latin-500-italic.css";
+import manropeRegularUrl from "@fontsource/manrope/files/manrope-latin-400-normal.woff2?url";
+import manropeSemiboldUrl from "@fontsource/manrope/files/manrope-latin-600-normal.woff2?url";
+import cormorantMediumUrl from "@fontsource/cormorant-garamond/files/cormorant-garamond-latin-500-normal.woff2?url";
 import "./globals.css";
 import { siteUrl } from "../lib/seo";
 import { siteConfig } from "../lib/site-config";
@@ -67,6 +70,13 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#fbfaf7",
+  colorScheme: "light",
+};
+
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const structuredData = {
     "@context": "https://schema.org",
@@ -123,6 +133,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 
   return (
     <html lang="en">
+      <head>
+        <link rel="preload" href={manropeRegularUrl} as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href={manropeSemiboldUrl} as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href={cormorantMediumUrl} as="font" type="font/woff2" crossOrigin="anonymous" />
+      </head>
       <body>
         <a className="skip-link" href="#main-content">Skip to main content</a>
         {children}

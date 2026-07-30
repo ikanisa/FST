@@ -7,6 +7,8 @@ export const siteConfig = {
   bookingUrl: "/book",
   primaryCtaLabel: "Book a Meeting",
   bookingRecipients: ["bosco@ikanisa.com"],
+  serviceOrderWhatsappDisplay: "+356 7718 6193",
+  serviceOrderWhatsappUrl: "https://wa.me/35677186193",
   appointmentScheduleUrl: process.env.NEXT_PUBLIC_GOOGLE_BOOKING_URL || "",
   serviceArea:
     "Supporting Malta-based and international businesses, finance teams and institutions through online and appointment-led engagements.",
