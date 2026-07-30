@@ -69,8 +69,8 @@ export default function ServiceCataloguePage() {
           </a>
         </div>
         <div className="catalogue-hero-pricing">
-          <strong>≈50% less</strong>
-          <p>Our standard starting fees are designed around roughly half the conventional full-service benchmark for comparable routine scope.</p>
+          <strong>Clear starting fees</strong>
+          <p>Indicative prices for straightforward work make it easier to compare scope and prepare one coordinated brief.</p>
           <small>Final fees depend on complexity, volume, records, deadlines and professional acceptance.</small>
         </div>
       </section>
@@ -127,7 +127,7 @@ export default function ServiceCataloguePage() {
       </section>
 
       <section className="catalogue-disclaimer section-shell">
-        <p><strong>Indicative fee notice.</strong> Prices are starting points for straightforward work with complete information and are not offers capable of acceptance. VAT, registry charges, disbursements and third-party fees are excluded unless expressly stated. FST confirms the responsible professional, engagement terms and fixed quote after reviewing scope. The ≈50% comparison is a pricing design target against comparable conventional delivery, not a guarantee against every market provider or every engagement.</p>
+        <p><strong>Indicative fee notice.</strong> Prices are starting points for straightforward work with complete information and are not offers capable of acceptance. VAT, registry charges, disbursements and third-party fees are excluded unless expressly stated. FST confirms the responsible professional, engagement terms and fixed quote after reviewing scope.</p>
       </section>
 
       <SiteFooter />

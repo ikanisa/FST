@@ -142,7 +142,8 @@ test("publishes a searchable multi-service catalogue with indicative prices and 
   const html = await response.text();
   assert.match(html, /Service Catalogue &amp; Indicative Fees \| FST/i);
   assert.match(html, /Choose the work\. See the starting fee\. Build one order\./i);
-  assert.match(html, /≈50% less/i);
+  assert.match(html, /Clear starting fees/i);
+  assert.doesNotMatch(html, /≈50% less/i);
   for (const category of [
     "Audit & assurance",
     "Accounting & reporting",
@@ -173,7 +174,7 @@ test("publishes a searchable multi-service catalogue with indicative prices and 
   assert.match(html, /Your FST order/i);
   assert.match(html, /Your cart is empty/i);
   assert.match(html, /required Malta authorisation|appropriately authorised Malta auditor|appropriately warranted legal professional/i);
-  assert.match(html, /not a guarantee against every market provider/i);
+  assert.doesNotMatch(html, /50%|roughly half|market provider/i);
   const cartSource = await readFile(path.join(root, "app/components/ServiceCatalogue.tsx"), "utf8");
   assert.match(cartSource, /Send order on WhatsApp/);
   assert.match(cartSource, /wa\.me\/35677186193|serviceOrderWhatsappUrl/);
@@ -465,7 +466,7 @@ test("contact, SEO and discovery routes render production signals", async () => 
   assert.match(robots, /Sitemap: https:\/\/fst\.ikanisa\.com\/sitemap\.xml/);
 });
 
-test("publishes only through the FST Cloudflare custom domain", async () => {
+test("keeps the FST Cloudflare custom domain and Sites source binding controlled", async () => {
   const config = JSON.parse(await readFile(path.join(root, "wrangler.jsonc"), "utf8"));
   assert.equal(config.workers_dev, false);
   assert.deepEqual(config.routes, [
@@ -475,10 +476,9 @@ test("publishes only through the FST Cloudflare custom domain", async () => {
     },
   ]);
   assert.equal(config.send_email, undefined);
-  await assert.rejects(
-    readFile(path.join(root, ".openai", "hosting.json")),
-    { code: "ENOENT" },
-  );
+  const hosting = JSON.parse(await readFile(path.join(root, ".openai", "hosting.json"), "utf8"));
+  assert.match(hosting.project_id, /^appgprj_[a-z0-9]+$/);
+  assert.deepEqual(Object.keys(hosting), ["project_id"]);
 });
 
 test("service cart creates a WhatsApp order link for the dedicated order number", async () => {

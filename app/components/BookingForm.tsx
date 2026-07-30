@@ -1,14 +1,26 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { trackConversion } from "../../lib/analytics";
 import { googleCalendarTemplateUrl, siteConfig } from "../../lib/site-config";
 
 type BookingResult = { calendarUrl?: string; meetUrl?: string; error?: string };
 
+function minimumBookableStart() {
+  const date = new Date(Date.now() + 60 * 60 * 1000);
+  date.setMinutes(Math.ceil(date.getMinutes() / 15) * 15, 0, 0);
+  const local = new Date(date.getTime() - date.getTimezoneOffset() * 60 * 1000);
+  return local.toISOString().slice(0, 16);
+}
+
 export function BookingForm() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "unavailable" | "error">("idle");
   const [result, setResult] = useState<BookingResult>({});
+  const startInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    startInputRef.current?.setAttribute("min", minimumBookableStart());
+  }, []);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -102,7 +114,7 @@ export function BookingForm() {
       </div>
       <label>Organisation or project<input name="organisation" autoComplete="organization" /></label>
       <div className="field-row">
-        <label>Requested start<input type="datetime-local" name="start" required /></label>
+        <label>Requested start<input ref={startInputRef} type="datetime-local" name="start" required /></label>
         <label>Conversation length<select name="duration" defaultValue="30"><option value="30">30 minutes</option><option value="60">60 minutes</option></select></label>
       </div>
       <label>What must be decided or completed?<textarea name="context" rows={4} /></label>
@@ -110,7 +122,15 @@ export function BookingForm() {
         <input type="checkbox" name="privacy_consent" value="agreed" required />
         <span>I permit FST to use these details to process and respond to this scheduling request.</span>
       </label>
-      {status === "error" && <p className="form-error" role="alert">{result.error === "slot_unavailable" ? "That slot has just been taken. Select a different one." : "The request could not be completed. Try again or use the phone or WhatsApp channel."}</p>}
+      {status === "error" && (
+        <p className="form-error" role="alert">
+          {result.error === "slot_unavailable"
+            ? "That slot has just been taken. Select a different one."
+            : result.error === "time_out_of_range"
+              ? "Choose a time at least one hour from now and within the next 180 days."
+              : "The request could not be completed. Try again or use the phone or WhatsApp channel."}
+        </p>
+      )}
       <button className="submit-button" type="submit" disabled={status === "submitting"}>{status === "submitting" ? "Checking the requested slot…" : siteConfig.primaryCtaLabel}</button>
       <p className="booking-note">A request becomes confirmed only when the calendar invitation is issued with its meeting link.</p>
       {siteConfig.appointmentScheduleUrl && <a className="schedule-link" href={siteConfig.appointmentScheduleUrl} target="_blank" rel="noreferrer">Browse the full calendar schedule</a>}

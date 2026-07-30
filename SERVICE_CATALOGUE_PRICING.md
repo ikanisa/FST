@@ -5,9 +5,7 @@ Market focus: Malta first, with EU and UK professional-services comparators wher
 
 ## Pricing position
 
-The public catalogue uses indicative **From** fees for straightforward work with complete records and ordinary delivery timing. The target is approximately 50% below a comparable conventional full-service engagement, enabled by specialised professional AI agents handling structured research, first-pass drafting, reconciliation, evidence indexing and repeatable quality checks.
-
-This is a pricing design target, not a promise that every FST fee will be 50% below every provider. The lowest automation-led competitors can already be cheaper in narrow categories. Statutory audit, legal work, CSP activity and other regulated outputs retain human professional time and cannot be reduced mechanically.
+The public catalogue uses indicative **From** fees for straightforward work with complete records and ordinary delivery timing. It does not make a comparative savings claim. Specialised professional AI agents may support structured research, first-pass drafting, reconciliation, evidence indexing and repeatable quality checks, while responsible professionals retain control of scope, judgement, approval and regulated outputs.
 
 All public prices:
 

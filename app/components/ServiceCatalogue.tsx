@@ -89,6 +89,7 @@ export function ServiceCatalogue() {
           <span className="sr-only">Search services</span>
           <input
             type="search"
+            aria-label="Search services"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Search bookkeeping, VAT, contracts, grants…"
@@ -243,7 +244,7 @@ function OrderPanel({
           <p className="eyebrow">Service cart</p>
           <h2 id={titleId}>Your FST order</h2>
         </div>
-        <span aria-label={`${selectedServices.length} services in cart`}>{selectedServices.length}</span>
+        <span aria-label={`${selectedServices.length} ${selectedServices.length === 1 ? "service" : "services"} in cart`}>{selectedServices.length}</span>
       </div>
       {!selectedServices.length ? (
         <div className="catalogue-order-empty">
