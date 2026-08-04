@@ -1,4 +1,5 @@
 import { siteUrl } from "../../lib/seo";
+import { legalDisclosureReady } from "../../lib/site-config";
 
 type JsonLdProps = {
   data: Record<string, unknown>;
@@ -69,7 +70,7 @@ export function ServiceJsonLd({
           name,
           url,
           description,
-          provider: { "@id": `${siteUrl}/#organization` },
+          provider: legalDisclosureReady ? { "@id": `${siteUrl}/#organization` } : undefined,
           areaServed: [
             { "@type": "Country", name: "Malta" },
             { "@type": "Place", name: "International" },

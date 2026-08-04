@@ -1,11 +1,13 @@
 # FST service catalogue pricing basis
 
-Reviewed: 29 July 2026
+Reviewed: 3 August 2026
 Market focus: Malta first, with EU and UK professional-services comparators where Malta firms do not publish detailed rate cards.
 
 ## Pricing position
 
-The public catalogue uses indicative **From** fees for straightforward work with complete records and ordinary delivery timing. It does not make a comparative savings claim. Specialised professional AI agents may support structured research, first-pass drafting, reconciliation, evidence indexing and repeatable quality checks, while responsible professionals retain control of scope, judgement, approval and regulated outputs.
+The public catalogue uses indicative **From** fees for straightforward work with complete records and ordinary delivery timing. Public copy describes the model as efficient and AI-assisted without making a blanket percentage-saving claim. Internally, the catalogue was initially calibrated toward a materially lower fee than comparable conventional full-service engagements, enabled by specialised professional AI agents handling structured research, first-pass drafting, reconciliation, evidence indexing and repeatable quality checks.
+
+The benchmark comparison is a pricing design record, not a public promise that every FST fee will be cheaper than every provider. The lowest automation-led competitors can already be cheaper in narrow categories. Statutory audit, legal work, CSP activity and other regulated outputs retain human professional time and cannot be reduced mechanically.
 
 All public prices:
 

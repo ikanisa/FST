@@ -46,7 +46,7 @@ export default function ServicesPage() {
           <h2>Compare individual services and indicative fees.</h2>
         </div>
         <div>
-          <p>Search the full catalogue, combine several work items and send one order enquiry. Every request starts with a free scope and fee check.</p>
+          <p>Search the full catalogue, combine several work items and send one service request. Every request starts with a free scope and fee check.</p>
           <Link className="primary-button" href="/services/catalogue">Browse the Service Catalogue</Link>
         </div>
       </section>

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const storageKey = "fst-analytics-consent";
@@ -43,11 +44,11 @@ export function AnalyticsConsent() {
   if (choice || !measurementId) return null;
 
   return (
-    <aside className="consent-banner" aria-label="Website measurement choice">
+    <aside className="analytics-consent" aria-label="Website measurement choice">
       <div>
         <strong>Optional website measurement</strong>
         <p>
-          Anonymous analytics help us identify slow or unclear pages. Refusing them does not change site access.
+          Anonymous analytics help us identify slow or unclear pages. Refusing them does not change site access. See the <Link href="/privacy">privacy and cookie notice</Link>.
         </p>
       </div>
       <div className="consent-actions">

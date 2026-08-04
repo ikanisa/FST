@@ -74,7 +74,7 @@ export function ServiceCatalogue() {
       const isRemoving = current.includes(id);
       const next = isRemoving ? current.filter((serviceId) => serviceId !== id) : [...current, id];
       setCartAnnouncement(
-        `${service?.title || "Service"} ${isRemoving ? "removed from" : "added to"} your order. ${next.length} ${next.length === 1 ? "service" : "services"} selected.`,
+        `${service?.title || "Service"} ${isRemoving ? "removed from" : "added to"} your request. ${next.length} ${next.length === 1 ? "service" : "services"} selected.`,
       );
       return next;
     });
@@ -155,7 +155,7 @@ export function ServiceCatalogue() {
                         className={selected ? "catalogue-remove-button" : "catalogue-add-button"}
                         onClick={() => toggleService(service.id)}
                         aria-pressed={selected}
-                        aria-label={`${selected ? "Remove" : "Add"} ${service.title} ${selected ? "from" : "to"} order`}
+                        aria-label={`${selected ? "Remove" : "Add"} ${service.title} ${selected ? "from" : "to"} request`}
                       >
                         {selected ? <><Check size={17} aria-hidden="true" /> Added</> : <><Plus size={17} aria-hidden="true" /> Add</>}
                       </button>
@@ -175,7 +175,7 @@ export function ServiceCatalogue() {
         </div>
 
         <aside className="catalogue-order-desktop" aria-label="Your selected services">
-          <OrderPanel
+          <RequestPanel
             selectedServices={selectedServices}
             removeService={toggleService}
           />
@@ -190,18 +190,18 @@ export function ServiceCatalogue() {
           aria-haspopup="dialog"
         >
           <span>{selectedServices.length} {selectedServices.length === 1 ? "service" : "services"} selected</span>
-          <strong>Review order</strong>
+          <strong>Review request</strong>
         </button>
       )}
 
       {mobileOrderOpen && (
         <div className="catalogue-order-modal" role="dialog" aria-modal="true" aria-labelledby="mobile-order-title">
-          <button className="catalogue-order-backdrop" type="button" onClick={() => setMobileOrderOpen(false)} aria-label="Dismiss order overlay" />
+          <button className="catalogue-order-backdrop" type="button" onClick={() => setMobileOrderOpen(false)} aria-label="Dismiss service-request overlay" />
           <div className="catalogue-order-sheet" ref={mobileOrderRef}>
-            <button className="catalogue-order-close" type="button" onClick={() => setMobileOrderOpen(false)} aria-label="Close order summary" autoFocus>
+            <button className="catalogue-order-close" type="button" onClick={() => setMobileOrderOpen(false)} aria-label="Close service-request summary" autoFocus>
               <X size={20} aria-hidden="true" />
             </button>
-            <OrderPanel
+            <RequestPanel
               selectedServices={selectedServices}
               removeService={toggleService}
               titleId="mobile-order-title"
@@ -213,7 +213,7 @@ export function ServiceCatalogue() {
   );
 }
 
-function OrderPanel({
+function RequestPanel({
   selectedServices,
   removeService,
   titleId,
@@ -223,13 +223,13 @@ function OrderPanel({
   titleId?: string;
 }) {
   const startingTotal = selectedServices.reduce((total, service) => total + (service?.from || 0), 0);
-  const orderLines = selectedServices.flatMap((service, index) =>
+  const requestLines = selectedServices.flatMap((service, index) =>
     service ? [`${index + 1}. ${service.title} — ${formatCataloguePrice(service)} · ${service.unit}`] : [],
   );
   const whatsappMessage = [
     "Hello FST, I would like to request the following services:",
     "",
-    ...orderLines,
+    ...requestLines,
     "",
     `Indicative starting total: €${startingTotal.toLocaleString("en-IE")}`,
     "",
@@ -241,15 +241,15 @@ function OrderPanel({
     <div className="catalogue-order-panel">
       <div className="catalogue-cart-heading">
         <div>
-          <p className="eyebrow">Service cart</p>
-          <h2 id={titleId}>Your FST order</h2>
+          <p className="eyebrow">Service request</p>
+          <h2 id={titleId}>Your FST request</h2>
         </div>
-        <span aria-label={`${selectedServices.length} ${selectedServices.length === 1 ? "service" : "services"} in cart`}>{selectedServices.length}</span>
+        <span aria-label={`${selectedServices.length} ${selectedServices.length === 1 ? "service" : "services"} in request`}>{selectedServices.length}</span>
       </div>
       {!selectedServices.length ? (
         <div className="catalogue-order-empty">
           <ShoppingCartSimple size={28} aria-hidden="true" />
-          <p>Your cart is empty. Add services from the catalogue to build one order.</p>
+          <p>Your request is empty. Add services from the catalogue to prepare one scope request.</p>
         </div>
       ) : (
         <>
@@ -278,10 +278,10 @@ function OrderPanel({
             onClick={() => trackConversion("service_catalogue_order")}
           >
             <WhatsappLogoIcon size={20} weight="fill" aria-hidden="true" />
-            Send order on WhatsApp
+            Send request on WhatsApp
           </a>
           <p className="catalogue-order-note">
-            WhatsApp opens with your service list ready to send to FST at {siteConfig.serviceOrderWhatsappDisplay}. No contact form or payment at this stage.
+            WhatsApp opens with your service list ready to send to FST’s catalogue-request channel at {siteConfig.serviceOrderWhatsappDisplay}. Sending it does not create an engagement or payment obligation.
           </p>
         </>
       )}

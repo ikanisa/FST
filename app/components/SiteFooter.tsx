@@ -20,8 +20,12 @@ export function SiteFooter() {
           <Link href="/services/catalogue">Service Catalogue</Link>
           <Link href="/who-we-work-with">Organisations</Link>
           <Link href="/about">Our Approach</Link>
+          <Link href="/insights">Insights</Link>
           <Link href="/ai-agent-team">Meet Our AI Agent Team</Link>
           <Link href="/contact">Get in touch</Link>
+          <Link href="/legal-information">Legal information</Link>
+          <Link href="/privacy">Privacy & cookies</Link>
+          <Link href="/terms">Site terms</Link>
         </nav>
         <div className="footer-contact">
           <TrackedLink href={siteConfig.whatsappUrl} event="contact_whatsapp_click" target="_blank" rel="noreferrer">WhatsApp · {siteConfig.whatsappDisplay}</TrackedLink>
@@ -29,7 +33,7 @@ export function SiteFooter() {
           {siteConfig.linkedInUrl && <TrackedLink href={siteConfig.linkedInUrl} event="linkedin_click" target="_blank" rel="noreferrer">LinkedIn</TrackedLink>}
         </div>
       </div>
-      <small>© 2026 FST. Advisory support delivered online and by prior appointment.</small>
+      <small>© 2026 FST. Website requests are non-binding. The contracting provider and responsible professional are confirmed before any engagement starts.</small>
     </footer>
   );
 }

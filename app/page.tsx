@@ -17,6 +17,7 @@ import { SectionVisual } from "./components/SectionVisual";
 import { SiteFooter } from "./components/SiteFooter";
 import { SiteHeader } from "./components/SiteHeader";
 import { ResponsiveImage } from "./components/ResponsiveImage";
+import { fieldNotes } from "../lib/field-notes";
 
 const capabilities = [
   {
@@ -90,21 +91,6 @@ const capabilities = [
     ],
     tone: "sand",
     icon: HandCoins,
-  },
-];
-
-const insights = [
-  {
-    category: "Controls in practice",
-    title: "When a control is worth keeping—and when it is only adding delay",
-  },
-  {
-    category: "Planning & delivery",
-    title: "A business plan is only credible when the operating milestones agree",
-  },
-  {
-    category: "Finance operations",
-    title: "The monthly evidence routine that makes year-end work easier",
   },
 ];
 
@@ -238,10 +224,10 @@ export default function Home() {
         </div>
         <SectionVisual src="/fst-insights.webp" alt="An evidence-led advisory research workspace with organised notes and schedules" className="section-banner-visual" />
         <div className="insight-grid">
-          {insights.map((insight, index) => (
-            <Link href="/about#field-notes" key={insight.title} className={`insight-card insight-${index + 1}`}>
-              <span>{insight.category}</span>
-              <h3>{insight.title}</h3>
+          {fieldNotes.map((note, index) => (
+            <Link href={`/insights/${note.slug}`} key={note.slug} className={`insight-card insight-${index + 1}`}>
+              <span>{note.category}</span>
+              <h3>{note.title}</h3>
             </Link>
           ))}
         </div>

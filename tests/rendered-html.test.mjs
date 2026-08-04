@@ -90,9 +90,10 @@ test("renders the new FST identity, navigation and service-category model", asyn
   assert.match(html, /Services/);
   assert.match(html, /Organisations/);
   assert.match(html, /Our Approach/);
+  assert.match(html, /Insights/);
   assert.match(html, /AI Agent Team/);
   assert.match(html, /src="\/brand\/fst-logo\.svg"/);
-  assert.doesNotMatch(html, /href="\/insights"/i);
+  assert.match(html, /href="\/insights"/i);
   assert.match(html, /src="\/fst-hero\.webp"/);
   assert.equal(response.headers.get("x-content-type-options"), "nosniff");
 });
@@ -141,9 +142,9 @@ test("publishes a searchable multi-service catalogue with indicative prices and 
   assert.equal(response.status, 200);
   const html = await response.text();
   assert.match(html, /Service Catalogue &amp; Indicative Fees \| FST/i);
-  assert.match(html, /Choose the work\. See the starting fee\. Build one order\./i);
-  assert.match(html, /Clear starting fees/i);
-  assert.doesNotMatch(html, /≈50% less/i);
+  assert.match(html, /Choose the work\. See the starting fee\. Build one request\./i);
+  assert.match(html, /Efficient by design/i);
+  assert.doesNotMatch(html, /≈50% less|roughly half/i);
   for (const category of [
     "Audit & assurance",
     "Accounting & reporting",
@@ -171,12 +172,13 @@ test("publishes a searchable multi-service catalogue with indicative prices and 
   assert.match(html, />Clear fees</);
   assert.doesNotMatch(html, /Clear [“"]From[”"] fees/);
   assert.match(html, /Free scope check/i);
-  assert.match(html, /Your FST order/i);
-  assert.match(html, /Your cart is empty/i);
+  assert.match(html, /Your FST request/i);
+  assert.match(html, /Your request is empty/i);
   assert.match(html, /required Malta authorisation|appropriately authorised Malta auditor|appropriately warranted legal professional/i);
   assert.doesNotMatch(html, /50%|roughly half|market provider/i);
+  assert.match(html, /contracting provider and responsible professional are confirmed/i);
   const cartSource = await readFile(path.join(root, "app/components/ServiceCatalogue.tsx"), "utf8");
-  assert.match(cartSource, /Send order on WhatsApp/);
+  assert.match(cartSource, /Send request on WhatsApp/);
   assert.match(cartSource, /wa\.me\/35677186193|serviceOrderWhatsappUrl/);
   assert.match(cartSource, /Indicative starting total/);
   assert.doesNotMatch(cartSource, /api\/service-order|<form|mailto:|name="email"|emailed directly/i);
@@ -235,14 +237,33 @@ test("explicitly serves start-ups, self-employed professionals, SMEs and NGOs", 
   ]) assert.match(html, new RegExp(label, "i"));
 });
 
-test("combines the FST approach and field notes on one route", async () => {
+test("publishes the FST approach and substantive field notes on direct routes", async () => {
   const about = await (await render("/about")).text();
   assert.match(about, /The FST approach/i);
   assert.match(about, /Working notes for decisions in motion/i);
   assert.match(about, /What a useful internal-control review should leave behind/i);
   assert.match(about, /Building a tax working file that reconciles before filing day/i);
-  assert.doesNotMatch(about, /href="\/insights"/i);
-  assert.equal((await render("/insights")).status, 404);
+  assert.match(about, /href="\/insights\/useful-internal-control-review"/i);
+
+  const insights = await render("/insights");
+  assert.equal(insights.status, 200);
+  const index = await insights.text();
+  assert.match(index, /Working notes for decisions in motion/i);
+  for (const slug of [
+    "useful-internal-control-review",
+    "stress-testing-business-plan",
+    "tax-working-file-that-reconciles",
+  ]) {
+    assert.match(index, new RegExp(`href="/insights/${slug}"`, "i"));
+    const article = await render(`/insights/${slug}`);
+    assert.equal(article.status, 200);
+    const articleHtml = await article.text();
+    assert.match(articleHtml, /"@type":"Article"/i);
+    assert.match(articleHtml, /property="og:type" content="article"/i);
+    assert.match(articleHtml, /property="og:image:width" content="1536"/i);
+    assert.match(articleHtml, /This article is general information/i);
+  }
+  assert.equal((await render("/insights/not-a-published-note")).status, 404);
 });
 
 test("presents the supervised IKANISA AI agent team with a clear human approval boundary", async () => {
@@ -385,9 +406,12 @@ test("publishes the approved FST logo and browser asset family", async () => {
   assert.match(await manifest.text(), /icon-192\.png/);
 });
 
-test("removed legacy and legal routes return 404", async () => {
-  for (const pathname of ["/services/investment-family-office", "/services/corporate-fiduciary", "/services/tax-accounting-payroll", "/insights", "/privacy", "/terms"]) {
+test("removed legacy routes return 404 while legal and privacy routes render", async () => {
+  for (const pathname of ["/services/investment-family-office", "/services/corporate-fiduciary", "/services/tax-accounting-payroll"]) {
     assert.equal((await render(pathname)).status, 404);
+  }
+  for (const pathname of ["/insights", "/legal-information", "/privacy", "/terms"]) {
+    assert.equal((await render(pathname)).status, 200);
   }
 });
 
@@ -419,6 +443,10 @@ test("uses clear canonical service URLs and preserves legacy link authority", as
   assert.match(sitemap, /https:\/\/fst\.ikanisa\.com\/services\/catalogue/);
   assert.match(sitemap, /https:\/\/fst\.ikanisa\.com\/services\/loan-funding-application-support/);
   assert.match(sitemap, /https:\/\/fst\.ikanisa\.com\/ai-agent-team/);
+  assert.match(sitemap, /https:\/\/fst\.ikanisa\.com\/insights\/useful-internal-control-review/);
+  assert.match(sitemap, /https:\/\/fst\.ikanisa\.com\/legal-information/);
+  assert.match(sitemap, /https:\/\/fst\.ikanisa\.com\/privacy/);
+  assert.match(sitemap, /https:\/\/fst\.ikanisa\.com\/terms/);
   assert.doesNotMatch(sitemap, /services\/tax-vat|business-planning-finance-applications|services\/loan-application-support|services\/funding-applications/);
 });
 
@@ -426,7 +454,7 @@ test("publishes page-level SEO schema, one primary heading and responsive images
   const home = await (await render("/")).text();
   assert.equal((home.match(/<h1(?:\s|>)/gi) || []).length, 1);
   assert.match(home, /"@type":"WebSite"/);
-  assert.match(home, /"@id":"https:\/\/fst\.ikanisa\.com\/#organization"/);
+  assert.doesNotMatch(home, /"@id":"https:\/\/fst\.ikanisa\.com\/#organization"/);
   assert.match(home, /srcset="\/fst-hero-640\.webp 640w, \/fst-hero-960\.webp 960w, \/fst-hero\.webp 1536w"/i);
 
   const service = await (await render("/services/taxation")).text();
@@ -453,6 +481,9 @@ test("contact, SEO and discovery routes render production signals", async () => 
   ]);
   assert.match(contact, /wa\.me\/35699152999/);
   assert.match(contact, />\+35699152999</);
+  assert.match(contact, /general enquiries/i);
+  assert.match(contact, /separate service-request channel/i);
+  assert.match(contact, /href="\/legal-information"/i);
   assert.doesNotMatch(contact, /tel:/i);
   assert.doesNotMatch(contact, /Open FST WhatsApp/i);
   assert.doesNotMatch(contact, /7942\s*8604|79428604/);
@@ -462,12 +493,37 @@ test("contact, SEO and discovery routes render production signals", async () => 
   assert.match(sitemap, /services\/catalogue/);
   assert.match(sitemap, /services\/loan-funding-application-support/);
   assert.match(sitemap, /ai-agent-team/);
-  assert.doesNotMatch(sitemap, /services\/funding-applications|services\/loan-application-support|investment-family-office|corporate-fiduciary|\/insights|\/privacy|\/terms/);
+  assert.match(sitemap, /\/insights/);
+  assert.match(sitemap, /\/privacy/);
+  assert.match(sitemap, /\/terms/);
+  assert.match(sitemap, /\/legal-information/);
+  assert.doesNotMatch(sitemap, /services\/funding-applications|services\/loan-application-support|investment-family-office|corporate-fiduciary/);
   assert.match(robots, /Sitemap: https:\/\/fst\.ikanisa\.com\/sitemap\.xml/);
 });
 
-test("keeps the FST Cloudflare custom domain and Sites source binding controlled", async () => {
+test("publishes fail-closed legal, privacy and enquiry safeguards", async () => {
+  const [legal, privacy, terms, booking, footer] = await Promise.all([
+    render("/legal-information").then((response) => response.text()),
+    render("/privacy").then((response) => response.text()),
+    render("/terms").then((response) => response.text()),
+    render("/book").then((response) => response.text()),
+    render("/").then((response) => response.text()),
+  ]);
+  assert.match(legal, /legal-entity, registration, address and professional-authorisation details have not yet been approved/i);
+  assert.match(legal, /website request does not itself appoint an auditor/i);
+  assert.match(privacy, /Controller disclosure is awaiting approved legal details/i);
+  assert.match(privacy, /Cloudflare|Google|WhatsApp/i);
+  assert.match(terms, /does not create a client relationship/i);
+  assert.match(booking, /href="\/privacy"/i);
+  assert.match(booking, /Do not include passwords/i);
+  assert.match(footer, /href="\/legal-information"/i);
+  assert.match(footer, /href="\/privacy"/i);
+  assert.match(footer, /href="\/terms"/i);
+});
+
+test("publishes only through the FST Cloudflare custom domain", async () => {
   const config = JSON.parse(await readFile(path.join(root, "wrangler.jsonc"), "utf8"));
+  const packageJson = JSON.parse(await readFile(path.join(root, "package.json"), "utf8"));
   assert.equal(config.workers_dev, false);
   assert.deepEqual(config.routes, [
     {
@@ -479,9 +535,11 @@ test("keeps the FST Cloudflare custom domain and Sites source binding controlled
   const hosting = JSON.parse(await readFile(path.join(root, ".openai", "hosting.json"), "utf8"));
   assert.match(hosting.project_id, /^appgprj_[a-z0-9]+$/);
   assert.deepEqual(Object.keys(hosting), ["project_id"]);
+  assert.match(packageJson.scripts.deploy, /(?:vinext|wrangler) deploy/i);
+  assert.doesNotMatch(JSON.stringify(packageJson.scripts), /vercel|netlify/i);
 });
 
-test("service cart creates a WhatsApp order link for the dedicated order number", async () => {
+test("service request creates a WhatsApp handoff link for the dedicated catalogue number", async () => {
   const cartSource = await readFile(path.join(root, "app/components/ServiceCatalogue.tsx"), "utf8");
   const siteConfigSource = await readFile(path.join(root, "lib/site-config.ts"), "utf8");
   await assert.rejects(
@@ -493,7 +551,7 @@ test("service cart creates a WhatsApp order link for the dedicated order number"
   assert.match(cartSource, /Hello FST, I would like to request the following services/);
   assert.match(cartSource, /encodeURIComponent\(whatsappMessage\)/);
   assert.match(cartSource, /target="_blank"/);
-  assert.match(cartSource, /Send order on WhatsApp/);
+  assert.match(cartSource, /Send request on WhatsApp/);
 });
 
 test("native booking validates input and fails safely without credentials", async () => {

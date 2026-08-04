@@ -1,6 +1,6 @@
 # FST production-readiness UAT and QA report
 
-Date: 29 July 2026
+Date: 3 August 2026
 Profiles: desktop 1440 × 900 and mobile 390 × 844
 
 ## Acceptance summary
@@ -22,6 +22,9 @@ Profiles: desktop 1440 × 900 and mobile 390 × 844
 | Horizontal-overflow sweep | Pass |
 | SEO, sitemap and removed-route checks | Pass |
 | Booking validation and safe unconfigured state | Pass |
+| Legal, privacy and terms routes | Pass — source is fail-closed pending approved disclosure values |
+| Insights index and direct article routes | Pass |
+| Non-binding service-request language | Pass |
 | Production dependency audit | Pass — zero known vulnerabilities |
 | Cloudflare deploy dry-run | Pass |
 
@@ -38,12 +41,19 @@ The browser sweep passed all retained public routes:
 - `/services/corporate-services`
 - `/services/loan-funding-application-support`
 - `/who-we-work-with`
-- `/about` — FST approach and field notes
+- `/about` — FST approach and featured field notes
+- `/insights`
+- `/insights/useful-internal-control-review`
+- `/insights/stress-testing-business-plan`
+- `/insights/tax-working-file-that-reconciles`
 - `/ai-agent-team` — supervised IKANISA agent team and workpack model
 - `/contact`
 - `/book`
+- `/legal-information`
+- `/privacy`
+- `/terms`
 
-The removed `/privacy`, `/terms`, `/services/investment-family-office`, `/services/corporate-fiduciary` and superseded `/services/tax-accounting-payroll` routes return 404. The previous loan and funding service routes permanently redirect to the consolidated service.
+The removed `/services/investment-family-office`, `/services/corporate-fiduciary` and superseded `/services/tax-accounting-payroll` routes return 404. The previous loan and funding service routes permanently redirect to the consolidated service. Legal disclosures remain visibly incomplete until approved environment values are supplied.
 
 ## Service-content acceptance
 

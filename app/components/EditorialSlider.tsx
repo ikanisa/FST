@@ -60,7 +60,7 @@ export function EditorialSlider() {
           <button type="button" onClick={selectPrevious} aria-label="Back — show the previous story">Back</button>
           {!reducedMotion && (
             <button type="button" onClick={() => setPaused((value) => !value)} aria-pressed={paused}>
-              {paused ? "Resume" : "Hold"}
+              {paused ? "Resume" : "Pause"}
             </button>
           )}
           <button type="button" onClick={selectNext} aria-label="Forward — show the next story">Forward</button>

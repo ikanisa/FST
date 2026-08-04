@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { trackConversion } from "../../lib/analytics";
 import { googleCalendarTemplateUrl, siteConfig } from "../../lib/site-config";
@@ -117,10 +118,11 @@ export function BookingForm() {
         <label>Requested start<input ref={startInputRef} type="datetime-local" name="start" required /></label>
         <label>Conversation length<select name="duration" defaultValue="30"><option value="30">30 minutes</option><option value="60">60 minutes</option></select></label>
       </div>
-      <label>What must be decided or completed?<textarea name="context" rows={4} /></label>
+      <label>What must be decided or completed?<textarea name="context" rows={4} aria-describedby="booking-context-note" /></label>
+      <p className="booking-data-note" id="booking-context-note">Do not include passwords, payment credentials, identity documents, health information or confidential client records in this form.</p>
       <label className="consent-check">
         <input type="checkbox" name="privacy_consent" value="agreed" required />
-        <span>I permit FST to use these details to process and respond to this scheduling request.</span>
+        <span>I permit FST to use these details to process and respond to this scheduling request as described in the <Link href="/privacy">privacy notice</Link>.</span>
       </label>
       {status === "error" && (
         <p className="form-error" role="alert">
@@ -132,7 +134,7 @@ export function BookingForm() {
         </p>
       )}
       <button className="submit-button" type="submit" disabled={status === "submitting"}>{status === "submitting" ? "Checking the requested slot…" : siteConfig.primaryCtaLabel}</button>
-      <p className="booking-note">A request becomes confirmed only when the calendar invitation is issued with its meeting link.</p>
+      <p className="booking-note">A meeting request is not a professional engagement. The legal provider, responsible professional, scope and terms are confirmed separately before work starts.</p>
       {siteConfig.appointmentScheduleUrl && <a className="schedule-link" href={siteConfig.appointmentScheduleUrl} target="_blank" rel="noreferrer">Browse the full calendar schedule</a>}
     </form>
   );

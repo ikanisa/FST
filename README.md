@@ -32,17 +32,21 @@ footer and structured organisation metadata.
 - `/services/accounting-financial-reporting`
 - `/services/corporate-services`
 - `/services/loan-funding-application-support`
-- `/about` — FST approach and field notes
+- `/about` — FST approach and featured field notes
+- `/insights` — substantive field-note index and individual articles
 - `/ai-agent-team` — how FST uses IKANISA’s supervised AI agent team
 - `/contact`
 - `/book` — Google Calendar and Google Meet booking
+- `/legal-information` — configuration-gated provider and professional disclosures
+- `/privacy` — privacy and cookie notice
+- `/terms` — website terms
 
 ## First-party integrations
 
 - `/api/book` validates meeting requests, checks Google Calendar free/busy availability, and creates a Calendar event with Google Meet and attendee notifications.
 - Every primary website action uses the label “Book a Meeting” and routes to `/book`.
 - Confirmed Calendar events invite the prospective client and FST’s approved scheduling contact with `sendUpdates=all`.
-- The service catalogue creates a prefilled WhatsApp order containing the selected services and indicative total, then opens the dedicated order chat at `+356 7718 6193`; no email form, `mailto:` action or payment step is used.
+- The service catalogue creates a prefilled, non-binding WhatsApp request containing the selected services and indicative total, then opens the dedicated catalogue-request chat at `+356 7718 6193`; no email form, `mailto:` action or payment step is used.
 - Booking fails safely when production credentials are absent by producing a dated Google Calendar invitation.
 - Required hosted values are listed in `.env.example` and `GO_LIVE_IMPLEMENTATION.md`.
 

@@ -1,6 +1,17 @@
 export const siteConfig = {
   name: "FST",
   url: (process.env.NEXT_PUBLIC_SITE_URL || "https://fst.ikanisa.com").replace(/\/$/, ""),
+  portfolioRelationship:
+    "FST operates within the IKANISA portfolio and uses IKANISA’s supervised professional AI-agent infrastructure.",
+  legalName: process.env.NEXT_PUBLIC_LEGAL_NAME || "",
+  companyRegistrationNumber: process.env.NEXT_PUBLIC_COMPANY_REGISTRATION_NUMBER || "",
+  vatNumber: process.env.NEXT_PUBLIC_VAT_NUMBER || "",
+  registeredAddress: process.env.NEXT_PUBLIC_REGISTERED_ADDRESS || "",
+  contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "",
+  complaintsEmail: process.env.NEXT_PUBLIC_COMPLAINTS_EMAIL || "",
+  accountancyBoardRegistration: process.env.NEXT_PUBLIC_ACCOUNTANCY_BOARD_REGISTRATION || "",
+  responsiblePrincipal: process.env.NEXT_PUBLIC_RESPONSIBLE_PRINCIPAL || "",
+  principalWarrantNumber: process.env.NEXT_PUBLIC_PRINCIPAL_WARRANT_NUMBER || "",
   whatsappDisplay: "+35699152999",
   whatsappUrl: "https://wa.me/35699152999",
   linkedInUrl: process.env.NEXT_PUBLIC_LINKEDIN_URL || "",
@@ -13,6 +24,13 @@ export const siteConfig = {
   serviceArea:
     "Supporting Malta-based and international businesses, finance teams and institutions through online and appointment-led engagements.",
 } as const;
+
+export const legalDisclosureReady = Boolean(
+  siteConfig.legalName &&
+  siteConfig.companyRegistrationNumber &&
+  siteConfig.registeredAddress &&
+  siteConfig.contactEmail,
+);
 
 export function googleCalendarTemplateUrl({
   start,

@@ -3,6 +3,7 @@ import { ClockCountdown } from "@phosphor-icons/react/dist/ssr/ClockCountdown";
 import { CurrencyEur } from "@phosphor-icons/react/dist/ssr/CurrencyEur";
 import { ShieldCheck } from "@phosphor-icons/react/dist/ssr/ShieldCheck";
 import { pageMetadata, siteUrl } from "../../../lib/seo";
+import { legalDisclosureReady } from "../../../lib/site-config";
 import { catalogueCategories, catalogueServices } from "../../../lib/service-catalogue";
 import { BreadcrumbJsonLd, JsonLd } from "../../components/JsonLd";
 import { ServiceCatalogue } from "../../components/ServiceCatalogue";
@@ -11,7 +12,7 @@ import { SiteHeader } from "../../components/SiteHeader";
 
 export const metadata = pageMetadata({
   title: "Service Catalogue & Indicative Fees",
-  description: "Compare FST audit, accounting, tax, payroll, corporate, management, funding and contract services, then build one coordinated order enquiry.",
+  description: "Compare FST audit, accounting, tax, payroll, corporate, management, funding and contract services, then build one coordinated service request.",
   path: "/services/catalogue",
   image: "/catalogue-og.jpg",
   imageAlt: "FST Service Catalogue — choose the work, see the starting fee.",
@@ -52,7 +53,7 @@ export default function ServiceCataloguePage() {
                   "@type": "Service",
                   name: service.title,
                   description: service.description,
-                  provider: { "@id": `${siteUrl}/#organization` },
+                  provider: legalDisclosureReady ? { "@id": `${siteUrl}/#organization` } : undefined,
                 },
               })),
           })),
@@ -62,15 +63,15 @@ export default function ServiceCataloguePage() {
 
       <section className="catalogue-hero">
         <div className="catalogue-hero-copy">
-          <h1>Choose the work. See the starting fee. Build one order.</h1>
-          <p>Browse individual services across audit, accounting, tax, company administration, management, funding and contracts. Add everything you need, then send one coordinated brief.</p>
+          <h1>Choose the work. See the starting fee. Build one request.</h1>
+          <p>Browse individual services across audit, accounting, tax, company administration, management, funding and contracts. Add everything you need, then send one coordinated scope request.</p>
           <a className="catalogue-hero-link" href="#catalogue-start">
             Explore {catalogueServices.length} services <ArrowDown size={17} aria-hidden="true" />
           </a>
         </div>
         <div className="catalogue-hero-pricing">
-          <strong>Clear starting fees</strong>
-          <p>Indicative prices for straightforward work make it easier to compare scope and prepare one coordinated brief.</p>
+          <strong>Efficient by design</strong>
+          <p>Transparent starting fees reflect structured, AI-assisted preparation while professional judgement, review and accountability remain human.</p>
           <small>Final fees depend on complexity, volume, records, deadlines and professional acceptance.</small>
         </div>
       </section>
@@ -127,7 +128,7 @@ export default function ServiceCataloguePage() {
       </section>
 
       <section className="catalogue-disclaimer section-shell">
-        <p><strong>Indicative fee notice.</strong> Prices are starting points for straightforward work with complete information and are not offers capable of acceptance. VAT, registry charges, disbursements and third-party fees are excluded unless expressly stated. FST confirms the responsible professional, engagement terms and fixed quote after reviewing scope.</p>
+        <p><strong>Indicative fee notice.</strong> Prices are starting points for straightforward work with complete information and are not offers capable of acceptance. VAT, registry charges, disbursements and third-party fees are excluded unless expressly stated. FST confirms the legal provider, responsible professional, engagement terms and fixed quote after reviewing scope.</p>
       </section>
 
       <SiteFooter />

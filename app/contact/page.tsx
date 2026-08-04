@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { pageMetadata } from "../../lib/seo";
 import { PrimaryCta } from "../components/PrimaryCta";
 import { SiteFooter } from "../components/SiteFooter";
@@ -20,8 +21,11 @@ export default function ContactPage() {
           <h1>Tell us what needs to move.</h1>
           <p>Use WhatsApp or the meeting route. We will use the first conversation to identify the right FST service and a practical next step.</p>
           <div className="contact-options" aria-label="Direct contact options">
-            <TrackedLink href={siteConfig.whatsappUrl} event="contact_whatsapp_click" target="_blank" rel="noreferrer"><span>WhatsApp</span><strong>{siteConfig.whatsappDisplay}</strong></TrackedLink>
+            <TrackedLink href={siteConfig.whatsappUrl} event="contact_whatsapp_click" target="_blank" rel="noreferrer"><span>WhatsApp · general enquiries</span><strong>{siteConfig.whatsappDisplay}</strong></TrackedLink>
+            {siteConfig.contactEmail && <a href={`mailto:${siteConfig.contactEmail}`}><span>Formal enquiries</span><strong>{siteConfig.contactEmail}</strong></a>}
+            {siteConfig.registeredAddress && <div><span>Registered address</span><strong>{siteConfig.registeredAddress}</strong></div>}
           </div>
+          <p className="contact-legal-note">Catalogue requests use a separate service-request channel at {siteConfig.serviceOrderWhatsappDisplay}. See <Link href="/legal-information">legal and professional-provider information</Link> before sending confidential material.</p>
           <ResponsiveImage src="/fst-consultation.webp" alt="A private first conversation with an FST adviser" sizes="(max-width: 900px) 100vw, 60vw" loading="lazy" decoding="async" />
         </div>
         <aside className="contact-page-form contact-booking-card" aria-labelledby="contact-booking-title">

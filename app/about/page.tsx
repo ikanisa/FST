@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Binoculars } from "@phosphor-icons/react/dist/ssr/Binoculars";
 import { CirclesThreePlus } from "@phosphor-icons/react/dist/ssr/CirclesThreePlus";
 import { Target } from "@phosphor-icons/react/dist/ssr/Target";
@@ -8,14 +9,10 @@ import { SectionVisual } from "../components/SectionVisual";
 import { PrimaryCta } from "../components/PrimaryCta";
 import { ResponsiveImage } from "../components/ResponsiveImage";
 import { BreadcrumbJsonLd } from "../components/JsonLd";
+import { fieldNotes } from "../../lib/field-notes";
+import { siteConfig } from "../../lib/site-config";
 
 export const metadata = pageMetadata({ title: "Our Advisory Approach", description: "How FST combines senior attention, connected expertise and implementation-focused advice, with evidence-led field notes for management and finance.", path: "/about" });
-
-const fieldNotes = [
-  { category: "Controls in practice", title: "What a useful internal-control review should leave behind", summary: "A field guide to process ownership, testable evidence and actions that management can actually close.", image: "/fst-management.webp", imageAlt: "A controls workshop assigning owners and actions", tone: "violet" },
-  { category: "Planning & management", title: "Stress-testing a business plan before implementation", summary: "The connections to check across the commercial case, operating milestones, cash forecast, resources and management assumptions.", image: "/fst-finance.webp", imageAlt: "A financial model and business plan being stress-tested", tone: "cobalt" },
-  { category: "Tax operations", title: "Building a tax working file that reconciles before filing day", summary: "How a repeatable ledger-to-return review can surface missing support, classification issues and tax exposures earlier.", image: "/fst-tax.webp", imageAlt: "A tax specialist reconciling a working file", tone: "orange" },
-];
 
 export default function AboutPage() {
   return (
@@ -45,7 +42,7 @@ export default function AboutPage() {
 
       <section className="about-story section-shell">
         <div className="about-story-image"><ResponsiveImage src="/fst-international.webp" alt="An international programme team coordinating delivery and accountability" sizes="(max-width: 720px) 100vw, 50vw" loading="lazy" decoding="async" /></div>
-        <div><p className="section-index">The connected file</p><h2>No hand-off gaps between services.</h2><p>A plan affects cash. Cash affects finance. Structure affects tax and governance. Funding rules affect budgets and delivery evidence. FST keeps those links visible, so each workstream strengthens the others.</p></div>
+        <div><p className="section-index">The connected file</p><h2>No hand-off gaps between services.</h2><p>A plan affects cash. Cash affects finance. Structure affects tax and governance. Funding rules affect budgets and delivery evidence. FST keeps those links visible, so each workstream strengthens the others.</p><p>{siteConfig.portfolioRelationship} The contracting provider and responsible professional remain identified separately for each engagement.</p><Link className="text-link" href="/legal-information">How responsibility is assigned</Link></div>
       </section>
 
       <section className="combined-field-notes section-shell" id="field-notes" aria-labelledby="field-notes-title">
@@ -56,9 +53,9 @@ export default function AboutPage() {
         </div>
         <div className="article-grid">
           {fieldNotes.map((article) => (
-            <article className={`article-card accent-${article.tone}`} key={article.title}>
+            <article className={`article-card accent-${article.tone}`} key={article.slug}>
               <ResponsiveImage src={article.image} alt={article.imageAlt} sizes="(max-width: 720px) 100vw, 33vw" loading="lazy" decoding="async" />
-              <div><span>{article.category}</span><h3>{article.title}</h3><p>{article.summary}</p></div>
+              <div><span>{article.category}</span><h3>{article.title}</h3><p>{article.summary}</p><Link className="text-link" href={`/insights/${article.slug}`}>Read field note</Link></div>
             </article>
           ))}
         </div>
