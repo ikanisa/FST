@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { aiAgents } from "../lib/ai-agents";
 import { siteUrl } from "../lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -18,7 +19,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/insights/useful-internal-control-review", priority: 0.7, changeFrequency: "yearly" as const, lastModified: "2026-08-03" },
     { path: "/insights/stress-testing-business-plan", priority: 0.7, changeFrequency: "yearly" as const, lastModified: "2026-08-03" },
     { path: "/insights/tax-working-file-that-reconciles", priority: 0.7, changeFrequency: "yearly" as const, lastModified: "2026-08-03" },
-    { path: "/ai-agent-team", priority: 0.8, changeFrequency: "monthly" as const },
+    { path: "/ai-agent-team", priority: 0.8, changeFrequency: "monthly" as const, lastModified: "2026-08-08" },
+    ...aiAgents.map((agent) => ({
+      path: `/ai-agent-team/${agent.slug}`,
+      priority: 0.7,
+      changeFrequency: "monthly" as const,
+      lastModified: "2026-08-08",
+    })),
     { path: "/contact", priority: 0.7, changeFrequency: "yearly" as const },
     { path: "/book", priority: 0.8, changeFrequency: "monthly" as const },
     { path: "/legal-information", priority: 0.5, changeFrequency: "monthly" as const, lastModified: "2026-08-03" },

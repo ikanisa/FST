@@ -99,7 +99,7 @@ test("renders the new FST identity, navigation and service-category model", asyn
 });
 
 test("does not expose removed practices or inherited KMFINCO language", async () => {
-  const routes = ["/", "/services", "/about", "/ai-agent-team", "/who-we-work-with", "/contact"];
+  const routes = ["/", "/services", "/about", "/ai-agent-team", "/ai-agent-team/patrick", "/ai-agent-team/sofia", "/ai-agent-team/matthew", "/ai-agent-team/claire", "/ai-agent-team/emma", "/who-we-work-with", "/contact"];
   const forbidden = /KMFINCO|K Mi|Investment &amp; Family Office|Fiduciary|Clarity for what comes next|Close enough to understand|Advice shaped around your reality|Useful thinking for consequential decisions/i;
   for (const pathname of routes) {
     const response = await render(pathname);
@@ -266,7 +266,7 @@ test("publishes the FST approach and substantive field notes on direct routes", 
   assert.equal((await render("/insights/not-a-published-note")).status, 404);
 });
 
-test("presents the supervised IKANISA AI agent team with a clear human approval boundary", async () => {
+test("presents the supervised AI agent team with internal FST profile links and a clear human approval boundary", async () => {
   const response = await render("/ai-agent-team");
   assert.equal(response.status, 200);
   const html = await response.text();
@@ -285,7 +285,7 @@ test("presents the supervised IKANISA AI agent team with a clear human approval 
     ["Emma", "emma"],
   ]) {
     assert.match(html, new RegExp(`>${name}<`, "i"));
-    assert.match(html, new RegExp(`href="https://ikanisa\\.com/professional-agents/${route}"`, "i"));
+    assert.match(html, new RegExp(`href="/ai-agent-team/${route}"`, "i"));
   }
   for (const pack of [
     "Audit file pack",
@@ -297,6 +297,29 @@ test("presents the supervised IKANISA AI agent team with a clear human approval 
   assert.match(html, /do not sign reports, issue opinions, approve filings/i);
   assert.match(html, /Final judgement, approval and accountability remain human/i);
   assert.doesNotMatch(html, />Professional AI Agents</i);
+  assert.doesNotMatch(html, /https:\/\/ikanisa\.com\/professional-agents|View on IKANISA/i);
+});
+
+test("publishes a dedicated internal FST page for every AI agent", async () => {
+  for (const [name, route, role, workpack] of [
+    ["Patrick", "patrick", "Audit workpack specialist", "Audit file pack"],
+    ["Sofia", "sofia", "Accounting and finance operations specialist", "Accounting close pack"],
+    ["Matthew", "matthew", "Malta tax compliance workpack specialist", "Tax and VAT evidence pack"],
+    ["Claire", "claire", "Corporate and regulatory workpack specialist", "Corporate and regulatory pack"],
+    ["Emma", "emma", "Insurance governance and reporting specialist", "Insurance regulatory pack"],
+  ]) {
+    const response = await render(`/ai-agent-team/${route}`);
+    assert.equal(response.status, 200, `${name}'s FST page should render`);
+    const html = await response.text();
+    assert.match(html, new RegExp(`<h1>${name}</h1>`, "i"));
+    assert.match(html, new RegExp(role, "i"));
+    assert.match(html, new RegExp(workpack, "i"));
+    assert.match(html, /href="\/ai-agent-team"[^>]*>[^<]*<svg/i);
+    assert.match(html, /Preparation is automated\. Accountability is not\./i);
+    assert.match(html, /href="\/book"/i);
+    assert.doesNotMatch(html, /https:\/\/ikanisa\.com\/professional-agents|View on IKANISA/i);
+  }
+  assert.equal((await render("/ai-agent-team/unknown-agent")).status, 404);
 });
 
 test("removes the inherited green palette from live source", async () => {
@@ -447,6 +470,9 @@ test("uses clear canonical service URLs and preserves legacy link authority", as
   assert.match(sitemap, /https:\/\/fst\.ikanisa\.com\/legal-information/);
   assert.match(sitemap, /https:\/\/fst\.ikanisa\.com\/privacy/);
   assert.match(sitemap, /https:\/\/fst\.ikanisa\.com\/terms/);
+  for (const agent of ["patrick", "sofia", "matthew", "claire", "emma"]) {
+    assert.match(sitemap, new RegExp(`https://fst\\.ikanisa\\.com/ai-agent-team/${agent}`));
+  }
   assert.doesNotMatch(sitemap, /services\/tax-vat|business-planning-finance-applications|services\/loan-application-support|services\/funding-applications/);
 });
 

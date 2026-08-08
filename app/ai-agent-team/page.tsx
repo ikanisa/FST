@@ -8,6 +8,8 @@ import { MagnifyingGlass } from "@phosphor-icons/react/dist/ssr/MagnifyingGlass"
 import { NotePencil } from "@phosphor-icons/react/dist/ssr/NotePencil";
 import { ShieldCheck } from "@phosphor-icons/react/dist/ssr/ShieldCheck";
 import { UserFocus } from "@phosphor-icons/react/dist/ssr/UserFocus";
+import Link from "next/link";
+import { aiAgents } from "../../lib/ai-agents";
 import { pageMetadata, siteUrl } from "../../lib/seo";
 import { siteConfig } from "../../lib/site-config";
 import { BreadcrumbJsonLd, JsonLd } from "../components/JsonLd";
@@ -69,49 +71,6 @@ const operatingSteps = [
     description:
       "The authorised professional or client approves what may be used, filed, communicated or acted upon.",
     icon: CheckCircle,
-  },
-];
-
-const agents = [
-  {
-    name: "Patrick",
-    practice: "Audit & Assurance",
-    description:
-      "Planning, risk assessment, PBC, workpapers, evidence registers, completion, reporting and QC/EQR support.",
-    image: "/fst-agent-patrick.png",
-    href: "https://ikanisa.com/professional-agents/patrick",
-  },
-  {
-    name: "Sofia",
-    practice: "Accounting & Finance",
-    description:
-      "Ledgers, reconciliations, trial-balance review, close packs, management reporting and audit-readiness support.",
-    image: "/fst-agent-sofia.png",
-    href: "https://ikanisa.com/professional-agents/sofia",
-  },
-  {
-    name: "Matthew",
-    practice: "Malta Tax",
-    description:
-      "Income tax, VAT, EC Sales, Intrastat, FSS, compliance calendars, tax-risk registers and authority-query packs.",
-    image: "/fst-agent-matthew.png",
-    href: "https://ikanisa.com/professional-agents/matthew",
-  },
-  {
-    name: "Claire",
-    practice: "Corporate, Legal & Regulatory",
-    description:
-      "Company administration, beneficial ownership, AML/CFT, MBR, contracts, GDPR and regulator-facing drafts.",
-    image: "/fst-agent-claire.png",
-    href: "https://ikanisa.com/professional-agents/claire",
-  },
-  {
-    name: "Emma",
-    practice: "Insurance & Solvency II",
-    description:
-      "ORSA, QRT, SFCR/RSR, DORA, IRRD, IDD, governance, actuarial evidence and MFSA-facing packs.",
-    image: "/fst-agent-emma.png",
-    href: "https://ikanisa.com/professional-agents/emma",
   },
 ];
 
@@ -181,14 +140,14 @@ export default function AiAgentTeamPage() {
           },
           mentions: {
             "@type": "ItemList",
-            itemListElement: agents.map((agent, index) => ({
+            itemListElement: aiAgents.map((agent, index) => ({
               "@type": "ListItem",
               position: index + 1,
               item: {
                 "@type": "SoftwareApplication",
                 name: agent.name,
                 applicationCategory: agent.practice,
-                url: agent.href,
+                url: `${siteUrl}/ai-agent-team/${agent.slug}`,
               },
             })),
           },
@@ -286,18 +245,18 @@ export default function AiAgentTeamPage() {
           </p>
         </div>
         <div className="ai-agent-list">
-          {agents.map((agent) => (
+          {aiAgents.map((agent) => (
             <article className="ai-agent-row" key={agent.name}>
-              <img src={agent.image} alt={`${agent.name}, IKANISA ${agent.practice} AI agent`} width="128" height="128" loading="lazy" decoding="async" />
+              <img src={agent.image} alt={`${agent.name}, FST ${agent.practice} AI agent`} width="128" height="128" loading="lazy" decoding="async" />
               <div>
                 <span>{agent.practice}</span>
                 <h3>{agent.name}</h3>
                 <p>{agent.description}</p>
               </div>
-              <a href={agent.href} target="_blank" rel="noreferrer" aria-label={`View ${agent.name} on IKANISA`}>
-                View on IKANISA
+              <Link href={`/ai-agent-team/${agent.slug}`} aria-label={`Meet ${agent.name} on FST`}>
+                Meet {agent.name}
                 <ArrowRight size={16} weight="regular" aria-hidden="true" />
-              </a>
+              </Link>
             </article>
           ))}
         </div>
