@@ -110,27 +110,6 @@ export default function ServiceCataloguePage() {
         </div>
       </section>
 
-      <section className="catalogue-boundaries section-shell" aria-labelledby="catalogue-boundaries-title">
-        <div>
-          <p className="section-index">Professional boundaries</p>
-          <h2 id="catalogue-boundaries-title">The right authority stays attached to the work.</h2>
-        </div>
-        <div className="catalogue-boundary-list">
-          {catalogueCategories.map((category) => (
-            "regulatedNote" in category ? (
-              <article key={category.id}>
-                <strong>{category.label}</strong>
-                <p>{category.regulatedNote}</p>
-              </article>
-            ) : null
-          ))}
-        </div>
-      </section>
-
-      <section className="catalogue-disclaimer section-shell">
-        <p><strong>Indicative fee notice.</strong> Prices are starting points for straightforward work with complete information and are not offers capable of acceptance. VAT, registry charges, disbursements and third-party fees are excluded unless expressly stated. FST confirms the legal provider, responsible professional, engagement terms and fixed quote after reviewing scope.</p>
-      </section>
-
       <SiteFooter />
     </main>
   );

@@ -1,5 +1,27 @@
 {
   "version": "7",
   "dialect": "sqlite",
-  "entries": []
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1787729043401,
+      "tag": "0000_loud_rhino",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1787756400000,
+      "tag": "0001_sector_package_intake",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1787763000000,
+      "tag": "0002_sector_catalogue_entries",
+      "breakpoints": true
+    }
+  ]
 }

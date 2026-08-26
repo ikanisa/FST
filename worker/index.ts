@@ -10,6 +10,12 @@ interface Env {
   GOOGLE_CALENDAR_ID?: string;
   GOOGLE_CALENDAR_REFRESH_TOKEN?: string;
   GOOGLE_CALENDAR_TIMEZONE?: string;
+  MT_GOOGLE_CALENDAR_ID?: string;
+  MT_GOOGLE_CALENDAR_TIMEZONE?: string;
+  MT_BOOKING_RECIPIENTS?: string;
+  RW_GOOGLE_CALENDAR_ID?: string;
+  RW_GOOGLE_CALENDAR_TIMEZONE?: string;
+  RW_BOOKING_RECIPIENTS?: string;
   IMAGES: {
     input(stream: ReadableStream): {
       transform(options: Record<string, unknown>): {
@@ -22,6 +28,34 @@ interface Env {
 interface ExecutionContext {
   waitUntil(promise: Promise<unknown>): void;
   passThroughOnException(): void;
+}
+
+type MarketCode = "mt" | "rw";
+
+function detectMarketAtEdge(request: Request): { market: MarketCode; source: "country" | "language" } | null {
+  const cloudflareCountry = (request as Request & { cf?: { country?: string } }).cf?.country;
+  const country = (cloudflareCountry || request.headers.get("CF-IPCountry") || "").trim().toUpperCase();
+  if (country === "RW") return { market: "rw", source: "country" };
+  if (country === "MT") return { market: "mt", source: "country" };
+
+  const language = request.headers.get("Accept-Language") || "";
+  if (/(?:^|[,;\s])(?:rw|en-RW)(?:[-,;\s]|$)/i.test(language)) return { market: "rw", source: "language" };
+  if (/(?:^|[,;\s])(?:mt|en-MT)(?:[-,;\s]|$)/i.test(language)) return { market: "mt", source: "language" };
+  return null;
+}
+
+function automaticMarketRedirect(request: Request, market: MarketCode, source: "country" | "language") {
+  const location = new URL(`/${market}`, request.url);
+  const response = new Response(null, {
+    status: 307,
+    headers: {
+      Location: location.toString(),
+      "Cache-Control": "private, no-store",
+      Vary: "CF-IPCountry, Accept-Language",
+      "X-FST-Market-Selection": source,
+    },
+  });
+  return withSecurityHeaders(response, request);
 }
 
 function withSecurityHeaders(response: Response, request: Request) {
@@ -46,6 +80,11 @@ const worker = {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     globalThis.__FST_ENV__ = env as unknown as Record<string, unknown>;
     const url = new URL(request.url);
+
+    if (url.pathname === "/" && (request.method === "GET" || request.method === "HEAD")) {
+      const detected = detectMarketAtEdge(request);
+      if (detected) return automaticMarketRedirect(request, detected.market, detected.source);
+    }
 
     if (url.pathname === "/_vinext/image") {
       const allowedWidths = [...DEFAULT_DEVICE_SIZES, ...DEFAULT_IMAGE_SIZES];

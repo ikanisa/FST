@@ -1,7 +1,9 @@
 import { serverEnv } from "../../../lib/server-env";
 import { siteConfig } from "../../../lib/site-config";
+import { getJurisdiction } from "../../../lib/jurisdictions";
 
 type BookingPayload = {
+  jurisdiction?: unknown;
   name?: unknown;
   email?: unknown;
   organisation?: unknown;
@@ -27,14 +29,15 @@ function hasTrustedOrigin(request: Request) {
   return origin === requestOrigin || origin === siteConfig.url;
 }
 
-function isRateLimited(request: Request) {
+function isRateLimited(request: Request, jurisdiction: string) {
   const forwarded = request.headers.get("cf-connecting-ip") || request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
   if (!forwarded) return false;
 
   const now = Date.now();
-  const current = bookingWindows.get(forwarded);
+  const key = `${jurisdiction}:${forwarded}`;
+  const current = bookingWindows.get(key);
   if (!current || current.resetAt <= now) {
-    bookingWindows.set(forwarded, { count: 1, resetAt: now + bookingWindowMs });
+    bookingWindows.set(key, { count: 1, resetAt: now + bookingWindowMs });
     return false;
   }
 
@@ -69,12 +72,6 @@ async function accessToken(clientId: string, clientSecret: string, refreshToken:
 
 export async function POST(request: Request) {
   if (!hasTrustedOrigin(request)) return json({ error: "origin_not_allowed" }, 403);
-  if (isRateLimited(request)) {
-    return Response.json(
-      { error: "rate_limited" },
-      { status: 429, headers: { "Cache-Control": "no-store", "Retry-After": "600" } },
-    );
-  }
 
   let payload: BookingPayload;
   try {
@@ -83,13 +80,22 @@ export async function POST(request: Request) {
     return json({ error: "invalid_request" }, 400);
   }
 
+  const jurisdiction = getJurisdiction(text(payload.jurisdiction, 2).toLowerCase() || "mt");
+  if (!jurisdiction) return json({ error: "invalid_jurisdiction" }, 400);
+  if (isRateLimited(request, jurisdiction.code)) {
+    return Response.json(
+      { error: "rate_limited" },
+      { status: 429, headers: { "Cache-Control": "no-store", "Retry-After": "600" } },
+    );
+  }
+
   if (text(payload.company_website, 200)) return json({ ok: true });
 
   const name = text(payload.name, 120);
   const email = text(payload.email, 254).toLowerCase();
   const organisation = text(payload.organisation, 160);
   const context = text(payload.context, 3000);
-  const timezone = text(payload.timezone, 80) || "Europe/Malta";
+  const requesterTimezone = text(payload.timezone, 80);
   const duration = Number(payload.duration);
   const start = new Date(text(payload.start, 64));
   const consent = payload.privacy_consent === "agreed" || payload.privacy_consent === true;
@@ -105,11 +111,26 @@ export async function POST(request: Request) {
 
   const end = new Date(start.getTime() + duration * 60 * 1000);
   const bindings = serverEnv();
-  const calendarId = bindings.GOOGLE_CALENDAR_ID || "primary";
-  const calendarTimezone = bindings.GOOGLE_CALENDAR_TIMEZONE || timezone;
+  const calendarId = jurisdiction.code === "rw"
+    ? bindings.RW_GOOGLE_CALENDAR_ID
+    : bindings.MT_GOOGLE_CALENDAR_ID || bindings.GOOGLE_CALENDAR_ID || "primary";
+  const calendarTimezone = jurisdiction.code === "rw"
+    ? bindings.RW_GOOGLE_CALENDAR_TIMEZONE || jurisdiction.timezone
+    : bindings.MT_GOOGLE_CALENDAR_TIMEZONE || bindings.GOOGLE_CALENDAR_TIMEZONE || jurisdiction.timezone;
+  const recipientSetting = jurisdiction.code === "rw"
+    ? bindings.RW_BOOKING_RECIPIENTS
+    : bindings.MT_BOOKING_RECIPIENTS;
+  const bookingRecipients = recipientSetting
+    ? recipientSetting.split(",").map((recipient) => recipient.trim().toLowerCase()).filter(Boolean)
+    : jurisdiction.code === "mt"
+      ? [...siteConfig.bookingRecipients]
+      : jurisdiction.contactEmail
+        ? [jurisdiction.contactEmail]
+        : [];
   if (!bindings.GOOGLE_CALENDAR_CLIENT_ID || !bindings.GOOGLE_CALENDAR_CLIENT_SECRET || !bindings.GOOGLE_CALENDAR_REFRESH_TOKEN) {
     return json({ error: "booking_not_configured" }, 503);
   }
+  if (!calendarId || bookingRecipients.length === 0) return json({ error: "booking_not_configured" }, 503);
 
   try {
     const token = await accessToken(
@@ -141,13 +162,13 @@ export async function POST(request: Request) {
         method: "POST",
         headers: authorization,
         body: JSON.stringify({
-          summary: `FST advisory conversation — ${name}`,
-          description: `Website booking request\n\nName: ${name}\nEmail: ${email}\nOrganisation: ${organisation || "Not provided"}\n\nContext:\n${context || "Not provided"}`,
+          summary: `FST ${jurisdiction.name} advisory conversation — ${name}`,
+          description: `Website booking request\n\nJurisdiction: ${jurisdiction.code.toUpperCase()} — ${jurisdiction.name}\nRequester timezone: ${requesterTimezone || "Not provided"}\nName: ${name}\nEmail: ${email}\nOrganisation: ${organisation || "Not provided"}\n\nContext:\n${context || "Not provided"}`,
           start: { dateTime: start.toISOString(), timeZone: calendarTimezone },
           end: { dateTime: end.toISOString(), timeZone: calendarTimezone },
           attendees: [
             { email, displayName: name },
-            ...siteConfig.bookingRecipients
+            ...bookingRecipients
               .filter((recipient) => recipient !== email)
               .map((recipient) => ({ email: recipient })),
           ],
@@ -161,7 +182,7 @@ export async function POST(request: Request) {
     );
     if (!eventResponse.ok) throw new Error("event_creation_failed");
     const event = (await eventResponse.json()) as { htmlLink?: string; hangoutLink?: string; id?: string };
-    return json({ ok: true, eventId: event.id, calendarUrl: event.htmlLink, meetUrl: event.hangoutLink });
+    return json({ ok: true, jurisdiction: jurisdiction.code, eventId: event.id, calendarUrl: event.htmlLink, meetUrl: event.hangoutLink });
   } catch {
     return json({ error: "calendar_service_unavailable" }, 502);
   }

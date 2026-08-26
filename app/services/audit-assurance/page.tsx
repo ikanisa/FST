@@ -2,7 +2,7 @@ import { pageMetadata } from "../../../lib/seo";
 import { ServicePage } from "../../components/ServicePage";
 
 export const metadata = pageMetadata({
-  title: "Audit & Assurance Services in Malta",
+  title: "Audit & Assurance Services",
   description: "Statutory and voluntary audit, assurance, agreed-upon procedures, internal audit, controls, compliance, donor, NGO and project audit services.",
   path: "/services/audit-assurance",
 });
@@ -26,7 +26,7 @@ export default function AuditAssurancePage() {
     accent="cobalt"
     professionalNote={{
       title: "Regulated work begins with authority and independence.",
-      description: "Statutory audit and other regulated assurance engagements are accepted and performed only where the responsible auditor or audit firm holds the required Malta authorisation. Every engagement remains subject to conflict and independence checks, professional competence, ethical requirements, quality management, evidence availability and formal engagement acceptance.",
+      description: "Statutory audit and other regulated assurance engagements are accepted and performed only where the responsible auditor or audit firm holds the required authorisation. Every engagement remains subject to conflict and independence checks, professional competence, ethical requirements, quality management, evidence availability and formal engagement acceptance.",
     }}
     services={[
       { title: "Statutory financial statement audit", description: "ISA-based audit of annual or consolidated financial statements, including planning, materiality, risk assessment, evidence, completion and an appropriately authorised auditor’s report." },

@@ -1,0 +1,368 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "Sector Packages for Rwanda's SMEs",
+    "description": "Decision report on dedicated catalogue packages for pharmacies, hardware shops, spare-parts shops, and construction or engineering practices.",
+    "generatedAt": "2026-08-26T11:00:00Z",
+    "sources": [
+      {
+        "id": "nisr_establishment_census_2023",
+        "label": "NISR Establishment Census 2023",
+        "href": "https://www.statistics.gov.rw/statistical-publications/business-establishment-finance-trade/establishment-census-2023",
+        "query": {
+          "engine": "duckdb",
+          "language": "sql",
+          "sql": "SELECT * FROM (VALUES ('Wholesale & retail', 0.103, 14665, 142365), ('Professional services', 0.294, 521, 1772), ('Construction', 0.656, 120, 183), ('Human health & social work', 0.713, 283, 397)) AS t(sector, formal_share, formal_count, total_count)",
+          "description": "Reproducible transcription of selected formal/informal establishment counts and stated formal shares from the NISR Establishment Census 2023 sector table.",
+          "url": "https://www.statistics.gov.rw/sites/default/files/documents/2025-01/Establishment%20Census%202023.pdf",
+          "executed_at": "2026-08-26T11:00:00Z",
+          "tables_used": [
+            "NISR Establishment Census 2023: formal and informal establishments by broad activity sector"
+          ],
+          "filters": [
+            "Four broad sectors selected for contextual comparison",
+            "These sectors are not treated as counts of the four target customer niches"
+          ],
+          "metric_definitions": [
+            "formal_share = formal establishments divided by total establishments within each broad activity sector; displayed as the rounded percentage reported by NISR"
+          ]
+        }
+      },
+      {
+        "id": "fst_sector_score_extract",
+        "label": "FST sector-design scoring synthesis",
+        "path": "reports/rwanda-sector-package-catalogue/source-notes.md",
+        "query": {
+          "engine": "duckdb",
+          "language": "sql",
+          "sql": "SELECT * FROM (VALUES ('Construction / engineering', 4, 1, 3, 5, 5, 5, 'R4 · I1 · T3 · L5 · F5 · P5', 'Contract, BOQ, project cost, WIP, variations and retention'), ('Hardware shops', 3, 4, 4, 2, 4, 2, 'R3 · I4 · T4 · L2 · F4 · P2', 'SKU/specification, conformity evidence, shrinkage and product-family margin'), ('Pharmacies', 5, 5, 4, 5, 4, 1, 'R5 · I5 · T4 · L5 · F4 · P1', 'Batch, expiry, cold chain, recall/disposal and licensed-premises evidence'), ('Spare-parts shops', 3, 5, 5, 2, 4, 2, 'R3 · I5 · T5 · L2 · F4 · P2', 'Part number, vehicle compatibility, landed cost, warranty and obsolescence')) AS t(sector, regulatory, inventory, tax_import, licensed_people, funding_evidence, project_contract, pressure_profile, defining_control)",
+          "description": "Reproducible sector-design scoring table assembled from the documented 1-to-5 qualitative rubric and official-source review.",
+          "executed_at": "2026-08-26T11:00:00Z",
+          "tables_used": [
+            "FST Rwanda sector package source and method notes"
+          ],
+          "metric_definitions": [
+            "Each score runs from 1 (low or occasional package pressure) to 5 (a defining feature that changes package architecture); scores are analytical judgements, not survey measurements"
+          ]
+        }
+      },
+      {
+        "id": "fst_package_blueprint_extract",
+        "label": "FST sector package blueprint synthesis",
+        "path": "reports/rwanda-sector-package-catalogue/source-notes.md",
+        "query": {
+          "engine": "duckdb",
+          "language": "sql",
+          "sql": "SELECT * FROM (VALUES (1, 'Pharmacies', 'Pharmacy Control & Compliance Desk', 'Bookkeeping; bank/MoMo; EBM/VAT/WHT; payroll/PAYE/RSSB; management summary; batch/expiry and near-expiry review; inspection evidence register', '1 branch; up to 100 monthly entries; 500 active SKUs; 10 staff; clean digital records', 'From RWF 45,000 / month', 'From RWF 45,000 / month · 1 branch · 100 monthly entries · 500 active SKUs · 10 staff', 'Premises/licence readiness; physical stock count; cold-chain review; recall/disposal pack; importer route; working-capital file'), (2, 'Construction / engineering', 'Engineering Practice & Project Finance Desk', 'Books, bank/MoMo, payroll/tax; project/contract/BOQ register; job cost and WIP; advances, variations, certificates, retention and collections', '1 entity; up to 2 active projects; 75 monthly entries; 10 staff; remote records', 'From RWF 50,000 / month', 'From RWF 50,000 / month · 1 entity · 2 active projects · 75 monthly entries · 10 staff', 'Tender evidence; TCC/RSSB readiness; bid model; bond/guarantee readiness; contract-claim support; annual accounts'), (3, 'Hardware shops', 'Hardware Stock, Tax & Margin Desk', 'Books; bank/MoMo; EBM/VAT/WHT; payroll; SKU/unit/specification master; stock movement; supplier evidence; slow stock, shrinkage and family margin', '1 branch; 100 monthly entries; 500 active SKUs; 10 staff; no physical count', 'From RWF 35,000 / month', 'From RWF 35,000 / month · 1 branch · 100 monthly entries · 500 active SKUs · 10 staff', 'Import/landed-cost pack; conformity evidence remediation; multi-branch; tender supply; working-capital file; physical stock count'), (4, 'Spare-parts shops', 'Spare Parts Stock & Import Desk', 'Books; bank/MoMo; EBM/VAT/WHT; payroll; part/compatibility master; import-batch landed cost; warranty/returns; slow and obsolete stock', '1 branch; 100 monthly entries; 750 active part numbers; 10 staff; no customs submission', 'From RWF 40,000 / month', 'From RWF 40,000 / month · 1 branch · 100 monthly entries · 750 part numbers · 10 staff', 'Importer/Quitus readiness; multi-branch; B2B credit control; inventory-finance file; physical stock count')) AS t(priority, sector, package, entry_scope, limits, starting_fee, limits_and_fee, event_add_ons)",
+          "description": "Reproducible extraction of the four proposed pilot package rows from the FST product synthesis.",
+          "executed_at": "2026-08-26T11:00:00Z",
+          "tables_used": [
+            "FST Rwanda sector package source and method notes",
+            "FST existing Rwanda atomic service catalogue"
+          ],
+          "filters": [
+            "Pilot entry scopes assume one entity, one location unless stated, clean digital records and remote delivery"
+          ]
+        }
+      },
+      {
+        "id": "fst_backend_model_extract",
+        "label": "FST hybrid catalogue architecture synthesis",
+        "path": "reports/rwanda-sector-package-catalogue/source-notes.md",
+        "query": {
+          "engine": "duckdb",
+          "language": "sql",
+          "sql": "SELECT * FROM (VALUES (1, 'Atomic workpack', 'Single reusable delivery unit', 'serviceId, jurisdiction, scope, unit, base fee, regulated flag, source review', 'Usually hidden inside the package; visible as an inclusion or add-on', 'Fields: serviceId, jurisdiction, scope, unit, fee, regulated flag and source review. Public: inclusion or add-on.'), (2, 'Sector control module', 'Captures the operating records that make the sector different', 'stock/project master, sector registers, reconciliation rules, evidence checklist', 'Explains why this package fits the business', 'Fields: stock or project master, sector registers, reconciliations and evidence checklist. Public: sector-fit explanation.'), (3, 'Package version', 'Curates workpacks into one commercial offer', 'includedServiceIds, limits, eligibility, add-ons, exclusions, price bands, owner, version', 'One recognisable package card with clear scope', 'Fields: workpack ids, limits, eligibility, add-ons, exclusions, price bands, owner and version. Public: one package card.'), (4, 'Scope response', 'Produces an indicative fit result from non-sensitive answers', 'branch, volume, SKU/project, employees, VAT/EBM, importer/tender, record condition', 'Recommended package, assumptions and reasons for referral', 'Fields: branch, volume, SKU/project, employees, VAT/EBM, importer/tender and records. Public: recommendation and referral reasons.'), (5, 'Engagement gate', 'Separates catalogue interest from acceptance', 'conflict/independence, responsible professional, consent, evidence, final quote and approval', 'No automatic filing, licence, credit or regulated conclusion', 'Fields: conflict, professional, consent, evidence, quote and approval. Public: no automatic regulated or authority action.')) AS t(layer_order, layer, purpose, key_fields, public_behavior, implementation)",
+          "description": "Reproducible extraction of the recommended five-layer hybrid catalogue architecture.",
+          "executed_at": "2026-08-26T11:00:00Z",
+          "tables_used": [
+            "FST Rwanda sector package source and method notes",
+            "FST existing Rwanda atomic service catalogue"
+          ]
+        }
+      }
+    ],
+    "charts": [
+      {
+        "id": "formal_share_by_broad_sector",
+        "title": "Formal establishments by broad activity sector",
+        "subtitle": "Share classified as formal in the 2023 Establishment Census; broad-sector context, not target-niche market size",
+        "type": "bar",
+        "dataset": "formal_share",
+        "sourceId": "nisr_establishment_census_2023",
+        "encodings": {
+          "x": { "field": "sector", "type": "ordinal", "label": "Broad activity sector" },
+          "y": { "field": "formal_share", "type": "quantitative", "label": "Formal share", "format": "percent" },
+          "tooltip": [
+            { "field": "formal_count", "type": "quantitative", "label": "Formal establishments" },
+            { "field": "total_count", "type": "quantitative", "label": "Total establishments" }
+          ]
+        },
+        "yAxisTitle": "Formal share",
+        "valueFormat": "percent",
+        "layout": "full"
+      }
+    ],
+    "tables": [
+      {
+        "id": "formal_share_by_broad_sector",
+        "title": "Formal establishments by broad activity sector",
+        "subtitle": "2023 Establishment Census; broad-sector context, not target-niche market size",
+        "dataset": "formal_share",
+        "sourceId": "nisr_establishment_census_2023",
+        "defaultSort": {
+          "field": "formal_share",
+          "direction": "desc"
+        },
+        "columns": [
+          { "field": "sector", "label": "Broad activity sector", "type": "text" },
+          { "field": "formal_count", "label": "Formal establishments", "type": "number", "format": "number" },
+          { "field": "total_count", "label": "Total establishments", "type": "number", "format": "number" },
+          { "field": "formal_share", "label": "Formal share", "type": "percent", "format": "percent" }
+        ],
+        "layout": "full"
+      },
+      {
+        "id": "sector_design_pressure",
+        "title": "Sector design pressure",
+        "subtitle": "Analytical scores from 1 (low) to 5 (defining); prioritisation aid, not survey data",
+        "dataset": "sector_scores",
+        "sourceId": "fst_sector_score_extract",
+        "defaultSort": {
+          "field": "sector",
+          "direction": "asc"
+        },
+        "columns": [
+          { "field": "sector", "label": "Sector", "type": "text" },
+          { "field": "pressure_profile", "label": "Pressure profile", "type": "text" },
+          { "field": "defining_control", "label": "Package-defining control", "type": "text" }
+        ],
+        "layout": "full"
+      },
+      {
+        "id": "package_blueprints",
+        "title": "Recommended package menu",
+        "subtitle": "Pilot entry scopes; one entity and one location unless stated",
+        "dataset": "package_blueprints",
+        "sourceId": "fst_package_blueprint_extract",
+        "defaultSort": {
+          "field": "package",
+          "direction": "asc"
+        },
+        "columns": [
+          { "field": "package", "label": "One-package menu", "type": "text" },
+          { "field": "entry_scope", "label": "Included recurring scope", "type": "text" },
+          { "field": "limits_and_fee", "label": "Pilot limits and fee", "type": "text" },
+          { "field": "event_add_ons", "label": "Event add-ons", "type": "text" }
+        ],
+        "layout": "full",
+        "density": "dense"
+      },
+      {
+        "id": "backend_model",
+        "title": "Backend package model",
+        "subtitle": "Keep reusable workpacks canonical; let the sector page curate them",
+        "dataset": "backend_model",
+        "sourceId": "fst_backend_model_extract",
+        "defaultSort": {
+          "field": "layer",
+          "direction": "asc"
+        },
+        "columns": [
+          { "field": "layer", "label": "Layer", "type": "text" },
+          { "field": "purpose", "label": "Purpose", "type": "text" },
+          { "field": "implementation", "label": "Implementation and public behaviour", "type": "text" }
+        ],
+        "layout": "full"
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# Sector Packages for Rwanda's SMEs"
+      },
+      {
+        "id": "executive_summary",
+        "type": "markdown",
+        "body": "## Executive Summary\n\n- **Build one sector menu for each of the four operating models, but keep one canonical catalogue underneath.** The public experience should sell a recognisable outcome—pharmacy control desk, hardware stock desk, spare-parts stock and import desk, or engineering project desk—while the backend assembles reusable tax, payroll, accounting, funding and control workpacks.\n- **Do not sell one unlimited all-in package.** One owner, one branch, clean records and modest volumes can use an entry scope; extra branches, stock counts, imports, projects, clean-up, filings, licences and funding applications must be visible bands or add-ons.\n- **Prioritise pharmacy first and construction/engineering second.** Pharmacy has the strongest licence, stock, expiry, cold-chain and recall distinction. Engineering is equally distinct, but its core object is the contract and project—not a SKU or monthly transaction count. Hardware and spare parts can share an inventory engine, but their masters and risks are different.\n- **Treat the proposed fees as pilot floors, not market evidence.** Current FST pricing is intentionally low. Time-track the first ten accepted clients per sector, then reset scope caps and prices using observed delivery effort, rework and contribution margin."
+      },
+      {
+        "id": "market_context",
+        "type": "markdown",
+        "sourceId": "nisr_establishment_census_2023",
+        "body": "## The opportunity is large, but the customer base is extremely small-business heavy\n\nThe 2023 Establishment Census counted **269,326 establishments**. Wholesale and retail represented **53.5%**, while **92.2%** of establishments were micro-enterprises and **92.0%** were one-person owned. That supports a simple, recognisable package menu—but also warns against enterprise-style retainers that hide cost and scope.\n\nThe census' broad-sector formalisation rates vary sharply. This does not size pharmacies, hardware, spare parts or engineering directly; it shows why one generic SME compliance promise would be unsafe."
+      },
+      {
+        "id": "formal_share_chart",
+        "type": "chart",
+        "chartId": "formal_share_by_broad_sector",
+        "layout": "full"
+      },
+      {
+        "id": "architecture_takeaway",
+        "type": "markdown",
+        "body": "## One catalogue engine, four sector product facades\n\n**The best architecture is hybrid.** Keep atomic services such as bookkeeping, bank/mobile-money reconciliation, VAT/EBM, WHT, PAYE/RSSB, management accounts, tax-clearance readiness, loan models and control workpacks as versioned backend primitives. Add sector packages that declare which primitives are included, what sector control layer is added, the volume limits, eligibility rules, responsible-professional gate, official costs, add-ons and price floor.\n\nA fully separate catalogue per sector would duplicate tax and finance logic, make regulation updates inconsistent and multiply QA. A single generic catalogue leaves the owner to translate professional-service jargon into their operating reality. The hybrid model gets recognisability without duplication."
+      },
+      {
+        "id": "sector_scores_block",
+        "type": "table",
+        "tableId": "sector_design_pressure",
+        "layout": "full"
+      },
+      {
+        "id": "pharmacy_finding",
+        "type": "markdown",
+        "body": "## Pharmacy needs a control desk, not a retail bookkeeping label\n\nA pharmacy combines ordinary retail finance with licensed premises, authorised professionals and medicine-specific custody. The package must add product/batch/expiry control, cold-chain and controlled-product evidence where applicable, near-expiry and dead-stock review, recall/disposal records, and an inspection-ready file. EBM, VAT, purchasing, payroll and reconciliations remain necessary but are not the differentiator.\n\n**Product boundary:** FST can prepare registers, reconciliations, evidence packs and renewal-readiness checklists. A licence, inspection result, pharmaceutical judgement, dispensing decision or regulatory submission remains with the authorised business and responsible professional. Customer or prescription health data should not enter the accounting package unless strictly necessary and lawfully controlled."
+      },
+      {
+        "id": "retail_finding",
+        "type": "markdown",
+        "body": "## Hardware and spare parts can share an inventory engine—but not the same stock master\n\nBoth businesses need EBM-to-sales reconciliation, purchases, stock movement, supplier balances, cash/mobile-money/bank reconciliation, gross margin, reorder points, slow stock and import evidence. That shared engine should be reused.\n\n**Hardware** needs units of measure, brand/specification, supplier and product-conformity evidence, shrinkage and margin by product family. **Spare parts** needs part numbers, vehicle compatibility, OEM/aftermarket status, import-batch landed cost, warranty/returns or core exchange, and obsolescence. Combining them into one front-end package would make the most valuable control fields invisible."
+      },
+      {
+        "id": "engineering_finding",
+        "type": "markdown",
+        "body": "## Engineering and construction must be organised around projects and contracts\n\nThe package's unit is an active project, not a monthly transaction cap. Its control spine is the contract/BOQ register, job cost and work in progress, advances, variations, payment certificates, retentions, invoices and collections. It must reconcile WHT and VAT certificates, payroll and subconsultants, while keeping professional registration and tender evidence current.\n\nThis package should expose project count, contract value band and fieldwork as scope drivers. Tender files, project-finance models, bonds or guarantees, contract claims and annual accounts are event modules—not silently included in a low monthly fee."
+      },
+      {
+        "id": "package_table_block",
+        "type": "table",
+        "tableId": "package_blueprints",
+        "layout": "full"
+      },
+      {
+        "id": "pricing_model",
+        "type": "markdown",
+        "body": "## Price the operating burden, not the sector label\n\nThe site should calculate **monthly base + volume band + branch/project band + regulated or event add-ons**. A fixed `from` fee remains useful, but only beside explicit assumptions.\n\nThe provisional monthly floors are **RWF 45,000 for pharmacy**, **RWF 35,000 for hardware**, **RWF 40,000 for spare parts**, and **RWF 50,000 for an engineering practice with up to two active projects**. These align with the present low-price strategy; they are not observed market rates and may be uneconomic if manual stock work, poor records or portal responsibility is included.\n\nNever display an unqualified total created by summing overlapping workpacks. VAT, authority and professional fees, travel, third parties, physical stock counts, legal or assurance work and urgent deadlines remain excluded unless quoted."
+      },
+      {
+        "id": "backend_table_block",
+        "type": "table",
+        "tableId": "backend_model",
+        "layout": "full"
+      },
+      {
+        "id": "api_recommendation",
+        "type": "markdown",
+        "body": "## Website and API design\n\nUse context routes such as `/rw/sectors/pharmacies`, `/rw/sectors/hardware-shops`, `/rw/sectors/spare-parts`, and `/rw/sectors/engineering-practices`; country selection remains routing logic, not repeated page copy. Each page should ask only the questions that change scope: business state, locations, monthly transaction band, SKU or active-project band, employees, VAT/EBM status, importer/tender status, record condition and desired event outcome.\n\nRecommended endpoints:\n\n- `GET /api/v1/sector-packages?jurisdiction=rw` — public package summaries and version metadata.\n- `GET /api/v1/sector-packages/{slug}` — inclusions, limits, evidence checklist, add-ons and price rules.\n- `POST /api/v1/package-scope` — returns an indicative scope from non-sensitive answers; never an acceptance or regulated conclusion.\n- Extend `POST /api/v1/enquiries` with `packageId`, `packageVersion`, scope answers and selected add-ons, while preserving underlying `serviceIds`.\n\nThe canonical package object should include `sector`, `jurisdiction`, `includedServiceIds`, `scopeLimits`, `eligibilityRules`, `evidenceChecklist`, `regulatedGate`, `addOns`, `pricingBands`, `officialFeesExcluded`, `responsibleProfessional`, `version` and `sourceReviewDate`."
+      },
+      {
+        "id": "recommended_steps",
+        "type": "markdown",
+        "body": "## Recommended next steps\n\n1. **Implement the package schema and pharmacy pilot first.** Add the pharmacy-specific stock, expiry and inspection-readiness workpacks; do not merely relabel the current SME starter.\n2. **Build the shared retail inventory engine.** Then configure separate hardware and spare-parts masters and evidence checklists.\n3. **Build the project-led engineering package independently.** Reuse tax/payroll primitives but give projects, contracts, BOQs, WIP, retention and certificates first-class data structures.\n4. **Pilot with ten accepted businesses per sector.** Record intake completeness, delivery hours, rework, add-on frequency, acceptance rate, client outcome and gross contribution.\n5. **Release only after legal/professional and operational review.** Current official sources, package wording, data minimisation, licence boundaries and fee economics all need named owners and review dates."
+      },
+      {
+        "id": "further_questions",
+        "type": "markdown",
+        "body": "## Further questions\n\n- Which sector already appears most often in FST enquiries, and which produces clean enough records for a controlled pilot?\n- Can the current delivery team reconcile inventory systems, EBM and accounting data without manual re-entry?\n- What transaction, SKU, employee, branch and project limits preserve a positive contribution margin at the current 10% fee strategy?\n- Which package steps require a named pharmacist, engineer, accountant, tax professional, lawyer or auditor before delivery or submission?\n- What personal or commercially sensitive data should be explicitly excluded from intake?"
+      },
+      {
+        "id": "caveats",
+        "type": "markdown",
+        "body": "## Caveats and assumptions\n\nThis is a product-architecture recommendation, not a market-size forecast or professional opinion for a named business. No primary customer interviews, FST enquiry data, delivery-time data or willingness-to-pay study was available. Broad NISR sectors do not map cleanly to the four target niches. Product standards and import controls are item-specific; pharmacy guidance changes; and lender criteria are applicant-, lender- and facility-specific.\n\nConfidence is **high** on the hybrid catalogue architecture, **moderate** on the package composition, and **low-to-moderate** on the fee floors until pilot evidence exists. All filings, payments, authority communications, licence decisions, credit decisions and regulated conclusions remain outside automatic website acceptance."
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-26T11:00:00Z",
+    "status": "ready",
+    "datasets": {
+      "formal_share": [
+        { "sector": "Wholesale & retail", "formal_share": 0.103, "formal_count": 14665, "total_count": 142365 },
+        { "sector": "Professional services", "formal_share": 0.294, "formal_count": 521, "total_count": 1772 },
+        { "sector": "Construction", "formal_share": 0.656, "formal_count": 120, "total_count": 183 },
+        { "sector": "Human health & social work", "formal_share": 0.713, "formal_count": 283, "total_count": 397 }
+      ],
+      "sector_scores": [
+        { "sector": "Construction / engineering", "regulatory": 4, "inventory": 1, "tax_import": 3, "licensed_people": 5, "funding_evidence": 5, "project_contract": 5, "pressure_profile": "R4 · I1 · T3 · L5 · F5 · P5", "defining_control": "Contract, BOQ, project cost, WIP, variations and retention" },
+        { "sector": "Hardware shops", "regulatory": 3, "inventory": 4, "tax_import": 4, "licensed_people": 2, "funding_evidence": 4, "project_contract": 2, "pressure_profile": "R3 · I4 · T4 · L2 · F4 · P2", "defining_control": "SKU/specification, conformity evidence, shrinkage and product-family margin" },
+        { "sector": "Pharmacies", "regulatory": 5, "inventory": 5, "tax_import": 4, "licensed_people": 5, "funding_evidence": 4, "project_contract": 1, "pressure_profile": "R5 · I5 · T4 · L5 · F4 · P1", "defining_control": "Batch, expiry, cold chain, recall/disposal and licensed-premises evidence" },
+        { "sector": "Spare-parts shops", "regulatory": 3, "inventory": 5, "tax_import": 5, "licensed_people": 2, "funding_evidence": 4, "project_contract": 2, "pressure_profile": "R3 · I5 · T5 · L2 · F4 · P2", "defining_control": "Part number, vehicle compatibility, landed cost, warranty and obsolescence" }
+      ],
+      "package_blueprints": [
+        { "priority": 1, "sector": "Pharmacies", "package": "Pharmacy Control & Compliance Desk", "entry_scope": "Bookkeeping; bank/MoMo; EBM/VAT/WHT; payroll/PAYE/RSSB; management summary; batch/expiry and near-expiry review; inspection evidence register", "limits": "1 branch; up to 100 monthly entries; 500 active SKUs; 10 staff; clean digital records", "starting_fee": "From RWF 45,000 / month", "limits_and_fee": "From RWF 45,000 / month · 1 branch · 100 monthly entries · 500 active SKUs · 10 staff", "event_add_ons": "Premises/licence readiness; physical stock count; cold-chain review; recall/disposal pack; importer route; working-capital file" },
+        { "priority": 2, "sector": "Construction / engineering", "package": "Engineering Practice & Project Finance Desk", "entry_scope": "Books, bank/MoMo, payroll/tax; project/contract/BOQ register; job cost and WIP; advances, variations, certificates, retention and collections", "limits": "1 entity; up to 2 active projects; 75 monthly entries; 10 staff; remote records", "starting_fee": "From RWF 50,000 / month", "limits_and_fee": "From RWF 50,000 / month · 1 entity · 2 active projects · 75 monthly entries · 10 staff", "event_add_ons": "Tender evidence; TCC/RSSB readiness; bid model; bond/guarantee readiness; contract-claim support; annual accounts" },
+        { "priority": 3, "sector": "Hardware shops", "package": "Hardware Stock, Tax & Margin Desk", "entry_scope": "Books; bank/MoMo; EBM/VAT/WHT; payroll; SKU/unit/specification master; stock movement; supplier evidence; slow stock, shrinkage and family margin", "limits": "1 branch; 100 monthly entries; 500 active SKUs; 10 staff; no physical count", "starting_fee": "From RWF 35,000 / month", "limits_and_fee": "From RWF 35,000 / month · 1 branch · 100 monthly entries · 500 active SKUs · 10 staff", "event_add_ons": "Import/landed-cost pack; conformity evidence remediation; multi-branch; tender supply; working-capital file; physical stock count" },
+        { "priority": 4, "sector": "Spare-parts shops", "package": "Spare Parts Stock & Import Desk", "entry_scope": "Books; bank/MoMo; EBM/VAT/WHT; payroll; part/compatibility master; import-batch landed cost; warranty/returns; slow and obsolete stock", "limits": "1 branch; 100 monthly entries; 750 active part numbers; 10 staff; no customs submission", "starting_fee": "From RWF 40,000 / month", "limits_and_fee": "From RWF 40,000 / month · 1 branch · 100 monthly entries · 750 part numbers · 10 staff", "event_add_ons": "Importer/Quitus readiness; multi-branch; B2B credit control; inventory-finance file; physical stock count" }
+      ],
+      "backend_model": [
+        { "layer_order": 1, "layer": "Atomic workpack", "purpose": "Single reusable delivery unit", "key_fields": "serviceId, jurisdiction, scope, unit, base fee, regulated flag, source review", "public_behavior": "Usually hidden inside the package; visible as an inclusion or add-on", "implementation": "Fields: serviceId, jurisdiction, scope, unit, fee, regulated flag and source review. Public: inclusion or add-on." },
+        { "layer_order": 2, "layer": "Sector control module", "purpose": "Captures the operating records that make the sector different", "key_fields": "stock/project master, sector registers, reconciliation rules, evidence checklist", "public_behavior": "Explains why this package fits the business", "implementation": "Fields: stock or project master, sector registers, reconciliations and evidence checklist. Public: sector-fit explanation." },
+        { "layer_order": 3, "layer": "Package version", "purpose": "Curates workpacks into one commercial offer", "key_fields": "includedServiceIds, limits, eligibility, add-ons, exclusions, price bands, owner, version", "public_behavior": "One recognisable package card with clear scope", "implementation": "Fields: workpack ids, limits, eligibility, add-ons, exclusions, price bands, owner and version. Public: one package card." },
+        { "layer_order": 4, "layer": "Scope response", "purpose": "Produces an indicative fit result from non-sensitive answers", "key_fields": "branch, volume, SKU/project, employees, VAT/EBM, importer/tender, record condition", "public_behavior": "Recommended package, assumptions and reasons for referral", "implementation": "Fields: branch, volume, SKU/project, employees, VAT/EBM, importer/tender and records. Public: recommendation and referral reasons." },
+        { "layer_order": 5, "layer": "Engagement gate", "purpose": "Separates catalogue interest from acceptance", "key_fields": "conflict/independence, responsible professional, consent, evidence, final quote and approval", "public_behavior": "No automatic filing, licence, credit or regulated conclusion", "implementation": "Fields: conflict, professional, consent, evidence, quote and approval. Public: no automatic regulated or authority action." }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "nisr_establishment_census_2023",
+      "label": "NISR Establishment Census 2023",
+      "href": "https://www.statistics.gov.rw/statistical-publications/business-establishment-finance-trade/establishment-census-2023"
+    },
+    {
+      "id": "rwanda_fda_stakeholder_documents",
+      "label": "Rwanda FDA current stakeholder documents",
+      "href": "https://monitoring.rwandafda.gov.rw/stakeholders/"
+    },
+    {
+      "id": "pharmacy_council_registration",
+      "label": "National Pharmacy Council registration requirements",
+      "href": "https://pharmacycouncil.rw/registration-requirements/"
+    },
+    {
+      "id": "rra_tax_routes",
+      "label": "RRA domestic tax service routes",
+      "href": "https://www.rra.gov.rw/en/domestic-tax-services"
+    },
+    {
+      "id": "rssb_pension_notice_2025",
+      "label": "RSSB mandatory pension contribution notice",
+      "href": "https://www.rssb.rw/uploads/merged_1_adba12649b.pdf"
+    },
+    {
+      "id": "rdb_business_registration",
+      "label": "RDB Office of the Registrar General business registration",
+      "href": "https://org.rdb.rw/business-registration/"
+    },
+    {
+      "id": "rsb_construction_materials",
+      "label": "Rwanda Standards Board construction-material certification",
+      "href": "https://www.rsb.gov.rw/certifications/system-certification/system-certification-schemes-1"
+    },
+    {
+      "id": "rica_services",
+      "label": "Rwanda Inspectorate, Competition and Consumer Protection Authority services",
+      "href": "https://www.rica.gov.rw/s"
+    },
+    {
+      "id": "engineering_professions_law_2025",
+      "label": "Law governing architecture, engineering and quantity-surveying professions, 2025",
+      "href": "https://www.engineersrwanda.rw/documents/ier_documents/1759312897.Law%20on%20the%20Professions%20of%20Architecture%2C%20Engineering%20and%20Quantity%20Surveying%202025-1.pdf"
+    },
+    {
+      "id": "brd_hatana",
+      "label": "BRD Hatana SME technical-assistance and finance information",
+      "href": "https://hatana.brd.rw/"
+    },
+    {
+      "id": "fst_sector_synthesis",
+      "label": "FST Rwanda sector package source and method notes",
+      "path": "reports/rwanda-sector-package-catalogue/source-notes.md"
+    },
+    {
+      "id": "fst_rwanda_catalogue",
+      "label": "Existing FST Rwanda atomic service catalogue",
+      "path": "lib/rwanda-catalogue.ts"
+    }
+  ],
+  "package_info": {
+    "root": "reports/rwanda-sector-package-catalogue",
+    "manifestPath": "reports/rwanda-sector-package-catalogue/artifact.json",
+    "snapshotPath": "reports/rwanda-sector-package-catalogue/artifact.json"
+  }
+}

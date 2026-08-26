@@ -59,7 +59,7 @@ export default function LegalInformationPage() {
           </section>
           <section>
             <h2>Regulated work</h2>
-            <p>Statutory audit and regulated assurance may proceed only through the Malta-authorised auditor or audit firm identified for the engagement, after independence, conflict, competence and acceptance checks. Company-service-provider and Malta-law reserved activities follow their own authorisation requirements.</p>
+            <p>Statutory audit and regulated assurance may proceed only through the appropriately authorised auditor or audit firm identified for the engagement, after independence, conflict, competence and acceptance checks. Company-service-provider and reserved legal activities follow their own authorisation requirements.</p>
             <p>If a responsible professional or authorised entity is not identified in writing, the request remains an initial enquiry and no regulated engagement has been accepted.</p>
           </section>
           <section>

@@ -28,7 +28,7 @@ Add these hosting values only after each underlying destination has been verifie
 | --- | --- | --- |
 | Canonical public origin | `NEXT_PUBLIC_SITE_URL` | Defaults to the production Cloudflare domain `https://fst.ikanisa.com` |
 | Google Calendar API | `GOOGLE_CALENDAR_CLIENT_ID`, `GOOGLE_CALENDAR_CLIENT_SECRET`, `GOOGLE_CALENDAR_REFRESH_TOKEN`, `GOOGLE_CALENDAR_ID`, `GOOGLE_CALENDAR_TIMEZONE` | Booking fails safely when credentials are absent |
-| Catalogue-request WhatsApp | `https://wa.me/35677186193` (`+356 7718 6193`) | The catalogue creates a prefilled request link without a server-side binding |
+| Catalogue-request WhatsApp | Malta: `https://wa.me/35699711145`; Rwanda: `https://wa.me/250795588248` | The catalogue creates a jurisdiction-specific prefilled request link without a server-side binding |
 | Public appointment schedule | `NEXT_PUBLIC_GOOGLE_BOOKING_URL` | Optional and hidden when absent |
 | LinkedIn company page | `NEXT_PUBLIC_LINKEDIN_URL` | Hidden when absent |
 | Google Analytics 4 | `NEXT_PUBLIC_GA_MEASUREMENT_ID` | Analytics and consent banner remain off |

@@ -38,8 +38,17 @@ yarn-error.log*
 
 # typescript
 next-env.d.ts
+*.tsbuildinfo
+
+# package manager
+/pnpm-lock.yaml
+/pnpm-workspace.yaml
 /dist/
 /.wrangler/
 /outputs/
 /work/
 /tmp/
+
+# generated report intermediates
+/reports/**/report.staging.html
+/reports/**/*verification-failure*.png

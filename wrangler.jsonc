@@ -18,6 +18,14 @@
     "not_found_handling": "none",
     "binding": "ASSETS"
   },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "fst-advisory-production",
+      "database_id": "da9a9ce0-fd39-44d1-871a-d4411cc32992",
+      "migrations_dir": "drizzle"
+    }
+  ],
   "images": {
     "binding": "IMAGES"
   }

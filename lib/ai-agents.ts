@@ -66,12 +66,12 @@ export const aiAgents: AiAgent[] = [
   {
     slug: "matthew",
     name: "Matthew",
-    practice: "Malta Tax",
-    role: "Malta tax compliance workpack specialist",
+    practice: "Tax",
+    role: "Tax compliance workpack specialist",
     description:
       "Income tax, VAT, EC Sales, Intrastat, FSS, compliance calendars, tax-risk registers and authority-query packs.",
     introduction:
-      "Matthew helps FST professionals prepare traceable Malta tax and VAT workpacks. He connects source records, reconciliations, filing requirements and open questions so the responsible person can review the position before submission.",
+      "Matthew helps FST professionals prepare traceable tax and VAT workpacks. He connects source records, reconciliations, filing requirements and open questions so the responsible person can review the position before submission.",
     image: "/fst-agent-matthew.png",
     tone: "peach",
     responsibilities: [
@@ -119,7 +119,7 @@ export const aiAgents: AiAgent[] = [
     description:
       "ORSA, QRT, SFCR/RSR, DORA, IRRD, IDD, governance, actuarial evidence and MFSA-facing packs.",
     introduction:
-      "Emma helps FST professionals structure insurance governance, risk and supervisory reporting work. She connects requirements, evidence, review findings and board actions across Solvency II and related Malta and EU obligations.",
+      "Emma helps FST professionals structure insurance governance, risk and supervisory reporting work. She connects requirements, evidence, review findings and board actions across Solvency II and related EU obligations.",
     image: "/fst-agent-emma.png",
     tone: "rose",
     responsibilities: [

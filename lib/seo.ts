@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { jurisdictionConfig, marketPath, type JurisdictionCode } from "./jurisdictions";
 
 export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://fst.ikanisa.com").replace(/\/$/, "");
 
@@ -66,6 +67,55 @@ export function pageMetadata({
       locale: "en_MT",
       type: "website",
       images: [{ url: image, width: imageWidth, height: imageHeight, type: imageContentType(image), alt: imageAlt }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: socialTitle,
+      description,
+      images: [image],
+    },
+  };
+}
+
+export function jurisdictionPageMetadata({
+  jurisdiction,
+  title,
+  description,
+  path = "/",
+  image = "/og.jpg",
+  imageAlt = "FST — Make the next move workable.",
+}: {
+  jurisdiction: JurisdictionCode;
+  title: string;
+  description: string;
+  path?: string;
+  image?: string;
+  imageAlt?: string;
+}): Metadata {
+  const config = jurisdictionConfig[jurisdiction];
+  const canonical = marketPath(jurisdiction, path);
+  const socialTitle = `${title} | FST ${config.name}`;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical,
+      languages: {
+        "en-MT": marketPath("mt", path),
+        "en-RW": marketPath("rw", path),
+        "x-default": path === "/" ? "/" : canonical,
+      },
+    },
+    openGraph: {
+      title: socialTitle,
+      description,
+      url: canonical,
+      siteName: "FST",
+      locale: config.openGraphLocale,
+      alternateLocale: jurisdiction === "mt" ? "en_RW" : "en_MT",
+      type: "website",
+      images: [{ url: image, width: 1200, height: 630, type: imageContentType(image), alt: imageAlt }],
     },
     twitter: {
       card: "summary_large_image",

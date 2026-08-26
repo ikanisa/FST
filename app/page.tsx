@@ -12,6 +12,7 @@ import { ShieldCheck } from "@phosphor-icons/react/dist/ssr/ShieldCheck";
 import { Target } from "@phosphor-icons/react/dist/ssr/Target";
 import { UsersThree } from "@phosphor-icons/react/dist/ssr/UsersThree";
 import { EditorialSlider } from "./components/EditorialSlider";
+import { AutomaticMarketRouter } from "./components/AutomaticMarketRouter";
 import { PrimaryCta } from "./components/PrimaryCta";
 import { SectionVisual } from "./components/SectionVisual";
 import { SiteFooter } from "./components/SiteFooter";
@@ -47,7 +48,7 @@ const capabilities = [
   {
     title: "Taxation",
     slug: "taxation",
-    intro: "Complete Malta tax support across direct, indirect, employment, property, transaction and international tax obligations.",
+    intro: "Complete tax support across direct, indirect, employment, property, transaction and international tax obligations.",
     items: [
       "Corporate and personal income tax",
       "VAT, payroll, FSS and social security",
@@ -97,6 +98,7 @@ const capabilities = [
 export default function Home() {
   return (
     <main id="main-content" tabIndex={-1}>
+      <AutomaticMarketRouter />
       <SiteHeader />
 
       <section className="hero" id="top">
@@ -113,7 +115,7 @@ export default function Home() {
           <ResponsiveImage
             className="hero-image"
             src="/fst-hero.webp"
-            alt="Advisers standing at a planning wall in a Malta office"
+            alt="Advisers standing at a planning wall in a professional office"
             sizes="(max-width: 900px) 100vw, 55vw"
             loading="eager"
             fetchPriority="high"

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { PrimaryCta } from "./components/PrimaryCta";
-import { SiteFooter } from "./components/SiteFooter";
 import { SiteHeader } from "./components/SiteHeader";
 
 export default function NotFound() {
@@ -16,7 +15,6 @@ export default function NotFound() {
           <Link className="text-link" href="/">Open the main page</Link>
         </div>
       </section>
-      <SiteFooter />
     </main>
   );
 }

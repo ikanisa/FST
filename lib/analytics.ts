@@ -5,6 +5,8 @@ export type ConversionEvent =
   | "booking_form_submit"
   | "booking_created"
   | "booking_fallback_open"
+  | "contact_form_submit"
+  | "contact_form_success"
   | "service_catalogue_order"
   | "linkedin_click";
 

@@ -22,7 +22,7 @@ import { TrackedLink } from "../components/TrackedLink";
 export const metadata = pageMetadata({
   title: "Meet Our AI Agent Team",
   description:
-    "Meet the supervised IKANISA AI agents FST uses to prepare source-linked audit, accounting, Malta tax, corporate, regulatory and insurance workpacks.",
+    "Meet the supervised IKANISA AI agents FST uses to prepare source-linked audit, accounting, tax, corporate, regulatory and insurance workpacks.",
   path: "/ai-agent-team",
 });
 
@@ -88,7 +88,7 @@ const workpacks = [
     outputs: ["Reconciliation pack", "Trial-balance review", "Close checklist", "Variance memo"],
   },
   {
-    practice: "Malta Tax",
+    practice: "Tax",
     name: "Tax and VAT evidence pack",
     agent: "Matthew",
     outputs: ["VAT schedules", "Tax-risk register", "Filing support pack", "Authority-query draft"],
@@ -169,7 +169,7 @@ export default function AiAgentTeamPage() {
         <div className="ai-team-hero-media">
           <ResponsiveImage
             src="/fst-ai-team.webp"
-            alt="FST professionals reviewing a structured evidence pack together in Malta"
+            alt="FST professionals reviewing a structured evidence pack together"
             sizes="(max-width: 900px) 100vw, 56vw"
             loading="eager"
             fetchPriority="high"

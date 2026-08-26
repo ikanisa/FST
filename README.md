@@ -47,7 +47,7 @@ footer and structured organisation metadata.
 - `/api/book` validates meeting requests, checks Google Calendar free/busy availability, and creates a Calendar event with Google Meet and attendee notifications.
 - Every primary website action uses the label “Book a Meeting” and routes to `/book`.
 - Confirmed Calendar events invite the prospective client and FST’s approved scheduling contact with `sendUpdates=all`.
-- The service catalogue creates a prefilled, non-binding WhatsApp request containing the selected services and indicative total, then opens the dedicated catalogue-request chat at `+356 7718 6193`; no email form, `mailto:` action or payment step is used.
+- The service catalogue creates a prefilled, non-binding WhatsApp request containing the selected services and indicative total, then opens the Malta catalogue-request chat at `+35699711145` or the Rwanda chat at `+250795588248`; no email form, `mailto:` action or payment step is used.
 - Booking fails safely when production credentials are absent by producing a dated Google Calendar invitation.
 - Required hosted values are listed in `.env.example` and `GO_LIVE_IMPLEMENTATION.md`.
 

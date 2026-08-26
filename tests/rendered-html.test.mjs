@@ -6,12 +6,14 @@ import test from "node:test";
 
 const root = path.resolve(new URL("..", import.meta.url).pathname);
 
-async function render(pathname = "/") {
+async function render(pathname = "/", headers = {}, country = "") {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}-${pathname}`);
   const { default: worker } = await import(workerUrl.href);
+  const request = new Request(`http://localhost${pathname}`, { headers: { accept: "text/html", ...headers } });
+  if (country) Object.defineProperty(request, "cf", { value: { country }, configurable: true });
   return worker.fetch(
-    new Request(`http://localhost${pathname}`, { headers: { accept: "text/html" } }),
+    request,
     { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } },
     { waitUntil() {}, passThroughOnException() {} },
   );
@@ -37,6 +39,18 @@ function gitBlobId(buffer) {
     .update(Buffer.from(`blob ${buffer.length}\0`))
     .update(buffer)
     .digest("hex");
+}
+
+function visibleBodyText(html) {
+  const body = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i)?.[1] || html;
+  return body
+    .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&nbsp;|&#160;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 const kmfincoPublicBlobIds = new Set(`
@@ -96,6 +110,55 @@ test("renders the new FST identity, navigation and service-category model", asyn
   assert.match(html, /href="\/insights"/i);
   assert.match(html, /src="\/fst-hero\.webp"/);
   assert.equal(response.headers.get("x-content-type-options"), "nosniff");
+});
+
+test("automatically selects Rwanda or Malta without a public market switcher", async () => {
+  const rwandaCountry = await render("/", {}, "RW");
+  assert.equal(rwandaCountry.status, 307);
+  assert.equal(rwandaCountry.headers.get("location"), "http://localhost/rw");
+  assert.equal(rwandaCountry.headers.get("x-fst-market-selection"), "country");
+  assert.match(rwandaCountry.headers.get("cache-control") || "", /no-store/i);
+
+  const maltaCountry = await render("/", {}, "MT");
+  assert.equal(maltaCountry.status, 307);
+  assert.equal(maltaCountry.headers.get("location"), "http://localhost/mt");
+
+  const rwandaLanguage = await render("/", { "accept-language": "en-RW,rw;q=0.9" });
+  assert.equal(rwandaLanguage.status, 307);
+  assert.equal(rwandaLanguage.headers.get("location"), "http://localhost/rw");
+  assert.equal(rwandaLanguage.headers.get("x-fst-market-selection"), "language");
+
+  for (const pathname of ["/", "/rw", "/mt"]) {
+    const response = await render(pathname);
+    const html = await response.text();
+    assert.doesNotMatch(html, /Choose market|jurisdiction-switcher/i);
+  }
+});
+
+test("renders jurisdiction audience cards as an intentional three-column layout", async () => {
+  for (const pathname of ["/rw/who-we-work-with", "/mt/who-we-work-with"]) {
+    const response = await render(pathname);
+    assert.equal(response.status, 200);
+    const html = await response.text();
+    assert.equal(
+      (html.match(/<article class="client-group-card client-group-three-up"/g) || []).length,
+      3,
+      `${pathname} should render three equal-width audience cards`,
+    );
+  }
+
+  const css = await readFile(path.join(root, "app/globals.css"), "utf8");
+  assert.match(css, /\.client-group-three-up\s*\{\s*grid-column:\s*span 4;/);
+  assert.match(css, /@media \(max-width:\s*900px\)[\s\S]*?\.client-group-three-up\s*\{\s*grid-column:\s*1 \/ -1;/);
+});
+
+test("gives the About story image an explicit height without a blank min-height area", async () => {
+  const html = await (await render("/rw/about")).text();
+  assert.match(html, /class="about-story-image"/);
+
+  const css = await readFile(path.join(root, "app/globals.css"), "utf8");
+  assert.match(css, /\.about-story-image\s*\{\s*height:\s*620px;/);
+  assert.doesNotMatch(css, /\.about-story-image\s*\{[^}]*min-height:/);
 });
 
 test("does not expose removed practices or inherited KMFINCO language", async () => {
@@ -160,7 +223,7 @@ test("publishes a searchable multi-service catalogue with indicative prices and 
     "Monthly bookkeeping",
     "VAT return and reconciliation",
     "Monthly payroll processing",
-    "Malta company formation",
+    "Company formation",
     "Business-plan preparation",
     "Grant application drafting",
     "Contract drafting",
@@ -172,15 +235,30 @@ test("publishes a searchable multi-service catalogue with indicative prices and 
   assert.match(html, />Clear fees</);
   assert.doesNotMatch(html, /Clear [“"]From[”"] fees/);
   assert.match(html, /Free scope check/i);
-  assert.match(html, /Your FST request/i);
-  assert.match(html, /Your request is empty/i);
-  assert.match(html, /required Malta authorisation|appropriately authorised Malta auditor|appropriately warranted legal professional/i);
+  assert.doesNotMatch(visibleBodyText(html), /Your FST request|Your request is empty/i);
+  assert.doesNotMatch(visibleBodyText(html), /Professional boundaries|The right authority stays attached to the work|Scope and fee notice|Indicative fee notice/i);
   assert.doesNotMatch(html, /50%|roughly half|market provider/i);
   assert.match(html, /contracting provider and responsible professional are confirmed/i);
   const cartSource = await readFile(path.join(root, "app/components/ServiceCatalogue.tsx"), "utf8");
-  assert.match(cartSource, /Send request on WhatsApp/);
-  assert.match(cartSource, /wa\.me\/35677186193|serviceOrderWhatsappUrl/);
+  assert.match(cartSource, /Order via WhatsApp/);
+  assert.match(cartSource, /wa\.me\/35699711145|serviceOrderWhatsappUrl/);
   assert.match(cartSource, /Indicative starting total/);
+  assert.match(cartSource, /if \(!isRemoving\) \{[\s\S]*?setOrderOpen\(true\)/);
+  assert.match(cartSource, /orderTriggerRef\.current = document\.activeElement/);
+  assert.match(cartSource, /orderOpen &&/);
+  assert.match(cartSource, />Services</);
+  assert.match(cartSource, />Industry packages</);
+  assert.match(cartSource, /getSectorPackages\(jurisdiction\)/);
+  const packageSource = await readFile(path.join(root, "lib/sector-packages.ts"), "utf8");
+  for (const packageLabel of ["Pharmacies", "Shops (hardware, spare-parts & more)", "Restaurants", "Construction", "Self-employed", "Shops", "CSPs"]) {
+    assert.ok(packageSource.includes(packageLabel), `${packageLabel} must appear in its market package configuration`);
+  }
+  assert.match(cartSource, /function togglePackage/);
+  assert.match(cartSource, /selectedPackages=\{selectedPackages\}/);
+  assert.match(cartSource, /Industry packages/);
+  assert.doesNotMatch(cartSource, /Select package/);
+  assert.doesNotMatch(cartSource, /\/sectors\//);
+  assert.doesNotMatch(cartSource, /catalogue-order-desktop|Your request is empty|Search individual work, filter it by professional category/i);
   assert.doesNotMatch(cartSource, /api\/service-order|<form|mailto:|name="email"|emailed directly/i);
   assert.doesNotMatch(cartSource, /catalogue-popular|catalogue-regulated|>Popular<|>Reviewed</);
   assert.doesNotMatch(html, /FST service catalogue <span>|AI-enabled professional delivery/i);
@@ -196,7 +274,7 @@ test("uses explicit loan and funding application support wording across public r
 test("covers Malta taxation beyond VAT and corporate income tax", async () => {
   const index = await (await render("/services")).text();
   const detail = await (await render("/services/taxation")).text();
-  assert.match(index, /Complete Malta tax support/i);
+  assert.match(index, /Complete tax support/i);
   for (const label of [
     "Corporate income tax",
     "Personal &amp; self-employed income tax",
@@ -304,7 +382,7 @@ test("publishes a dedicated internal FST page for every AI agent", async () => {
   for (const [name, route, role, workpack] of [
     ["Patrick", "patrick", "Audit workpack specialist", "Audit file pack"],
     ["Sofia", "sofia", "Accounting and finance operations specialist", "Accounting close pack"],
-    ["Matthew", "matthew", "Malta tax compliance workpack specialist", "Tax and VAT evidence pack"],
+    ["Matthew", "matthew", "Tax compliance workpack specialist", "Tax and VAT evidence pack"],
     ["Claire", "claire", "Corporate and regulatory workpack specialist", "Corporate and regulatory pack"],
     ["Emma", "emma", "Insurance governance and reporting specialist", "Insurance regulatory pack"],
   ]) {
@@ -367,7 +445,7 @@ test("separates independent audit work from management advisory and states profe
     "Audit committee &amp; governance reporting",
   ]) assert.match(audit, new RegExp(label, "i"));
   assert.match(audit, /Regulated work begins with authority and independence/i);
-  assert.match(audit, /holds the required Malta authorisation/i);
+  assert.match(audit, /holds the required authorisation/i);
   assert.match(audit, /conflict and independence checks/i);
   assert.doesNotMatch(management, /<h3>Internal audit<\/h3>/i);
 });
@@ -394,7 +472,7 @@ test("every rendered public image exists and none matches a KMFINCO public asset
   }
   const publicFiles = await readdir(path.join(root, "public"));
   assert.ok(
-    publicFiles.every((name) => /^(fst-|funding-|catalogue-og\.jpg$|_headers$|favicon\.svg$|og\.jpg$|apple-touch-icon\.png$|icon-(?:192|512)\.png$|brand$)/.test(name)),
+    publicFiles.every((name) => /^(fst-|sector-|funding-|catalogue-og\.jpg$|_headers$|favicon\.svg$|og\.jpg$|apple-touch-icon\.png$|icon-(?:192|512)\.png$|brand$)/.test(name)),
     "public should contain only FST/funding exports and core brand files",
   );
 });
@@ -505,8 +583,8 @@ test("contact, SEO and discovery routes render production signals", async () => 
   const [contact, sitemap, robots] = await Promise.all([
     contactResponse.text(), sitemapResponse.text(), robotsResponse.text(),
   ]);
-  assert.match(contact, /wa\.me\/35699152999/);
-  assert.match(contact, />\+35699152999</);
+  assert.match(contact, /wa\.me\/35699711145/);
+  assert.match(contact, />\+35699711145</);
   assert.match(contact, /general enquiries/i);
   assert.match(contact, /separate service-request channel/i);
   assert.match(contact, /href="\/legal-information"/i);
@@ -572,12 +650,12 @@ test("service request creates a WhatsApp handoff link for the dedicated catalogu
     readFile(path.join(root, "app/api/service-order/route.ts"), "utf8"),
     { code: "ENOENT" },
   );
-  assert.match(siteConfigSource, /serviceOrderWhatsappDisplay: "\+356 7718 6193"/);
-  assert.match(siteConfigSource, /serviceOrderWhatsappUrl: "https:\/\/wa\.me\/35677186193"/);
-  assert.match(cartSource, /Hello FST, I would like to request the following services/);
+  assert.match(siteConfigSource, /serviceOrderWhatsappDisplay: "\+35699711145"/);
+  assert.match(siteConfigSource, /serviceOrderWhatsappUrl: "https:\/\/wa\.me\/35699711145"/);
+  assert.match(cartSource, /Hello FST, I would like to order the following catalogue items/);
   assert.match(cartSource, /encodeURIComponent\(whatsappMessage\)/);
   assert.match(cartSource, /target="_blank"/);
-  assert.match(cartSource, /Send request on WhatsApp/);
+  assert.match(cartSource, /Order via WhatsApp/);
 });
 
 test("native booking validates input and fails safely without credentials", async () => {
@@ -620,4 +698,335 @@ test("native booking creates conflict-checked Google Meet events for approved re
   } finally {
     globalThis.fetch = originalFetch;
   }
+});
+
+test("publishes complete Malta and Rwanda route families without cross-market contact leakage", async () => {
+  const sharedRoutes = [
+    "",
+    "/services",
+    "/services/catalogue",
+    "/services/management-consulting",
+    "/services/audit-assurance",
+    "/services/taxation",
+    "/services/accounting-financial-reporting",
+    "/services/corporate-services",
+    "/services/loan-funding-application-support",
+    "/who-we-work-with",
+    "/about",
+    "/contact",
+    "/book",
+    "/legal-information",
+    "/privacy",
+    "/terms",
+  ];
+
+  for (const jurisdiction of ["mt", "rw"]) {
+    for (const suffix of sharedRoutes) {
+      const pathname = `/${jurisdiction}${suffix}`;
+      const response = await render(pathname);
+      assert.equal(response.status, 200, `${pathname} should render`);
+      const html = await response.text();
+      assert.match(html, new RegExp(`href="/${jurisdiction}/services`, "i"));
+      assert.match(html, new RegExp(`href="/${jurisdiction}/book`, "i"));
+    }
+  }
+
+  const malta = await (await render("/mt/services/catalogue")).text();
+  const rwanda = await (await render("/rw/services/catalogue")).text();
+  assert.match(malta, /From €100|From &euro;100/i);
+  assert.match(rwanda, /From (?:RWF|RF|Rwf|FRw|Frw|RFr|R₣)(?:&nbsp;|\s)*3,500/i);
+  assert.match(rwanda, /https:\/\/wa\.me\/250795588248/i);
+  assert.match(visibleBodyText(rwanda), /\+250795588248/);
+  assert.match(visibleBodyText(rwanda), /Clear starting fees\./i);
+  assert.match(visibleBodyText(rwanda), /Build an itemised order/i);
+  assert.match(visibleBodyText(rwanda), /Every selection and displayed starting fee stays together in one order/i);
+  assert.match(visibleBodyText(rwanda), /Review it in WhatsApp/i);
+  assert.match(visibleBodyText(rwanda), /Receive a confirmed scope/i);
+  assert.match(visibleBodyText(rwanda), /records required, deadline, final fee, taxes or official costs and responsible professional/i);
+  assert.doesNotMatch(visibleBodyText(rwanda), /Practical workpacks, priced in RWF/i);
+  assert.doesNotMatch(visibleBodyText(rwanda), /Fee basis|per taxpayer profile/i);
+  assert.doesNotMatch(visibleBodyText(rwanda), /FST Rwanda/i);
+  assert.doesNotMatch(rwanda, /\+356|wa\.me\/356|From €|From &euro;/i);
+  assert.match(rwanda, /hreflang="en-MT"/i);
+  assert.match(rwanda, /hreflang="en-RW"/i);
+
+  const selectedRwandaRequest = await (await render("/rw/contact?services=rw-vat-return,not-a-service")).text();
+  const selectedRwandaRequestText = selectedRwandaRequest.split("<body>")[1].replaceAll("<!-- -->", "");
+  assert.match(selectedRwandaRequestText, /1 service attached/i);
+  assert.match(selectedRwandaRequestText, /VAT return and EBM reconciliation/i);
+  assert.doesNotMatch(selectedRwandaRequestText, /not-a-service/i);
+});
+
+test("keeps jurisdiction in routing and metadata instead of repeated visible labels", async () => {
+  const sharedRoutes = [
+    "",
+    "/services",
+    "/services/catalogue",
+    "/services/taxation",
+    "/about",
+    "/who-we-work-with",
+    "/contact",
+    "/book",
+    "/legal-information",
+    "/privacy",
+    "/terms",
+  ];
+
+  for (const jurisdiction of ["mt", "rw"]) {
+    for (const suffix of sharedRoutes) {
+      const pathname = `/${jurisdiction}${suffix}`;
+      const html = await (await render(pathname)).text();
+      const visible = visibleBodyText(html)
+        .replaceAll("Malta Enterprise", "")
+        .replaceAll("Xjenza Malta", "");
+      assert.doesNotMatch(
+        visible,
+        /\b(?:Rwanda|Rwandan|Malta|Maltese)\b/i,
+        `${pathname} should not repeat the active jurisdiction in visible copy`,
+      );
+      assert.doesNotMatch(
+        visible,
+        /\b(?:FST\s+(?:RW|MT)|jurisdiction|market route|country desk)\b/i,
+        `${pathname} should not expose internal routing labels`,
+      );
+    }
+  }
+});
+
+test("jurisdiction and catalogue APIs expose validated public market contracts", async () => {
+  const jurisdictionsResponse = await render("/api/v1/jurisdictions");
+  assert.equal(jurisdictionsResponse.status, 200);
+  const jurisdictions = await jurisdictionsResponse.json();
+  assert.deepEqual(jurisdictions.data.map(({ code }) => code), ["mt", "rw"]);
+  assert.equal(jurisdictions.data.find(({ code }) => code === "rw").currency, "RWF");
+  assert.equal(jurisdictions.data.find(({ code }) => code === "rw").timezone, "Africa/Kigali");
+  assert.equal(jurisdictions.data.find(({ code }) => code === "rw").contact.whatsappDisplay, "+250795588248");
+  assert.equal(jurisdictions.data.find(({ code }) => code === "rw").contact.whatsappUrl, "https://wa.me/250795588248");
+
+  const catalogueResponse = await render("/api/v1/catalogue?jurisdiction=rw&q=bookkeeping");
+  assert.equal(catalogueResponse.status, 200);
+  const catalogue = await catalogueResponse.json();
+  assert.equal(catalogue.jurisdiction, "rw");
+  assert.equal(catalogue.currency, "RWF");
+  assert.equal(catalogue.pricingMode, "indicative_starting_fee");
+  assert.ok(catalogue.services.length >= 1);
+  assert.ok(catalogue.services.every(({ from, priceLabel }) => from >= 3_500 && /^From RWF\s/i.test(priceLabel)));
+  assert.equal(catalogue.services.find(({ id }) => id === "rw-monthly-bookkeeping")?.from, 7_500);
+
+  const completeRwandaCatalogue = await (await render("/api/v1/catalogue?jurisdiction=rw")).json();
+  assert.ok(completeRwandaCatalogue.count >= 45);
+  assert.ok(completeRwandaCatalogue.services.every(({ from }) => Number.isInteger(from) && from >= 3_500));
+  assert.equal(completeRwandaCatalogue.services.find(({ id }) => id === "rw-brd-dfi-financing")?.from, 120_000);
+  const rwandaServiceText = completeRwandaCatalogue.services.map(({ title, description, tags }) => `${title} ${description} ${tags.join(" ")}`).join(" ");
+  for (const requiredTerm of ["VAT", "WHT", "PAYE", "RSSB", "EBM", "CIT", "RDB", "RGB", "loan application", "BDF", "BRD", "grant readiness", "MEAL", "donor report"]) {
+    assert.match(rwandaServiceText, new RegExp(requiredTerm, "i"), `Rwanda catalogue should cover ${requiredTerm}`);
+  }
+
+  const invalid = await render("/api/v1/catalogue?jurisdiction=xx");
+  assert.equal(invalid.status, 400);
+  assert.deepEqual(await invalid.json(), { error: "invalid_jurisdiction" });
+});
+
+test("publishes one add-to-order package card per industry on each main catalogue and removes sector subpages", async () => {
+  const expectations = {
+    rw: [
+      ["pharmacies", "Pharmacy Finance, Tax &amp; Administration", "RWF 25,000"],
+      ["shops", "Shop Finance, Tax &amp; Stock", "RWF 20,000"],
+      ["restaurants-and-hospitality", "Restaurant Finance, Tax &amp; Payroll", "RWF 20,000"],
+      ["engineering-practices", "Construction Finance, Tender &amp; Administration", "RWF 25,000"],
+    ],
+    mt: [
+      ["restaurants-and-cafes", "Restaurant Finance, VAT &amp; Payroll", "€300"],
+      ["self-employed", "Self-Employed Finance &amp; Tax", "€180"],
+      ["retail-shops", "Retail Finance, VAT &amp; Stock", "€250"],
+      ["csp-firms", "Accounting, Tax &amp; Compliance Outsourcing", "€450"],
+    ],
+  };
+
+  for (const [jurisdiction, packages] of Object.entries(expectations)) {
+    const catalogue = await (await render(`/${jurisdiction}/services/catalogue`)).text();
+    const visibleCatalogue = visibleBodyText(catalogue);
+    assert.equal((catalogue.match(/class="catalogue-industry-card accent-/g) || []).length, 4);
+    assert.doesNotMatch(visibleCatalogue, /Select package/);
+    assert.doesNotMatch(catalogue, new RegExp(`href="/${jurisdiction}/sectors(?:/|\")`, "i"));
+    for (const [, title, entryPrice] of packages) {
+      assert.match(catalogue, new RegExp(title, "i"));
+      assert.match(visibleCatalogue, new RegExp(entryPrice.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i"));
+      assert.match(catalogue, new RegExp(`aria-label="Add [^"]+ to order"`, "i"));
+    }
+    if (jurisdiction === "mt") {
+      assert.match(visibleCatalogue, /per client \/ month/i);
+      assert.match(visibleCatalogue, /regulatory, KYC and AML\/CFT evidence administration for CSP review/i);
+      assert.doesNotMatch(visibleCatalogue, /CSP firm's own|firm's own company/i);
+    }
+
+    for (const removedPath of ["/sectors", ...packages.map(([slug]) => `/sectors/${slug}`)]) {
+      assert.equal((await render(`/${jurisdiction}${removedPath}`)).status, 404, `/${jurisdiction}${removedPath} should be removed`);
+    }
+
+    const services = await (await render(`/${jurisdiction}/services`)).text();
+    assert.match(services, new RegExp(`href="/${jurisdiction}/services/catalogue#industry-package-title"[^>]*>Explore industry packages`, "i"));
+  }
+});
+
+test("sector package APIs expose current versions and return a non-binding fit result", async () => {
+  for (const jurisdiction of ["rw", "mt"]) {
+    const response = await render(`/api/v1/sector-packages?jurisdiction=${jurisdiction}`);
+    assert.equal(response.status, 200);
+    const body = await response.json();
+    assert.equal(body.jurisdiction, jurisdiction);
+    assert.equal(body.count, 4);
+    assert.ok(body.packages.every((item) => item.version === "2026-08-26"));
+    assert.ok(body.packages.every((item) => item.catalogueEntries.length === 1));
+    assert.ok(body.packages.every((item) => item.catalogueEntries[0].includes.length === 5));
+    assert.ok(body.packages.every((item) => item.officialCostsExcluded === true));
+  }
+
+  const detail = await render("/api/v1/sector-packages/pharmacies?jurisdiction=rw");
+  assert.equal(detail.status, 200);
+  const pharmacy = await detail.json();
+  assert.equal(pharmacy.id, "rw-pharmacy-control-desk");
+  assert.equal(pharmacy.monthlyFrom, 25_000);
+  assert.deepEqual(pharmacy.catalogueEntries.map(({ id, from }) => [id, from]), [["finance-routine", 25_000]]);
+
+  const maltaRestaurantDetail = await render("/api/v1/sector-packages/restaurants-and-cafes?jurisdiction=mt");
+  assert.equal(maltaRestaurantDetail.status, 200);
+  const maltaRestaurant = await maltaRestaurantDetail.json();
+  assert.equal(maltaRestaurant.monthlyFrom, 300);
+  assert.deepEqual(maltaRestaurant.catalogueEntries.map(({ id, from }) => [id, from]), [["finance-routine", 300]]);
+  assert.equal((await render("/api/v1/sector-packages/pharmacies?jurisdiction=mt")).status, 404);
+
+  const entry = await post("/api/v1/package-scope", {
+    jurisdiction: "rw",
+    packageSlug: "pharmacies",
+    packageVersion: "2026-08-26",
+    locations: 1,
+    employees: "1-5",
+    workload: "entry",
+    records: "clean",
+    regulatedEvent: false,
+    addOnIds: [],
+  });
+  assert.equal(entry.status, 200);
+  const entryResult = await entry.json();
+  assert.equal(entryResult.quoteStatus, "indicative_fit");
+  assert.equal(entryResult.engagementAccepted, false);
+  assert.equal(entryResult.monthlyFrom, 25_000);
+
+  const complex = await post("/api/v1/package-scope", {
+    jurisdiction: "rw",
+    packageSlug: "engineering-practices",
+    packageVersion: "2026-08-26",
+    locations: 2,
+    employees: "11-20",
+    workload: "complex",
+    records: "cleanup",
+    regulatedEvent: true,
+    addOnIds: ["tender-pack", "not-valid"],
+  });
+  assert.equal(complex.status, 200);
+  const complexResult = await complex.json();
+  assert.equal(complexResult.quoteStatus, "manual_review_required");
+  assert.deepEqual(complexResult.addOnIds, ["tender-pack"]);
+  assert.equal(complexResult.engagementAccepted, false);
+});
+
+test("secure enquiry intake validates jurisdiction and persists only through D1", async () => {
+  const validPayload = {
+    jurisdiction: "rw",
+    name: "Test Client",
+    email: "test@example.com",
+    organisation: "Example Cooperative",
+    message: "We need a controlled bookkeeping and funding-readiness scope.",
+    serviceIds: ["rw-monthly-bookkeeping", "rw-loan-readiness"],
+    privacy_consent: "agreed",
+    sourcePath: "/rw/contact",
+  };
+
+  const unconfigured = await post("/api/v1/enquiries", validPayload);
+  assert.equal(unconfigured.status, 503);
+  assert.deepEqual(await unconfigured.json(), { error: "enquiry_storage_not_configured" });
+
+  const writes = [];
+  const DB = {
+    prepare(sql) {
+      return {
+        bind(...values) {
+          writes.push({ sql, values });
+          return { run: async () => ({ success: true }) };
+        },
+      };
+    },
+  };
+  const stored = await post("/api/v1/enquiries", validPayload, { DB });
+  assert.equal(stored.status, 201);
+  const receipt = await stored.json();
+  assert.equal(receipt.ok, true);
+  assert.equal(receipt.jurisdiction, "rw");
+  assert.match(receipt.requestId, /^ENQ-RW-\d{8}-[A-F0-9]{8}$/);
+  assert.equal(writes.length, 1);
+  assert.match(writes[0].sql, /INSERT INTO enquiries/i);
+  assert.equal(writes[0].values[1], "rw");
+  assert.doesNotMatch(JSON.stringify(receipt), /test@example\.com|Example Cooperative/);
+
+  const mismatch = await post("/api/v1/enquiries", { ...validPayload, sourcePath: "/mt/contact" }, { DB });
+  assert.equal(mismatch.status, 400);
+  assert.deepEqual(await mismatch.json(), { error: "jurisdiction_path_mismatch" });
+});
+
+test("sector package enquiry stores the canonical package, scope and underlying workpacks", async () => {
+  const writes = [];
+  const DB = {
+    prepare(sql) {
+      return {
+        bind(...values) {
+          writes.push({ sql, values });
+          return { run: async () => ({ success: true }) };
+        },
+      };
+    },
+  };
+  const response = await post("/api/v1/enquiries", {
+    jurisdiction: "mt",
+    name: "Test Client",
+    email: "test@example.com",
+    organisation: "Example Restaurant",
+    message: "We need the recurring finance package and catch-up bookkeeping.",
+    serviceIds: [],
+    packageId: "mt-restaurant-finance-desk",
+    packageVersion: "2026-08-26",
+    packageEntryId: "finance-routine",
+    scopeAnswers: { locations: "1", employees: "1-5", workload: "entry", records: "clean", regulatedEvent: true },
+    addonIds: ["catch-up-books", "invalid-addon"],
+    atomicServiceIds: ["untrusted-service"],
+    quoteStatus: "manual_review_required",
+    privacy_consent: "agreed",
+    sourcePath: "/mt/contact",
+  }, { DB });
+  assert.equal(response.status, 201);
+  assert.equal(writes.length, 1);
+  assert.match(writes[0].sql, /package_id, package_version, package_entry_id, scope_answers_json/i);
+  assert.ok(writes[0].values.includes("mt-restaurant-finance-desk"));
+  assert.ok(writes[0].values.includes("2026-08-26"));
+  assert.ok(writes[0].values.includes("finance-routine"));
+  assert.ok(writes[0].values.includes('["catch-up-books"]'));
+  assert.ok(writes[0].values.includes('["monthly-bookkeeping","management-accounts","vat-return","monthly-payroll","fss-filings"]'));
+  assert.ok(!JSON.stringify(writes[0].values).includes("untrusted-service"));
+});
+
+test("Rwanda booking fails closed instead of using the Malta calendar", async () => {
+  const future = new Date(Date.now() + 72 * 60 * 60 * 1000).toISOString();
+  const response = await post(
+    "/api/book",
+    { jurisdiction: "rw", name: "Test Client", email: "test@example.com", start: future, duration: 30, timezone: "Africa/Kigali", privacy_consent: "agreed" },
+    {
+      GOOGLE_CALENDAR_CLIENT_ID: "client",
+      GOOGLE_CALENDAR_CLIENT_SECRET: "secret",
+      GOOGLE_CALENDAR_REFRESH_TOKEN: "refresh",
+      GOOGLE_CALENDAR_ID: "primary",
+      GOOGLE_CALENDAR_TIMEZONE: "Europe/Malta",
+    },
+  );
+  assert.equal(response.status, 503);
+  assert.deepEqual(await response.json(), { error: "booking_not_configured" });
 });

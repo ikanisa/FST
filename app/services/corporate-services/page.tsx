@@ -2,7 +2,7 @@ import { pageMetadata } from "../../../lib/seo";
 import { ServicePage } from "../../components/ServicePage";
 
 export const metadata = pageMetadata({
-  title: "Malta Corporate & Administrative Services",
+  title: "Corporate & Administrative Services",
   description: "Company formation, corporate administration, company secretarial, statutory records, filings and administrative support.",
   path: "/services/corporate-services",
 });

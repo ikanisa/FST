@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 import { aiAgents } from "../lib/ai-agents";
 import { siteUrl } from "../lib/seo";
+import { jurisdictionCodes } from "../lib/jurisdictions";
+import { jurisdictionServiceSlugs } from "../lib/jurisdiction-services";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
@@ -33,9 +35,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/terms", priority: 0.5, changeFrequency: "yearly" as const, lastModified: "2026-08-03" },
   ];
 
-  return routes.map((route) => ({
+  const jurisdictionRoutes = jurisdictionCodes.flatMap((jurisdiction) => [
+    { path: `/${jurisdiction}`, priority: 1, changeFrequency: "monthly" as const },
+    { path: `/${jurisdiction}/services`, priority: 0.9, changeFrequency: "monthly" as const },
+    { path: `/${jurisdiction}/services/catalogue`, priority: 0.9, changeFrequency: "weekly" as const },
+    ...jurisdictionServiceSlugs.map((service) => ({ path: `/${jurisdiction}/services/${service}`, priority: 0.8, changeFrequency: "monthly" as const })),
+    { path: `/${jurisdiction}/who-we-work-with`, priority: 0.8, changeFrequency: "monthly" as const },
+    { path: `/${jurisdiction}/about`, priority: 0.7, changeFrequency: "monthly" as const },
+    { path: `/${jurisdiction}/contact`, priority: 0.7, changeFrequency: "yearly" as const },
+    { path: `/${jurisdiction}/book`, priority: 0.8, changeFrequency: "monthly" as const },
+    { path: `/${jurisdiction}/legal-information`, priority: 0.5, changeFrequency: "monthly" as const },
+    { path: `/${jurisdiction}/privacy`, priority: 0.5, changeFrequency: "yearly" as const },
+    { path: `/${jurisdiction}/terms`, priority: 0.5, changeFrequency: "yearly" as const },
+  ]);
+
+  return [...routes, ...jurisdictionRoutes].map((route) => ({
     url: `${siteUrl}${route.path}`,
-    lastModified: new Date("lastModified" in route ? route.lastModified : "2026-07-30"),
+    lastModified: new Date((route as { lastModified?: string }).lastModified || "2026-07-30"),
     changeFrequency: route.changeFrequency,
     priority: route.priority,
   }));

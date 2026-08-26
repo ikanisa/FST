@@ -1,13 +1,14 @@
-import { env } from "cloudflare:workers";
 import { drizzle } from "drizzle-orm/d1";
 import * as schema from "./schema";
+import { serverEnv } from "../lib/server-env";
 
 export function getDb() {
-  if (!env.DB) {
+  const binding = serverEnv().DB;
+  if (!binding) {
     throw new Error(
       "Cloudflare D1 binding `DB` is unavailable. Configure the binding in wrangler.jsonc before using the database."
     );
   }
 
-  return drizzle(env.DB, { schema });
+  return drizzle(binding, { schema });
 }

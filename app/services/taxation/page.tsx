@@ -2,8 +2,8 @@ import { pageMetadata } from "../../../lib/seo";
 import { ServicePage } from "../../components/ServicePage";
 
 export const metadata = pageMetadata({
-  title: "Malta Tax Advisory & Compliance",
-  description: "Comprehensive Malta tax support across income tax, VAT, payroll and FSS, social security, withholding, property, transfer, international and transaction taxes.",
+  title: "Tax Advisory & Compliance",
+  description: "Comprehensive tax support across income tax, VAT, payroll and FSS, social security, withholding, property, transfer, international and transaction taxes.",
   path: "/services/taxation",
 });
 
@@ -13,9 +13,9 @@ export default function TaxationPage() {
     path="/services/taxation"
     eyebrow="Taxation"
     title="Bring every applicable tax obligation into one working plan."
-    lede="Comprehensive Malta tax support across corporate and personal income tax, VAT, employment taxes, social security, withholding, property and transfer taxes, international tax and other applicable obligations."
+    lede="Comprehensive tax support across corporate and personal income tax, VAT, employment taxes, social security, withholding, property and transfer taxes, international tax and other applicable obligations."
     image="/fst-tax.webp"
-    imageAlt="A tax specialist reviewing reconciled schedules across Malta tax obligations"
+    imageAlt="A tax specialist reviewing reconciled schedules across tax obligations"
     sectionImages={{
       intro: { src: "/fst-accounting.webp", alt: "Accounting records being reconciled before tax preparation" },
       offerings: { src: "/fst-tax.webp", alt: "A tax specialist checking calculations and supporting evidence" },

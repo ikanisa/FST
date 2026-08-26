@@ -14,7 +14,7 @@ import { ResponsiveImage } from "../components/ResponsiveImage";
 import { BreadcrumbJsonLd } from "../components/JsonLd";
 
 export const metadata = pageMetadata({
-  title: "Advisory Services in Malta",
+  title: "Advisory Services",
   description: "Explore FST management, audit, assurance, tax, accounting, corporate administration and funding support, or compare individual services and indicative fees.",
   path: "/services",
 });
@@ -22,7 +22,7 @@ export const metadata = pageMetadata({
 const services = [
   { title: "Management Advisory, Risk & Controls", slug: "management-consulting", image: "/fst-management.webp", copy: "Business planning, strategy, decision support, risk management, control design and hands-on management follow-through.", tone: "violet", icon: Compass },
   { title: "Audit & Assurance", slug: "audit-assurance", image: "/fst-insights.webp", copy: "Statutory and voluntary audit, assurance, agreed-upon procedures, internal audit, controls, compliance, donor, NGO and project audit work.", tone: "cobalt", icon: ShieldCheck },
-  { title: "Taxation", slug: "taxation", image: "/fst-tax.webp", copy: "Complete Malta tax support covering corporate and personal income tax, VAT, payroll and FSS, social security, withholding, property, transfer and international tax.", tone: "orange", icon: Receipt },
+  { title: "Taxation", slug: "taxation", image: "/fst-tax.webp", copy: "Complete tax support covering corporate and personal income tax, VAT, payroll and FSS, social security, withholding, property, transfer and international tax.", tone: "orange", icon: Receipt },
   { title: "Accounting & Financial Reporting", slug: "accounting-financial-reporting", image: "/fst-accounting.webp", copy: "Finance records, close, reporting, payroll and forward-looking information prepared for management use.", tone: "blue", icon: Calculator },
   { title: "Corporate & Administrative Services", slug: "corporate-services", image: "/fst-corporate.webp", copy: "Company records, governance actions, statutory filings and recurring administration kept orderly and current.", tone: "cobalt", icon: Buildings },
   { title: "Loan & Funding Application Support", slug: "loan-funding-application-support", image: "/fst-finance.webp", copy: "One complete financing file for bank lending, FONDI.eu, Malta Enterprise, Xjenza Malta and connected funding routes.", tone: "rose", icon: HandCoins },

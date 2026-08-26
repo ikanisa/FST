@@ -4,7 +4,7 @@ export const catalogueCategories = [
     label: "Audit & assurance",
     shortLabel: "Audit",
     description: "Independent and evidence-led work for statutory, funder, governance and control requirements.",
-    regulatedNote: "Statutory audit and assurance work is accepted only through an appropriately authorised Malta auditor or audit firm after independence and conflict checks.",
+    regulatedNote: "Statutory audit and assurance work is accepted only through an appropriately authorised auditor or audit firm after independence and conflict checks.",
   },
   {
     id: "accounting-reporting",
@@ -16,7 +16,7 @@ export const catalogueCategories = [
     id: "tax-payroll",
     label: "Tax, VAT & payroll",
     shortLabel: "Tax & payroll",
-    description: "Recurring and one-off Malta compliance support for businesses, employers and individuals.",
+    description: "Recurring and one-off compliance support for businesses, employers and individuals.",
     regulatedNote: "Final filings, positions and submissions remain subject to client approval and any applicable professional requirements.",
   },
   {
@@ -24,7 +24,7 @@ export const catalogueCategories = [
     label: "Corporate administration",
     shortLabel: "Corporate",
     description: "Company formation, statutory records, resolutions, filings and recurring governance administration.",
-    regulatedNote: "Company-service-provider activities are delivered only where the required Malta authorisation, registration or exemption is in place.",
+    regulatedNote: "Company-service-provider activities are delivered only where the required authorisation, registration or exemption is in place.",
   },
   {
     id: "management-risk",
@@ -43,18 +43,25 @@ export const catalogueCategories = [
     label: "Legal & contract support",
     shortLabel: "Contracts",
     description: "Contract drafting, legal document preparation and review for everyday business needs.",
-    regulatedNote: "Legal advice, opinions and Malta-law work requiring an advocate are reviewed or delivered by an appropriately warranted legal professional.",
+    regulatedNote: "Legal advice, opinions and reserved legal work requiring an advocate are reviewed or delivered by an appropriately warranted legal professional.",
   },
 ] as const;
 
 export type CatalogueCategoryId = (typeof catalogueCategories)[number]["id"];
+export type CatalogueCategory = {
+  id: CatalogueCategoryId;
+  label: string;
+  shortLabel: string;
+  description: string;
+  regulatedNote?: string;
+};
 
 export type CatalogueService = {
   id: string;
   category: CatalogueCategoryId;
   title: string;
   description: string;
-  from: number;
+  from: number | null;
   unit: string;
   popular?: boolean;
   free?: boolean;
@@ -67,7 +74,7 @@ export const catalogueServices: CatalogueService[] = [
     id: "statutory-audit",
     category: "audit-assurance",
     title: "Statutory financial statement audit",
-    description: "Risk-based audit of a straightforward small Malta company, including planning, fieldwork and the statutory auditor’s report.",
+    description: "Risk-based audit of a straightforward small company, including planning, fieldwork and the statutory auditor’s report.",
     from: 450,
     unit: "per year",
     popular: true,
@@ -305,7 +312,7 @@ export const catalogueServices: CatalogueService[] = [
     id: "corporate-tax-return",
     category: "tax-payroll",
     title: "Corporate income tax return",
-    description: "Tax computation and return for a straightforward Malta company from final, reconciled accounts.",
+    description: "Tax computation and return for a straightforward company from final, reconciled accounts.",
     from: 180,
     unit: "per year",
     popular: true,
@@ -397,7 +404,7 @@ export const catalogueServices: CatalogueService[] = [
   {
     id: "company-formation",
     category: "corporate-administration",
-    title: "Malta company formation",
+    title: "Company formation",
     description: "Formation pack, constitutional documents, registrations and setup checklist for a straightforward structure.",
     from: 650,
     unit: "professional fee",
@@ -850,6 +857,27 @@ export const catalogueServices: CatalogueService[] = [
   },
 ];
 
-export function formatCataloguePrice(service: CatalogueService) {
-  return service.free ? "Free" : `From €${service.from.toLocaleString("en")}`;
+export function formatCataloguePrice(
+  service: CatalogueService,
+  currency: "EUR" | "RWF" = "EUR",
+  locale = currency === "EUR" ? "en-IE" : "en-RW",
+) {
+  if (service.free) return "Free";
+  if (service.from === null) return "Scope first";
+  return `From ${formatCatalogueAmount(service.from, currency, locale)}`;
+}
+
+export function formatCatalogueAmount(
+  amount: number,
+  currency: "EUR" | "RWF" = "EUR",
+  locale = currency === "EUR" ? "en-IE" : "en-RW",
+) {
+  if (currency === "RWF") {
+    return `RWF ${new Intl.NumberFormat(locale, { maximumFractionDigits: 0 }).format(amount)}`;
+  }
+  return new Intl.NumberFormat(locale, {
+    style: "currency",
+    currency,
+    maximumFractionDigits: 0,
+  }).format(amount);
 }

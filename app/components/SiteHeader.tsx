@@ -4,12 +4,14 @@ import Link from "next/link";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { BrandLogo } from "./BrandLogo";
 import { PrimaryCta } from "./PrimaryCta";
+import { marketPath, type JurisdictionCode } from "../../lib/jurisdictions";
 
-export function SiteHeader() {
+export function SiteHeader({ jurisdiction }: { jurisdiction?: JurisdictionCode } = {}) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const scrollSentinelRef = useRef<HTMLSpanElement>(null);
   const closeMenu = () => setMenuOpen(false);
+  const path = (value: string) => jurisdiction ? marketPath(jurisdiction, value) : value;
 
   useEffect(() => {
     const sentinel = scrollSentinelRef.current;
@@ -40,17 +42,17 @@ export function SiteHeader() {
     <Fragment>
       <span ref={scrollSentinelRef} className="header-scroll-sentinel" aria-hidden="true" />
       <header className={scrolled ? "site-header is-scrolled" : "site-header"} aria-label="Website navigation">
-        <Link className="brand-logo brand-logo-header" href="/" onClick={closeMenu} aria-label="Go to the FST homepage">
+        <Link className="brand-logo brand-logo-header" href={jurisdiction ? marketPath(jurisdiction) : "/"} onClick={closeMenu} aria-label="Go to the FST homepage">
           <BrandLogo priority />
         </Link>
         <nav id="primary-navigation" className={menuOpen ? "nav-links is-open" : "nav-links"} aria-label="Main links">
-          <Link href="/services" onClick={closeMenu}>Services</Link>
-          <Link href="/services/catalogue" onClick={closeMenu}>Catalogue</Link>
-          <Link href="/who-we-work-with" onClick={closeMenu}>Organisations</Link>
-          <Link href="/about" onClick={closeMenu}>Our Approach</Link>
-          <Link href="/insights" onClick={closeMenu}>Insights</Link>
-          <Link href="/ai-agent-team" onClick={closeMenu}>AI Agent Team</Link>
-          <PrimaryCta className="nav-cta" onClick={closeMenu} />
+          <Link href={path("/services")} onClick={closeMenu}>Services</Link>
+          <Link href={path("/services/catalogue")} onClick={closeMenu}>Catalogue</Link>
+          <Link href={path("/who-we-work-with")} onClick={closeMenu}>Organisations</Link>
+          <Link href={path("/about")} onClick={closeMenu}>Our Approach</Link>
+          {!jurisdiction && <Link href="/insights" onClick={closeMenu}>Insights</Link>}
+          {!jurisdiction && <Link href="/ai-agent-team" onClick={closeMenu}>AI Agent Team</Link>}
+          <PrimaryCta jurisdiction={jurisdiction} className="nav-cta" onClick={closeMenu} />
         </nav>
         <button
           className="menu-toggle"

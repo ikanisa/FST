@@ -4,6 +4,7 @@ import Link from "next/link";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { trackConversion } from "../../lib/analytics";
 import { googleCalendarTemplateUrl, siteConfig } from "../../lib/site-config";
+import { jurisdictionConfig, marketPath, type JurisdictionCode } from "../../lib/jurisdictions";
 
 type BookingResult = { calendarUrl?: string; meetUrl?: string; error?: string };
 
@@ -14,7 +15,8 @@ function minimumBookableStart() {
   return local.toISOString().slice(0, 16);
 }
 
-export function BookingForm() {
+export function BookingForm({ jurisdiction = "mt" }: { jurisdiction?: JurisdictionCode }) {
+  const market = jurisdictionConfig[jurisdiction];
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "unavailable" | "error">("idle");
   const [result, setResult] = useState<BookingResult>({});
   const startInputRef = useRef<HTMLInputElement>(null);
@@ -43,6 +45,7 @@ export function BookingForm() {
       timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       privacy_consent: values.get("privacy_consent"),
       company_website: values.get("company_website"),
+      jurisdiction,
     };
 
     setStatus("submitting");
@@ -67,6 +70,9 @@ export function BookingForm() {
           name: payload.name,
           email: payload.email,
           context: payload.context,
+          title: "FST advisory conversation",
+          timezone: market.timezone,
+          recipients: market.contactEmail ? [market.contactEmail] : [],
         });
         setResult({ calendarUrl: fallbackUrl });
         setStatus("unavailable");
@@ -84,7 +90,7 @@ export function BookingForm() {
       <div className="booking-success" role="status">
         <p className="eyebrow">Slot confirmed</p>
         <h2>The meeting has been placed on the calendar.</h2>
-        <p>The invitation has been issued to your address and the FST scheduling contacts. You can open either destination below.</p>
+        <p>The invitation has been issued to your address and the configured FST scheduling contacts. You can open either destination below.</p>
         <div className="booking-result-actions">
           {result.calendarUrl && <a className="text-link" href={result.calendarUrl} target="_blank" rel="noreferrer">View calendar entry</a>}
           {result.meetUrl && <a className="text-link" href={result.meetUrl} target="_blank" rel="noreferrer">Enter meeting room</a>}
@@ -122,7 +128,7 @@ export function BookingForm() {
       <p className="booking-data-note" id="booking-context-note">Do not include passwords, payment credentials, identity documents, health information or confidential client records in this form.</p>
       <label className="consent-check">
         <input type="checkbox" name="privacy_consent" value="agreed" required />
-        <span>I permit FST to use these details to process and respond to this scheduling request as described in the <Link href="/privacy">privacy notice</Link>.</span>
+        <span>I permit FST to use these details to process and respond to this scheduling request as described in the <Link href={marketPath(jurisdiction, "/privacy")}>privacy notice</Link>.</span>
       </label>
       {status === "error" && (
         <p className="form-error" role="alert">

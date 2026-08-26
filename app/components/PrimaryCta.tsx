@@ -3,12 +3,15 @@
 import type { AnchorHTMLAttributes } from "react";
 import { siteConfig } from "../../lib/site-config";
 import { TrackedLink } from "./TrackedLink";
+import { marketPath, type JurisdictionCode } from "../../lib/jurisdictions";
 
-type PrimaryCtaProps = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href" | "children">;
+type PrimaryCtaProps = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href" | "children"> & {
+  jurisdiction?: JurisdictionCode;
+};
 
-export function PrimaryCta(props: PrimaryCtaProps) {
+export function PrimaryCta({ jurisdiction, ...props }: PrimaryCtaProps) {
   return (
-    <TrackedLink {...props} href={siteConfig.bookingUrl} event="booking_click">
+    <TrackedLink {...props} href={jurisdiction ? marketPath(jurisdiction, siteConfig.bookingUrl) : siteConfig.bookingUrl} event="booking_click">
       {siteConfig.primaryCtaLabel}
     </TrackedLink>
   );

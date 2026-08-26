@@ -94,6 +94,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       "Management, audit, assurance, tax, accounting, corporate and consolidated loan and funding application support organised around executable outcomes.",
     areaServed: [
       { "@type": "Country", name: "Malta" },
+      { "@type": "Country", name: "Rwanda" },
       { "@type": "Place", name: "International" },
     ],
     address: siteConfig.registeredAddress,
@@ -138,7 +139,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         url: `${siteUrl}/`,
         name: "FST",
         publisher: legalDisclosureReady ? { "@id": `${siteUrl}/#organization` } : undefined,
-        inLanguage: "en",
+        inLanguage: ["en-MT", "en-RW"],
       },
     ].filter(Boolean),
   };

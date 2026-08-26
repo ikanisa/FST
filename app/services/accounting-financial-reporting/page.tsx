@@ -33,7 +33,7 @@ export default function AccountingFinancialReportingPage() {
       { title: "Financial statement review", description: "Critical review of drafts, disclosures, classifications and supporting balances before approval or filing." },
       { title: "Budgets & projections", description: "Driver-based budgets, rolling forecasts and scenarios connected to operating assumptions." },
       { title: "Cash-flow & working capital", description: "Liquidity forecasts and focused analysis of collections, payments, stock and short-term funding pressure." },
-      { title: "Payroll & FSS support", description: "Payroll processing, employee master data and Malta FSS reporting support with review controls." },
+      { title: "Payroll & FSS support", description: "Payroll processing, employee master data and FSS reporting support with review controls." },
       { title: "Month-end & year-end close", description: "Close timetables, account ownership, review evidence and issue logs that make completion repeatable." },
     ]}
     outcomes={["A controlled close process", "Decision-ready reporting packs", "Prepared or reviewed financial statements", "Forward cash and budget visibility"]}

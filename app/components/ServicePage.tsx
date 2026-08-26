@@ -21,8 +21,10 @@ import { SiteHeader } from "./SiteHeader";
 import { PrimaryCta } from "./PrimaryCta";
 import { ResponsiveImage } from "./ResponsiveImage";
 import { ServiceJsonLd } from "./JsonLd";
+import type { JurisdictionCode } from "../../lib/jurisdictions";
 
 type ServicePageProps = {
+  jurisdiction?: JurisdictionCode;
   serviceName: string;
   path: string;
   eyebrow: string;
@@ -76,6 +78,7 @@ function iconForService(title: string) {
 }
 
 export function ServicePage({
+  jurisdiction,
   serviceName,
   path,
   eyebrow,
@@ -99,13 +102,13 @@ export function ServicePage({
         description={lede}
         services={services}
       />
-      <SiteHeader />
+      <SiteHeader jurisdiction={jurisdiction} />
       <section className={`subpage-hero accent-${accent}`}>
         <div className="subpage-copy">
           <p className="eyebrow">{eyebrow}</p>
           <h1>{title}</h1>
           <p>{lede}</p>
-          <PrimaryCta className="primary-button" />
+          <PrimaryCta jurisdiction={jurisdiction} className="primary-button" />
         </div>
         <div className="subpage-image-wrap">
           <ResponsiveImage
@@ -187,11 +190,11 @@ export function ServicePage({
           <p className="section-index">Start with the live issue</p>
           <h2>Share the decision, deadline or funding route in front of you.</h2>
           <p>FST will define the right workstream, the information needed and a practical route forward.</p>
-          <PrimaryCta className="primary-button" />
+          <PrimaryCta jurisdiction={jurisdiction} className="primary-button" />
         </div>
         <SectionVisual src={sectionImages.cta.src} alt={sectionImages.cta.alt} className="subpage-cta-visual" />
       </section>
-      <SiteFooter />
+      <SiteFooter jurisdiction={jurisdiction} />
     </main>
   );
 }
