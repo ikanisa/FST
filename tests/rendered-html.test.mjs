@@ -135,6 +135,44 @@ test("automatically selects Rwanda or Malta without a public market switcher", a
   }
 });
 
+test("uses direct WhatsApp actions and removes the generic hero promise overlay", async () => {
+  const markets = [
+    { pathname: "/mt", whatsapp: "35699711145" },
+    { pathname: "/rw", whatsapp: "250795588248" },
+  ];
+
+  for (const { pathname, whatsapp } of markets) {
+    const response = await render(pathname);
+    assert.equal(response.status, 200);
+    const html = await response.text();
+    const visible = visibleBodyText(html);
+
+    assert.equal((visible.match(/Chat on WhatsApp/g) || []).length, 2, `${pathname} should show hero and closing WhatsApp actions`);
+    assert.match(html, new RegExp(`href="https://wa\\.me/${whatsapp}"`, "i"));
+    assert.doesNotMatch(visible, /Explore services|commercial context|Local scheduling|Professional responsibility confirmed/i);
+    assert.doesNotMatch(html, /promise-card|promise-title|promise-rule/i);
+  }
+
+  const css = await readFile(path.join(root, "app/globals.css"), "utf8");
+  assert.match(css, /\.whatsapp-button\s*\{[^}]*background:\s*#25d366;/s);
+  assert.match(css, /\.contact-cta-actions\s*\{/);
+});
+
+test("uses button actions on jurisdiction services pages without generic footer support copy", async () => {
+  for (const jurisdiction of ["mt", "rw"]) {
+    const response = await render(`/${jurisdiction}/services`);
+    assert.equal(response.status, 200);
+    const html = await response.text();
+    const visibleText = visibleBodyText(html);
+    const expectedWhatsapp = jurisdiction === "rw" ? "250795588248" : "35699711145";
+
+    assert.match(html, /class="primary-button"[^>]*>Explore industry packages</i);
+    assert.match(html, new RegExp(`href="https://wa.me/${expectedWhatsapp}"`));
+    assert.match(visibleText, /Chat on WhatsApp/);
+    assert.doesNotMatch(visibleText, /Supporting (?:local and international )?businesses/);
+  }
+});
+
 test("renders jurisdiction audience cards as an intentional three-column layout", async () => {
   for (const pathname of ["/rw/who-we-work-with", "/mt/who-we-work-with"]) {
     const response = await render(pathname);
@@ -743,6 +781,7 @@ test("publishes complete Malta and Rwanda route families without cross-market co
   assert.match(visibleBodyText(rwanda), /Review it in WhatsApp/i);
   assert.match(visibleBodyText(rwanda), /Receive a confirmed scope/i);
   assert.match(visibleBodyText(rwanda), /records required, deadline, final fee, taxes or official costs and responsible professional/i);
+  assert.doesNotMatch(visibleBodyText(rwanda), /A catalogue selection is a scope request/i);
   assert.doesNotMatch(visibleBodyText(rwanda), /Practical workpacks, priced in RWF/i);
   assert.doesNotMatch(visibleBodyText(rwanda), /Fee basis|per taxpayer profile/i);
   assert.doesNotMatch(visibleBodyText(rwanda), /FST Rwanda/i);
@@ -867,6 +906,16 @@ test("publishes one add-to-order package card per industry on each main catalogu
     const services = await (await render(`/${jurisdiction}/services`)).text();
     assert.match(services, new RegExp(`href="/${jurisdiction}/services/catalogue#industry-package-title"[^>]*>Explore industry packages`, "i"));
   }
+});
+
+test("stacks industry packages as readable full-width cards on small screens", async () => {
+  const css = await readFile(path.join(root, "app/globals.css"), "utf8");
+  const mobileCatalogue = css.slice(css.indexOf("@media (max-width: 540px)"));
+
+  assert.match(mobileCatalogue, /\.catalogue-industry-grid\s*\{[^}]*grid-template-columns:\s*1fr;[^}]*grid-auto-flow:\s*row;[^}]*overflow:\s*visible;/s);
+  assert.match(mobileCatalogue, /\.catalogue-industry-card\s*\{[^}]*grid-template-rows:\s*170px auto;/s);
+  assert.match(mobileCatalogue, /\.catalogue-industry-card-copy\s*\{[^}]*min-height:\s*0;/s);
+  assert.doesNotMatch(mobileCatalogue, /\.catalogue-industry-grid\s*\{[^}]*grid-auto-flow:\s*column;/s);
 });
 
 test("sector package APIs expose current versions and return a non-binding fit result", async () => {

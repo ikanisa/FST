@@ -10,6 +10,7 @@ import { ResponsiveImage } from "../../components/ResponsiveImage";
 import { SectionVisual } from "../../components/SectionVisual";
 import { SiteFooter } from "../../components/SiteFooter";
 import { SiteHeader } from "../../components/SiteHeader";
+import { WhatsAppCta } from "../../components/WhatsAppCta";
 
 type PageProps = { params: Promise<{ jurisdiction: string }> };
 
@@ -46,7 +47,7 @@ export default async function JurisdictionServicesPage({ params }: PageProps) {
           <h2>{config.code === "rw" ? "Run a pharmacy, shop, restaurant or construction business?" : "Want one package built around how your business operates?"}</h2>
           <p>{config.code === "rw" ? "Choose one package for a pharmacy, a stock-led shop, a restaurant or a construction business." : "Choose one package for a restaurant, self-employed professional, shop or CSP."}</p>
         </div>
-        <Link href={`${marketPath(config.code, "/services/catalogue")}#industry-package-title`}>Explore industry packages</Link>
+        <Link className="primary-button" href={`${marketPath(config.code, "/services/catalogue")}#industry-package-title`}>Explore industry packages</Link>
       </section>
       <section className="service-index-grid section-shell" aria-label="FST services">
         {services.map((service) => (
@@ -57,7 +58,7 @@ export default async function JurisdictionServicesPage({ params }: PageProps) {
         ))}
       </section>
       <section className="subpage-cta section-shell">
-        <div className="subpage-cta-copy"><p className="section-index">A practical first step</p><h2>Start with the outcome and the deadline.</h2><p>FST will map the information, specialist review and approval sequence required for the work.</p><PrimaryCta jurisdiction={config.code} className="primary-button" /></div>
+        <div className="subpage-cta-copy"><p className="section-index">A practical first step</p><h2>Start with the outcome and the deadline.</h2><p>FST will map the information, specialist review and approval sequence required for the work.</p><div className="contact-cta-actions"><PrimaryCta jurisdiction={config.code} className="primary-button" /><WhatsAppCta jurisdiction={config.code} /></div></div>
         <SectionVisual src={config.visuals.consultation} alt="An adviser and business owner agreeing the scope of work" className="subpage-cta-visual" />
       </section>
       <SiteFooter jurisdiction={config.code} />

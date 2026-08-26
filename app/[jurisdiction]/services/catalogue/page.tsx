@@ -65,7 +65,6 @@ export default async function JurisdictionCataloguePage({ params }: PageProps) {
         <div className="catalogue-hero-pricing">
           <strong>Clear starting fees.</strong>
           <p>{config.code === "rw" ? "Each minimum fee states the entry scope. The final quote adjusts only for volume, condition of records, complexity, deadline, fieldwork and the responsible professional route." : "Transparent starting fees reflect structured preparation while professional judgement, review and accountability remain human."}</p>
-          <small>A catalogue selection is a scope request, not an engagement or offer capable of acceptance.</small>
         </div>
       </section>
 

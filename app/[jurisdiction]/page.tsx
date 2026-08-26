@@ -12,6 +12,7 @@ import { ResponsiveImage } from "../components/ResponsiveImage";
 import { SectionVisual } from "../components/SectionVisual";
 import { SiteFooter } from "../components/SiteFooter";
 import { SiteHeader } from "../components/SiteHeader";
+import { WhatsAppCta } from "../components/WhatsAppCta";
 import { JsonLd } from "../components/JsonLd";
 import { getJurisdiction, marketPath } from "../../lib/jurisdictions";
 import { getJurisdictionServices } from "../../lib/jurisdiction-services";
@@ -56,7 +57,7 @@ export default async function JurisdictionHome({ params }: JurisdictionPageProps
           <p className="hero-lede">{config.hero.lede}</p>
           <div className="jurisdiction-hero-actions">
             <PrimaryCta jurisdiction={config.code} className="primary-button" />
-            <Link className="text-link" href={marketPath(config.code, "/services")}>Explore services</Link>
+            <WhatsAppCta jurisdiction={config.code} />
           </div>
         </div>
         <div className="hero-visual" aria-label="FST advisory work">
@@ -69,15 +70,6 @@ export default async function JurisdictionHome({ params }: JurisdictionPageProps
             fetchPriority="high"
             decoding="async"
           />
-          <aside className="promise-card" aria-label="How FST works locally">
-            <p className="promise-title">Local context.<br />Controlled delivery.</p>
-            <span className="promise-rule" aria-hidden="true" />
-            <ul>
-              <li>{config.currency} commercial context</li>
-              <li>Local scheduling</li>
-              <li>Professional responsibility confirmed</li>
-            </ul>
-          </aside>
         </div>
       </section>
 
@@ -136,7 +128,10 @@ export default async function JurisdictionHome({ params }: JurisdictionPageProps
         <div className="contact-cta-panel">
           <h3>Start with the issue in front of you.</h3>
           <p>Requests are routed automatically to the configured intake, scheduling and professional-review path.</p>
-          <PrimaryCta jurisdiction={config.code} className="primary-button" />
+          <div className="contact-cta-actions">
+            <PrimaryCta jurisdiction={config.code} className="primary-button" />
+            <WhatsAppCta jurisdiction={config.code} />
+          </div>
         </div>
       </section>
 

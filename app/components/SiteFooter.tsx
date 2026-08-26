@@ -18,7 +18,6 @@ export function SiteFooter({ jurisdiction }: { jurisdiction?: JurisdictionCode }
       </Link>
       <div className="footer-summary">
         <p>Plans, audits, numbers, obligations and financing work—managed as a practical programme.</p>
-        <span>{config?.serviceArea || siteConfig.serviceArea}</span>
       </div>
       <div className="footer-links">
         <nav aria-label="Footer links">
