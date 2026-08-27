@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: FieldNotePageProps): Promise<
   const note = getFieldNote((await params).slug);
   if (!note) return {};
   return pageMetadata({
-    title: note.title,
+    title: note.slug === "tax-working-file-that-reconciles" ? "Tax Working Files That Reconcile Before Filing" : note.title,
     description: note.description,
     path: `/insights/${note.slug}`,
     image: note.image,

@@ -886,7 +886,7 @@ test("publishes complete Malta and Rwanda route families without cross-market co
   assert.doesNotMatch(selectedRwandaRequestText, /not-a-service/i);
 });
 
-test("keeps jurisdiction in routing and metadata instead of repeated visible labels", async () => {
+test("keeps jurisdiction in routing while reserving visible country copy for the verified office and service area", async () => {
   const sharedRoutes = [
     "",
     "/services",
@@ -908,18 +908,57 @@ test("keeps jurisdiction in routing and metadata instead of repeated visible lab
       const visible = visibleBodyText(html)
         .replaceAll("Malta Enterprise", "")
         .replaceAll("Xjenza Malta", "");
+      if (jurisdiction === "mt") {
+        assert.doesNotMatch(
+          visible,
+          /\b(?:Rwanda|Rwandan|Malta|Maltese)\b/i,
+          `${pathname} should not repeat the active jurisdiction in visible copy`,
+        );
+      } else {
+        const countryMentions = visible.match(/\bRwanda(?:’s|'s)?\b/gi) || [];
+        assert.ok(countryMentions.length <= 5, `${pathname} should keep Rwanda references limited to location and coverage copy`);
+        assert.doesNotMatch(visible, /\bRwandan\b/i, `${pathname} should not repeat country adjectives outside useful local copy`);
+      }
       assert.doesNotMatch(
         visible,
-        /\b(?:Rwanda|Rwandan|Malta|Maltese)\b/i,
-        `${pathname} should not repeat the active jurisdiction in visible copy`,
-      );
-      assert.doesNotMatch(
-        visible,
-        /\b(?:FST\s+(?:RW|MT)|jurisdiction|market route|country desk)\b/i,
+        /\b(?:FST\s+(?:RW|MT|Rwanda|Malta)|jurisdiction|market route|country desk)\b/i,
         `${pathname} should not expose internal routing labels`,
       );
     }
   }
+});
+
+test("connects the Rwanda service area to the verified Norrsken House Kigali address", async () => {
+  const [homeResponse, contactResponse, serviceResponse, sitemapResponse] = await Promise.all([
+    render("/rw"),
+    render("/rw/contact"),
+    render("/rw/services/taxation"),
+    render("/sitemap.xml"),
+  ]);
+  const [home, contact, service, sitemap] = await Promise.all([
+    homeResponse.text(),
+    contactResponse.text(),
+    serviceResponse.text(),
+    sitemapResponse.text(),
+  ]);
+
+  assert.match(home, /<title>Professional Services in Rwanda \| FST<\/title>/i);
+  assert.match(home, /Norrsken House Kigali/i);
+  assert.match(home, /1 KN 78 St, Norrsken House, Kiyovu, Nyarugenge, Kigali, Rwanda/i);
+  assert.match(home, /Northern, Southern, Eastern and Western provinces/i);
+  assert.match(home, /google\.com\/maps\/search\/\?api=1&amp;query=Norrsken\+House\+Kigali/i);
+  assert.match(home, /name="geo\.region" content="RW-01"/i);
+  assert.match(home, /"@type":"ProfessionalService"/i);
+  assert.match(home, /"streetAddress":"1 KN 78 St, Norrsken House"/i);
+  assert.match(home, /"addressCountry":"RW"/i);
+  assert.match(home, /"areaServed":\{"@type":"Country","name":"Rwanda"\}/i);
+
+  assert.match(contact, /Contact FST at Norrsken House Kigali/i);
+  assert.match(contact, /Office · by appointment/i);
+  assert.match(contact, /1 KN 78 St, Norrsken House/i);
+  assert.match(service, /"provider":\{"@id":"https:\/\/fst\.ikanisa\.com\/rw#professional-service"\}/i);
+  assert.match(service, /"areaServed":\[\{"@type":"Country","name":"Rwanda"\}\]/i);
+  assert.match(sitemap, /<loc>https:\/\/fst\.ikanisa\.com\/rw<\/loc>\s*<lastmod>2026-08-27T00:00:00\.000Z<\/lastmod>/i);
 });
 
 test("jurisdiction and catalogue APIs expose validated public market contracts", async () => {

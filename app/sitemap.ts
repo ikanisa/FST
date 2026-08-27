@@ -6,7 +6,6 @@ import { jurisdictionServiceSlugs } from "../lib/jurisdiction-services";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
-    { path: "/", priority: 1, changeFrequency: "monthly" as const },
     { path: "/services", priority: 0.9, changeFrequency: "monthly" as const },
     { path: "/services/catalogue", priority: 0.9, changeFrequency: "weekly" as const },
     { path: "/services/management-consulting", priority: 0.8, changeFrequency: "monthly" as const },
@@ -35,19 +34,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/terms", priority: 0.5, changeFrequency: "yearly" as const, lastModified: "2026-08-03" },
   ];
 
-  const jurisdictionRoutes = jurisdictionCodes.flatMap((jurisdiction) => [
-    { path: `/${jurisdiction}`, priority: 1, changeFrequency: "monthly" as const },
-    { path: `/${jurisdiction}/services`, priority: 0.9, changeFrequency: "monthly" as const },
-    { path: `/${jurisdiction}/services/catalogue`, priority: 0.9, changeFrequency: "weekly" as const },
-    ...jurisdictionServiceSlugs.map((service) => ({ path: `/${jurisdiction}/services/${service}`, priority: 0.8, changeFrequency: "monthly" as const })),
-    { path: `/${jurisdiction}/who-we-work-with`, priority: 0.8, changeFrequency: "monthly" as const },
-    { path: `/${jurisdiction}/about`, priority: 0.7, changeFrequency: "monthly" as const },
-    { path: `/${jurisdiction}/contact`, priority: 0.7, changeFrequency: "yearly" as const },
-    { path: `/${jurisdiction}/book`, priority: 0.8, changeFrequency: "monthly" as const },
-    { path: `/${jurisdiction}/legal-information`, priority: 0.5, changeFrequency: "monthly" as const },
-    { path: `/${jurisdiction}/privacy`, priority: 0.5, changeFrequency: "yearly" as const },
-    { path: `/${jurisdiction}/terms`, priority: 0.5, changeFrequency: "yearly" as const },
-  ]);
+  const jurisdictionRoutes = jurisdictionCodes.flatMap((jurisdiction) => {
+    const lastModified = jurisdiction === "rw" ? "2026-08-27" : undefined;
+    return [
+      { path: `/${jurisdiction}`, priority: 1, changeFrequency: "monthly" as const, lastModified },
+      { path: `/${jurisdiction}/services`, priority: 0.9, changeFrequency: "monthly" as const, lastModified },
+      { path: `/${jurisdiction}/services/catalogue`, priority: 0.9, changeFrequency: "weekly" as const, lastModified },
+      ...jurisdictionServiceSlugs.map((service) => ({ path: `/${jurisdiction}/services/${service}`, priority: 0.8, changeFrequency: "monthly" as const, lastModified })),
+      { path: `/${jurisdiction}/who-we-work-with`, priority: 0.8, changeFrequency: "monthly" as const, lastModified },
+      { path: `/${jurisdiction}/about`, priority: 0.7, changeFrequency: "monthly" as const, lastModified },
+      { path: `/${jurisdiction}/contact`, priority: 0.7, changeFrequency: "yearly" as const, lastModified },
+      { path: `/${jurisdiction}/book`, priority: 0.8, changeFrequency: "monthly" as const, lastModified },
+      { path: `/${jurisdiction}/legal-information`, priority: 0.5, changeFrequency: "monthly" as const, lastModified },
+      { path: `/${jurisdiction}/privacy`, priority: 0.5, changeFrequency: "yearly" as const, lastModified },
+      { path: `/${jurisdiction}/terms`, priority: 0.5, changeFrequency: "yearly" as const, lastModified },
+    ];
+  });
 
   const maltaAgentRoutes = [
     { path: "/mt/ai-agent-team", priority: 0.8, changeFrequency: "monthly" as const },

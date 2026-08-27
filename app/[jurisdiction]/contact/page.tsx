@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getJurisdiction, marketPath } from "../../../lib/jurisdictions";
-import { jurisdictionPageMetadata } from "../../../lib/seo";
-import { BreadcrumbJsonLd } from "../../components/JsonLd";
+import { jurisdictionPageMetadata, siteUrl } from "../../../lib/seo";
+import { BreadcrumbJsonLd, JsonLd } from "../../components/JsonLd";
 import { EnquiryForm } from "../../components/EnquiryForm";
 import { ResponsiveImage } from "../../components/ResponsiveImage";
 import { SiteFooter } from "../../components/SiteFooter";
@@ -31,7 +31,14 @@ type PageProps = {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const config = getJurisdiction((await params).jurisdiction);
-  return config ? jurisdictionPageMetadata({ jurisdiction: config.code, title: `Contact FST ${config.name}`, description: `Send a controlled enquiry to the FST ${config.name} desk or request a focused working meeting.`, path: "/contact" }) : {};
+  return config ? jurisdictionPageMetadata({
+    jurisdiction: config.code,
+    title: config.location ? "Contact FST at Norrsken House Kigali" : `Contact FST ${config.name}`,
+    description: config.location
+      ? "Contact FST for management, accounting, tax readiness, governance and funding support at Norrsken House Kigali or online across Rwanda."
+      : `Send a controlled enquiry to the FST ${config.name} desk or request a focused working meeting.`,
+    path: "/contact",
+  }) : {};
 }
 
 export default async function JurisdictionContactPage({ params, searchParams }: PageProps) {
@@ -83,6 +90,13 @@ export default async function JurisdictionContactPage({ params, searchParams }: 
   return (
     <main id="main-content" tabIndex={-1}>
       <BreadcrumbJsonLd items={[{ name: "Home", path: marketPath(config.code) }, { name: "Contact", path: marketPath(config.code, "/contact") }]} />
+      {config.location && <JsonLd data={{
+        "@context": "https://schema.org",
+        "@type": "ContactPage",
+        "@id": `${siteUrl}${marketPath(config.code, "/contact")}#contact-page`,
+        name: "Contact FST at Norrsken House Kigali",
+        about: { "@id": `${siteUrl}${marketPath(config.code)}#professional-service` },
+      }} />}
       <SiteHeader jurisdiction={config.code} />
       <section className="contact-page section-shell jurisdiction-contact-page">
         <div className="contact-page-intro">
@@ -91,6 +105,7 @@ export default async function JurisdictionContactPage({ params, searchParams }: 
           <div className="contact-options" aria-label="Direct contact options">
             {config.whatsappUrl && <TrackedLink href={config.whatsappUrl} event="contact_whatsapp_click" target="_blank" rel="noreferrer"><span>WhatsApp</span><strong>{config.whatsappDisplay}</strong></TrackedLink>}
             {config.contactEmail && <a href={`mailto:${config.contactEmail}`}><span>Formal enquiries</span><strong>{config.contactEmail}</strong></a>}
+            {config.location && <a href={config.location.mapUrl} target="_blank" rel="noreferrer"><span>Office · by appointment</span><strong>{config.location.postalLabel}</strong></a>}
             <div><span>Scheduling</span><strong>Local business hours</strong></div>
           </div>
           <p className="contact-legal-note">Do not send confidential client records through the first-contact form. Read the <a href={marketPath(config.code, "/legal-information")}>legal and provider information</a> first.</p>

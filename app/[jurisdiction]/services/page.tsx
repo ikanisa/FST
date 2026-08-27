@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!config) return {};
   return jurisdictionPageMetadata({
     jurisdiction: config.code,
-    title: `Professional Services in ${config.name}`,
+    title: config.code === "rw" ? "Business Advisory & Accounting Services in Rwanda" : `Professional Services in ${config.name}`,
     description: `Explore FST management, finance, tax, governance, assurance-readiness and funding support configured for organisations in ${config.name}.`,
     path: "/services",
   });

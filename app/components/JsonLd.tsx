@@ -1,5 +1,6 @@
 import { siteUrl } from "../../lib/seo";
 import { legalDisclosureReady } from "../../lib/site-config";
+import { jurisdictionConfig, marketPath, type JurisdictionCode } from "../../lib/jurisdictions";
 
 type JsonLdProps = {
   data: Record<string, unknown>;
@@ -45,20 +46,27 @@ export function ServiceJsonLd({
   path,
   description,
   services,
+  jurisdiction,
 }: {
   name: string;
   path: string;
   description: string;
   services: Array<{ title: string; description: string }>;
+  jurisdiction?: JurisdictionCode;
 }) {
   const url = `${siteUrl}${path}`;
+  const config = jurisdiction ? jurisdictionConfig[jurisdiction] : undefined;
+  const serviceIndexPath = jurisdiction ? marketPath(jurisdiction, "/services") : "/services";
+  const provider = config?.location
+    ? { "@id": `${siteUrl}${marketPath(jurisdiction!)}#professional-service` }
+    : legalDisclosureReady ? { "@id": `${siteUrl}/#organization` } : undefined;
 
   return (
     <>
       <BreadcrumbJsonLd
         items={[
-          { name: "Home", path: "/" },
-          { name: "Services", path: "/services" },
+          { name: "Home", path: jurisdiction ? marketPath(jurisdiction) : "/" },
+          { name: "Services", path: serviceIndexPath },
           { name, path },
         ]}
       />
@@ -70,11 +78,13 @@ export function ServiceJsonLd({
           name,
           url,
           description,
-          provider: legalDisclosureReady ? { "@id": `${siteUrl}/#organization` } : undefined,
-          areaServed: [
-            { "@type": "Country", name: "Malta" },
-            { "@type": "Place", name: "International" },
-          ],
+          provider,
+          areaServed: config
+            ? [{ "@type": "Country", name: config.country }]
+            : [
+                { "@type": "Country", name: "Malta" },
+                { "@type": "Place", name: "International" },
+              ],
           hasOfferCatalog: {
             "@type": "OfferCatalog",
             name: `${name} services`,

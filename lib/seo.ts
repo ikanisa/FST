@@ -107,6 +107,12 @@ export function jurisdictionPageMetadata({
         "x-default": path === "/" ? "/" : canonical,
       },
     },
+    other: config.location ? {
+      "geo.region": "RW-01",
+      "geo.placename": config.location.addressLocality,
+      "geo.position": `${config.location.latitude};${config.location.longitude}`,
+      ICBM: `${config.location.latitude}, ${config.location.longitude}`,
+    } : undefined,
     openGraph: {
       title: socialTitle,
       description,

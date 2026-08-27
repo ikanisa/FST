@@ -27,8 +27,10 @@ export async function generateMetadata({ params }: JurisdictionPageProps): Promi
   if (!config) return {};
   return jurisdictionPageMetadata({
     jurisdiction: config.code,
-    title: `FST ${config.name} | Make the next move workable`,
-    description: config.hero.lede,
+    title: config.code === "rw" ? "Professional Services in Rwanda" : `FST ${config.name} | Make the next move workable`,
+    description: config.code === "rw"
+      ? "FST provides management, accounting, tax readiness, governance and funding support from Norrsken House Kigali to organisations across Rwanda."
+      : config.hero.lede,
   });
 }
 
@@ -36,6 +38,37 @@ export default async function JurisdictionHome({ params }: JurisdictionPageProps
   const config = getJurisdiction((await params).jurisdiction);
   if (!config) notFound();
   const services = getJurisdictionServices(config.code);
+  const locationStructuredData = config.location ? {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "@id": `${siteUrl}${marketPath(config.code)}#professional-service`,
+    name: "FST",
+    url: `${siteUrl}${marketPath(config.code)}`,
+    image: `${siteUrl}${config.visuals.hero}`,
+    telephone: config.whatsappDisplay,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: config.location.streetAddress,
+      addressLocality: config.location.addressLocality,
+      addressRegion: config.location.addressRegion,
+      addressCountry: config.location.addressCountry,
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: config.location.latitude,
+      longitude: config.location.longitude,
+    },
+    hasMap: config.location.mapUrl,
+    areaServed: { "@type": "Country", name: config.country },
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: config.whatsappDisplay,
+      url: config.whatsappUrl,
+      contactType: "client enquiries",
+      areaServed: config.location.addressCountry,
+      availableLanguage: ["English"],
+    },
+  } : undefined;
 
   return (
     <main id="main-content" tabIndex={-1}>
@@ -49,6 +82,7 @@ export default async function JurisdictionHome({ params }: JurisdictionPageProps
         about: { "@type": "Country", name: config.country },
         isPartOf: { "@id": `${siteUrl}/#website` },
       }} />
+      {locationStructuredData && <JsonLd data={locationStructuredData} />}
       <SiteHeader jurisdiction={config.code} />
 
       <section className="hero jurisdiction-hero" id="top">
@@ -105,6 +139,22 @@ export default async function JurisdictionHome({ params }: JurisdictionPageProps
           {config.audience.map((audience) => <article key={audience.title}><h3>{audience.title}</h3><p>{audience.description}</p></article>)}
         </div>
       </section>
+
+      {config.location && (
+        <section className="market-location-section section-shell" aria-labelledby="market-location-title">
+          <div className="market-location-copy">
+            <p className="eyebrow">Kigali office · nationwide service</p>
+            <h2 id="market-location-title">Meet us at Norrsken House or work with us from anywhere in Rwanda.</h2>
+            <p>{config.location.coverage}</p>
+          </div>
+          <div className="market-location-card">
+            <span>Visit by appointment</span>
+            <h3>{config.location.name}</h3>
+            <address>{config.location.postalLabel}</address>
+            <a href={config.location.mapUrl} target="_blank" rel="noreferrer">View address on Google Maps</a>
+          </div>
+        </section>
+      )}
 
       <section className="approach-section section-shell" aria-labelledby="market-approach-title">
         <div className="approach-panel">

@@ -35,6 +35,18 @@ export type JurisdictionConfig = {
     finance: string;
   };
   audience: Array<{ title: string; description: string }>;
+  location?: {
+    name: string;
+    streetAddress: string;
+    addressLocality: string;
+    addressRegion: string;
+    addressCountry: string;
+    postalLabel: string;
+    mapUrl: string;
+    latitude: number;
+    longitude: number;
+    coverage: string;
+  };
   operationalNotice: string;
 };
 
@@ -124,6 +136,19 @@ export const jurisdictionConfig: Record<JurisdictionCode, JurisdictionConfig> = 
       { title: "Cooperatives and community enterprises", description: "Governance, bookkeeping, reporting and bankability support organised around member accountability." },
       { title: "NGOs and development programmes", description: "Budgeting, donor reporting, grant controls, audit readiness and evidence management." },
     ],
+    location: {
+      name: "FST at Norrsken House Kigali",
+      streetAddress: "1 KN 78 St, Norrsken House",
+      addressLocality: "Kigali",
+      addressRegion: "City of Kigali",
+      addressCountry: "RW",
+      postalLabel: "1 KN 78 St, Norrsken House, Kiyovu, Nyarugenge, Kigali, Rwanda",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Norrsken+House+Kigali%2C+1+KN+78+St%2C+Kigali%2C+Rwanda",
+      latitude: -1.9511,
+      longitude: 30.06,
+      coverage:
+        "Available by appointment in Kigali and online across the City of Kigali and Rwanda’s Northern, Southern, Eastern and Western provinces.",
+    },
     operationalNotice:
       "Services remain subject to scope, applicable professional requirements and confirmation of the responsible provider before an engagement starts.",
   },

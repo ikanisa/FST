@@ -17,8 +17,8 @@ export async function generateMetadata({ params }: MaltaAgentProfilePageProps): 
   const agent = jurisdiction === "mt" ? getAiAgent(slug) : undefined;
   if (!agent) return {};
   return pageMetadata({
-    title: `${agent.name} — ${agent.role}`,
-    description: `${agent.name} supports FST's supervised ${agent.practice.toLowerCase()} workpacks. See responsibilities, inputs, outputs and the human approval boundary.`,
+    title: `${agent.name} — ${agent.practice} AI Agent for Malta`,
+    description: `${agent.name} supports FST's supervised Malta ${agent.practice.toLowerCase()} workpacks. See responsibilities, inputs, outputs and the human approval boundary.`,
     path: `/mt/ai-agent-team/${agent.slug}`,
     image: agent.image,
     imageAlt: `${agent.name}, FST ${agent.practice} AI agent`,

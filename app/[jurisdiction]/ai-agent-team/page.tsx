@@ -8,9 +8,9 @@ type MaltaAgentTeamPageProps = { params: Promise<{ jurisdiction: string }> };
 export async function generateMetadata({ params }: MaltaAgentTeamPageProps): Promise<Metadata> {
   if ((await params).jurisdiction !== "mt") return {};
   return pageMetadata({
-    title: "Meet Our AI Agent Team",
+    title: "AI Agent Team for Malta Professional Work",
     description:
-      "Meet the supervised IKANISA AI agents FST uses to prepare source-linked audit, accounting, tax, corporate, regulatory and insurance workpacks.",
+      "Meet the supervised IKANISA AI agents FST uses for source-linked Malta audit, accounting, tax, corporate, regulatory and insurance workpacks.",
     path: "/mt/ai-agent-team",
   });
 }

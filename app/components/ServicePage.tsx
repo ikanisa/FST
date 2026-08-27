@@ -101,6 +101,7 @@ export function ServicePage({
         path={path}
         description={lede}
         services={services}
+        jurisdiction={jurisdiction}
       />
       <SiteHeader jurisdiction={jurisdiction} />
       <section className={`subpage-hero accent-${accent}`}>

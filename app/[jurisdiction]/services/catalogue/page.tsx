@@ -17,8 +17,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!config) return {};
   return jurisdictionPageMetadata({
     jurisdiction: config.code,
-    title: config.code === "mt" ? "Service Catalogue & Indicative Fees" : "Rwanda Professional Services & Starting Fees",
-    description: `Browse FST ${config.name} management, accounting, tax, governance, assurance-readiness and funding services, then build one coordinated request.`,
+    title: config.code === "mt" ? "Malta Service Catalogue & Indicative Fees" : "Rwanda Professional Services & Starting Fees",
+    description: config.code === "mt"
+      ? "Browse Malta-focused FST management, accounting, tax, governance, assurance-readiness and funding services, then build one coordinated request."
+      : "Browse Rwanda-focused FST management, accounting, tax, governance, assurance-readiness and funding services, then build one coordinated request.",
     path: "/services/catalogue",
     image: "/catalogue-og.jpg",
   });

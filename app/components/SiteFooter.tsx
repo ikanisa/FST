@@ -18,6 +18,11 @@ export function SiteFooter({ jurisdiction }: { jurisdiction?: JurisdictionCode }
       </Link>
       <div className="footer-summary">
         <p>Plans, audits, numbers, obligations and financing work—managed as a practical programme.</p>
+        {config?.location && (
+          <address className="footer-location">
+            <a href={config.location.mapUrl} target="_blank" rel="noreferrer">{config.location.postalLabel}</a>
+          </address>
+        )}
       </div>
       <div className="footer-links">
         <nav aria-label="Footer links">
