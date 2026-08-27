@@ -462,6 +462,9 @@ test("presents the supervised AI agent team with internal FST profile links and 
     "Corporate and regulatory pack",
     "Insurance regulatory pack",
   ]) assert.match(html, new RegExp(pack, "i"));
+  assert.match(html, /Meet the team and the workpacks they prepare\./i);
+  assert.match(html, /Prepared workpack/i);
+  assert.doesNotMatch(html, /class="ai-workpacks|Structured workpacks for the work that slows teams down/i);
   assert.match(html, /do not sign reports, issue opinions, approve filings/i);
   assert.match(html, /Final judgement, approval and accountability remain human/i);
   assert.doesNotMatch(html, />Professional AI Agents</i);

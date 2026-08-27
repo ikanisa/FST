@@ -75,39 +75,6 @@ const operatingSteps = [
   },
 ];
 
-const workpacks = [
-  {
-    practice: "Audit & Assurance",
-    name: "Audit file pack",
-    agent: "Patrick",
-    outputs: ["PBC tracker", "Risk matrix", "Evidence register", "Completion memo"],
-  },
-  {
-    practice: "Accounting & Finance",
-    name: "Accounting close pack",
-    agent: "Sofia",
-    outputs: ["Reconciliation pack", "Trial-balance review", "Close checklist", "Variance memo"],
-  },
-  {
-    practice: "Tax",
-    name: "Tax and VAT evidence pack",
-    agent: "Matthew",
-    outputs: ["VAT schedules", "Tax-risk register", "Filing support pack", "Authority-query draft"],
-  },
-  {
-    practice: "Corporate, Legal & Regulatory",
-    name: "Corporate and regulatory pack",
-    agent: "Claire",
-    outputs: ["BO register", "CDD/EDD checklist", "MBR checklist", "Regulator-response draft"],
-  },
-  {
-    practice: "Insurance & Solvency II",
-    name: "Insurance regulatory pack",
-    agent: "Emma",
-    outputs: ["ORSA evidence pack", "QRT tracker", "SFCR/RSR review notes", "Board pack"],
-  },
-];
-
 const controlPoints = [
   "A named task, purpose and professional owner",
   "Source-linked outputs and visible evidence gaps",
@@ -242,52 +209,39 @@ export function AiAgentTeamContent({ jurisdiction }: { jurisdiction?: Jurisdicti
 
       <section className="ai-agents section-shell" aria-labelledby="ai-agents-title">
         <div className="ai-section-heading">
-          <h2 id="ai-agents-title">Meet the team behind the workpacks.</h2>
+          <h2 id="ai-agents-title">Meet the team and the workpacks they prepare.</h2>
           <p>
             Each IKANISA agent is focused on a professional workflow family.
-            FST selects the relevant agent, defines the work and reviews the
-            result in the context of your engagement.
+            See the structured outputs each one prepares before FST reviews the
+            evidence, resolves exceptions and approves the result.
           </p>
         </div>
         <div className="ai-agent-list">
           {aiAgents.map((agent) => (
             <article className="ai-agent-row" key={agent.name}>
               <img src={agent.image} alt={`${agent.name}, FST ${agent.practice} AI agent`} width="128" height="128" loading="lazy" decoding="async" />
-              <div>
-                <span>{agent.practice}</span>
-                <h3>{agent.name}</h3>
+              <div className="ai-agent-details">
+                <div className="ai-agent-intro">
+                  <div>
+                    <span>{agent.practice}</span>
+                    <h3>{agent.name}</h3>
+                  </div>
+                  <Link href={`${teamPath}/${agent.slug}`} aria-label={`Meet ${agent.name} on FST`}>
+                    Meet {agent.name}
+                    <ArrowRight size={16} weight="regular" aria-hidden="true" />
+                  </Link>
+                </div>
                 <p>{agent.description}</p>
+                <div className="ai-agent-workpack">
+                  <div>
+                    <span>Prepared workpack</span>
+                    <strong>{agent.workpackName}</strong>
+                  </div>
+                  <ul aria-label={`${agent.name} workpack outputs`}>
+                    {agent.workpackOutputs.map((output) => <li key={output}>{output}</li>)}
+                  </ul>
+                </div>
               </div>
-              <Link href={`${teamPath}/${agent.slug}`} aria-label={`Meet ${agent.name} on FST`}>
-                Meet {agent.name}
-                <ArrowRight size={16} weight="regular" aria-hidden="true" />
-              </Link>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="ai-workpacks section-shell" aria-labelledby="ai-workpacks-title">
-        <div className="ai-section-heading">
-          <h2 id="ai-workpacks-title">
-            Structured workpacks for the work that slows teams down.
-          </h2>
-          <p>
-            Outputs are prepared for review, with source trails, assumptions,
-            exceptions and missing information kept visible.
-          </p>
-        </div>
-        <div className="ai-workpack-list">
-          {workpacks.map((workpack) => (
-            <article key={workpack.name}>
-              <div className="ai-workpack-practice">
-                <span>{workpack.practice}</span>
-                <strong>{workpack.agent}</strong>
-              </div>
-              <h3>{workpack.name}</h3>
-              <ul>
-                {workpack.outputs.map((output) => <li key={output}>{output}</li>)}
-              </ul>
             </article>
           ))}
         </div>
