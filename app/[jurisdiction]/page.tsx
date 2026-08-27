@@ -73,20 +73,20 @@ export default async function JurisdictionHome({ params }: JurisdictionPageProps
         </div>
       </section>
 
-      <section className="expertise-section section-shell" aria-labelledby="market-services-title">
+      <section className="expertise-section jurisdiction-expertise-section section-shell" aria-labelledby="market-services-title">
         <div className="section-heading section-heading-no-index">
           <h2 id="market-services-title">One working plan. The right workstreams.</h2>
           <p>Shared FST delivery standards sit underneath services, terminology, evidence and professional controls selected automatically for the request.</p>
         </div>
         <SectionVisual src={config.visuals.collaboration} alt="Specialists coordinating connected workstreams around one delivery plan" className="section-banner-visual" />
-        <div className="expertise-card-grid" aria-label="FST service lines">
+        <div className="expertise-card-grid expertise-card-grid-compact" aria-label="FST service lines">
           {services.map((service, index) => {
             const ServiceIcon = serviceIcons[index];
             return (
               <Link className={`expertise-card expertise-card-${index % 2 ? "sky" : "lilac"}`} href={marketPath(config.code, `/services/${service.slug}`)} key={service.slug}>
                 <div>
                   <span className="expertise-card-heading"><span className="item-icon" aria-hidden="true"><ServiceIcon size={20} weight="regular" /></span></span>
-                  <h3>{service.title}</h3>
+                  <h3>{service.shortTitle}</h3>
                   <p>{service.description}</p>
                 </div>
                 <span className="text-link">View service</span>
@@ -96,7 +96,7 @@ export default async function JurisdictionHome({ params }: JurisdictionPageProps
         </div>
       </section>
 
-      <section className="audience-section section-shell" aria-labelledby="market-audience-title">
+      <section className="audience-section jurisdiction-audience-section section-shell" aria-labelledby="market-audience-title">
         <div className="section-heading compact section-heading-no-index">
           <h2 id="market-audience-title">Built around organisations carrying the decision.</h2>
         </div>

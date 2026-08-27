@@ -158,6 +158,58 @@ test("uses direct WhatsApp actions and removes the generic hero promise overlay"
   assert.match(css, /\.contact-cta-actions\s*\{/);
 });
 
+test("condenses jurisdiction service lines without hiding a service route", async () => {
+  const compactLabels = [
+    "Management, risk &amp; controls",
+    "Audit &amp; assurance",
+    "Taxation",
+    "Accounting &amp; reporting",
+    "Corporate services",
+    "Loans &amp; funding",
+  ];
+
+  for (const pathname of ["/mt", "/rw"]) {
+    const response = await render(pathname);
+    assert.equal(response.status, 200);
+    const html = await response.text();
+
+    assert.match(html, /class="expertise-card-grid expertise-card-grid-compact"/i);
+    for (const label of compactLabels) assert.match(html, new RegExp(label, "i"));
+    assert.equal((html.match(/class="expertise-card expertise-card-/g) || []).length, 6);
+  }
+
+  const css = await readFile(path.join(root, "app/globals.css"), "utf8");
+  assert.match(css, /\.expertise-card-grid-compact \.expertise-card\s*\{[^}]*min-height:\s*228px;[^}]*padding:\s*24px 24px 22px;/s);
+});
+
+test("removes excess whitespace between jurisdiction homepage sections", async () => {
+  for (const pathname of ["/mt", "/rw"]) {
+    const html = await (await render(pathname)).text();
+    assert.match(html, /class="expertise-section jurisdiction-expertise-section section-shell"/i);
+    assert.match(html, /class="audience-section jurisdiction-audience-section section-shell"/i);
+  }
+
+  const css = await readFile(path.join(root, "app/globals.css"), "utf8");
+  assert.match(css, /\.expertise-section\.jurisdiction-expertise-section\s*\{[^}]*padding:\s*48px 0 24px;/s);
+  assert.match(css, /\.audience-section\.jurisdiction-audience-section\s*\{[^}]*padding:\s*32px 0 36px;/s);
+});
+
+test("keeps individual catalogue cards compact without weakening their actions", async () => {
+  const css = await readFile(path.join(root, "app/globals.css"), "utf8");
+
+  assert.match(css, /\.catalogue-card-grid\s*\{[^}]*gap:\s*12px;/s);
+  assert.match(css, /\.catalogue-card\s*\{[^}]*min-height:\s*224px;[^}]*padding:\s*16px;[^}]*contain-intrinsic-size:\s*auto 224px;/s);
+  assert.match(css, /\.catalogue-card h2\s*\{[^}]*margin:\s*8px 0 7px;[^}]*font-size:\s*clamp\(25px, 2\.1vw, 30px\);/s);
+  assert.match(css, /\.catalogue-card-action\s*\{[^}]*padding-top:\s*8px;/s);
+  assert.match(css, /\.catalogue-add-button,\s*\.catalogue-remove-button\s*\{[^}]*min-height:\s*40px;/s);
+
+  for (const pathname of ["/mt/services/catalogue", "/rw/services/catalogue"]) {
+    const html = await (await render(pathname)).text();
+    assert.match(html, /class="catalogue-add-button"/i);
+    assert.match(html, /aria-label="Add [^"]+ to request"/i);
+  }
+});
+
 test("uses button actions on jurisdiction services pages without generic footer support copy", async () => {
   for (const jurisdiction of ["mt", "rw"]) {
     const response = await render(`/${jurisdiction}/services`);

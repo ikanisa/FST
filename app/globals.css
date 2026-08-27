@@ -554,6 +554,10 @@ h1 {
   padding: 150px 0 100px;
 }
 
+.expertise-section.jurisdiction-expertise-section {
+  padding: 48px 0 24px;
+}
+
 .section-heading {
   display: grid;
   grid-template-columns: 0.5fr 1.4fr 0.9fr;
@@ -721,6 +725,48 @@ h1 {
   line-height: 1.65;
 }
 
+.expertise-card-grid-compact {
+  gap: 12px;
+}
+
+.expertise-card-grid-compact .expertise-card {
+  min-height: 228px;
+  padding: 24px 24px 22px;
+  border-top-width: 2px;
+  border-radius: 16px;
+  box-shadow: 0 12px 34px rgba(43, 62, 62, 0.07);
+}
+
+.expertise-card-grid-compact .expertise-card-heading {
+  margin-bottom: 14px;
+}
+
+.expertise-card-grid-compact .item-icon {
+  width: 36px;
+  height: 36px;
+  flex-basis: 36px;
+  border-radius: 11px;
+}
+
+.expertise-card-grid-compact .expertise-card h3 {
+  margin-bottom: 12px;
+  font-size: clamp(25px, 2vw, 32px);
+  line-height: 1.04;
+}
+
+.expertise-card-grid-compact .expertise-card p {
+  margin-bottom: 16px;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.expertise-card-grid-compact .text-link {
+  margin-top: auto;
+  color: var(--cobalt);
+  font-size: 11px;
+  font-weight: 700;
+}
+
 .expertise-card ul {
   margin: 0 0 28px;
   padding: 0;
@@ -803,6 +849,10 @@ h1 {
 .audience-section,
 .insights-section {
   padding: 150px 0;
+}
+
+.audience-section.jurisdiction-audience-section {
+  padding: 32px 0 36px;
 }
 
 .section-heading.compact {
@@ -3123,20 +3173,20 @@ h1 {
 .catalogue-card-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+  gap: 12px;
 }
 
 .catalogue-card {
-  min-height: 310px;
-  padding: 24px;
+  min-height: 224px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   border: 1px solid rgba(16, 38, 53, 0.11);
-  border-radius: 20px;
+  border-radius: 14px;
   background: rgba(255, 255, 255, 0.84);
   box-shadow: 0 8px 24px rgba(34, 50, 68, 0.055);
   content-visibility: auto;
-  contain-intrinsic-size: auto 310px;
+  contain-intrinsic-size: auto 224px;
   transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
 }
 
@@ -3153,34 +3203,34 @@ h1 {
 }
 
 .catalogue-card-topline {
-  min-height: 27px;
+  min-height: 14px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
   color: var(--cobalt);
-  font-size: 9px;
+  font-size: 8px;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
 .catalogue-card h2 {
-  margin: 24px 0 12px;
-  font-size: clamp(31px, 2.5vw, 39px);
-  line-height: 0.98;
+  margin: 8px 0 7px;
+  font-size: clamp(25px, 2.1vw, 30px);
+  line-height: 1;
 }
 
 .catalogue-card > p {
-  margin-bottom: 24px;
+  margin-bottom: 10px;
   color: var(--ink-soft);
-  font-size: 12px;
-  line-height: 1.65;
+  font-size: 11.5px;
+  line-height: 1.45;
 }
 
 .catalogue-card-action {
   margin-top: auto;
-  padding-top: 18px;
+  padding-top: 8px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -3201,8 +3251,8 @@ h1 {
 
 .catalogue-add-button,
 .catalogue-remove-button {
-  min-height: 42px;
-  padding: 0 14px;
+  min-height: 40px;
+  padding: 0 12px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -3678,8 +3728,8 @@ h1 {
   .catalogue-results-heading { align-items: flex-start; flex-direction: column; }
   .catalogue-results-heading > span { text-align: left; }
   .catalogue-card-grid { grid-template-columns: 1fr; }
-  .catalogue-card { min-height: 290px; padding: 22px; }
-  .catalogue-card h2 { font-size: 36px; }
+  .catalogue-card { min-height: 224px; padding: 16px; }
+  .catalogue-card h2 { font-size: 27px; }
   .catalogue-card-action { align-items: center; }
   .catalogue-order-panel { padding: 32px 22px 28px; }
   .catalogue-order-panel h2 { padding-right: 40px; font-size: 39px; }
