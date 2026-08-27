@@ -233,10 +233,7 @@ export function AiAgentTeamContent({ jurisdiction }: { jurisdiction?: Jurisdicti
                 </div>
                 <p>{agent.description}</p>
                 <div className="ai-agent-workpack">
-                  <div>
-                    <span>Prepared workpack</span>
-                    <strong>{agent.workpackName}</strong>
-                  </div>
+                  <strong>{agent.workpackName}</strong>
                   <ul aria-label={`${agent.name} workpack outputs`}>
                     {agent.workpackOutputs.map((output) => <li key={output}>{output}</li>)}
                   </ul>

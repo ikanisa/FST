@@ -4054,31 +4054,18 @@ h1 {
 }
 
 .ai-agent-workpack {
-  margin-top: 14px;
-  padding-top: 14px;
+  margin-top: 10px;
+  padding-top: 10px;
   display: grid;
   grid-template-columns: minmax(180px, 0.5fr) minmax(0, 1.5fr);
-  gap: 20px;
+  gap: 16px;
   align-items: center;
   border-top: 1px solid var(--line);
 }
 
-.ai-agent-workpack > div {
-  display: grid;
-  gap: 4px;
-}
-
-.ai-agent-workpack span {
-  color: var(--coral-dark);
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-
 .ai-agent-workpack strong {
   color: var(--cobalt);
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   line-height: 1.3;
 }
@@ -4092,8 +4079,8 @@ h1 {
 }
 
 .ai-agent-workpack li {
-  min-height: 38px;
-  padding: 0 12px;
+  min-height: 32px;
+  padding: 0 10px;
   display: flex;
   align-items: center;
   border-left: 1px solid var(--line);
@@ -4545,7 +4532,7 @@ h1 {
   .ai-step-arrow { display: none; }
   .ai-control-panel { gap: 34px; }
   .ai-agent-row { grid-template-columns: 88px minmax(0, 1fr); gap: 20px; }
-  .ai-agent-workpack { grid-template-columns: 1fr; gap: 12px; }
+  .ai-agent-workpack { grid-template-columns: 1fr; gap: 10px; }
   .ai-evidence-flow { grid-template-columns: 1fr 1fr; }
   .ai-evidence-flow li:nth-child(2) {
     margin-right: 0;
@@ -4614,14 +4601,14 @@ h1 {
   .ai-agent-intro > a { margin-top: 12px; font-size: 0; gap: 0; }
   .ai-agent-intro > a svg { width: 17px; height: 17px; }
   .ai-agent-workpack {
-    margin-top: 14px;
-    padding-top: 12px;
+    margin-top: 10px;
+    padding-top: 10px;
   }
   .ai-agent-workpack ul {
     grid-template-columns: 1fr 1fr;
   }
   .ai-agent-workpack li {
-    min-height: 38px;
+    min-height: 34px;
     padding: 0 8px;
   }
   .ai-accountability {
