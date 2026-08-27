@@ -25,8 +25,8 @@ export default function AuditAssurancePage() {
     introduction="FST scopes each engagement around the reporting framework, intended users, material risks, independence requirements and evidence needed to support a defensible conclusion."
     accent="cobalt"
     professionalNote={{
-      title: "Regulated work begins with authority and independence.",
-      description: "Statutory audit and other regulated assurance engagements are accepted and performed only where the responsible auditor or audit firm holds the required authorisation. Every engagement remains subject to conflict and independence checks, professional competence, ethical requirements, quality management, evidence availability and formal engagement acceptance.",
+      title: "Authorised work with protected independence.",
+      description: "FST delivers statutory audit and other regulated assurance engagements through the responsible authorised auditor or audit firm. Every engagement follows conflict and independence checks, professional competence, ethical requirements, quality management, evidence availability and formal engagement acceptance.",
     }}
     services={[
       { title: "Statutory financial statement audit", description: "ISA-based audit of annual or consolidated financial statements, including planning, materiality, risk assessment, evidence, completion and an appropriately authorised auditor’s report." },

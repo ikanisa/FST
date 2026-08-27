@@ -63,8 +63,8 @@ const maltaServices: JurisdictionService[] = [
     ],
     outcomes: ["Evidence-supported conclusions", "Clear findings", "Visible unresolved matters", "Actions that preserve independence"],
     professionalNote: {
-      title: "Authority and independence come first.",
-      description: "Regulated audit and assurance work is performed only through an appropriately authorised provider after independence, conflict, competence and acceptance checks.",
+      title: "Authorised work with protected independence.",
+      description: "FST delivers regulated audit and assurance work through its appropriately authorised provider, with independence, conflict, competence and acceptance checks applied to every engagement.",
     },
   },
   {
@@ -111,7 +111,7 @@ const maltaServices: JurisdictionService[] = [
     outcomes: ["Current statutory records", "Traceable decisions", "Visible deadlines", "Approved submission packs"],
     professionalNote: {
       title: "Corporate authority stays explicit.",
-      description: "Company-service-provider activities are delivered only where the required authorisation, registration or exemption is in place.",
+      description: "FST delivers company-service-provider activities through the applicable authorised, registered or exempt operating arrangement.",
     },
   },
   {
@@ -161,8 +161,8 @@ const rwandaServices: JurisdictionService[] = [
     ],
     outcomes: ["A review-ready evidence file", "Clear unresolved matters", "Findings with owners", "Regulated conclusions kept with authorised professionals"],
     professionalNote: {
-      title: "Regulated conclusions require the right authority.",
-      description: "FST does not present preparation support as a statutory audit opinion. Any regulated audit or assurance conclusion is accepted and issued only by a provider authorised for the applicable engagement.",
+      title: "Authorised conclusions remain independent.",
+      description: "FST distinguishes preparation support from a statutory audit opinion. Regulated audit and assurance conclusions are accepted and issued through the authorised provider responsible for the engagement.",
     },
   },
   {

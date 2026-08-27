@@ -52,8 +52,8 @@ export default function LegalInformationPage() {
           </section>
           <section>
             <h2>Regulated work</h2>
-            <p>Statutory audit and regulated assurance may proceed only through the appropriately authorised auditor or audit firm identified for the engagement, after independence, conflict, competence and acceptance checks. Company-service-provider and reserved legal activities follow their own authorisation requirements.</p>
-            <p>Accounting, tax and management-advisory services are provided by FST. Where a specific engagement requires a named warranted professional or additional regulated authority, that responsibility is recorded in the written engagement.</p>
+            <p>All services published on this website are authorised FST service lines. Statutory audit, regulated assurance, company-service-provider and reserved legal work are delivered through the applicable authorised or warranted professional or firm, with the responsible provider identified in the engagement.</p>
+            <p>Accounting, tax and management-advisory services are provided by FST. Independence, conflict, competence and formal engagement-acceptance checks are applied where required by the service.</p>
           </section>
           <section>
             <h2>Requests, prices and engagements</h2>

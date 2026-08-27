@@ -570,8 +570,8 @@ test("separates independent audit work from management advisory and states profe
     "Audit readiness &amp; remediation",
     "Audit committee &amp; governance reporting",
   ]) assert.match(audit, new RegExp(label, "i"));
-  assert.match(audit, /Regulated work begins with authority and independence/i);
-  assert.match(audit, /holds the required authorisation/i);
+  assert.match(audit, /Authorised work with protected independence/i);
+  assert.match(audit, /through the responsible authorised auditor or audit firm/i);
   assert.match(audit, /conflict and independence checks/i);
   assert.doesNotMatch(management, /<h3>Internal audit<\/h3>/i);
 });
@@ -748,11 +748,14 @@ test("publishes approved legal, privacy and enquiry details", async () => {
   assert.match(legal, /C 21500/i);
   assert.match(legal, /MT 1409 8221/i);
   assert.match(legal, /Registered with the Malta Accountancy Board/i);
+  assert.match(legal, /All services published on this website are authorised FST service lines/i);
   assert.doesNotMatch(legal, /not yet been approved|activation requirement/i);
   assert.match(visibleBodyText(privacy), /FST Management Services Limited is the controller/i);
   assert.doesNotMatch(privacy, /awaiting approved legal details|not yet configured/i);
   assert.match(privacy, /Cloudflare|Google|WhatsApp/i);
   assert.match(terms, /does not create a client relationship/i);
+  assert.match(terms, /All services published on this website are authorised FST service lines/i);
+  assert.doesNotMatch(terms, /does not represent that FST itself holds every authorisation/i);
   assert.match(booking, /href="\/privacy"/i);
   assert.match(booking, /Do not include passwords/i);
   assert.match(footer, /href="\/legal-information"/i);

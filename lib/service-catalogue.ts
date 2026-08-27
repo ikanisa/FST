@@ -4,7 +4,7 @@ export const catalogueCategories = [
     label: "Audit & assurance",
     shortLabel: "Audit",
     description: "Independent and evidence-led work for statutory, funder, governance and control requirements.",
-    regulatedNote: "Statutory audit and assurance work is accepted only through an appropriately authorised auditor or audit firm after independence and conflict checks.",
+    regulatedNote: "FST delivers statutory audit and assurance work through the responsible authorised auditor or audit firm, with independence and conflict checks applied to every engagement.",
   },
   {
     id: "accounting-reporting",
@@ -24,7 +24,7 @@ export const catalogueCategories = [
     label: "Corporate administration",
     shortLabel: "Corporate",
     description: "Company formation, statutory records, resolutions, filings and recurring governance administration.",
-    regulatedNote: "Company-service-provider activities are delivered only where the required authorisation, registration or exemption is in place.",
+    regulatedNote: "FST delivers company-service-provider activities through the applicable authorised, registered or exempt operating arrangement.",
   },
   {
     id: "management-risk",
