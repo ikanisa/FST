@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Check } from "@phosphor-icons/react/Check";
 import { MagnifyingGlass } from "@phosphor-icons/react/MagnifyingGlass";
 import { Minus } from "@phosphor-icons/react/Minus";
@@ -26,6 +26,8 @@ import {
   type SectorCatalogueEntry,
   type SectorPackage,
 } from "../../lib/sector-packages";
+import { CatalogueWebMcpRegistrar } from "../webmcp/CatalogueWebMcpRegistrar";
+import type { PrepareFstServiceRequestInput } from "../webmcp/tools/prepare-fst-service-request";
 
 const allCategory = "all";
 
@@ -66,10 +68,10 @@ export function ServiceCatalogue({
     () => selectedIds.map((id) => services.find((service) => service.id === id)).filter(Boolean),
     [selectedIds, services],
   );
-  const industryCards = getSectorPackages(jurisdiction).flatMap((sector) => {
+  const industryCards = useMemo(() => getSectorPackages(jurisdiction).flatMap((sector) => {
     const entry = getSectorCatalogueEntries(sector)[0];
     return entry ? [{ slug: sector.slug, label: sector.sectorLabel, image: sector.image, alt: sector.imageAlt, sector, entry }] : [];
-  });
+  }), [jurisdiction]);
   const selectedPackages = industryCards.filter((item) => selectedPackageSlugs.includes(item.slug));
   const selectedItemCount = selectedServices.length + selectedPackages.length;
 
@@ -143,8 +145,62 @@ export function ServiceCatalogue({
     if (isRemoving && !next.length && !selectedServices.length) setOrderOpen(false);
   }
 
+  const prepareWebMcpServiceRequest = useCallback(async (input: PrepareFstServiceRequestInput) => {
+    const requestedServiceIds = [...new Set(input.service_ids || [])];
+    const requestedPackageSlugs = [...new Set(input.package_slugs || [])];
+    const validServiceIds = new Set(services.map((service) => service.id));
+    const validPackageSlugs = new Set<string>(industryCards.map((item) => item.slug));
+    const unknownServiceIds = requestedServiceIds.filter((id) => !validServiceIds.has(id));
+    const unknownPackageSlugs = requestedPackageSlugs.filter((slug) => !validPackageSlugs.has(slug));
+    if (unknownServiceIds.length) throw new Error(`unknown service_ids: ${unknownServiceIds.join(", ")}`);
+    if (unknownPackageSlugs.length) throw new Error(`unknown package_slugs: ${unknownPackageSlugs.join(", ")}`);
+    if (!requestedServiceIds.length && !requestedPackageSlugs.length) throw new Error("provide at least one valid service or package");
+
+    const replace = input.replace_selection !== false;
+    const nextServiceIds = replace ? requestedServiceIds : [...new Set([...selectedIds, ...requestedServiceIds])];
+    const nextPackageSlugs = replace ? requestedPackageSlugs : [...new Set([...selectedPackageSlugs, ...requestedPackageSlugs])];
+    const nextServices = nextServiceIds
+      .map((id) => services.find((service) => service.id === id))
+      .filter((service): service is CatalogueService => Boolean(service));
+    const nextPackages = industryCards.filter((item) => nextPackageSlugs.includes(item.slug));
+    const total = nextPackages.reduce((sum, item) => sum + item.entry.from, 0)
+      + nextServices.reduce((sum, service) => sum + (service.from || 0), 0);
+    const allPricesKnown = nextServices.every((service) => service.from !== null);
+
+    setSelectedIds(nextServiceIds);
+    setSelectedPackageSlugs(nextPackageSlugs);
+    orderTriggerRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    setOrderOpen(true);
+    setCartAnnouncement(`${nextServiceIds.length + nextPackageSlugs.length} items selected. Review the non-binding order before continuing to WhatsApp.`);
+    await new Promise<void>((resolve) => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
+
+    return {
+      jurisdiction,
+      services: nextServices.map((service) => ({
+        id: service.id,
+        title: service.title,
+        price: formatCataloguePrice(service, currency, currencyLocale),
+        unit: service.unit,
+      })),
+      packages: nextPackages.map((item) => ({
+        slug: item.slug,
+        title: item.entry.title,
+        price: formatSectorPackagePrice(item.sector, item.entry.from),
+        unit: item.entry.billingUnit,
+      })),
+      indicativeStartingTotal: allPricesKnown ? formatCatalogueAmount(total, currency, currencyLocale) : null,
+      itemCount: nextServiceIds.length + nextPackageSlugs.length,
+      status: "prepared_for_human_review",
+      whatsappMessageSent: false,
+      note: "The visible order review is open. The visitor must review it, open WhatsApp and send the message.",
+    };
+  }, [currency, currencyLocale, industryCards, jurisdiction, selectedIds, selectedPackageSlugs, services]);
+
+  const webMcpBindings = useMemo(() => ({ prepare: prepareWebMcpServiceRequest }), [prepareWebMcpServiceRequest]);
+
   return (
     <>
+      <CatalogueWebMcpRegistrar bindings={webMcpBindings} />
       <p className="sr-only" role="status" aria-live="polite" aria-atomic="true">{cartAnnouncement}</p>
       <section className="catalogue-industry-browser section-shell" aria-labelledby="industry-package-title">
         <div className="catalogue-section-heading catalogue-section-heading-single">

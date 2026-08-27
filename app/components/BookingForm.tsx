@@ -1,10 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { trackConversion } from "../../lib/analytics";
 import { googleCalendarTemplateUrl, siteConfig } from "../../lib/site-config";
 import { jurisdictionConfig, marketPath, type JurisdictionCode } from "../../lib/jurisdictions";
+import { BookingWebMcpRegistrar } from "../webmcp/BookingWebMcpRegistrar";
+import type { PrepareFstMeetingRequestInput } from "../webmcp/tools/prepare-fst-meeting-request";
 
 type BookingResult = { calendarUrl?: string; meetUrl?: string; error?: string };
 
@@ -19,6 +21,7 @@ export function BookingForm({ jurisdiction = "mt" }: { jurisdiction?: Jurisdicti
   const market = jurisdictionConfig[jurisdiction];
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "unavailable" | "error">("idle");
   const [result, setResult] = useState<BookingResult>({});
+  const formRef = useRef<HTMLFormElement>(null);
   const startInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -85,6 +88,67 @@ export function BookingForm({ jurisdiction = "mt" }: { jurisdiction?: Jurisdicti
     }
   }
 
+  const prepareWebMcpMeetingRequest = useCallback(async (input: PrepareFstMeetingRequestInput) => {
+    const name = typeof input.name === "string" ? input.name.trim() : "";
+    const email = typeof input.email === "string" ? input.email.trim().toLowerCase() : "";
+    const organisation = typeof input.organisation === "string" ? input.organisation.trim() : "";
+    const context = typeof input.context === "string" ? input.context.trim() : "";
+    const start = typeof input.start === "string" ? input.start.trim() : "";
+    const duration = Number(input.duration);
+    if (!name || name.length > 120) throw new Error("name must contain between 1 and 120 characters");
+    if (email.length > 254 || !/^\S+@\S+\.\S+$/.test(email)) throw new Error("email must be a valid address");
+    if (organisation.length > 160) throw new Error("organisation must not exceed 160 characters");
+    if (context.length > 3000) throw new Error("context must not exceed 3000 characters");
+    if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(start)) throw new Error("start must use YYYY-MM-DDTHH:mm local format");
+    if (duration !== 30 && duration !== 60) throw new Error("duration must be 30 or 60 minutes");
+    const localStart = new Date(start);
+    const now = Date.now();
+    if (Number.isNaN(localStart.getTime()) || localStart.getTime() < now + 60 * 60 * 1000 || localStart.getTime() > now + 180 * 24 * 60 * 60 * 1000) {
+      throw new Error("start must be at least one hour from now and within the next 180 days");
+    }
+
+    const form = formRef.current;
+    if (!form) throw new Error("the booking form is not available");
+    const setValue = (fieldName: string, value: string) => {
+      const field = form.elements.namedItem(fieldName);
+      if (!(field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement || field instanceof HTMLSelectElement)) {
+        throw new Error(`booking field is missing: ${fieldName}`);
+      }
+      field.value = value;
+      field.dispatchEvent(new Event("input", { bubbles: true }));
+      field.dispatchEvent(new Event("change", { bubbles: true }));
+    };
+    setValue("name", name);
+    setValue("email", email);
+    setValue("organisation", organisation);
+    setValue("start", start);
+    setValue("duration", String(duration));
+    setValue("context", context);
+    const consent = form.elements.namedItem("privacy_consent");
+    if (!(consent instanceof HTMLInputElement)) throw new Error("booking consent field is missing");
+    consent.checked = false;
+    setStatus("idle");
+    setResult({});
+    form.scrollIntoView({ behavior: "smooth", block: "center" });
+    await new Promise<void>((resolve) => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
+    return {
+      jurisdiction,
+      name,
+      email,
+      organisation: organisation || null,
+      start,
+      duration,
+      context: context || null,
+      status: "prepared_for_human_review",
+      privacyConsent: "awaiting_visitor",
+      calendarEventCreated: false,
+      invitationsSent: false,
+      note: "The visitor must review the visible details, confirm the privacy notice and submit the form.",
+    };
+  }, [jurisdiction]);
+
+  const webMcpBindings = useMemo(() => ({ prepare: prepareWebMcpMeetingRequest }), [prepareWebMcpMeetingRequest]);
+
   if (status === "success") {
     return (
       <div className="booking-success" role="status">
@@ -113,7 +177,9 @@ export function BookingForm({ jurisdiction = "mt" }: { jurisdiction?: Jurisdicti
   }
 
   return (
-    <form className="booking-form" onSubmit={handleSubmit}>
+    <>
+    <BookingWebMcpRegistrar bindings={webMcpBindings} />
+    <form ref={formRef} className="booking-form" onSubmit={handleSubmit}>
       <input type="hidden" name="company_website" value="" readOnly />
       <div className="field-row">
         <label>Your name<input name="name" autoComplete="name" required /></label>
@@ -143,5 +209,6 @@ export function BookingForm({ jurisdiction = "mt" }: { jurisdiction?: Jurisdicti
       <p className="booking-note">A meeting request is not a professional engagement. The legal provider, responsible professional, scope and terms are confirmed separately before work starts.</p>
       {siteConfig.appointmentScheduleUrl && <a className="schedule-link" href={siteConfig.appointmentScheduleUrl} target="_blank" rel="noreferrer">Browse the full calendar schedule</a>}
     </form>
+    </>
   );
 }

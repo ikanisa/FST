@@ -12,6 +12,7 @@ import { siteUrl } from "../lib/seo";
 import { legalDisclosureReady, siteConfig } from "../lib/site-config";
 import { AnalyticsConsent } from "./components/AnalyticsConsent";
 import { JsonLd } from "./components/JsonLd";
+import { WebMcpRegistrar } from "./webmcp/WebMcpRegistrar";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -153,6 +154,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       </head>
       <body>
         <a className="skip-link" href="#main-content">Skip to main content</a>
+        <WebMcpRegistrar />
         {children}
         <AnalyticsConsent />
         <JsonLd data={structuredData} />

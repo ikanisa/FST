@@ -1,0 +1,57 @@
+{
+  "journey": "Help a visitor understand FST, find the right Malta or Rwanda offering, assemble a reversible service request for human WhatsApp review, or prepare a meeting request for human consent and submission.",
+  "site": "FST professional services website",
+  "suggestions": [
+    {
+      "id": "ask-fst-site",
+      "name": "ask_fst_site",
+      "description": "Find relevant FST website information for a visitor question across services, industry packages, professional safeguards, insights, contact, privacy and legal information. Use when the visitor asks what FST offers, how work is handled or where to continue; returns matched excerpts with source paths and does not change the page.",
+      "why": "Visitors need one reliable way to retrieve answers from FST's own published content.",
+      "status": "approved",
+      "params": [
+        { "name": "question", "type": "string", "description": "The visitor's question about FST." },
+        { "name": "max_results", "type": "integer", "description": "Optional maximum number of matched excerpts to return." }
+      ]
+    },
+    {
+      "id": "browse-fst-offerings",
+      "name": "browse_fst_offerings",
+      "description": "Search FST's current Malta or Rwanda services and industry-package catalogue by need, category or phrase. Use when a visitor wants suitable offerings or starting fees; returns concise matches with IDs, prices, safeguards and catalogue paths and does not change the page.",
+      "why": "Visitors need structured catalogue results instead of having an agent scrape cards from the page.",
+      "status": "approved",
+      "params": [
+        { "name": "jurisdiction", "type": "string", "description": "The FST market whose services and prices apply: mt or rw." },
+        { "name": "query", "type": "string", "description": "The service need, category or phrase to search for." },
+        { "name": "category", "type": "string", "description": "Optional catalogue category identifier." },
+        { "name": "limit", "type": "integer", "description": "Optional maximum number of matches." }
+      ]
+    },
+    {
+      "id": "prepare-fst-service-request",
+      "name": "prepare_fst_service_request",
+      "description": "Select valid FST services or industry packages and open the website's order review. Use when a visitor wants to assemble a non-binding request; returns the itemised selection, displayed starting fees and handoff status. It does not send a WhatsApp message or accept an engagement.",
+      "why": "Visitors need an agent-safe way to prepare the same visible order that the catalogue's Add buttons create.",
+      "status": "approved",
+      "params": [
+        { "name": "service_ids", "type": "string[]", "description": "Catalogue service identifiers to select." },
+        { "name": "package_slugs", "type": "string[]", "description": "Industry-package slugs to select." },
+        { "name": "replace_selection", "type": "boolean", "description": "Replace the current selection when true; otherwise extend it." }
+      ]
+    },
+    {
+      "id": "prepare-fst-meeting-request",
+      "name": "prepare_fst_meeting_request",
+      "description": "Fill FST's booking form with proposed meeting details and bring it into view. Use only when a visitor wants to review an appointment request; returns the prepared values and validation notes. It does not create a calendar event or send invitations—the visitor must review consent and submit the form.",
+      "why": "Visitors need help preparing a meeting while privacy consent and external notifications remain human-controlled.",
+      "status": "approved",
+      "params": [
+        { "name": "name", "type": "string", "description": "Visitor name to place in the form." },
+        { "name": "email", "type": "string", "description": "Business email to place in the form." },
+        { "name": "organisation", "type": "string", "description": "Optional organisation or project." },
+        { "name": "start", "type": "string", "description": "Requested local start in YYYY-MM-DDTHH:mm form." },
+        { "name": "duration", "type": "integer", "description": "Meeting length: 30 or 60 minutes." },
+        { "name": "context", "type": "string", "description": "Optional non-confidential meeting context." }
+      ]
+    }
+  ]
+}
