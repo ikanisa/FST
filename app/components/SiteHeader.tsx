@@ -51,7 +51,7 @@ export function SiteHeader({ jurisdiction }: { jurisdiction?: JurisdictionCode }
           <Link href={path("/who-we-work-with")} onClick={closeMenu}>Organisations</Link>
           <Link href={path("/about")} onClick={closeMenu}>Our Approach</Link>
           {!jurisdiction && <Link href="/insights" onClick={closeMenu}>Insights</Link>}
-          {!jurisdiction && <Link href="/ai-agent-team" onClick={closeMenu}>AI Agent Team</Link>}
+          {jurisdiction !== "rw" && <Link href={path("/ai-agent-team")} onClick={closeMenu}>AI Agent Team</Link>}
           <PrimaryCta jurisdiction={jurisdiction} className="nav-cta" onClick={closeMenu} />
         </nav>
         <button

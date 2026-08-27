@@ -49,7 +49,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: `/${jurisdiction}/terms`, priority: 0.5, changeFrequency: "yearly" as const },
   ]);
 
-  return [...routes, ...jurisdictionRoutes].map((route) => ({
+  const maltaAgentRoutes = [
+    { path: "/mt/ai-agent-team", priority: 0.8, changeFrequency: "monthly" as const },
+    ...aiAgents.map((agent) => ({ path: `/mt/ai-agent-team/${agent.slug}`, priority: 0.7, changeFrequency: "monthly" as const })),
+  ];
+
+  return [...routes, ...jurisdictionRoutes, ...maltaAgentRoutes].map((route) => ({
     url: `${siteUrl}${route.path}`,
     lastModified: new Date((route as { lastModified?: string }).lastModified || "2026-07-30"),
     changeFrequency: route.changeFrequency,

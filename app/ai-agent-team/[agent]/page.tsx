@@ -7,6 +7,8 @@ import { CheckCircle } from "@phosphor-icons/react/dist/ssr/CheckCircle";
 import { FileMagnifyingGlass } from "@phosphor-icons/react/dist/ssr/FileMagnifyingGlass";
 import { ShieldCheck } from "@phosphor-icons/react/dist/ssr/ShieldCheck";
 import { aiAgents, getAiAgent } from "../../../lib/ai-agents";
+import type { AiAgent } from "../../../lib/ai-agents";
+import { marketPath, type JurisdictionCode } from "../../../lib/jurisdictions";
 import { pageMetadata, siteUrl } from "../../../lib/seo";
 import { BreadcrumbJsonLd, JsonLd } from "../../components/JsonLd";
 import { PrimaryCta } from "../../components/PrimaryCta";
@@ -37,22 +39,30 @@ export default async function AgentProfilePage({ params }: AgentPageProps) {
   const agent = getAiAgent(slug);
   if (!agent) notFound();
 
+  return <AgentProfileContent agent={agent} />;
+}
+
+export function AgentProfileContent({ agent, jurisdiction }: { agent: AiAgent; jurisdiction?: JurisdictionCode }) {
+  const path = (value: string) => jurisdiction ? marketPath(jurisdiction, value) : value;
+  const teamPath = path("/ai-agent-team");
+  const profilePath = `${teamPath}/${agent.slug}`;
+
   return (
     <main id="main-content" tabIndex={-1}>
       <BreadcrumbJsonLd
         items={[
-          { name: "Home", path: "/" },
-          { name: "AI Agent Team", path: "/ai-agent-team" },
-          { name: agent.name, path: `/ai-agent-team/${agent.slug}` },
+          { name: "Home", path: jurisdiction ? marketPath(jurisdiction) : "/" },
+          { name: "AI Agent Team", path: teamPath },
+          { name: agent.name, path: profilePath },
         ]}
       />
       <JsonLd
         data={{
           "@context": "https://schema.org",
           "@type": "WebPage",
-          "@id": `${siteUrl}/ai-agent-team/${agent.slug}#webpage`,
+          "@id": `${siteUrl}${profilePath}#webpage`,
           name: `${agent.name} — ${agent.role}`,
-          url: `${siteUrl}/ai-agent-team/${agent.slug}`,
+          url: `${siteUrl}${profilePath}`,
           description: agent.introduction,
           isPartOf: { "@id": `${siteUrl}/#website` },
           about: {
@@ -63,18 +73,18 @@ export default async function AgentProfilePage({ params }: AgentPageProps) {
           },
         }}
       />
-      <SiteHeader />
+      <SiteHeader jurisdiction={jurisdiction} />
 
       <section className={`agent-profile-hero agent-profile-${agent.tone}`}>
         <div className="agent-profile-hero-copy">
-          <Link className="agent-profile-back" href="/ai-agent-team">
+          <Link className="agent-profile-back" href={teamPath}>
             <ArrowLeft size={16} aria-hidden="true" /> Back to the agent team
           </Link>
           <p className="eyebrow">FST supervised AI agent · {agent.practice}</p>
           <h1>{agent.name}</h1>
           <h2>{agent.role}</h2>
           <p>{agent.introduction}</p>
-          <PrimaryCta className="primary-button" />
+          <PrimaryCta jurisdiction={jurisdiction} className="primary-button" />
         </div>
         <div className="agent-profile-portrait">
           <img src={agent.image} alt={`${agent.name}, FST ${agent.practice} AI agent`} width="512" height="512" fetchPriority="high" />
@@ -127,12 +137,12 @@ export default async function AgentProfilePage({ params }: AgentPageProps) {
           <p>Bring the task, deadline and available source material. FST will define the workpack, supervision and approval responsibilities before preparation starts.</p>
         </div>
         <div>
-          <PrimaryCta className="primary-button" />
-          <Link href="/ai-agent-team">Meet the full agent team <ArrowRight size={16} aria-hidden="true" /></Link>
+          <PrimaryCta jurisdiction={jurisdiction} className="primary-button" />
+          <Link href={teamPath}>Meet the full agent team <ArrowRight size={16} aria-hidden="true" /></Link>
         </div>
       </section>
 
-      <SiteFooter />
+      <SiteFooter jurisdiction={jurisdiction} />
     </main>
   );
 }

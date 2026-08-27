@@ -490,6 +490,40 @@ test("publishes a dedicated internal FST page for every AI agent", async () => {
   assert.equal((await render("/ai-agent-team/unknown-agent")).status, 404);
 });
 
+test("restores the five-agent page and profiles inside the Malta route", async () => {
+  const maltaHome = await (await render("/mt")).text();
+  assert.match(maltaHome, /href="\/mt\/ai-agent-team"[^>]*>AI Agent Team</i);
+  assert.match(maltaHome, /href="\/mt\/ai-agent-team"[^>]*>Meet Our AI Agent Team</i);
+
+  const response = await render("/mt/ai-agent-team");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /Meet our AI agent team\./i);
+  assert.match(html, /href="\/mt\/book"/i);
+  assert.match(html, /href="https:\/\/wa\.me\/35699711145"/i);
+  assert.match(html, /rel="canonical" href="https:\/\/fst\.ikanisa\.com\/mt\/ai-agent-team"/i);
+
+  for (const [name, route] of [
+    ["Patrick", "patrick"],
+    ["Sofia", "sofia"],
+    ["Matthew", "matthew"],
+    ["Claire", "claire"],
+    ["Emma", "emma"],
+  ]) {
+    assert.match(html, new RegExp(`>${name}<`, "i"));
+    assert.match(html, new RegExp(`href="/mt/ai-agent-team/${route}"`, "i"));
+    const profile = await render(`/mt/ai-agent-team/${route}`);
+    assert.equal(profile.status, 200, `${name}'s Malta profile should render`);
+    const profileHtml = await profile.text();
+    assert.match(profileHtml, new RegExp(`<h1>${name}</h1>`, "i"));
+    assert.match(profileHtml, /href="\/mt\/ai-agent-team"/i);
+    assert.match(profileHtml, /href="\/mt\/book"/i);
+  }
+
+  assert.equal((await render("/rw/ai-agent-team")).status, 404);
+  assert.equal((await render("/mt/ai-agent-team/unknown-agent")).status, 404);
+});
+
 test("removes the inherited green palette from live source", async () => {
   const paletteFiles = [
     "app/globals.css",
@@ -634,12 +668,14 @@ test("uses clear canonical service URLs and preserves legacy link authority", as
   assert.match(sitemap, /https:\/\/fst\.ikanisa\.com\/services\/catalogue/);
   assert.match(sitemap, /https:\/\/fst\.ikanisa\.com\/services\/loan-funding-application-support/);
   assert.match(sitemap, /https:\/\/fst\.ikanisa\.com\/ai-agent-team/);
+  assert.match(sitemap, /https:\/\/fst\.ikanisa\.com\/mt\/ai-agent-team/);
   assert.match(sitemap, /https:\/\/fst\.ikanisa\.com\/insights\/useful-internal-control-review/);
   assert.match(sitemap, /https:\/\/fst\.ikanisa\.com\/legal-information/);
   assert.match(sitemap, /https:\/\/fst\.ikanisa\.com\/privacy/);
   assert.match(sitemap, /https:\/\/fst\.ikanisa\.com\/terms/);
   for (const agent of ["patrick", "sofia", "matthew", "claire", "emma"]) {
     assert.match(sitemap, new RegExp(`https://fst\\.ikanisa\\.com/ai-agent-team/${agent}`));
+    assert.match(sitemap, new RegExp(`https://fst\\.ikanisa\\.com/mt/ai-agent-team/${agent}`));
   }
   assert.doesNotMatch(sitemap, /services\/tax-vat|business-planning-finance-applications|services\/loan-application-support|services\/funding-applications/);
 });

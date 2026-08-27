@@ -36,6 +36,7 @@ footer and structured organisation metadata.
 - `/insights` — substantive field-note index and individual articles
 - `/ai-agent-team` — how FST uses IKANISA’s supervised AI agent team
 - `/ai-agent-team/patrick`, `/sofia`, `/matthew`, `/claire`, `/emma` — dedicated FST profiles for each supervised agent
+- `/mt/ai-agent-team` and `/mt/ai-agent-team/{agent}` — Malta-routed team and profile pages that preserve local navigation, booking and contact paths
 - `/contact`
 - `/book` — Google Calendar and Google Meet booking
 - `/legal-information` — configuration-gated provider and professional disclosures

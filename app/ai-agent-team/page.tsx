@@ -10,6 +10,7 @@ import { ShieldCheck } from "@phosphor-icons/react/dist/ssr/ShieldCheck";
 import { UserFocus } from "@phosphor-icons/react/dist/ssr/UserFocus";
 import Link from "next/link";
 import { aiAgents } from "../../lib/ai-agents";
+import { jurisdictionConfig, marketPath, type JurisdictionCode } from "../../lib/jurisdictions";
 import { pageMetadata, siteUrl } from "../../lib/seo";
 import { siteConfig } from "../../lib/site-config";
 import { BreadcrumbJsonLd, JsonLd } from "../components/JsonLd";
@@ -115,22 +116,26 @@ const controlPoints = [
   "Final judgement, approval and accountability remain human",
 ];
 
-export default function AiAgentTeamPage() {
+export function AiAgentTeamContent({ jurisdiction }: { jurisdiction?: JurisdictionCode } = {}) {
+  const path = (value: string) => jurisdiction ? marketPath(jurisdiction, value) : value;
+  const teamPath = path("/ai-agent-team");
+  const whatsappUrl = jurisdiction ? jurisdictionConfig[jurisdiction].whatsappUrl : siteConfig.whatsappUrl;
+
   return (
     <main id="main-content" tabIndex={-1}>
       <BreadcrumbJsonLd
         items={[
-          { name: "Home", path: "/" },
-          { name: "Meet Our AI Agent Team", path: "/ai-agent-team" },
+          { name: "Home", path: jurisdiction ? marketPath(jurisdiction) : "/" },
+          { name: "Meet Our AI Agent Team", path: teamPath },
         ]}
       />
       <JsonLd
         data={{
           "@context": "https://schema.org",
           "@type": "WebPage",
-          "@id": `${siteUrl}/ai-agent-team#webpage`,
+          "@id": `${siteUrl}${teamPath}#webpage`,
           name: "Meet Our AI Agent Team",
-          url: `${siteUrl}/ai-agent-team`,
+          url: `${siteUrl}${teamPath}`,
           description:
             "How FST uses supervised IKANISA AI agents to prepare professional workpacks for human review and approval.",
           isPartOf: { "@id": `${siteUrl}/#website` },
@@ -147,13 +152,13 @@ export default function AiAgentTeamPage() {
                 "@type": "SoftwareApplication",
                 name: agent.name,
                 applicationCategory: agent.practice,
-                url: `${siteUrl}/ai-agent-team/${agent.slug}`,
+                url: `${siteUrl}${teamPath}/${agent.slug}`,
               },
             })),
           },
         }}
       />
-      <SiteHeader />
+      <SiteHeader jurisdiction={jurisdiction} />
 
       <section className="ai-team-hero" aria-labelledby="ai-team-title">
         <div className="ai-team-hero-copy">
@@ -164,7 +169,7 @@ export default function AiAgentTeamPage() {
             workpacks and faster first drafts—while people keep every
             judgement and approval.
           </p>
-          <PrimaryCta className="primary-button" />
+          <PrimaryCta jurisdiction={jurisdiction} className="primary-button" />
         </div>
         <div className="ai-team-hero-media">
           <ResponsiveImage
@@ -253,7 +258,7 @@ export default function AiAgentTeamPage() {
                 <h3>{agent.name}</h3>
                 <p>{agent.description}</p>
               </div>
-              <Link href={`/ai-agent-team/${agent.slug}`} aria-label={`Meet ${agent.name} on FST`}>
+              <Link href={`${teamPath}/${agent.slug}`} aria-label={`Meet ${agent.name} on FST`}>
                 Meet {agent.name}
                 <ArrowRight size={16} weight="regular" aria-hidden="true" />
               </Link>
@@ -318,9 +323,9 @@ export default function AiAgentTeamPage() {
           </p>
         </div>
         <div className="ai-team-cta-actions">
-          <PrimaryCta className="primary-button" />
+          <PrimaryCta jurisdiction={jurisdiction} className="primary-button" />
           <TrackedLink
-            href={siteConfig.whatsappUrl}
+            href={whatsappUrl}
             event="contact_whatsapp_click"
             target="_blank"
             rel="noreferrer"
@@ -331,7 +336,11 @@ export default function AiAgentTeamPage() {
         </div>
       </section>
 
-      <SiteFooter />
+      <SiteFooter jurisdiction={jurisdiction} />
     </main>
   );
+}
+
+export default function AiAgentTeamPage() {
+  return <AiAgentTeamContent />;
 }

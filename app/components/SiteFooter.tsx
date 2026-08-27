@@ -27,7 +27,7 @@ export function SiteFooter({ jurisdiction }: { jurisdiction?: JurisdictionCode }
           <Link href={path("/who-we-work-with")}>Organisations</Link>
           <Link href={path("/about")}>Our Approach</Link>
           {!jurisdiction && <Link href="/insights">Insights</Link>}
-          {!jurisdiction && <Link href="/ai-agent-team">Meet Our AI Agent Team</Link>}
+          {jurisdiction !== "rw" && <Link href={path("/ai-agent-team")}>Meet Our AI Agent Team</Link>}
           <Link href={path("/contact")}>Get in touch</Link>
           <Link href={path("/legal-information")}>Legal information</Link>
           <Link href={path("/privacy")}>Privacy & cookies</Link>
