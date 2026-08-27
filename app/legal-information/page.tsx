@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { pageMetadata } from "../../lib/seo";
-import { legalDisclosureReady, siteConfig } from "../../lib/site-config";
+import { siteConfig } from "../../lib/site-config";
 import { BreadcrumbJsonLd } from "../components/JsonLd";
 import { SiteFooter } from "../components/SiteFooter";
 import { SiteHeader } from "../components/SiteHeader";
@@ -32,16 +32,9 @@ export default function LegalInformationPage() {
         <header className="legal-page-hero">
           <p className="eyebrow">Legal and professional information</p>
           <h1>Know who is responsible before work starts.</h1>
-          <p>FST is a website-facing service name within the IKANISA portfolio. A website request does not itself appoint an auditor, accountant, advocate, company-service provider or other professional.</p>
-          <small>Last reviewed 3 August 2026</small>
+          <p>FST is the professional-services brand of {siteConfig.legalName} within the IKANISA portfolio. Accounting, tax, management advisory and related services are available as described across the website.</p>
+          <small>Last reviewed 27 August 2026</small>
         </header>
-
-        {!legalDisclosureReady && (
-          <aside className="legal-status-warning" aria-labelledby="legal-status-title">
-            <h2 id="legal-status-title">Formal provider disclosure is an activation requirement.</h2>
-            <p>Verified legal-entity, registration, address and professional-authorisation details have not yet been approved for publication. Until they are displayed here and identified in a written response, do not treat FST as an appointed or authorised provider and do not send confidential records.</p>
-          </aside>
-        )}
 
         {disclosures.length > 0 && (
           <section className="legal-disclosure" aria-labelledby="published-details-title">
@@ -60,7 +53,7 @@ export default function LegalInformationPage() {
           <section>
             <h2>Regulated work</h2>
             <p>Statutory audit and regulated assurance may proceed only through the appropriately authorised auditor or audit firm identified for the engagement, after independence, conflict, competence and acceptance checks. Company-service-provider and reserved legal activities follow their own authorisation requirements.</p>
-            <p>If a responsible professional or authorised entity is not identified in writing, the request remains an initial enquiry and no regulated engagement has been accepted.</p>
+            <p>Accounting, tax and management-advisory services are provided by FST. Where a specific engagement requires a named warranted professional or additional regulated authority, that responsibility is recorded in the written engagement.</p>
           </section>
           <section>
             <h2>Requests, prices and engagements</h2>

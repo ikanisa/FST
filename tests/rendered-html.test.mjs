@@ -686,7 +686,9 @@ test("publishes page-level SEO schema, one primary heading and responsive images
   const home = await (await render("/")).text();
   assert.equal((home.match(/<h1(?:\s|>)/gi) || []).length, 1);
   assert.match(home, /"@type":"WebSite"/);
-  assert.doesNotMatch(home, /"@id":"https:\/\/fst\.ikanisa\.com\/#organization"/);
+  assert.match(home, /"@id":"https:\/\/fst\.ikanisa\.com\/#organization"/);
+  assert.match(home, /"legalName":"FST Management Services Limited"/);
+  assert.match(home, /"value":"C 21500"/);
   assert.match(home, /srcset="\/fst-hero-640\.webp 640w, \/fst-hero-960\.webp 960w, \/fst-hero\.webp 1536w"/i);
 
   const service = await (await render("/services/taxation")).text();
@@ -716,11 +718,12 @@ test("contact, SEO and discovery routes render production signals", async () => 
   assert.match(contact, /general enquiries/i);
   assert.match(contact, /separate service-request channel/i);
   assert.match(contact, /href="\/legal-information"/i);
+  assert.match(contact, /mailto:info@ikanisa\.com/i);
+  assert.match(contact, /144\/9, Palazzo Marian, Marina Street, Pietà PTA 9043, Malta/i);
   assert.doesNotMatch(contact, /tel:/i);
   assert.doesNotMatch(contact, /Open FST WhatsApp/i);
   assert.doesNotMatch(contact, /7942\s*8604|79428604/);
   assert.doesNotMatch(contact, /hello@fst\.ikanisa\.com/i);
-  assert.doesNotMatch(contact, /mailto:/i);
   assert.match(sitemap, /services\/audit-assurance/);
   assert.match(sitemap, /services\/catalogue/);
   assert.match(sitemap, /services\/loan-funding-application-support/);
@@ -733,7 +736,7 @@ test("contact, SEO and discovery routes render production signals", async () => 
   assert.match(robots, /Sitemap: https:\/\/fst\.ikanisa\.com\/sitemap\.xml/);
 });
 
-test("publishes fail-closed legal, privacy and enquiry safeguards", async () => {
+test("publishes approved legal, privacy and enquiry details", async () => {
   const [legal, privacy, terms, booking, footer] = await Promise.all([
     render("/legal-information").then((response) => response.text()),
     render("/privacy").then((response) => response.text()),
@@ -741,9 +744,13 @@ test("publishes fail-closed legal, privacy and enquiry safeguards", async () => 
     render("/book").then((response) => response.text()),
     render("/").then((response) => response.text()),
   ]);
-  assert.match(legal, /legal-entity, registration, address and professional-authorisation details have not yet been approved/i);
-  assert.match(legal, /website request does not itself appoint an auditor/i);
-  assert.match(privacy, /Controller disclosure is awaiting approved legal details/i);
+  assert.match(legal, /FST Management Services Limited/i);
+  assert.match(legal, /C 21500/i);
+  assert.match(legal, /MT 1409 8221/i);
+  assert.match(legal, /Registered with the Malta Accountancy Board/i);
+  assert.doesNotMatch(legal, /not yet been approved|activation requirement/i);
+  assert.match(visibleBodyText(privacy), /FST Management Services Limited is the controller/i);
+  assert.doesNotMatch(privacy, /awaiting approved legal details|not yet configured/i);
   assert.match(privacy, /Cloudflare|Google|WhatsApp/i);
   assert.match(terms, /does not create a client relationship/i);
   assert.match(booking, /href="\/privacy"/i);
@@ -886,7 +893,7 @@ test("publishes complete Malta and Rwanda route families without cross-market co
   assert.doesNotMatch(selectedRwandaRequestText, /not-a-service/i);
 });
 
-test("keeps jurisdiction in routing while reserving visible country copy for the verified office and service area", async () => {
+test("keeps visible country copy within the jurisdiction context and approved legal disclosure", async () => {
   const sharedRoutes = [
     "",
     "/services",
@@ -914,7 +921,11 @@ test("keeps jurisdiction in routing while reserving visible country copy for the
       const countryMentions = visible.match(activeCountry) || [];
       assert.ok(countryMentions.length <= 5, `${pathname} should keep country references limited to location and coverage copy`);
       assert.doesNotMatch(visible, countryAdjective, `${pathname} should not repeat country adjectives outside useful local copy`);
-      assert.doesNotMatch(visible, otherCountry, `${pathname} should not leak the other office location`);
+      if (suffix !== "/legal-information") {
+        assert.doesNotMatch(visible, otherCountry, `${pathname} should not leak the other office location`);
+      } else {
+        assert.match(visible, /FST Management Services Limited operates the FST website/i);
+      }
       assert.doesNotMatch(
         visible,
         /\b(?:FST\s+(?:RW|MT|Rwanda|Malta)|jurisdiction|market route|country desk)\b/i,
@@ -924,7 +935,7 @@ test("keeps jurisdiction in routing while reserving visible country copy for the
   }
 });
 
-test("connects the Rwanda service area to the verified Norrsken House Kigali address", async () => {
+test("keeps Rwanda service content free of an unsupported physical-office claim", async () => {
   const [homeResponse, contactResponse, serviceResponse, sitemapResponse] = await Promise.all([
     render("/rw"),
     render("/rw/contact"),
@@ -941,20 +952,13 @@ test("connects the Rwanda service area to the verified Norrsken House Kigali add
   assert.match(home, /<title>Accounting, Tax &amp; Business Advisory in Rwanda \| FST<\/title>/i);
   assert.match(visibleBodyText(home), /Accounting, tax and business advisory in Rwanda/i);
   assert.match(visibleBodyText(home), /RRA tax compliance/i);
-  assert.match(home, /Norrsken House Kigali/i);
-  assert.match(home, /1 KN 78 St, Norrsken House, Kiyovu, Nyarugenge, Kigali, Rwanda/i);
-  assert.match(home, /Northern, Southern, Eastern and Western provinces/i);
-  assert.match(home, /google\.com\/maps\/search\/\?api=1&amp;query=Norrsken\+House\+Kigali/i);
-  assert.match(home, /name="geo\.region" content="RW-01"/i);
-  assert.match(home, /"@type":"ProfessionalService"/i);
-  assert.match(home, /"streetAddress":"1 KN 78 St, Norrsken House"/i);
-  assert.match(home, /"addressCountry":"RW"/i);
-  assert.match(home, /"areaServed":\{"@type":"Country","name":"Rwanda"\}/i);
+  assert.doesNotMatch(home, /Norrsken|1 KN 78|Kigali office|\/rw#professional-service|name="geo\.region"/i);
+  assert.match(home, /support for organisations across Rwanda/i);
 
-  assert.match(contact, /Contact FST at Norrsken House Kigali/i);
-  assert.match(contact, /Office · by appointment/i);
-  assert.match(contact, /1 KN 78 St, Norrsken House/i);
-  assert.match(service, /"provider":\{"@id":"https:\/\/fst\.ikanisa\.com\/rw#professional-service"\}/i);
+  assert.match(contact, /Contact FST Rwanda/i);
+  assert.doesNotMatch(contact, /Norrsken|1 KN 78|Office · by appointment|#professional-service/i);
+  assert.doesNotMatch(service, /"provider":\{"@id":"https:\/\/fst\.ikanisa\.com\/rw#professional-service"\}/i);
+  assert.match(service, /"provider":\{"@id":"https:\/\/fst\.ikanisa\.com\/#organization"\}/i);
   assert.match(service, /"areaServed":\[\{"@type":"Country","name":"Rwanda"\}\]/i);
   assert.match(service, /<title>RRA Tax Compliance, VAT, EBM, PAYE &amp; WHT in Rwanda \| FST<\/title>/i);
   assert.match(visibleBodyText(service), /VAT, EBM, PAYE, WHT & RSSB workpacks/i);

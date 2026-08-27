@@ -147,7 +147,7 @@ export const jurisdictionConfig: Record<JurisdictionCode, JurisdictionConfig> = 
     seo: {
       homeTitle: "Accounting, Tax & Business Advisory in Rwanda",
       homeDescription:
-        "Bookkeeping, accounting, RRA tax compliance, EBM, PAYE, audit readiness, business setup and funding support from Norrsken House Kigali.",
+        "Bookkeeping, accounting, RRA tax compliance, EBM, PAYE, audit readiness, business setup and funding support for organisations across Rwanda.",
     },
     hero: {
       title: "Accounting, tax and business advisory in Rwanda.",
@@ -169,22 +169,6 @@ export const jurisdictionConfig: Record<JurisdictionCode, JurisdictionConfig> = 
       { title: "Cooperatives and community enterprises", description: "Governance, bookkeeping, reporting and bankability support organised around member accountability." },
       { title: "NGOs and development programmes", description: "Budgeting, donor reporting, grant controls, audit readiness and evidence management." },
     ],
-    location: {
-      name: "Norrsken House Kigali",
-      eyebrow: "Kigali office · nationwide service",
-      headline: "Meet us at Norrsken House or work with us from anywhere in Rwanda.",
-      streetAddress: "1 KN 78 St, Norrsken House",
-      addressLocality: "Kigali",
-      addressRegion: "City of Kigali",
-      addressCountry: "RW",
-      postalLabel: "1 KN 78 St, Norrsken House, Kiyovu, Nyarugenge, Kigali, Rwanda",
-      mapUrl: "https://www.google.com/maps/search/?api=1&query=Norrsken+House+Kigali%2C+1+KN+78+St%2C+Kigali%2C+Rwanda",
-      latitude: -1.9511,
-      longitude: 30.06,
-      geoRegion: "RW-01",
-      coverage:
-        "Available by appointment in Kigali and online across the City of Kigali and Rwanda’s Northern, Southern, Eastern and Western provinces.",
-    },
     operationalNotice:
       "Services remain subject to scope, applicable professional requirements and confirmation of the responsible provider before an engagement starts.",
   },

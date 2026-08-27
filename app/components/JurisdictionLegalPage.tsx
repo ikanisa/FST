@@ -33,7 +33,7 @@ export function JurisdictionLegalPage({ jurisdiction, kind }: { jurisdiction: Ju
     title: "Legal & professional-provider information",
     intro: `This route separates website ownership, intake, preparation support and regulated professional responsibility.`,
     sections: [
-      ["Website operator", siteConfig.legalName ? `${siteConfig.legalName} operates the FST website. Registration and address information is provided below where configured.` : "The website operator's full legal disclosure is published when the required registration and address fields are configured."],
+      ["Website operator", `${siteConfig.legalName} operates the FST website under company registration ${siteConfig.companyRegistrationNumber}. Its registered address is ${siteConfig.registeredAddress}.`],
       ["Contracting provider", "The contracting provider is confirmed before work starts. It may differ by service, applicable rules, professional authority and delivery arrangement."],
       ["Professional responsibility", config.operationalNotice],
       ["Supervised AI preparation", "FST may use supervised professional AI agents for research, reconciliation, drafting, evidence indexing and quality checks. Agents do not accept engagements, sign opinions, approve filings or replace accountable human judgement."],

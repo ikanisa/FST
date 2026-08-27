@@ -107,8 +107,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     ].filter(Boolean),
     contactPoint: {
       "@type": "ContactPoint",
-      telephone: siteConfig.whatsappDisplay,
-      url: siteConfig.whatsappUrl,
       contactType: "client enquiries",
       email: siteConfig.contactEmail,
       availableLanguage: ["English"],
