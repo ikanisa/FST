@@ -908,17 +908,13 @@ test("keeps jurisdiction in routing while reserving visible country copy for the
       const visible = visibleBodyText(html)
         .replaceAll("Malta Enterprise", "")
         .replaceAll("Xjenza Malta", "");
-      if (jurisdiction === "mt") {
-        assert.doesNotMatch(
-          visible,
-          /\b(?:Rwanda|Rwandan|Malta|Maltese)\b/i,
-          `${pathname} should not repeat the active jurisdiction in visible copy`,
-        );
-      } else {
-        const countryMentions = visible.match(/\bRwanda(?:’s|'s)?\b/gi) || [];
-        assert.ok(countryMentions.length <= 5, `${pathname} should keep Rwanda references limited to location and coverage copy`);
-        assert.doesNotMatch(visible, /\bRwandan\b/i, `${pathname} should not repeat country adjectives outside useful local copy`);
-      }
+      const activeCountry = jurisdiction === "rw" ? /\bRwanda(?:’s|'s)?\b/gi : /\bMalta(?:’s|'s)?\b/gi;
+      const otherCountry = jurisdiction === "rw" ? /\b(?:Malta|Maltese)\b/i : /\b(?:Rwanda|Rwandan)\b/i;
+      const countryAdjective = jurisdiction === "rw" ? /\bRwandan\b/i : /\bMaltese\b/i;
+      const countryMentions = visible.match(activeCountry) || [];
+      assert.ok(countryMentions.length <= 5, `${pathname} should keep country references limited to location and coverage copy`);
+      assert.doesNotMatch(visible, countryAdjective, `${pathname} should not repeat country adjectives outside useful local copy`);
+      assert.doesNotMatch(visible, otherCountry, `${pathname} should not leak the other office location`);
       assert.doesNotMatch(
         visible,
         /\b(?:FST\s+(?:RW|MT|Rwanda|Malta)|jurisdiction|market route|country desk)\b/i,
@@ -959,6 +955,39 @@ test("connects the Rwanda service area to the verified Norrsken House Kigali add
   assert.match(service, /"provider":\{"@id":"https:\/\/fst\.ikanisa\.com\/rw#professional-service"\}/i);
   assert.match(service, /"areaServed":\[\{"@type":"Country","name":"Rwanda"\}\]/i);
   assert.match(sitemap, /<loc>https:\/\/fst\.ikanisa\.com\/rw<\/loc>\s*<lastmod>2026-08-27T00:00:00\.000Z<\/lastmod>/i);
+});
+
+test("connects the Malta service area to the verified SOHO The Strand address", async () => {
+  const [homeResponse, contactResponse, serviceResponse, sitemapResponse] = await Promise.all([
+    render("/mt"),
+    render("/mt/contact"),
+    render("/mt/services/accounting-financial-reporting"),
+    render("/sitemap.xml"),
+  ]);
+  const [home, contact, service, sitemap] = await Promise.all([
+    homeResponse.text(),
+    contactResponse.text(),
+    serviceResponse.text(),
+    sitemapResponse.text(),
+  ]);
+
+  assert.match(home, /<title>Professional Services in Malta \| FST<\/title>/i);
+  assert.match(visibleBodyText(home), /FST at SOHO The Strand/i);
+  assert.match(home, /SOHO The Strand, Fawwara Building, Triq l-Imsida, Gżira GZR 1401, Malta/i);
+  assert.match(home, /businesses, organisations and finance teams across Malta and Gozo/i);
+  assert.match(home, /google\.com\/maps\/search\/\?api=1&amp;query=SOHO\+The\+Strand/i);
+  assert.match(home, /name="geo\.region" content="MT-12"/i);
+  assert.match(home, /"@type":"ProfessionalService"/i);
+  assert.match(home, /"streetAddress":"SOHO The Strand, Fawwara Building, Triq l-Imsida"/i);
+  assert.match(home, /"addressCountry":"MT"/i);
+  assert.match(home, /"areaServed":\{"@type":"Country","name":"Malta"\}/i);
+
+  assert.match(contact, /Contact FST at SOHO The Strand/i);
+  assert.match(contact, /Office · by appointment/i);
+  assert.match(contact, /Fawwara Building, Triq l-Imsida/i);
+  assert.match(service, /"provider":\{"@id":"https:\/\/fst\.ikanisa\.com\/mt#professional-service"\}/i);
+  assert.match(service, /"areaServed":\[\{"@type":"Country","name":"Malta"\}\]/i);
+  assert.match(sitemap, /<loc>https:\/\/fst\.ikanisa\.com\/mt<\/loc>\s*<lastmod>2026-08-27T00:00:00\.000Z<\/lastmod>/i);
 });
 
 test("jurisdiction and catalogue APIs expose validated public market contracts", async () => {

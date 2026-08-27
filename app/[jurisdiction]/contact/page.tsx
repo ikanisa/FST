@@ -33,9 +33,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const config = getJurisdiction((await params).jurisdiction);
   return config ? jurisdictionPageMetadata({
     jurisdiction: config.code,
-    title: config.location ? "Contact FST at Norrsken House Kigali" : `Contact FST ${config.name}`,
+    title: config.location ? `Contact FST at ${config.location.name}` : `Contact FST ${config.name}`,
     description: config.location
-      ? "Contact FST for management, accounting, tax readiness, governance and funding support at Norrsken House Kigali or online across Rwanda."
+      ? `Contact FST for management, accounting, tax readiness, governance and funding support at ${config.location.name} or online across ${config.country}.`
       : `Send a controlled enquiry to the FST ${config.name} desk or request a focused working meeting.`,
     path: "/contact",
   }) : {};
@@ -94,7 +94,7 @@ export default async function JurisdictionContactPage({ params, searchParams }: 
         "@context": "https://schema.org",
         "@type": "ContactPage",
         "@id": `${siteUrl}${marketPath(config.code, "/contact")}#contact-page`,
-        name: "Contact FST at Norrsken House Kigali",
+        name: `Contact FST at ${config.location.name}`,
         about: { "@id": `${siteUrl}${marketPath(config.code)}#professional-service` },
       }} />}
       <SiteHeader jurisdiction={config.code} />

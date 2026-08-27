@@ -27,9 +27,9 @@ export async function generateMetadata({ params }: JurisdictionPageProps): Promi
   if (!config) return {};
   return jurisdictionPageMetadata({
     jurisdiction: config.code,
-    title: config.code === "rw" ? "Professional Services in Rwanda" : `FST ${config.name} | Make the next move workable`,
-    description: config.code === "rw"
-      ? "FST provides management, accounting, tax readiness, governance and funding support from Norrsken House Kigali to organisations across Rwanda."
+    title: `Professional Services in ${config.name}`,
+    description: config.location
+      ? `FST provides management, accounting, tax readiness, governance and funding support from ${config.location.name} to organisations across ${config.country}.`
       : config.hero.lede,
   });
 }
@@ -143,13 +143,13 @@ export default async function JurisdictionHome({ params }: JurisdictionPageProps
       {config.location && (
         <section className="market-location-section section-shell" aria-labelledby="market-location-title">
           <div className="market-location-copy">
-            <p className="eyebrow">Kigali office · nationwide service</p>
-            <h2 id="market-location-title">Meet us at Norrsken House or work with us from anywhere in Rwanda.</h2>
+            <p className="eyebrow">{config.location.eyebrow}</p>
+            <h2 id="market-location-title">{config.location.headline}</h2>
             <p>{config.location.coverage}</p>
           </div>
           <div className="market-location-card">
             <span>Visit by appointment</span>
-            <h3>{config.location.name}</h3>
+            <h3>FST at {config.location.name}</h3>
             <address>{config.location.postalLabel}</address>
             <a href={config.location.mapUrl} target="_blank" rel="noreferrer">View address on Google Maps</a>
           </div>

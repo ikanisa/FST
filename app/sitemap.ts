@@ -35,7 +35,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const jurisdictionRoutes = jurisdictionCodes.flatMap((jurisdiction) => {
-    const lastModified = jurisdiction === "rw" ? "2026-08-27" : undefined;
+    const lastModified = "2026-08-27";
     return [
       { path: `/${jurisdiction}`, priority: 1, changeFrequency: "monthly" as const, lastModified },
       { path: `/${jurisdiction}/services`, priority: 0.9, changeFrequency: "monthly" as const, lastModified },

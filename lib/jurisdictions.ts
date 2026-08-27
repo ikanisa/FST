@@ -37,6 +37,8 @@ export type JurisdictionConfig = {
   audience: Array<{ title: string; description: string }>;
   location?: {
     name: string;
+    eyebrow: string;
+    headline: string;
     streetAddress: string;
     addressLocality: string;
     addressRegion: string;
@@ -45,6 +47,7 @@ export type JurisdictionConfig = {
     mapUrl: string;
     latitude: number;
     longitude: number;
+    geoRegion: string;
     coverage: string;
   };
   operationalNotice: string;
@@ -96,6 +99,22 @@ export const jurisdictionConfig: Record<JurisdictionCode, JurisdictionConfig> = 
       { title: "SMEs and established businesses", description: "Connected finance, compliance, assurance and management support as operations become more complex." },
       { title: "NGOs and international programmes", description: "Evidence-led financial, donor, governance and project-accountability work." },
     ],
+    location: {
+      name: "SOHO The Strand",
+      eyebrow: "Gżira office · Malta-wide service",
+      headline: "Meet us at SOHO The Strand or work with us from anywhere in Malta.",
+      streetAddress: "SOHO The Strand, Fawwara Building, Triq l-Imsida",
+      addressLocality: "Gżira",
+      addressRegion: "Central Region",
+      addressCountry: "MT",
+      postalLabel: "SOHO The Strand, Fawwara Building, Triq l-Imsida, Gżira GZR 1401, Malta",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=SOHO+The+Strand%2C+Fawwara+Building%2C+Triq+l-Imsida%2C+Gzira+GZR+1401%2C+Malta",
+      latitude: 35.9023513,
+      longitude: 14.4938964,
+      geoRegion: "MT-12",
+      coverage:
+        "Available by appointment in Gżira and online for businesses, organisations and finance teams across Malta and Gozo.",
+    },
     operationalNotice:
       "Regulated work is accepted only after provider authority, independence, competence and engagement checks are complete.",
   },
@@ -137,7 +156,9 @@ export const jurisdictionConfig: Record<JurisdictionCode, JurisdictionConfig> = 
       { title: "NGOs and development programmes", description: "Budgeting, donor reporting, grant controls, audit readiness and evidence management." },
     ],
     location: {
-      name: "FST at Norrsken House Kigali",
+      name: "Norrsken House Kigali",
+      eyebrow: "Kigali office · nationwide service",
+      headline: "Meet us at Norrsken House or work with us from anywhere in Rwanda.",
       streetAddress: "1 KN 78 St, Norrsken House",
       addressLocality: "Kigali",
       addressRegion: "City of Kigali",
@@ -146,6 +167,7 @@ export const jurisdictionConfig: Record<JurisdictionCode, JurisdictionConfig> = 
       mapUrl: "https://www.google.com/maps/search/?api=1&query=Norrsken+House+Kigali%2C+1+KN+78+St%2C+Kigali%2C+Rwanda",
       latitude: -1.9511,
       longitude: 30.06,
+      geoRegion: "RW-01",
       coverage:
         "Available by appointment in Kigali and online across the City of Kigali and Rwanda’s Northern, Southern, Eastern and Western provinces.",
     },

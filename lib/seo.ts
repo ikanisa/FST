@@ -108,7 +108,7 @@ export function jurisdictionPageMetadata({
       },
     },
     other: config.location ? {
-      "geo.region": "RW-01",
+      "geo.region": config.location.geoRegion,
       "geo.placename": config.location.addressLocality,
       "geo.position": `${config.location.latitude};${config.location.longitude}`,
       ICBM: `${config.location.latitude}, ${config.location.longitude}`,
