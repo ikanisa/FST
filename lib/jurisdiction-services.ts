@@ -17,6 +17,8 @@ export type JurisdictionService = {
   shortTitle: string;
   introduction: string;
   description: string;
+  seoTitle?: string;
+  seoDescription?: string;
   offerings: Array<{ title: string; description: string }>;
   outcomes: string[];
   professionalNote?: { title: string; description: string };
@@ -132,7 +134,9 @@ const rwandaServices: JurisdictionService[] = [
     ...shared["management-consulting"],
     image: "/fst-rw-collaboration.webp",
     title: "Management Advisory, Risk & Controls",
-    introduction: "Translate growth plans into operating priorities, owners and measurable controls.",
+    seoTitle: "Business Plans, Risk & Internal Controls in Rwanda",
+    seoDescription: "Business planning, feasibility, risk management and internal controls support for Rwanda businesses, cooperatives, NGOs and development programmes.",
+    introduction: "Business plans, risk management and internal controls built for execution.",
     description: "Practical support for businesses, cooperatives and programmes working through strategy, execution, governance and control questions.",
     imageAlt: "Business leaders mapping priorities, ownership and operating controls",
     offerings: [
@@ -145,7 +149,9 @@ const rwandaServices: JurisdictionService[] = [
   {
     ...shared["audit-assurance"],
     title: "Audit Readiness & Assurance Support",
-    introduction: "Prepare reliable evidence and route regulated conclusions through the right authorised provider.",
+    seoTitle: "Audit Readiness & Internal Controls in Rwanda",
+    seoDescription: "Audit readiness, internal audit, controls review and donor-project evidence support for organisations and programmes operating in Rwanda.",
+    introduction: "Audit readiness and internal controls support built around reliable evidence.",
     description: "Audit readiness, internal audit, controls, donor and project evidence support for organisations and programmes.",
     imageAlt: "A structured audit-readiness file with records, evidence and review points",
     offerings: [
@@ -162,12 +168,14 @@ const rwandaServices: JurisdictionService[] = [
   {
     ...shared.taxation,
     title: "Tax Compliance Readiness",
-    introduction: "Build tax work from reconciled records, documented positions and controlled approvals.",
-    description: "Preparation support for tax registrations, returns, payroll obligations, withholding, reconciliations and authority queries.",
+    seoTitle: "RRA Tax Compliance, VAT, EBM, PAYE & WHT in Rwanda",
+    seoDescription: "RRA tax compliance support covering VAT, EBM reconciliation, PAYE, withholding tax, income tax workpacks, RSSB schedules and authority queries.",
+    introduction: "RRA tax compliance, VAT, EBM, PAYE and withholding tax support.",
+    description: "Preparation support for RRA tax registrations and returns, VAT and EBM reconciliation, PAYE, withholding tax, RSSB schedules and authority queries.",
     imageAlt: "Tax records and reconciliation schedules organised for review and approval",
     offerings: [
       { title: "Income tax & business tax readiness", description: "Computations, return workpacks, payment schedules and supporting evidence." },
-      { title: "VAT, payroll & withholding workpacks", description: "Recurring obligation calendars, reconciliations and approval-ready schedules." },
+      { title: "VAT, EBM, PAYE, WHT & RSSB workpacks", description: "RRA and RSSB obligation calendars, VAT and EBM reconciliations, payroll support, PAYE and withholding-tax schedules." },
       { title: "Tax queries & review support", description: "Issue logs, source records, reconciliations and response packs for professional review." },
     ],
     outcomes: ["A reconciled tax file", "Visible filing responsibilities", "Approval evidence", "Questions escalated to the right professional"],
@@ -179,8 +187,10 @@ const rwandaServices: JurisdictionService[] = [
   {
     ...shared["accounting-financial-reporting"],
     title: "Accounting & Financial Reporting",
-    introduction: "Create records that reconcile, reporting that management can use and a year-end file that withstands review.",
-    description: "Bookkeeping, close, financial reporting, budgets, cash-flow and finance-control support for organisations and programmes.",
+    seoTitle: "Bookkeeping & Accounting Services in Rwanda",
+    seoDescription: "Bookkeeping, bank and mobile-money reconciliation, management accounts, financial reporting, budgets and year-end accounting support in Rwanda.",
+    introduction: "Bookkeeping and accounting services that keep business records decision-ready.",
+    description: "Bookkeeping, bank and mobile-money reconciliation, close, financial reporting, budgets, cash-flow and finance-control support for organisations and programmes.",
     imageAlt: "Reconciled accounting records and financial reports prepared for management review",
     offerings: [
       { title: "Bookkeeping & reconciliations", description: "Ledger maintenance, bank and mobile-money reconciliation, exceptions and source-document control." },
@@ -192,11 +202,13 @@ const rwandaServices: JurisdictionService[] = [
   {
     ...shared["corporate-services"],
     title: "Corporate Governance & Administration",
-    introduction: "Keep entity information, governance decisions and recurring obligations controlled and current.",
-    description: "Preparation support for business setup, governance records, registers, resolutions and recurring corporate administration.",
+    seoTitle: "Business Setup & Corporate Governance in Rwanda",
+    seoDescription: "Business setup readiness, ownership records, governance documents, resolutions, registers and recurring corporate administration support in Rwanda.",
+    introduction: "Business setup and corporate governance support with controlled records.",
+    description: "Preparation support for business setup, registration information, ownership records, governance documents, registers, resolutions and recurring administration.",
     imageAlt: "Governance records, resolutions and compliance actions organised in one file",
     offerings: [
-      { title: "Business setup readiness", description: "Information checklists, ownership records, operating documents and registration workpacks." },
+      { title: "Business setup & RDB registration readiness", description: "Information checklists, ownership records, operating documents and registration workpacks prepared for approval." },
       { title: "Governance records", description: "Meeting packs, decisions, action logs, policies and controlled registers." },
       { title: "Recurring compliance administration", description: "Obligation calendars, evidence files and approval-controlled submission preparation." },
     ],
@@ -210,7 +222,9 @@ const rwandaServices: JurisdictionService[] = [
     ...shared["loan-funding-application-support"],
     image: "/fst-rw-operations.webp",
     title: "Loan, Grant & Funding Application Support",
-    introduction: "Build one credible financing file around the use of funds, repayment or impact logic and verifiable evidence.",
+    seoTitle: "Business Loan, Grant & Funding Support in Rwanda",
+    seoDescription: "Business loan, grant, donor and investment-readiness support with cash-flow forecasts, budgets, bankability evidence and application workpacks.",
+    introduction: "Business loan, grant and funding applications built around credible evidence.",
     description: "Bankability, loan, grant, donor and investment-readiness support for businesses, cooperatives and programmes.",
     imageAlt: "A funding application file with financial schedules, evidence and delivery milestones",
     offerings: [

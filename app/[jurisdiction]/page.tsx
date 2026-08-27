@@ -27,10 +27,8 @@ export async function generateMetadata({ params }: JurisdictionPageProps): Promi
   if (!config) return {};
   return jurisdictionPageMetadata({
     jurisdiction: config.code,
-    title: `Professional Services in ${config.name}`,
-    description: config.location
-      ? `FST provides management, accounting, tax readiness, governance and funding support from ${config.location.name} to organisations across ${config.country}.`
-      : config.hero.lede,
+    title: config.seo.homeTitle,
+    description: config.seo.homeDescription,
   });
 }
 
@@ -45,6 +43,7 @@ export default async function JurisdictionHome({ params }: JurisdictionPageProps
     name: "FST",
     url: `${siteUrl}${marketPath(config.code)}`,
     image: `${siteUrl}${config.visuals.hero}`,
+    description: config.seo.homeDescription,
     telephone: config.whatsappDisplay,
     address: {
       "@type": "PostalAddress",
@@ -68,6 +67,15 @@ export default async function JurisdictionHome({ params }: JurisdictionPageProps
       areaServed: config.location.addressCountry,
       availableLanguage: ["English"],
     },
+    knowsAbout: config.code === "rw" ? [
+      "Bookkeeping and accounting",
+      "RRA tax compliance",
+      "VAT and EBM reconciliation",
+      "PAYE, withholding tax and RSSB schedules",
+      "Audit readiness and internal controls",
+      "Business setup and corporate governance",
+      "Business loan and grant application support",
+    ] : undefined,
   } : undefined;
 
   return (
@@ -77,6 +85,7 @@ export default async function JurisdictionHome({ params }: JurisdictionPageProps
         "@type": "WebPage",
         "@id": `${siteUrl}${marketPath(config.code)}#webpage`,
         name: `FST ${config.name}`,
+        description: config.seo.homeDescription,
         url: `${siteUrl}${marketPath(config.code)}`,
         inLanguage: config.locale,
         about: { "@type": "Country", name: config.country },

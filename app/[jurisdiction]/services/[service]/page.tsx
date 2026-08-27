@@ -21,8 +21,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!service) return {};
   return jurisdictionPageMetadata({
     jurisdiction: config.code,
-    title: `${service.title} in ${config.name}`,
-    description: service.description,
+    title: service.seoTitle || `${service.title} in ${config.name}`,
+    description: service.seoDescription || service.description,
     path: `/services/${service.slug}`,
   });
 }

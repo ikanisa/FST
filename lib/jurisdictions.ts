@@ -20,6 +20,10 @@ export type JurisdictionConfig = {
   serviceOrderWhatsappDisplay: string;
   serviceOrderWhatsappUrl: string;
   serviceArea: string;
+  seo: {
+    homeTitle: string;
+    homeDescription: string;
+  };
   hero: {
     title: string;
     lede: string;
@@ -79,6 +83,11 @@ export const jurisdictionConfig: Record<JurisdictionCode, JurisdictionConfig> = 
     serviceOrderWhatsappUrl: siteConfig.serviceOrderWhatsappUrl,
     serviceArea:
       "Supporting local and international businesses, finance teams and institutions through online and appointment-led engagements.",
+    seo: {
+      homeTitle: "Professional Services in Malta",
+      homeDescription:
+        "FST provides management, accounting, tax, governance, assurance and funding support from SOHO The Strand to organisations across Malta.",
+    },
     hero: {
       title: "Turn ambition into an executable plan.",
       lede:
@@ -135,10 +144,15 @@ export const jurisdictionConfig: Record<JurisdictionCode, JurisdictionConfig> = 
     serviceOrderWhatsappUrl: whatsappUrl(rwServiceWhatsappDisplay),
     serviceArea:
       "Supporting businesses, entrepreneurs, cooperatives, NGOs and institutions through online and appointment-led engagements.",
+    seo: {
+      homeTitle: "Accounting, Tax & Business Advisory in Rwanda",
+      homeDescription:
+        "Bookkeeping, accounting, RRA tax compliance, EBM, PAYE, audit readiness, business setup and funding support from Norrsken House Kigali.",
+    },
     hero: {
-      title: "Make the next business decision workable.",
+      title: "Accounting, tax and business advisory in Rwanda.",
       lede:
-        "FST connects management, finance, tax readiness, governance and funding support into a controlled programme designed around the decision that must move.",
+        "FST connects bookkeeping, financial reporting, RRA tax compliance, audit readiness, governance and funding support in one accountable programme of work.",
       imageAlt: "Business leaders and advisers organising priorities, evidence and delivery responsibilities",
     },
     visuals: {

@@ -19,8 +19,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!config) return {};
   return jurisdictionPageMetadata({
     jurisdiction: config.code,
-    title: `Business Advisory & Accounting Services in ${config.name}`,
-    description: `Explore FST management, finance, tax, governance, assurance-readiness and funding support configured for organisations in ${config.name}.`,
+    title: config.code === "rw"
+      ? "Accounting, Tax & Business Advisory Services in Rwanda"
+      : `Business Advisory & Accounting Services in ${config.name}`,
+    description: config.code === "rw"
+      ? "Explore bookkeeping, accounting, RRA tax compliance, audit readiness, business setup, management advisory and funding support in Rwanda."
+      : `Explore FST management, finance, tax, governance, assurance-readiness and funding support configured for organisations in ${config.name}.`,
     path: "/services",
   });
 }
@@ -35,7 +39,7 @@ export default async function JurisdictionServicesPage({ params }: PageProps) {
       <BreadcrumbJsonLd items={[{ name: "Home", path: marketPath(config.code) }, { name: "Services", path: marketPath(config.code, "/services") }]} />
       <SiteHeader jurisdiction={config.code} />
       <section className="index-hero image-index-hero services-index-hero">
-        <div><h1>Build the right team around the work.</h1><p>Choose the workstream closest to the outcome. FST keeps finance, management, evidence, compliance and funding dependencies in one controlled plan.</p></div>
+        <div><h1>{config.code === "rw" ? "Accounting, tax and business advisory services." : "Build the right team around the work."}</h1><p>{config.code === "rw" ? "Choose bookkeeping, financial reporting, RRA tax, audit readiness, governance, management or funding support. FST keeps connected work in one controlled plan." : "Choose the workstream closest to the outcome. FST keeps finance, management, evidence, compliance and funding dependencies in one controlled plan."}</p></div>
         <ResponsiveImage src={config.visuals.collaboration} alt="Specialists coordinating connected workstreams" sizes="(max-width: 900px) 100vw, 80vw" loading="eager" fetchPriority="high" />
       </section>
       <section className="services-catalogue-invitation section-shell">

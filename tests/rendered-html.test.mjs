@@ -938,7 +938,9 @@ test("connects the Rwanda service area to the verified Norrsken House Kigali add
     sitemapResponse.text(),
   ]);
 
-  assert.match(home, /<title>Professional Services in Rwanda \| FST<\/title>/i);
+  assert.match(home, /<title>Accounting, Tax &amp; Business Advisory in Rwanda \| FST<\/title>/i);
+  assert.match(visibleBodyText(home), /Accounting, tax and business advisory in Rwanda/i);
+  assert.match(visibleBodyText(home), /RRA tax compliance/i);
   assert.match(home, /Norrsken House Kigali/i);
   assert.match(home, /1 KN 78 St, Norrsken House, Kiyovu, Nyarugenge, Kigali, Rwanda/i);
   assert.match(home, /Northern, Southern, Eastern and Western provinces/i);
@@ -954,6 +956,8 @@ test("connects the Rwanda service area to the verified Norrsken House Kigali add
   assert.match(contact, /1 KN 78 St, Norrsken House/i);
   assert.match(service, /"provider":\{"@id":"https:\/\/fst\.ikanisa\.com\/rw#professional-service"\}/i);
   assert.match(service, /"areaServed":\[\{"@type":"Country","name":"Rwanda"\}\]/i);
+  assert.match(service, /<title>RRA Tax Compliance, VAT, EBM, PAYE &amp; WHT in Rwanda \| FST<\/title>/i);
+  assert.match(visibleBodyText(service), /VAT, EBM, PAYE, WHT & RSSB workpacks/i);
   assert.match(sitemap, /<loc>https:\/\/fst\.ikanisa\.com\/rw<\/loc>\s*<lastmod>2026-08-27T00:00:00\.000Z<\/lastmod>/i);
 });
 
