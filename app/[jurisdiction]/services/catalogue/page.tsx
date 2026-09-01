@@ -60,20 +60,20 @@ export default async function JurisdictionCataloguePage({ params }: PageProps) {
 
       <section className="catalogue-hero">
         <div className="catalogue-hero-copy">
-          <h1>Choose the work. See the starting fee. Build one request.</h1>
-          <p>{config.code === "rw" ? "Choose individual professional services or open a sector-specific package menu. Build one coordinated scope request around the work you need." : "Choose individual professional services or open a sector-specific package menu, then build one coordinated scope request."}</p>
-          <a className="catalogue-hero-link" href="#catalogue-start">Explore services &amp; industry packages <ArrowDown size={17} aria-hidden="true" /></a>
+          <h1>Compare professional services and starting fees.</h1>
+          <p>Select individual services or a business-type package. Your choices stay in one itemised, non-binding request for FST to confirm scope, records, responsibility and final fees.</p>
+          <a className="catalogue-hero-link" href="#catalogue-start">Browse packages and individual services <ArrowDown size={17} aria-hidden="true" /></a>
         </div>
         <div className="catalogue-hero-pricing">
-          <strong>Clear starting fees.</strong>
-          <p>{config.code === "rw" ? "Each minimum fee states the entry scope. The final quote adjusts only for volume, condition of records, complexity, deadline, fieldwork and the responsible professional route." : "Transparent starting fees reflect structured preparation while professional judgement, review and accountability remain human."}</p>
+          <strong>Indicative fees before you enquire.</strong>
+          <p>{config.code === "rw" ? "Each minimum fee covers the stated entry scope. FST confirms any change for volume, record quality, complexity, deadline, fieldwork or professional requirements before work starts." : "Each fee is a starting point for the stated scope. FST confirms records, timing, final fees and the responsible professional before work starts."}</p>
         </div>
       </section>
 
-      <section className="catalogue-trust-rail section-shell" aria-label="How ordering works">
-        <article><b>01</b><div><strong>Build an itemised order</strong><span>Click Add on a package or service. Every selection and displayed starting fee stays together in one order.</span></div></article>
-        <article><b>02</b><div><strong>Review it in WhatsApp</strong><span>WhatsApp opens with your itemised selection and displayed total already prepared for you to review and send.</span></div></article>
-        <article><b>03</b><div><strong>Receive a confirmed scope</strong><span>FST replies with the records required, deadline, final fee, taxes or official costs and responsible professional before accepting the work.</span></div></article>
+      <section className="catalogue-trust-rail section-shell" aria-label="How to prepare a service request">
+        <article><b>01</b><div><strong>Add services to one request</strong><span>Use Add to request on each relevant package or individual service.</span></div></article>
+        <article><b>02</b><div><strong>Check items and starting total</strong><span>Review every selected item and displayed fee before opening WhatsApp.</span></div></article>
+        <article><b>03</b><div><strong>Send for scope confirmation</strong><span>FST confirms required records, timing, final fees, charges and the responsible professional before work starts.</span></div></article>
       </section>
 
       <div id="catalogue-start">

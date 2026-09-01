@@ -35,19 +35,19 @@ export default function ServicesPage() {
       <SiteHeader />
       <section className="index-hero image-index-hero services-index-hero">
         <div>
-          <h1>Build the right team around the work.</h1>
-          <p>FST combines management, audit, finance and compliance services with consolidated loan and funding application support—without separating the commercial story from the evidence behind it.</p>
+          <h1>Accounting, tax, audit, corporate and funding services.</h1>
+          <p>Choose a defined service area for reporting, compliance, governance, management decisions, contracts or financing, with scope and deliverables kept in one controlled plan.</p>
         </div>
         <ResponsiveImage src="/fst-collaboration.webp" alt="FST specialists coordinating workstreams in an open project studio" sizes="(max-width: 900px) 100vw, 80vw" loading="eager" fetchPriority="high" />
       </section>
       <section className="services-catalogue-invitation section-shell">
         <div>
-          <p className="section-index">Need one specific service?</p>
-          <h2>Compare individual services and indicative fees.</h2>
+          <p className="section-index">Individual services and fees</p>
+          <h2>Compare named deliverables and indicative starting fees.</h2>
         </div>
         <div>
-          <p>Search the full catalogue, combine several work items and send one service request. Every request starts with a free scope and fee check.</p>
-          <Link className="primary-button" href="/services/catalogue">Browse the Service Catalogue</Link>
+          <p>Search accounting, tax, audit, corporate, advisory, funding and contract deliverables, then prepare one itemised request.</p>
+          <Link className="primary-button" href="/services/catalogue">Compare services and fees</Link>
         </div>
       </section>
       <section className="service-index-grid section-shell" aria-label="Our services">
@@ -67,9 +67,9 @@ export default function ServicesPage() {
       </section>
       <section className="subpage-cta section-shell">
         <div className="subpage-cta-copy">
-          <p className="section-index">A practical first step</p>
-          <h2>Start with the outcome and the deadline.</h2>
-          <p>FST will map the specialist support, information and sequence required to get there.</p>
+          <p className="section-index">Scope a deadline or deliverable</p>
+          <h2>Tell FST what must be filed, reported, financed or decided.</h2>
+          <p>FST will confirm the relevant service, required records, review sequence and responsible professional route.</p>
           <PrimaryCta className="primary-button" />
         </div>
         <SectionVisual src="/fst-consultation.webp" alt="A business owner and adviser agreeing the scope of a new engagement" className="subpage-cta-visual" />

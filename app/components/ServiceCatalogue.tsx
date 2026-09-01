@@ -31,6 +31,10 @@ import type { PrepareFstServiceRequestInput } from "../webmcp/tools/prepare-fst-
 
 const allCategory = "all";
 
+function displayBillingUnit(unit: string) {
+  return unit === "client / month" ? "client" : unit;
+}
+
 type IndustryPackageSelection = {
   slug: string;
   sector: SectorPackage;
@@ -204,7 +208,7 @@ export function ServiceCatalogue({
       <p className="sr-only" role="status" aria-live="polite" aria-atomic="true">{cartAnnouncement}</p>
       <section className="catalogue-industry-browser section-shell" aria-labelledby="industry-package-title">
         <div className="catalogue-section-heading catalogue-section-heading-single">
-          <h2 id="industry-package-title">Industry packages</h2>
+          <h2 id="industry-package-title">Monthly packages by business type</h2>
         </div>
         <div className="catalogue-industry-grid" aria-label="Industry package catalogue">
           {industryCards.map((item) => {
@@ -223,7 +227,7 @@ export function ServiceCatalogue({
                   <small>{item.entry.description}</small>
                   <div className="catalogue-industry-package-price">
                     <strong>{jurisdiction === "mt" && "From "}{formatSectorPackagePrice(item.sector, item.entry.from)}</strong>
-                    <span>per {item.entry.billingUnit}</span>
+                    <span>per {displayBillingUnit(item.entry.billingUnit)}</span>
                   </div>
                   <ul>{item.entry.includes.slice(0, 5).map((included) => <li key={included}>{included}</li>)}</ul>
                   <button
@@ -233,7 +237,7 @@ export function ServiceCatalogue({
                     aria-pressed={selected}
                     aria-label={`${selected ? "Remove" : "Add"} ${item.entry.title} ${selected ? "from" : "to"} order`}
                   >
-                    {selected ? <><Check size={17} aria-hidden="true" /> Added</> : <><Plus size={17} aria-hidden="true" /> Add</>}
+                    {selected ? <><Check size={17} aria-hidden="true" /> In request</> : <><Plus size={17} aria-hidden="true" /> Add to request</>}
                   </button>
                 </div>
               </article>
@@ -245,14 +249,14 @@ export function ServiceCatalogue({
       <section className="catalogue-service-browser" aria-labelledby="service-catalogue-title">
         <div className="catalogue-toolbar section-shell">
           <div className="catalogue-section-heading catalogue-service-heading">
-            <h2 id="service-catalogue-title">Services</h2>
+            <h2 id="service-catalogue-title">Individual professional services</h2>
           </div>
           <label className="catalogue-search">
             <MagnifyingGlass size={20} aria-hidden="true" />
-            <span className="sr-only">Search services</span>
+            <span className="sr-only">Search by service, filing, deliverable or business need</span>
             <input
               type="search"
-              aria-label="Search services"
+              aria-label="Search by service, filing, deliverable or business need"
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               placeholder={jurisdiction === "rw" ? "Search bookkeeping, tax, controls, grants…" : "Search bookkeeping, VAT, contracts, grants…"}
@@ -294,7 +298,7 @@ export function ServiceCatalogue({
           <div className="catalogue-results">
           <div className="catalogue-results-heading" aria-live="polite">
             <p><strong>{filteredServices.length}</strong> {filteredServices.length === 1 ? "service" : "services"}</p>
-            <span>{query ? `Matching “${query}”` : activeCategory === allCategory ? "Across all FST practices" : categories.find((category) => category.id === activeCategory)?.description}</span>
+            <span>{query ? `Matching “${query}”` : activeCategory === allCategory ? "Audit, accounting, tax, corporate administration, advisory, funding and contract work." : categories.find((category) => category.id === activeCategory)?.description}</span>
           </div>
 
           {filteredServices.length ? (
@@ -320,7 +324,7 @@ export function ServiceCatalogue({
                         aria-pressed={selected}
                         aria-label={`${selected ? "Remove" : "Add"} ${service.title} ${selected ? "from" : "to"} request`}
                       >
-                        {selected ? <><Check size={17} aria-hidden="true" /> Added</> : <><Plus size={17} aria-hidden="true" /> Add</>}
+                        {selected ? <><Check size={17} aria-hidden="true" /> In request</> : <><Plus size={17} aria-hidden="true" /> Add to request</>}
                       </button>
                     </div>
                   </article>
@@ -352,7 +356,7 @@ export function ServiceCatalogue({
           aria-expanded={orderOpen}
         >
           <span>{selectedItemCount} {selectedItemCount === 1 ? "item" : "items"} selected</span>
-          <strong>Review order</strong>
+          <strong>Review selected services</strong>
         </button>
       )}
 
@@ -410,11 +414,11 @@ function RequestPanel({
     service ? [`${index + 1}. ${service.title} — ${formatCataloguePrice(service, currency, currencyLocale)} · ${service.unit}`] : [],
   );
   const packageRequestLines = selectedPackages.map((item, index) =>
-    `${index + 1}. ${item.entry.title} — ${formatSectorPackagePrice(item.sector, item.entry.from)} · per ${item.entry.billingUnit}`,
+    `${index + 1}. ${item.entry.title} — ${formatSectorPackagePrice(item.sector, item.entry.from)} · per ${displayBillingUnit(item.entry.billingUnit)}`,
   );
   const allPricesKnown = pricedServices.length === selectedServices.length;
   const whatsappMessage = [
-    "Hello FST, I would like to order the following catalogue items:",
+    "Hello FST, I would like scope confirmation for these catalogue items:",
     "",
     ...(packageRequestLines.length ? ["Industry packages", ...packageRequestLines, ""] : []),
     ...(serviceRequestLines.length ? ["Individual services", ...serviceRequestLines, ""] : []),
@@ -438,7 +442,7 @@ function RequestPanel({
     <div className="catalogue-order-panel">
       <div className="catalogue-cart-heading">
         <div>
-          <h2 id={titleId}>Your order</h2>
+          <h2 id={titleId}>Your itemised service request</h2>
         </div>
         <span aria-label={`${selectedItemCount} ${selectedItemCount === 1 ? "item" : "items"} in order`}>{selectedItemCount}</span>
       </div>
@@ -446,9 +450,9 @@ function RequestPanel({
         {selectedPackages.map((item) => (
           <li key={`package-${item.slug}`}>
             <div>
-              <small>Industry package</small>
+              <small>Business-type package</small>
               <strong>{item.entry.title}</strong>
-              <span>{formatSectorPackagePrice(item.sector, item.entry.from)} · per {item.entry.billingUnit}</span>
+              <span>{formatSectorPackagePrice(item.sector, item.entry.from)} · per {displayBillingUnit(item.entry.billingUnit)}</span>
             </div>
             <button type="button" onClick={() => removePackage(item.slug)} aria-label={`Remove ${item.entry.title}`}>
               <Minus size={15} aria-hidden="true" />
@@ -480,7 +484,7 @@ function RequestPanel({
           onClick={() => trackConversion("service_catalogue_order")}
         >
           <WhatsappLogoIcon size={20} weight="fill" aria-hidden="true" />
-          Order via WhatsApp
+          Send request on WhatsApp
         </a>
       ) : (
         <a className="catalogue-order-submit" href={contactUrl} onClick={() => trackConversion("service_catalogue_order")}>

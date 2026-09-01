@@ -90,7 +90,7 @@ test("renders the new FST identity, navigation and service-category model", asyn
   assert.equal(response.status, 200);
   const html = await response.text();
   assert.match(html, /<title>FST \| Make the next move workable<\/title>/i);
-  assert.match(html, /Turn ambition into an executable plan\./);
+  assert.match(html, /Accounting, tax, audit and business advisory services\./);
   assert.match(html, /Specialist services\./);
   for (const label of [
     "Management Advisory, Risk &amp; Controls",
@@ -100,12 +100,12 @@ test("renders the new FST identity, navigation and service-category model", asyn
     "Corporate &amp; Administrative Services",
     "Loan &amp; Funding Application Support",
   ]) assert.match(html, new RegExp(label, "i"));
-  assert.match(html, /href="\/book"[^>]*>Book a Meeting</i);
+  assert.match(html, /href="\/book"[^>]*>Book a Scope Call</i);
   assert.match(html, /Services/);
-  assert.match(html, /Organisations/);
-  assert.match(html, /Our Approach/);
+  assert.match(html, /Who We Help/);
+  assert.match(html, /How We Work/);
   assert.match(html, /Insights/);
-  assert.match(html, /AI Agent Team/);
+  assert.match(html, /AI Delivery Team/);
   assert.match(html, /src="\/brand\/fst-logo\.svg"/);
   assert.match(html, /href="\/insights"/i);
   assert.match(html, /src="\/fst-hero\.webp"/);
@@ -147,7 +147,7 @@ test("uses direct WhatsApp actions and removes the generic hero promise overlay"
     const html = await response.text();
     const visible = visibleBodyText(html);
 
-    assert.equal((visible.match(/Chat on WhatsApp/g) || []).length, 2, `${pathname} should show hero and closing WhatsApp actions`);
+    assert.equal((visible.match(/Ask FST on WhatsApp/g) || []).length, 2, `${pathname} should show hero and closing WhatsApp actions`);
     assert.match(html, new RegExp(`href="https://wa\\.me/${whatsapp}"`, "i"));
     assert.doesNotMatch(visible, /Explore services|commercial context|Local scheduling|Professional responsibility confirmed/i);
     assert.doesNotMatch(html, /promise-card|promise-title|promise-rule/i);
@@ -218,9 +218,9 @@ test("uses button actions on jurisdiction services pages without generic footer 
     const visibleText = visibleBodyText(html);
     const expectedWhatsapp = jurisdiction === "rw" ? "250795588248" : "35699711145";
 
-    assert.match(html, /class="primary-button"[^>]*>Explore industry packages</i);
+    assert.match(html, /class="primary-button"[^>]*>See business-type packages</i);
     assert.match(html, new RegExp(`href="https://wa.me/${expectedWhatsapp}"`));
-    assert.match(visibleText, /Chat on WhatsApp/);
+    assert.match(visibleText, /Ask FST on WhatsApp/);
     assert.doesNotMatch(visibleText, /Supporting (?:local and international )?businesses/);
   }
 });
@@ -263,7 +263,7 @@ test("does not expose removed practices or inherited KMFINCO language", async ()
 
 test("honours the annotated homepage copy requirements", async () => {
   const html = await (await render("/")).text();
-  assert.match(html, /href="\/book"[^>]*>Book a Meeting</i);
+  assert.match(html, /href="\/book"[^>]*>Book a Scope Call</i);
   assert.match(html, /Specialist services\./i);
   assert.doesNotMatch(html, /\bdisciplines?\b/i);
   assert.doesNotMatch(html, /One working plan\./i);
@@ -286,7 +286,7 @@ test("uses direct service labels on the services index", async () => {
   assert.match(html, /Audit &amp; Assurance/i);
   assert.match(html, /Taxation/i);
   assert.match(html, /Loan &amp; Funding Application Support/i);
-  assert.match(html, /href="\/services\/catalogue"[^>]*>Browse the Service Catalogue</i);
+  assert.match(html, /href="\/services\/catalogue"[^>]*>Compare services and fees</i);
   assert.doesNotMatch(html, /Six coordinated workstreams|Tax &amp; VAT|Business Planning &amp; Finance Applications|Business Planning &amp; Loan Application Support|Funding Application Services/i);
 });
 
@@ -295,8 +295,8 @@ test("publishes a searchable multi-service catalogue with indicative prices and 
   assert.equal(response.status, 200);
   const html = await response.text();
   assert.match(html, /Service Catalogue &amp; Indicative Fees \| FST/i);
-  assert.match(html, /Choose the work\. See the starting fee\. Build one request\./i);
-  assert.match(html, /Efficient by design/i);
+  assert.match(html, /Compare professional services and indicative starting fees\./i);
+  assert.match(html, /Indicative fees before you enquire\./i);
   assert.doesNotMatch(html, /≈50% less|roughly half/i);
   for (const category of [
     "Audit & assurance",
@@ -322,22 +322,22 @@ test("publishes a searchable multi-service catalogue with indicative prices and 
     "Privacy and cookie policy",
   ]) assert.match(html, new RegExp(service, "i"));
   assert.match(html, /From €100/);
-  assert.match(html, />Clear fees</);
+  assert.match(html, />Starting fees and exclusions</);
   assert.doesNotMatch(html, /Clear [“"]From[”"] fees/);
-  assert.match(html, /Free scope check/i);
+  assert.match(html, /Scope confirmation before work/i);
   assert.doesNotMatch(visibleBodyText(html), /Your FST request|Your request is empty/i);
   assert.doesNotMatch(visibleBodyText(html), /Professional boundaries|The right authority stays attached to the work|Scope and fee notice|Indicative fee notice/i);
   assert.doesNotMatch(html, /50%|roughly half|market provider/i);
   assert.match(html, /contracting provider and responsible professional are confirmed/i);
   const cartSource = await readFile(path.join(root, "app/components/ServiceCatalogue.tsx"), "utf8");
-  assert.match(cartSource, /Order via WhatsApp/);
+  assert.match(cartSource, /Send request on WhatsApp/);
   assert.match(cartSource, /wa\.me\/35699711145|serviceOrderWhatsappUrl/);
   assert.match(cartSource, /Indicative starting total/);
   assert.match(cartSource, /if \(!isRemoving\) \{[\s\S]*?setOrderOpen\(true\)/);
   assert.match(cartSource, /orderTriggerRef\.current = document\.activeElement/);
   assert.match(cartSource, /orderOpen &&/);
-  assert.match(cartSource, />Services</);
-  assert.match(cartSource, />Industry packages</);
+  assert.match(cartSource, />Individual professional services</);
+  assert.match(cartSource, />Monthly packages by business type</);
   assert.match(cartSource, /getSectorPackages\(jurisdiction\)/);
   const packageSource = await readFile(path.join(root, "lib/sector-packages.ts"), "utf8");
   for (const packageLabel of ["Pharmacies", "Shops (hardware, spare-parts & more)", "Restaurants", "Construction", "Self-employed", "Shops", "CSPs"]) {
@@ -407,7 +407,7 @@ test("explicitly serves start-ups, self-employed professionals, SMEs and NGOs", 
 
 test("publishes the FST approach and substantive field notes on direct routes", async () => {
   const about = await (await render("/about")).text();
-  assert.match(about, /The FST approach/i);
+  assert.match(about, /Scope, evidence and review/i);
   assert.match(about, /Working notes for decisions in motion/i);
   assert.match(about, /What a useful internal-control review should leave behind/i);
   assert.match(about, /Building a tax working file that reconciles before filing day/i);
@@ -518,8 +518,8 @@ test("publishes a dedicated internal FST page for every AI agent", async () => {
 
 test("restores the five-agent page and profiles inside the Malta route", async () => {
   const maltaHome = await (await render("/mt")).text();
-  assert.match(maltaHome, /href="\/mt\/ai-agent-team"[^>]*>AI Agent Team</i);
-  assert.match(maltaHome, /href="\/mt\/ai-agent-team"[^>]*>Meet Our AI Agent Team</i);
+  assert.match(maltaHome, /href="\/mt\/ai-agent-team"[^>]*>AI Delivery Team</i);
+  assert.match(maltaHome, /href="\/mt\/ai-agent-team"[^>]*>AI Delivery Team &amp; Workpacks</i);
 
   const response = await render("/mt/ai-agent-team");
   assert.equal(response.status, 200);
@@ -814,10 +814,10 @@ test("service request creates a WhatsApp handoff link for the dedicated catalogu
   );
   assert.match(siteConfigSource, /serviceOrderWhatsappDisplay: "\+35699711145"/);
   assert.match(siteConfigSource, /serviceOrderWhatsappUrl: "https:\/\/wa\.me\/35699711145"/);
-  assert.match(cartSource, /Hello FST, I would like to order the following catalogue items/);
+  assert.match(cartSource, /Hello FST, I would like scope confirmation for these catalogue items/);
   assert.match(cartSource, /encodeURIComponent\(whatsappMessage\)/);
   assert.match(cartSource, /target="_blank"/);
-  assert.match(cartSource, /Order via WhatsApp/);
+  assert.match(cartSource, /Send request on WhatsApp/);
 });
 
 test("native booking validates input and fails safely without credentials", async () => {
@@ -899,12 +899,12 @@ test("publishes complete Malta and Rwanda route families without cross-market co
   assert.match(rwanda, /From (?:RWF|RF|Rwf|FRw|Frw|RFr|R₣)(?:&nbsp;|\s)*3,500/i);
   assert.match(rwanda, /https:\/\/wa\.me\/250795588248/i);
   assert.match(visibleBodyText(rwanda), /\+250795588248/);
-  assert.match(visibleBodyText(rwanda), /Clear starting fees\./i);
-  assert.match(visibleBodyText(rwanda), /Build an itemised order/i);
-  assert.match(visibleBodyText(rwanda), /Every selection and displayed starting fee stays together in one order/i);
-  assert.match(visibleBodyText(rwanda), /Review it in WhatsApp/i);
-  assert.match(visibleBodyText(rwanda), /Receive a confirmed scope/i);
-  assert.match(visibleBodyText(rwanda), /records required, deadline, final fee, taxes or official costs and responsible professional/i);
+  assert.match(visibleBodyText(rwanda), /Indicative fees before you enquire\./i);
+  assert.match(visibleBodyText(rwanda), /Add services to one request/i);
+  assert.match(visibleBodyText(rwanda), /Use Add to request on each relevant package or individual service/i);
+  assert.match(visibleBodyText(rwanda), /Check items and starting total/i);
+  assert.match(visibleBodyText(rwanda), /Send for scope confirmation/i);
+  assert.match(visibleBodyText(rwanda), /required records, timing, final fees, charges and the responsible professional/i);
   assert.doesNotMatch(visibleBodyText(rwanda), /A catalogue selection is a scope request/i);
   assert.doesNotMatch(visibleBodyText(rwanda), /Practical workpacks, priced in RWF/i);
   assert.doesNotMatch(visibleBodyText(rwanda), /Fee basis|per taxpayer profile/i);
@@ -946,7 +946,7 @@ test("keeps visible country copy within the jurisdiction context and approved le
       const otherCountry = jurisdiction === "rw" ? /\b(?:Malta|Maltese)\b/i : /\b(?:Rwanda|Rwandan)\b/i;
       const countryAdjective = jurisdiction === "rw" ? /\bRwandan\b/i : /\bMaltese\b/i;
       const countryMentions = visible.match(activeCountry) || [];
-      assert.ok(countryMentions.length <= 5, `${pathname} should keep country references limited to location and coverage copy`);
+      assert.ok(countryMentions.length <= 6, `${pathname} should keep country references limited to useful service, location and coverage copy`);
       assert.doesNotMatch(visible, countryAdjective, `${pathname} should not repeat country adjectives outside useful local copy`);
       if (suffix !== "/legal-information") {
         assert.doesNotMatch(visible, otherCountry, `${pathname} should not leak the other office location`);
@@ -1020,7 +1020,7 @@ test("connects the Malta service area to the public Gżira address without a ven
 
   assert.match(contact, /Contact FST at Gżira/i);
   assert.doesNotMatch(contact, /SOHO/i);
-  assert.match(contact, /Office · by appointment/i);
+  assert.match(contact, /Gżira meeting location/i);
   assert.match(contact, /Fawwara Building, Triq l-Imsida/i);
   assert.match(service, /"provider":\{"@id":"https:\/\/fst\.ikanisa\.com\/mt#professional-service"\}/i);
   assert.match(service, /"areaServed":\[\{"@type":"Country","name":"Malta"\}\]/i);
@@ -1096,7 +1096,8 @@ test("publishes one add-to-order package card per industry on each main catalogu
       assert.match(visibleCatalogue, /From €135/i);
       assert.match(visibleCatalogue, /From €200/i);
       assert.doesNotMatch(visibleCatalogue, /Restaurant Finance, VAT & Payroll|Self-Employed Finance & Tax|Retail Finance, VAT & Stock|Accounting, Tax & Compliance Outsourcing/i);
-      assert.match(visibleCatalogue, /per client \/ month/i);
+      assert.match(visibleCatalogue, /From €200 per client/i);
+      assert.doesNotMatch(visibleCatalogue, /per client \/ month/i);
       assert.match(visibleCatalogue, /regulatory, KYC and AML\/CFT evidence administration for CSP review/i);
       assert.doesNotMatch(visibleCatalogue, /CSP firm's own|firm's own company/i);
     }
@@ -1106,7 +1107,7 @@ test("publishes one add-to-order package card per industry on each main catalogu
     }
 
     const services = await (await render(`/${jurisdiction}/services`)).text();
-    assert.match(services, new RegExp(`href="/${jurisdiction}/services/catalogue#industry-package-title"[^>]*>Explore industry packages`, "i"));
+    assert.match(services, new RegExp(`href="/${jurisdiction}/services/catalogue#industry-package-title"[^>]*>See business-type packages`, "i"));
   }
 });
 

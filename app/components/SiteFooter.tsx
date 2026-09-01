@@ -17,7 +17,7 @@ export function SiteFooter({ jurisdiction }: { jurisdiction?: JurisdictionCode }
         <BrandLogo />
       </Link>
       <div className="footer-summary">
-        <p>Plans, audits, numbers, obligations and financing work—managed as a practical programme.</p>
+        <p>Accounting, tax, audit, governance, advisory and funding work—scoped, prepared and reviewed through one accountable programme.</p>
         {config?.location && (
           <address className="footer-location">
             <a href={config.location.mapUrl} target="_blank" rel="noreferrer">{config.location.postalLabel}</a>
@@ -26,20 +26,20 @@ export function SiteFooter({ jurisdiction }: { jurisdiction?: JurisdictionCode }
       </div>
       <div className="footer-links">
         <nav aria-label="Footer links">
-          <Link href={path("/services")}>Services</Link>
-          {jurisdiction && <Link href={`${path("/services/catalogue")}#industry-package-title`}>Industry Packages</Link>}
-          <Link href={path("/services/catalogue")}>Service Catalogue</Link>
-          <Link href={path("/who-we-work-with")}>Organisations</Link>
-          <Link href={path("/about")}>Our Approach</Link>
+          <Link href={path("/services")}>Professional Services</Link>
+          {jurisdiction && <Link href={`${path("/services/catalogue")}#industry-package-title`}>Business-Type Packages</Link>}
+          <Link href={path("/services/catalogue")}>Services &amp; Starting Fees</Link>
+          <Link href={path("/who-we-work-with")}>Who We Help</Link>
+          <Link href={path("/about")}>How FST Works</Link>
           {!jurisdiction && <Link href="/insights">Insights</Link>}
-          {jurisdiction !== "rw" && <Link href={path("/ai-agent-team")}>Meet Our AI Agent Team</Link>}
-          <Link href={path("/contact")}>Get in touch</Link>
+          {jurisdiction !== "rw" && <Link href={path("/ai-agent-team")}>AI Delivery Team &amp; Workpacks</Link>}
+          <Link href={path("/contact")}>Send a Secure Enquiry</Link>
           <Link href={path("/legal-information")}>Legal information</Link>
           <Link href={path("/privacy")}>Privacy & cookies</Link>
           <Link href={path("/terms")}>Site terms</Link>
         </nav>
         <div className="footer-contact">
-          {whatsappUrl && <TrackedLink href={whatsappUrl} event="contact_whatsapp_click" target="_blank" rel="noreferrer">WhatsApp · {whatsappDisplay}</TrackedLink>}
+          {whatsappUrl && <TrackedLink href={whatsappUrl} event="contact_whatsapp_click" target="_blank" rel="noreferrer">WhatsApp enquiries · {whatsappDisplay}</TrackedLink>}
           <PrimaryCta jurisdiction={jurisdiction} />
           {siteConfig.linkedInUrl && <TrackedLink href={siteConfig.linkedInUrl} event="linkedin_click" target="_blank" rel="noreferrer">LinkedIn</TrackedLink>}
         </div>

@@ -100,21 +100,21 @@ export default async function JurisdictionContactPage({ params, searchParams }: 
       <SiteHeader jurisdiction={config.code} />
       <section className="contact-page section-shell jurisdiction-contact-page">
         <div className="contact-page-intro">
-          <h1>Tell us what needs to move.</h1>
-          <p>Describe the decision, deadline and current evidence. The first response will confirm fit, information needs and the responsible delivery route.</p>
+          <h1>Request a scope review for a service, filing or business project.</h1>
+          <p>Describe the required deliverable, deadline and records already available. FST will confirm fit, missing information, indicative scope and the responsible delivery route.</p>
           <div className="contact-options" aria-label="Direct contact options">
-            {config.whatsappUrl && <TrackedLink href={config.whatsappUrl} event="contact_whatsapp_click" target="_blank" rel="noreferrer"><span>WhatsApp</span><strong>{config.whatsappDisplay}</strong></TrackedLink>}
-            {config.contactEmail && <a href={`mailto:${config.contactEmail}`}><span>Formal enquiries</span><strong>{config.contactEmail}</strong></a>}
-            {config.location && <a href={config.location.mapUrl} target="_blank" rel="noreferrer"><span>Office · by appointment</span><strong>{config.location.postalLabel}</strong></a>}
-            <div><span>Scheduling</span><strong>Local business hours</strong></div>
+            {config.whatsappUrl && <TrackedLink href={config.whatsappUrl} event="contact_whatsapp_click" target="_blank" rel="noreferrer"><span>WhatsApp enquiries</span><strong>{config.whatsappDisplay}</strong></TrackedLink>}
+            {config.contactEmail && <a href={`mailto:${config.contactEmail}`}><span>Email enquiries</span><strong>{config.contactEmail}</strong></a>}
+            {config.location && <a href={config.location.mapUrl} target="_blank" rel="noreferrer"><span>Gżira meeting location</span><strong>{config.location.postalLabel}</strong></a>}
+            <div><span>Response and meeting hours</span><strong>Local business hours</strong></div>
           </div>
           <p className="contact-legal-note">Do not send confidential client records through the first-contact form. Read the <a href={marketPath(config.code, "/legal-information")}>legal and provider information</a> first.</p>
           <ResponsiveImage src="/fst-consultation.webp" alt="A private first conversation focused on a business decision" sizes="(max-width: 900px) 100vw, 60vw" loading="lazy" decoding="async" />
         </div>
         <aside className="contact-page-form" aria-labelledby="secure-request-title">
-          <p className="eyebrow">Secure request</p>
-          <h2 id="secure-request-title">Start a secure request.</h2>
-          <p>The correct routing and any selected catalogue services stay attached to the request.</p>
+          <p className="eyebrow">Confidential scope enquiry</p>
+          <h2 id="secure-request-title">Send the deliverable, deadline and available records.</h2>
+          <p>Selected catalogue services and contact details stay attached to the request.</p>
           <EnquiryForm jurisdiction={config.code} initialServiceIds={initialServiceIds} initialServiceLabels={initialServiceLabels} packageContext={packageContext} whatsappUrl={config.whatsappUrl} contactEmail={config.contactEmail} />
         </aside>
       </section>

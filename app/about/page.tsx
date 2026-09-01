@@ -12,26 +12,26 @@ import { BreadcrumbJsonLd } from "../components/JsonLd";
 import { fieldNotes } from "../../lib/field-notes";
 import { siteConfig } from "../../lib/site-config";
 
-export const metadata = pageMetadata({ title: "Our Advisory Approach", description: "How FST combines senior attention, connected expertise and implementation-focused advice, with evidence-led field notes for management and finance.", path: "/about" });
+export const metadata = pageMetadata({ title: "How FST Scopes, Prepares and Reviews Work", description: "How FST scopes multidisciplinary professional services, controls evidence and confirms professional review and approval responsibilities.", path: "/about" });
 
 export default function AboutPage() {
   return (
     <main id="main-content" tabIndex={-1}>
-      <BreadcrumbJsonLd items={[{ name: "Home", path: "/" }, { name: "Our Approach", path: "/about" }]} />
+      <BreadcrumbJsonLd items={[{ name: "Home", path: "/" }, { name: "How FST Works", path: "/about" }]} />
       <SiteHeader />
       <section className="subpage-hero accent-cobalt">
         <div className="subpage-copy">
-          <p className="eyebrow">The FST approach</p>
-          <h1>Your question. The relevant expertise.</h1>
-          <p>We assemble management, audit, assurance, risk, tax, accounting, corporate and finance expertise around the result you need to achieve.</p>
+          <p className="eyebrow">Scope, evidence and review</p>
+          <h1>How FST scopes, prepares and reviews multidisciplinary work.</h1>
+          <p>FST matches each request to defined accounting, tax, audit, governance, advisory or funding deliverables, required evidence and the responsible professional route.</p>
           <PrimaryCta className="primary-button" />
         </div>
         <div className="subpage-image-wrap"><ResponsiveImage src="/fst-collaboration.webp" alt="A multidisciplinary FST team working through a client priority" className="subpage-image" sizes="(max-width: 900px) 100vw, 52vw" loading="eager" fetchPriority="high" decoding="async" /></div>
       </section>
 
       <section className="about-principles section-shell">
-        <p className="section-index">How the work runs</p>
-        <h2>Understand the setting. Join the evidence. Move the decision.</h2>
+        <p className="section-index">From enquiry to reviewed deliverable</p>
+        <h2>Define the scope, control the evidence and confirm each approval owner.</h2>
         <SectionVisual src="/fst-management.webp" alt="A facilitated workshop connecting evidence, owners and next actions" className="about-principles-visual" />
         <div className="principle-grid">
           <article><span className="item-icon principle-icon" aria-hidden="true"><Binoculars size={21} weight="regular" /></span><h3>Read the whole situation</h3><p>We establish the decision, constraints, owners and available evidence before proposing a workstream.</p></article>

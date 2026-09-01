@@ -17,21 +17,21 @@ export default function ContactPage() {
       <SiteHeader />
       <section className="contact-page section-shell">
         <div className="contact-page-intro">
-          <p className="eyebrow">Start with the issue</p>
-          <h1>Tell us what needs to move.</h1>
-          <p>Use WhatsApp or the meeting route. We will use the first conversation to identify the right FST service and a practical next step.</p>
+          <p className="eyebrow">Service and project enquiries</p>
+          <h1>Request a scope review for a service, filing or business project.</h1>
+          <p>Describe the required deliverable, deadline and records already available. FST will confirm fit, missing information and the responsible delivery route.</p>
           <div className="contact-options" aria-label="Direct contact options">
             <TrackedLink href={siteConfig.whatsappUrl} event="contact_whatsapp_click" target="_blank" rel="noreferrer"><span>WhatsApp · general enquiries</span><strong>{siteConfig.whatsappDisplay}</strong></TrackedLink>
-            {siteConfig.contactEmail && <a href={`mailto:${siteConfig.contactEmail}`}><span>Formal enquiries</span><strong>{siteConfig.contactEmail}</strong></a>}
+            {siteConfig.contactEmail && <a href={`mailto:${siteConfig.contactEmail}`}><span>Email enquiries</span><strong>{siteConfig.contactEmail}</strong></a>}
             {siteConfig.registeredAddress && <div><span>Registered address</span><strong>{siteConfig.registeredAddress}</strong></div>}
           </div>
           <p className="contact-legal-note">Catalogue requests use a separate service-request channel at {siteConfig.serviceOrderWhatsappDisplay}. See <Link href="/legal-information">legal and professional-provider information</Link> before sending confidential material.</p>
           <ResponsiveImage src="/fst-consultation.webp" alt="A private first conversation with an FST adviser" sizes="(max-width: 900px) 100vw, 60vw" loading="lazy" decoding="async" />
         </div>
         <aside className="contact-page-form contact-booking-card" aria-labelledby="contact-booking-title">
-          <p className="eyebrow">Schedule a first discussion</p>
-          <h2 id="contact-booking-title">Reserve a focused working session.</h2>
-          <p>Select the most relevant topic and prepare a calendar invitation for the time you choose.</p>
+          <p className="eyebrow">Book a scope call</p>
+          <h2 id="contact-booking-title">Discuss the required service, deadline and available records.</h2>
+          <p>Select the closest service topic and prepare a calendar invitation for the time you choose.</p>
           <PrimaryCta className="primary-button" />
         </aside>
       </section>

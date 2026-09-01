@@ -103,10 +103,10 @@ export default function Home() {
 
       <section className="hero" id="top">
         <div className="hero-copy">
-          <h1>Turn ambition into an executable plan.</h1>
+          <h1>Accounting, tax, audit and business advisory services.</h1>
           <p className="hero-lede">
-            FST brings management, audit, finance, tax, governance and loan and
-            funding application support into an accountable programme of work.
+            FST connects accounting, reporting, tax, audit, governance, management
+            advisory and funding support in one accountable programme of work.
           </p>
           <PrimaryCta className="primary-button" />
         </div>
@@ -153,8 +153,8 @@ export default function Home() {
 
       <section className="expertise-section section-shell" aria-labelledby="expertise-title">
         <div className="section-heading section-heading-no-index">
-          <h2 id="expertise-title">Specialists who stay in the same room.</h2>
-          <p>Each workstream has a clear purpose, but the assumptions, deadlines and evidence are managed together.</p>
+          <h2 id="expertise-title">Accounting, tax, audit, corporate, advisory and funding specialists.</h2>
+          <p>Each workstream has defined deliverables while assumptions, deadlines, evidence and review points stay connected.</p>
         </div>
         <SectionVisual src="/fst-accounting.webp" alt="An organised finance workspace connecting records, reports and decisions" className="section-banner-visual" />
         <div className="expertise-card-grid" aria-label="FST service lines">
@@ -197,7 +197,7 @@ export default function Home() {
 
       <section className="audience-section section-shell" id="who-we-work-with" aria-labelledby="audience-title">
         <div className="section-heading compact section-heading-no-index">
-          <h2 id="audience-title">Built around the people carrying the decision.</h2>
+          <h2 id="audience-title">Support for founders, finance teams, SMEs, NGOs and international programmes.</h2>
         </div>
         <SectionVisual src="/fst-operations.webp" alt="A business owner and adviser reviewing operations on a production floor" className="section-banner-visual" />
         <div className="audience-list">

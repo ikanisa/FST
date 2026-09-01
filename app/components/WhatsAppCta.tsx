@@ -10,7 +10,7 @@ type WhatsAppCtaProps = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href" | "
   label?: string;
 };
 
-export function WhatsAppCta({ jurisdiction, label = "Chat on WhatsApp", className = "whatsapp-button", ...props }: WhatsAppCtaProps) {
+export function WhatsAppCta({ jurisdiction, label = "Ask FST on WhatsApp", className = "whatsapp-button", ...props }: WhatsAppCtaProps) {
   const config = jurisdictionConfig[jurisdiction];
 
   return (

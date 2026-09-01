@@ -126,7 +126,7 @@ export function ServicePage({
 
       <section className="service-intro section-shell">
         <div className="service-intro-copy">
-          <p className="section-index">The working brief</p>
+          <p className="section-index">Scope and purpose</p>
           <h2>{introduction}</h2>
         </div>
         <SectionVisual src={sectionImages.intro.src} alt={sectionImages.intro.alt} className="service-intro-visual" />
@@ -177,8 +177,8 @@ export function ServicePage({
 
       <section className={`service-outcomes section-shell accent-${accent}`}>
         <div>
-          <p className="section-index">What the engagement should produce</p>
-          <h2>Work that management can use and evidence can support.</h2>
+          <p className="section-index">Expected deliverables and decisions</p>
+          <h2>Usable deliverables, source-linked evidence and named review points.</h2>
         </div>
         <ul>
           {outcomes.map((outcome) => <li key={outcome}>{outcome}</li>)}
@@ -188,9 +188,9 @@ export function ServicePage({
 
       <section className="subpage-cta section-shell">
         <div className="subpage-cta-copy">
-          <p className="section-index">Start with the live issue</p>
-          <h2>Share the decision, deadline or funding route in front of you.</h2>
-          <p>FST will define the right workstream, the information needed and a practical route forward.</p>
+          <p className="section-index">Request a scope review</p>
+          <h2>Send the service, deadline and records already available.</h2>
+          <p>FST will confirm the deliverables, information required, review sequence and responsible professional route.</p>
           <PrimaryCta jurisdiction={jurisdiction} className="primary-button" />
         </div>
         <SectionVisual src={sectionImages.cta.src} alt={sectionImages.cta.alt} className="subpage-cta-visual" />

@@ -15,19 +15,19 @@ export const metadata = pageMetadata({
 export default function BookPage() {
   return (
     <main id="main-content" tabIndex={-1}>
-      <BreadcrumbJsonLd items={[{ name: "Home", path: "/" }, { name: "Book a Meeting", path: "/book" }]} />
+      <BreadcrumbJsonLd items={[{ name: "Home", path: "/" }, { name: "Book a Scope Call", path: "/book" }]} />
       <SiteHeader />
       <section className="booking-page section-shell">
         <div className="booking-intro">
           <p className="eyebrow">FST scheduling desk</p>
-          <h1>Set aside time for the issue in front of you.</h1>
-          <p>Request a focused working conversation. The selected duration and slot are checked before a calendar invitation and meeting link are created.</p>
+          <h1>Request a 30- or 60-minute FST scope call.</h1>
+          <p>Choose a time to discuss the required service, deliverable, deadline and records. The selected slot is checked before a calendar invitation and meeting link are created.</p>
           <div className="booking-confirmations">
             <span>Requested slot checked</span>
             <span>Meeting link added when confirmed</span>
             <span>Both parties receive the invitation</span>
           </div>
-          <p className="booking-alternative">Need a shorter first contact? <TrackedLink href={siteConfig.whatsappUrl} event="contact_whatsapp_click" target="_blank" rel="noreferrer">Open the FST WhatsApp channel</TrackedLink>.</p>
+          <p className="booking-alternative">Need only a short first answer? <TrackedLink href={siteConfig.whatsappUrl} event="contact_whatsapp_click" target="_blank" rel="noreferrer">Ask FST on WhatsApp</TrackedLink>.</p>
         </div>
         <div className="booking-panel"><BookingForm /></div>
       </section>

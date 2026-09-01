@@ -57,14 +57,14 @@ const clientGroups = [
 export default function WhoWeWorkWithPage() {
   return (
     <main id="main-content" tabIndex={-1}>
-      <BreadcrumbJsonLd items={[{ name: "Home", path: "/" }, { name: "Organisations", path: "/who-we-work-with" }]} />
+      <BreadcrumbJsonLd items={[{ name: "Home", path: "/" }, { name: "Who We Help", path: "/who-we-work-with" }]} />
       <SiteHeader />
 
       <section className="client-hero">
         <div className="client-hero-copy">
-          <p className="eyebrow">Organisations we support</p>
-          <h1>Support matched to the pressure you are under.</h1>
-          <p>The service mix changes with the situation. The working method stays consistent: establish the decision, join the evidence and agree the route forward.</p>
+          <p className="eyebrow">Clients and organisations</p>
+          <h1>Support for founders, SMEs, finance teams, NGOs and programmes.</h1>
+          <p>FST matches accounting, tax, audit, governance, advisory and funding work to the organisation, required deliverable and deadline.</p>
           <div className="client-hero-actions">
             <PrimaryCta className="primary-button" />
           </div>
@@ -72,16 +72,16 @@ export default function WhoWeWorkWithPage() {
         <div className="client-hero-visual">
           <ResponsiveImage src="/fst-collaboration.webp" alt="A diverse advisory team working alongside organisational leaders" sizes="(max-width: 900px) 100vw, 60vw" loading="eager" fetchPriority="high" decoding="async" />
           <aside>
-            <strong>A joined-up working file.</strong>
-            <span>A shared objective, named owners and evidence that can be reviewed.</span>
+            <strong>Scope, evidence and approval owners in one file.</strong>
+            <span>Named deliverables, records, deadlines and review points stay connected.</span>
           </aside>
         </div>
       </section>
 
       <section className="client-groups section-shell" aria-labelledby="client-groups-title">
         <div className="client-groups-heading">
-          <h2 id="client-groups-title">Support for organisations at every stage.</h2>
-          <p>We scope the work around the organisation, the decision and the evidence required—from first setup and growth to funded programmes and institutional accountability.</p>
+          <h2 id="client-groups-title">Choose the organisation profile closest to yours.</h2>
+          <p>Each profile shows the services and evidence priorities most often required at that stage.</p>
         </div>
         <div className="client-groups-grid">
           {clientGroups.map((group) => (
@@ -101,9 +101,9 @@ export default function WhoWeWorkWithPage() {
 
       <section className="relationship-cta section-shell" aria-labelledby="relationship-title">
         <div className="relationship-cta-copy">
-          <p className="eyebrow">Begin with the decision</p>
-          <h2 id="relationship-title">Describe the outcome, not the service code.</h2>
-          <p>Tell us what must be decided, financed, filed, controlled or delivered. We will map the relevant FST workstreams around it.</p>
+          <p className="eyebrow">Request a scope review</p>
+          <h2 id="relationship-title">Tell us what must be filed, financed, reported, controlled or decided.</h2>
+          <p>Include the deadline and records already available; FST will identify the relevant service and review route.</p>
           <PrimaryCta className="primary-button" />
         </div>
         <ResponsiveImage src="/fst-consultation.webp" alt="A private first meeting focused on a business outcome" sizes="(max-width: 900px) 100vw, 45vw" loading="lazy" decoding="async" />

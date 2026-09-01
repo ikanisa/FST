@@ -1,43 +1,36 @@
-# AI Agent Team Section — Design QA
+# Design QA — Malta AI Delivery Team
 
-## Evidence
+## Comparison inputs
 
-- Source visual truth: `/Users/jeanbosco/.codex/visualizations/2026/09/01/01a05ca8-6994-7a03-ad6d-68989b1a9b3b/fst-ai-team-section-before.png`
-- Implementation: `http://127.0.0.1:3000/mt/ai-agent-team`
-- Implementation screenshot: `/Users/jeanbosco/.codex/visualizations/2026/09/01/01a05ca8-6994-7a03-ad6d-68989b1a9b3b/fst-ai-team-section-final.png`
-- Side-by-side comparison: `/Users/jeanbosco/.codex/visualizations/2026/09/01/01a05ca8-6994-7a03-ad6d-68989b1a9b3b/fst-ai-team-section-comparison.png`
-- Viewport and pixels: source and implementation are both 1327 × 841 CSS px at browser density 1; no density normalization was required.
-- State: Malta AI Agent Team page, portfolio summary and all five agent cards, no modal or hover state.
+- Selected source concept: `/Users/jeanbosco/.codex/generated_images/01a05ca8-6994-7a03-ad6d-68989b1a9b3b/exec-d2f99c5e-10d8-4a0e-a599-c233ce1ef623.png`
+- Implemented route: `http://127.0.0.1:3000/mt/ai-agent-team`
+- Desktop capture: `/Users/jeanbosco/.codex/visualizations/2026/09/01/01a05ca8-6994-7a03-ad6d-68989b1a9b3b/fst-ai-team-premium/implementation-desktop-v1.png`
+- Desktop specialist-region capture: `/Users/jeanbosco/.codex/visualizations/2026/09/01/01a05ca8-6994-7a03-ad6d-68989b1a9b3b/fst-ai-team-premium/implementation-agents-v1.png`
+- Mobile captures: `/Users/jeanbosco/.codex/visualizations/2026/09/01/01a05ca8-6994-7a03-ad6d-68989b1a9b3b/fst-ai-team-premium/implementation-mobile-v1.png`, `/Users/jeanbosco/.codex/visualizations/2026/09/01/01a05ca8-6994-7a03-ad6d-68989b1a9b3b/fst-ai-team-premium/implementation-mobile-agents-v1.png`, `/Users/jeanbosco/.codex/visualizations/2026/09/01/01a05ca8-6994-7a03-ad6d-68989b1a9b3b/fst-ai-team-premium/implementation-mobile-card-v1.png`
 
-## Full-view comparison
+## Test state
 
-The redesigned section preserves the established FST grid, typography, portraits, content, border treatment and workpack chips. The requested ratios are now the dominant card-level signal: `35/70`, `27/55`, `22/43`, `28/56` and `17/34`. A pale-blue capacity band separates each ratio from longer descriptive copy, and the previously arrow-only profile action now has a visible `Profile` label.
+- Desktop viewport override: 1440 × 1100; captured output: 1425 × 1089 after browser chrome and scrollbar allocation.
+- Mobile viewport override: 390 × 844; document width: 375; no page-level horizontal overflow.
+- Page state: production build, initial route load, no cookie banner or modal.
+- Carousel state: Patrick selected on initial load; next-control changes the active specialist to Sofia and scrolls the rail at both desktop and mobile widths.
+- Full view evidence: desktop hero, metrics and workstream heading; focused evidence: desktop carousel, mobile hero, mobile metrics, and mobile specialist card.
 
-## Focused-region comparison
+## Fidelity review
 
-The card header, capacity row and workpack footer were compared at the same desktop viewport. The final capacity band improves separation between identity, quantified capacity and service detail without introducing new assets or visual tokens. Long professional-role labels remain subordinate and fit within their card columns without horizontal overflow.
+| Surface | Result | Evidence |
+| --- | --- | --- |
+| Typography | Pass | Editorial display face, compact uppercase labels and restrained sans-serif body hierarchy match the selected premium direction while retaining approved FST copy. |
+| Spacing and layout | Pass | Two-column hero, curved media reveal, overlapping metric band and partially revealed horizontal specialist rail preserve the concept's main composition. Mobile collapses to one column without overflow. |
+| Colour | Pass | The approved four-colour campaign system is used as light tints and thin accents: `#6ADD6C`, `#FE7148`, `#D4838F`, `#8186EE`. Navy and ivory remain the dominant professional surfaces. |
+| Imagery | Pass | Existing FST team image, approved portraits and FST identity assets are retained with no stock-asset substitution. |
+| Copy and data | Pass | All five agents, routes, workstream labels, workflow/deliverable counts, `129/258` capacity and `102/102` control gates remain intact. |
+| Motion | Pass | Hero/media entrance, ambient colour drift, view-triggered section reveals, hover transitions, smooth carousel motion and an explicit reduced-motion fallback are present. |
 
-## Required fidelity surfaces
+## Findings and iteration history
 
-- Fonts and typography: existing Manrope and Cormorant Garamond families are preserved. Ratios use Manrope for clearer numerals; names and portfolio totals retain the display serif.
-- Spacing and layout: the original three-over-two grid remains. Capacity bands use consistent padding and alignment; workpack footers stay bottom-aligned.
-- Colors and tokens: only existing `--sky`, `--cobalt`, `--ink` and `--ink-soft` tokens are used.
-- Image quality: all five existing portraits retain their source, crop, radius and resolution treatment.
-- Copy and content: `AVG · OPT` was replaced with the requested slash notation. `Average / optimised` and the profession-specific equivalent remain visible as the explanatory label.
-
-## Interaction and technical checks
-
-- Matthew's visible `Profile` action opened `/mt/ai-agent-team/matthew` and returned successfully.
-- No horizontal overflow was detected at the captured desktop viewport.
-- Browser console: no warnings or errors.
-- Production build, ESLint, `git diff --check` and all 55 tests passed.
-
-## Comparison history
-
-1. P2: ratios and long role labels competed on one text line; the top summary also mixed serif numerals with `AVG/OPT` labels. Fixed by using the compact slash ratios and a dedicated capacity band.
-2. P2: agent-profile affordance was an unlabeled arrow. Fixed by exposing the `Profile` label while retaining the existing route and arrow icon.
-3. P3: the first band iteration used display-serif numerals, which reduced ratio legibility. Fixed by switching card ratios to Manrope and preserving the serif only for portfolio totals.
-
-No actionable P0, P1 or P2 findings remain in the captured state.
+1. P2 — The carousel initially announced Sofia because the active-card calculation used the viewport centre while Patrick was visibly leading the rail. Corrected the calculation to use the rail's leading edge, then repeated desktop and mobile interaction checks.
+2. No remaining P0, P1 or P2 visual defects were observed in the recorded desktop and mobile states.
+3. Browser console check after interaction returned no warnings or errors.
 
 final result: passed

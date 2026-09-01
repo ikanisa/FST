@@ -8,12 +8,12 @@ import { MagnifyingGlass } from "@phosphor-icons/react/dist/ssr/MagnifyingGlass"
 import { NotePencil } from "@phosphor-icons/react/dist/ssr/NotePencil";
 import { ShieldCheck } from "@phosphor-icons/react/dist/ssr/ShieldCheck";
 import { UserFocus } from "@phosphor-icons/react/dist/ssr/UserFocus";
-import Link from "next/link";
 import { aiAgents } from "../../lib/ai-agents";
 import { jurisdictionConfig, marketPath, type JurisdictionCode } from "../../lib/jurisdictions";
 import { pageMetadata, siteUrl } from "../../lib/seo";
 import { siteConfig } from "../../lib/site-config";
 import { BreadcrumbJsonLd, JsonLd } from "../components/JsonLd";
+import { AiAgentShowcase } from "../components/AiAgentShowcase";
 import { PrimaryCta } from "../components/PrimaryCta";
 import { ResponsiveImage } from "../components/ResponsiveImage";
 import { SiteFooter } from "../components/SiteFooter";
@@ -116,7 +116,7 @@ export function AiAgentTeamContent({ jurisdiction }: { jurisdiction?: Jurisdicti
   const whatsappUrl = jurisdiction ? jurisdictionConfig[jurisdiction].whatsappUrl : siteConfig.whatsappUrl;
 
   return (
-    <main id="main-content" tabIndex={-1}>
+    <main id="main-content" className="ai-team-page" tabIndex={-1}>
       <BreadcrumbJsonLd
         items={[
           { name: "Home", path: jurisdiction ? marketPath(jurisdiction) : "/" },
@@ -156,6 +156,10 @@ export function AiAgentTeamContent({ jurisdiction }: { jurisdiction?: Jurisdicti
 
       <section className="ai-team-hero" aria-labelledby="ai-team-title">
         <div className="ai-team-hero-copy">
+          <span className="ai-team-kicker">
+            <img src="/brand/fst-mark.svg" alt="" width="20" height="20" aria-hidden="true" />
+            Governed AI delivery
+          </span>
           <h1 id="ai-team-title">Meet our AI agent team.</h1>
           <p>
             FST combines experienced professionals with IKANISA&apos;s
@@ -163,7 +167,18 @@ export function AiAgentTeamContent({ jurisdiction }: { jurisdiction?: Jurisdicti
             workpacks and faster first drafts—while people keep every
             judgement and approval.
           </p>
-          <PrimaryCta jurisdiction={jurisdiction} className="primary-button" />
+          <div className="ai-team-hero-actions">
+            <PrimaryCta jurisdiction={jurisdiction} className="primary-button" />
+            <TrackedLink
+              href={whatsappUrl}
+              event="contact_whatsapp_click"
+              target="_blank"
+              rel="noreferrer"
+            >
+              WhatsApp FST
+              <ArrowRight size={16} weight="regular" aria-hidden="true" />
+            </TrackedLink>
+          </div>
         </div>
         <div className="ai-team-hero-media">
           <ResponsiveImage
@@ -175,6 +190,43 @@ export function AiAgentTeamContent({ jurisdiction }: { jurisdiction?: Jurisdicti
             decoding="async"
           />
         </div>
+      </section>
+
+      <section className="ai-premium-stats section-shell" aria-label="AI agent portfolio coverage">
+        <dl className="ai-portfolio-stats">
+          <div>
+            <dt>Governed workflows</dt>
+            <dd>{portfolioTotals.workflows}</dd>
+          </div>
+          <div>
+            <dt>Defined deliverables</dt>
+            <dd>{portfolioTotals.deliverables}</dd>
+          </div>
+          <div>
+            <dt>Senior-equivalent capacity</dt>
+            <dd>{portfolioTotals.averageCapacity}/{portfolioTotals.optimisedCapacity}</dd>
+          </div>
+          <div>
+            <dt>Controlled gates</dt>
+            <dd>102/102</dd>
+          </div>
+        </dl>
+        <p className="ai-capacity-note">
+          Capacity figures are planning equivalents based on defined workflow
+          coverage—not staff headcount, professional authority or guaranteed throughput.
+        </p>
+      </section>
+
+      <section className="ai-agents section-shell" aria-labelledby="ai-agents-title">
+        <div className="ai-section-heading">
+          <h2 id="ai-agents-title">Five specialist workstreams. One governed delivery bench.</h2>
+          <p>
+            Each agent prepares source-linked workpacks in a defined professional
+            domain. FST reviews the evidence, resolves exceptions and keeps every
+            decision, signature and external action with an authorised person.
+          </p>
+        </div>
+        <AiAgentShowcase agents={aiAgents} teamPath={teamPath} />
       </section>
 
       <section className="ai-pressure section-shell" aria-labelledby="ai-pressure-title">
@@ -259,74 +311,6 @@ export function AiAgentTeamContent({ jurisdiction }: { jurisdiction?: Jurisdicti
               </article>
             );
           })}
-        </div>
-      </section>
-
-      <section className="ai-agents section-shell" aria-labelledby="ai-agents-title">
-        <div className="ai-section-heading">
-          <h2 id="ai-agents-title">Five specialist workstreams. One governed delivery bench.</h2>
-          <p>
-            Each agent prepares source-linked workpacks in a defined professional
-            domain. FST reviews the evidence, resolves exceptions and keeps every
-            decision, signature and external action with an authorised person.
-          </p>
-        </div>
-        <dl className="ai-portfolio-stats" aria-label="AI agent portfolio coverage">
-          <div>
-            <dt>Governed workflows</dt>
-            <dd>{portfolioTotals.workflows}</dd>
-          </div>
-          <div>
-            <dt>Defined deliverables</dt>
-            <dd>{portfolioTotals.deliverables}</dd>
-          </div>
-          <div>
-            <dt>Senior-equivalent capacity</dt>
-            <dd>{portfolioTotals.averageCapacity}/{portfolioTotals.optimisedCapacity}</dd>
-          </div>
-          <div>
-            <dt>Controlled gates</dt>
-            <dd>102/102</dd>
-          </div>
-        </dl>
-        <p className="ai-capacity-note">
-          Capacity figures are planning equivalents based on defined workflow
-          coverage—not staff headcount, professional authority or guaranteed throughput.
-        </p>
-        <div className="ai-agent-list">
-          {aiAgents.map((agent) => (
-            <article className="ai-agent-row" key={agent.name}>
-              <img src={agent.image} alt={`${agent.name}, FST ${agent.practice} AI agent`} width="128" height="128" loading="lazy" decoding="async" />
-              <div className="ai-agent-details">
-                <div className="ai-agent-intro">
-                  <div>
-                    <span>{agent.practice}</span>
-                    <h3>{agent.name}</h3>
-                    <small>{agent.workflowCount} workflows · {agent.deliverableCount} deliverables</small>
-                  </div>
-                  <Link href={`${teamPath}/${agent.slug}`} aria-label={`Meet ${agent.name} on FST`}>
-                    Profile
-                    <ArrowRight size={16} weight="regular" aria-hidden="true" />
-                  </Link>
-                </div>
-                <div className="ai-agent-capacity" aria-label={`${agent.name} senior-equivalent planning capacity`}>
-                  <strong>{agent.averageCapacity}/{agent.optimisedCapacity}</strong>
-                  <span>
-                    <b>Average / optimised</b>
-                    {" "}
-                    {agent.capacityRole}
-                  </span>
-                </div>
-                <p>{agent.description}</p>
-              </div>
-              <div className="ai-agent-workpack">
-                <strong>{agent.workpackName}</strong>
-                <ul aria-label={`${agent.name} workpack outputs`}>
-                  {agent.workpackOutputs.map((output) => <li key={output}>{output}</li>)}
-                </ul>
-              </div>
-            </article>
-          ))}
         </div>
       </section>
 

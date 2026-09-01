@@ -24,24 +24,24 @@ export default async function JurisdictionAboutPage({ params }: PageProps) {
   if (!config) notFound();
   return (
     <main id="main-content" tabIndex={-1}>
-      <BreadcrumbJsonLd items={[{ name: "Home", path: marketPath(config.code) }, { name: "Our Approach", path: marketPath(config.code, "/about") }]} />
+      <BreadcrumbJsonLd items={[{ name: "Home", path: marketPath(config.code) }, { name: "How FST Works", path: marketPath(config.code, "/about") }]} />
       <SiteHeader jurisdiction={config.code} />
       <section className="subpage-hero accent-cobalt">
-        <div className="subpage-copy"><h1>Your question. The relevant expertise. One accountable route.</h1><p>We assemble management, finance, tax, governance, assurance-readiness and funding expertise around the result, evidence and professional responsibility required.</p><PrimaryCta jurisdiction={config.code} className="primary-button" /></div>
+        <div className="subpage-copy"><h1>How FST scopes, prepares and reviews multidisciplinary work.</h1><p>FST matches each request to defined accounting, tax, audit, governance, advisory or funding deliverables, required evidence and the responsible professional route.</p><PrimaryCta jurisdiction={config.code} className="primary-button" /></div>
         <div className="subpage-image-wrap"><ResponsiveImage src={config.visuals.collaboration} alt="A multidisciplinary team working through a client priority" className="subpage-image" sizes="(max-width: 900px) 100vw, 52vw" loading="eager" fetchPriority="high" decoding="async" /></div>
       </section>
       <section className="about-principles section-shell">
-        <p className="section-index">How the work runs</p><h2>Understand the setting. Join the evidence. Move the decision.</h2>
+        <p className="section-index">From enquiry to reviewed deliverable</p><h2>Define the scope, control the evidence and confirm each approval owner.</h2>
         <SectionVisual src={config.visuals.management} alt="A workshop connecting evidence, owners and next actions" className="about-principles-visual" />
         <div className="principle-grid">
-          <article><span className="item-icon principle-icon" aria-hidden="true"><Binoculars size={21} /></span><h3>Route automatically</h3><p>The applicable service, pricing, contact and professional controls are attached before content or workflow decisions are made.</p></article>
-          <article><span className="item-icon principle-icon" aria-hidden="true"><CirclesThreePlus size={21} /></span><h3>Keep one controlled file</h3><p>Assumptions, records, sources, reviews, approvals and unresolved matters remain connected through delivery.</p></article>
-          <article><span className="item-icon principle-icon" aria-hidden="true"><Target size={21} /></span><h3>Leave an executable route</h3><p>Outputs identify the owner, deadline, evidence, professional boundary and next review point.</p></article>
+          <article><span className="item-icon principle-icon" aria-hidden="true"><Binoculars size={21} /></span><h3>Match the request to a service and professional route</h3><p>The applicable scope, pricing, records and professional controls are identified before work begins.</p></article>
+          <article><span className="item-icon principle-icon" aria-hidden="true"><CirclesThreePlus size={21} /></span><h3>Keep sources, workpapers and review points in one file</h3><p>Assumptions, records, sources, reviews, approvals and unresolved matters remain connected through delivery.</p></article>
+          <article><span className="item-icon principle-icon" aria-hidden="true"><Target size={21} /></span><h3>Name the deliverable, deadline and approval owner</h3><p>Each output identifies its owner, due date, supporting evidence, professional boundary and next review point.</p></article>
         </div>
       </section>
       <section className="about-story section-shell">
         <div className="about-story-image"><ResponsiveImage src={config.visuals.international} alt="A cross-functional team coordinating delivery and accountability" sizes="(max-width: 720px) 100vw, 50vw" loading="lazy" decoding="async" /></div>
-        <div><p className="section-index">Delivery governance</p><h2>Shared standards without cross-route leakage.</h2><p>FST reuses its design system, security controls and delivery methods. Services, claims, pricing, legal text, contacts, calendars and evidence expectations remain owned by the active route.</p><p>{config.operationalNotice}</p></div>
+        <div><p className="section-index">Market-specific controls</p><h2>Each service route keeps its own fees, contacts and professional requirements.</h2><p>FST reuses security controls and delivery methods without mixing route-specific claims, prices, legal text, calendars or evidence requirements.</p><p>{config.operationalNotice}</p></div>
       </section>
       <SiteFooter jurisdiction={config.code} />
     </main>

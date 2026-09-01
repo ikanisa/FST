@@ -47,11 +47,11 @@ export function SiteHeader({ jurisdiction }: { jurisdiction?: JurisdictionCode }
         </Link>
         <nav id="primary-navigation" className={menuOpen ? "nav-links is-open" : "nav-links"} aria-label="Main links">
           <Link href={path("/services")} onClick={closeMenu}>Services</Link>
-          <Link href={path("/services/catalogue")} onClick={closeMenu}>Catalogue</Link>
-          <Link href={path("/who-we-work-with")} onClick={closeMenu}>Organisations</Link>
-          <Link href={path("/about")} onClick={closeMenu}>Our Approach</Link>
+          <Link href={path("/services/catalogue")} onClick={closeMenu}>Services &amp; Fees</Link>
+          <Link href={path("/who-we-work-with")} onClick={closeMenu}>Who We Help</Link>
+          <Link href={path("/about")} onClick={closeMenu}>How We Work</Link>
           {!jurisdiction && <Link href="/insights" onClick={closeMenu}>Insights</Link>}
-          {jurisdiction !== "rw" && <Link href={path("/ai-agent-team")} onClick={closeMenu}>AI Agent Team</Link>}
+          {jurisdiction !== "rw" && <Link href={path("/ai-agent-team")} onClick={closeMenu}>AI Delivery Team</Link>}
           <PrimaryCta jurisdiction={jurisdiction} className="nav-cta" onClick={closeMenu} />
         </nav>
         <button

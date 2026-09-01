@@ -89,9 +89,9 @@ export const jurisdictionConfig: Record<JurisdictionCode, JurisdictionConfig> = 
         "FST provides management, accounting, tax, governance, assurance and funding support to organisations across Malta.",
     },
     hero: {
-      title: "Turn ambition into an executable plan.",
+      title: "Accounting, tax, audit and business advisory in Malta.",
       lede:
-        "FST brings management, audit, finance, tax, governance and loan and funding application support into one accountable programme of work.",
+        "FST connects bookkeeping, financial reporting, tax, audit, corporate administration, management advisory and funding support in one accountable programme of work.",
       imageAlt: "Advisers shaping a controlled work programme with a business leadership team",
     },
     visuals: {

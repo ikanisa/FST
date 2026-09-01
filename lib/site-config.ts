@@ -16,7 +16,7 @@ export const siteConfig = {
   whatsappUrl: "https://wa.me/35699711145",
   linkedInUrl: process.env.NEXT_PUBLIC_LINKEDIN_URL || "",
   bookingUrl: "/book",
-  primaryCtaLabel: "Book a Meeting",
+  primaryCtaLabel: "Book a Scope Call",
   bookingRecipients: ["bosco@ikanisa.com"],
   serviceOrderWhatsappDisplay: "+35699711145",
   serviceOrderWhatsappUrl: "https://wa.me/35699711145",

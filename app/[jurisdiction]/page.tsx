@@ -118,8 +118,8 @@ export default async function JurisdictionHome({ params }: JurisdictionPageProps
 
       <section className="expertise-section jurisdiction-expertise-section section-shell" aria-labelledby="market-services-title">
         <div className="section-heading section-heading-no-index">
-          <h2 id="market-services-title">One working plan. The right workstreams.</h2>
-          <p>Shared FST delivery standards sit underneath services, terminology, evidence and professional controls selected automatically for the request.</p>
+          <h2 id="market-services-title">Accounting, tax, audit, governance and funding support in one delivery plan.</h2>
+          <p>Choose the service area closest to the required deliverable. FST keeps related records, review points and professional controls connected.</p>
         </div>
         <SectionVisual src={config.visuals.collaboration} alt="Specialists coordinating connected workstreams around one delivery plan" className="section-banner-visual" />
         <div className="expertise-card-grid expertise-card-grid-compact" aria-label="FST service lines">
@@ -132,7 +132,7 @@ export default async function JurisdictionHome({ params }: JurisdictionPageProps
                   <h3>{service.shortTitle}</h3>
                   <p>{service.description}</p>
                 </div>
-                <span className="text-link">View service</span>
+                <span className="text-link">See scope and deliverables</span>
               </Link>
             );
           })}
@@ -141,7 +141,7 @@ export default async function JurisdictionHome({ params }: JurisdictionPageProps
 
       <section className="audience-section jurisdiction-audience-section section-shell" aria-labelledby="market-audience-title">
         <div className="section-heading compact section-heading-no-index">
-          <h2 id="market-audience-title">Built around organisations carrying the decision.</h2>
+          <h2 id="market-audience-title">{config.code === "rw" ? "Support for entrepreneurs, SMEs, cooperatives and NGOs." : "Support for start-ups, SMEs, NGOs and international programmes."}</h2>
         </div>
         <SectionVisual src={config.visuals.operations} alt="Business owners and advisers reviewing operational and financial priorities" className="section-banner-visual" />
         <div className="audience-list">
@@ -167,8 +167,8 @@ export default async function JurisdictionHome({ params }: JurisdictionPageProps
 
       <section className="approach-section section-shell" aria-labelledby="market-approach-title">
         <div className="approach-panel">
-          <h2 id="market-approach-title">Context is part of the work—not a label added at the end.</h2>
-          <p>Every request carries the applicable rules, currency, operational destination and professional boundary through the complete workflow.</p>
+          <h2 id="market-approach-title">Local rules, source evidence and professional responsibility stay attached to every workstream.</h2>
+          <p>Every request carries the applicable rules, currency, records, review points and professional boundary through delivery.</p>
         </div>
         <div className="approach-steps approach-steps-plain">
           <div><h3>Scope in local context</h3><p>Confirm the organisation, decision, applicable rules and evidence before selecting a workstream.</p></div>
@@ -180,13 +180,13 @@ export default async function JurisdictionHome({ params }: JurisdictionPageProps
 
       <section className="contact-section section-shell" id="contact" aria-labelledby="market-contact-title">
         <div className="contact-copy">
-          <h2 id="market-contact-title">Bring the decision—not a perfect brief.</h2>
-          <p>Choose a route, identify the issue and tell us the deadline. The first response will confirm fit, scope and the responsible delivery route.</p>
+          <h2 id="market-contact-title">Tell us the decision, deadline and records you already have.</h2>
+          <p>The first response will confirm the relevant service, missing information, indicative scope and responsible delivery route.</p>
           <SectionVisual src="/fst-consultation.webp" alt="A private first discussion focused on a business decision" className="contact-section-visual" />
         </div>
         <div className="contact-cta-panel">
-          <h3>Start with the issue in front of you.</h3>
-          <p>Requests are routed automatically to the configured intake, scheduling and professional-review path.</p>
+          <h3>Request a scope review.</h3>
+          <p>Choose a scope call or WhatsApp enquiry. FST will confirm fit and professional responsibility before accepting work.</p>
           <div className="contact-cta-actions">
             <PrimaryCta jurisdiction={config.code} className="primary-button" />
             <WhatsAppCta jurisdiction={config.code} />

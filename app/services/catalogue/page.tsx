@@ -15,7 +15,7 @@ export const metadata = pageMetadata({
   description: "Compare FST audit, accounting, tax, payroll, corporate, management, funding and contract services, then build one coordinated service request.",
   path: "/services/catalogue",
   image: "/catalogue-og.jpg",
-  imageAlt: "FST Service Catalogue — choose the work, see the starting fee.",
+  imageAlt: "FST professional services and indicative starting fees.",
 });
 
 export default function ServiceCataloguePage() {
@@ -63,15 +63,15 @@ export default function ServiceCataloguePage() {
 
       <section className="catalogue-hero">
         <div className="catalogue-hero-copy">
-          <h1>Choose the work. See the starting fee. Build one request.</h1>
-          <p>Browse individual services across audit, accounting, tax, company administration, management, funding and contracts. Add everything you need, then send one coordinated scope request.</p>
+          <h1>Compare professional services and indicative starting fees.</h1>
+          <p>Select accounting, tax, audit, company administration, advisory, funding or contract services. Your choices stay in one itemised, non-binding request for scope confirmation.</p>
           <a className="catalogue-hero-link" href="#catalogue-start">
-            Explore {catalogueServices.length} services <ArrowDown size={17} aria-hidden="true" />
+            Browse {catalogueServices.length} named services <ArrowDown size={17} aria-hidden="true" />
           </a>
         </div>
         <div className="catalogue-hero-pricing">
-          <strong>Efficient by design</strong>
-          <p>Transparent starting fees reflect structured, AI-assisted preparation while professional judgement, review and accountability remain human.</p>
+          <strong>Indicative fees before you enquire.</strong>
+          <p>Each fee is a starting point for the stated scope. FST confirms records, timing, final fees and the responsible professional before work starts.</p>
           <small>Final fees depend on complexity, volume, records, deadlines and professional acceptance.</small>
         </div>
       </section>
@@ -79,15 +79,15 @@ export default function ServiceCataloguePage() {
       <section className="catalogue-trust-rail section-shell" aria-label="How catalogue pricing works">
         <article>
           <CurrencyEur size={24} aria-hidden="true" />
-          <div><strong>Clear fees</strong><span>EUR, excluding VAT, official fees and third-party costs unless stated.</span></div>
+          <div><strong>Starting fees and exclusions</strong><span>EUR, excluding VAT, official fees and third-party costs unless stated.</span></div>
         </article>
         <article>
           <ClockCountdown size={24} aria-hidden="true" />
-          <div><strong>Free scope check</strong><span>We confirm fit, inputs, timetable and a fixed quote before work starts.</span></div>
+          <div><strong>Scope confirmation before work</strong><span>FST confirms fit, inputs, timetable and a fixed quote before work starts.</span></div>
         </article>
         <article>
           <ShieldCheck size={24} aria-hidden="true" />
-          <div><strong>Professional control</strong><span>Regulated work remains subject to authority, independence and human approval.</span></div>
+          <div><strong>Professional review and approval</strong><span>Regulated work remains subject to authority, independence and human approval.</span></div>
         </article>
       </section>
 
