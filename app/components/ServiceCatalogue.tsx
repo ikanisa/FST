@@ -219,10 +219,10 @@ export function ServiceCatalogue({
                 />
                 <div className="catalogue-industry-card-copy">
                   <small className="catalogue-industry-sector-label">{item.label}</small>
-                  <strong>{item.entry.title}</strong>
+                  {jurisdiction !== "mt" && <strong>{item.entry.title}</strong>}
                   <small>{item.entry.description}</small>
                   <div className="catalogue-industry-package-price">
-                    <strong>{formatSectorPackagePrice(item.sector, item.entry.from)}</strong>
+                    <strong>{jurisdiction === "mt" && "From "}{formatSectorPackagePrice(item.sector, item.entry.from)}</strong>
                     <span>per {item.entry.billingUnit}</span>
                   </div>
                   <ul>{item.entry.includes.slice(0, 5).map((included) => <li key={included}>{included}</li>)}</ul>

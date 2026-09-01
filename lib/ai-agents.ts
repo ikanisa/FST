@@ -11,6 +11,11 @@ export type AiAgent = {
   inputs: string[];
   workpackName: string;
   workpackOutputs: string[];
+  workflowCount: number;
+  deliverableCount: number;
+  averageCapacity: number;
+  optimisedCapacity: number;
+  capacityRole: string;
   humanBoundary: string;
 };
 
@@ -36,6 +41,11 @@ export const aiAgents: AiAgent[] = [
     inputs: ["Engagement scope", "Trial balance and records", "Policies and controls", "Prior findings and evidence"],
     workpackName: "Audit file pack",
     workpackOutputs: ["PBC tracker", "Risk matrix", "Evidence register", "Completion memo"],
+    workflowCount: 44,
+    deliverableCount: 147,
+    averageCapacity: 35,
+    optimisedCapacity: 70,
+    capacityRole: "audit-senior equivalents",
     humanBoundary:
       "Patrick does not accept engagements, determine an audit opinion, clear independence, sign reports or communicate conclusions. The responsible authorised professional retains every judgement and approval.",
   },
@@ -60,6 +70,11 @@ export const aiAgents: AiAgent[] = [
     inputs: ["General ledger", "Bank and supplier records", "Opening balances", "Reporting requirements"],
     workpackName: "Accounting close pack",
     workpackOutputs: ["Reconciliation pack", "Trial-balance review", "Close checklist", "Variance memo"],
+    workflowCount: 35,
+    deliverableCount: 115,
+    averageCapacity: 27,
+    optimisedCapacity: 55,
+    capacityRole: "senior-accountant equivalents",
     humanBoundary:
       "Sofia does not post unapproved entries, operate client bank accounts, approve financial statements or make management decisions. FST professionals and authorised client personnel review and approve all actions.",
   },
@@ -84,6 +99,11 @@ export const aiAgents: AiAgent[] = [
     inputs: ["Accounting records", "Prior returns", "Payroll and transaction data", "Tax correspondence"],
     workpackName: "Tax and VAT evidence pack",
     workpackOutputs: ["VAT schedules", "Tax-risk register", "Filing support pack", "Authority-query draft"],
+    workflowCount: 31,
+    deliverableCount: 91,
+    averageCapacity: 22,
+    optimisedCapacity: 43,
+    capacityRole: "tax-senior equivalents",
     humanBoundary:
       "Matthew does not choose a final tax position, approve or file returns, correspond with authorities or give binding advice. The taxpayer and responsible professional retain review, approval and submission authority.",
   },
@@ -108,6 +128,11 @@ export const aiAgents: AiAgent[] = [
     inputs: ["Corporate records", "Ownership information", "Policies and contracts", "Regulatory correspondence"],
     workpackName: "Corporate and regulatory pack",
     workpackOutputs: ["BO register", "CDD/EDD checklist", "MBR checklist", "Regulator-response draft"],
+    workflowCount: 38,
+    deliverableCount: 118,
+    averageCapacity: 28,
+    optimisedCapacity: 56,
+    capacityRole: "legal/regulatory-associate equivalents",
     humanBoundary:
       "Claire does not give reserved legal advice, approve regulated activity, file corporate changes or communicate with regulators independently. Appropriately authorised professionals and clients retain those decisions and actions.",
   },
@@ -132,6 +157,11 @@ export const aiAgents: AiAgent[] = [
     inputs: ["Policies and governance records", "Risk and capital information", "QRT and reporting data", "Board and supervisory correspondence"],
     workpackName: "Insurance regulatory pack",
     workpackOutputs: ["ORSA evidence pack", "QRT tracker", "SFCR/RSR review notes", "Board pack"],
+    workflowCount: 20,
+    deliverableCount: 72,
+    averageCapacity: 17,
+    optimisedCapacity: 34,
+    capacityRole: "insurance/Solvency II specialist equivalents",
     humanBoundary:
       "Emma does not make actuarial judgements, approve regulatory returns, sign board papers or communicate with the MFSA. Responsible functions, directors and authorised professionals retain review and approval.",
   },

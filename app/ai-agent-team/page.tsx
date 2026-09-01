@@ -83,6 +83,33 @@ const controlPoints = [
   "Final judgement, approval and accountability remain human",
 ];
 
+const deliveryModels = [
+  {
+    title: "Professional-firm outsourcing",
+    description:
+      "Audit, accounting, tax, legal and advisory firms outsource defined production work. The firm keeps the client relationship, reviews the work and signs the engagement; FST works under an agreed share of the professional fee.",
+    detail: "Defined workpacks · fee-share delivery · no seat licences",
+    icon: FileMagnifyingGlass,
+  },
+  {
+    title: "Managed outsourced services",
+    description:
+      "Public bodies and organisations contract FST for a defined scope, volumes, service levels, security and reporting. FST prepares the evidence and workpacks; the authorised officer retains every decision and external action.",
+    detail: "Monthly or annual scope · governed outputs · accountable review",
+    icon: Buildings,
+  },
+];
+
+const portfolioTotals = aiAgents.reduce(
+  (totals, agent) => ({
+    workflows: totals.workflows + agent.workflowCount,
+    deliverables: totals.deliverables + agent.deliverableCount,
+    averageCapacity: totals.averageCapacity + agent.averageCapacity,
+    optimisedCapacity: totals.optimisedCapacity + agent.optimisedCapacity,
+  }),
+  { workflows: 0, deliverables: 0, averageCapacity: 0, optimisedCapacity: 0 },
+);
+
 export function AiAgentTeamContent({ jurisdiction }: { jurisdiction?: JurisdictionCode } = {}) {
   const path = (value: string) => jurisdiction ? marketPath(jurisdiction, value) : value;
   const teamPath = path("/ai-agent-team");
@@ -207,15 +234,65 @@ export function AiAgentTeamContent({ jurisdiction }: { jurisdiction?: Jurisdicti
         </div>
       </section>
 
-      <section className="ai-agents section-shell" aria-labelledby="ai-agents-title">
-        <div className="ai-section-heading">
-          <h2 id="ai-agents-title">Meet the team and the workpacks they prepare.</h2>
+      <section className="ai-delivery section-shell" aria-labelledby="ai-delivery-title">
+        <div className="ai-section-heading ai-delivery-heading">
+          <h2 id="ai-delivery-title">Defined outsourced work. Clear professional ownership.</h2>
           <p>
-            Each IKANISA agent is focused on a professional workflow family.
-            See the structured outputs each one prepares before FST reviews the
-            evidence, resolves exceptions and approves the result.
+            FST adds governed preparation capacity inside an agreed service
+            model. It does not sell unsupervised automation or replace the
+            professional who remains responsible for the result.
           </p>
         </div>
+        <div className="ai-delivery-grid">
+          {deliveryModels.map((model) => {
+            const ModelIcon = model.icon;
+            return (
+              <article key={model.title}>
+                <span className="ai-line-icon" aria-hidden="true">
+                  <ModelIcon size={24} weight="regular" />
+                </span>
+                <div>
+                  <h3>{model.title}</h3>
+                  <p>{model.description}</p>
+                  <strong>{model.detail}</strong>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="ai-agents section-shell" aria-labelledby="ai-agents-title">
+        <div className="ai-section-heading">
+          <h2 id="ai-agents-title">Five specialist workstreams. One governed delivery bench.</h2>
+          <p>
+            Each agent prepares source-linked workpacks in a defined professional
+            domain. FST reviews the evidence, resolves exceptions and keeps every
+            decision, signature and external action with an authorised person.
+          </p>
+        </div>
+        <dl className="ai-portfolio-stats" aria-label="AI agent portfolio coverage">
+          <div>
+            <dt>Governed workflows</dt>
+            <dd>{portfolioTotals.workflows}</dd>
+          </div>
+          <div>
+            <dt>Defined deliverables</dt>
+            <dd>{portfolioTotals.deliverables}</dd>
+          </div>
+          <div>
+            <dt>Senior-equivalent capacity</dt>
+            <dd>{portfolioTotals.averageCapacity}/{portfolioTotals.optimisedCapacity}</dd>
+          </div>
+          <div>
+            <dt>Controlled gates</dt>
+            <dd>102/102</dd>
+          </div>
+        </dl>
+        <p className="ai-capacity-note">
+          Capacity figures are planning equivalents based on defined workflow
+          coverage—not staff headcount, professional authority or guaranteed throughput.
+        </p>
         <div className="ai-agent-list">
           {aiAgents.map((agent) => (
             <article className="ai-agent-row" key={agent.name}>
@@ -225,19 +302,28 @@ export function AiAgentTeamContent({ jurisdiction }: { jurisdiction?: Jurisdicti
                   <div>
                     <span>{agent.practice}</span>
                     <h3>{agent.name}</h3>
+                    <small>{agent.workflowCount} workflows · {agent.deliverableCount} deliverables</small>
                   </div>
                   <Link href={`${teamPath}/${agent.slug}`} aria-label={`Meet ${agent.name} on FST`}>
-                    Meet {agent.name}
+                    Profile
                     <ArrowRight size={16} weight="regular" aria-hidden="true" />
                   </Link>
                 </div>
-                <p>{agent.description}</p>
-                <div className="ai-agent-workpack">
-                  <strong>{agent.workpackName}</strong>
-                  <ul aria-label={`${agent.name} workpack outputs`}>
-                    {agent.workpackOutputs.map((output) => <li key={output}>{output}</li>)}
-                  </ul>
+                <div className="ai-agent-capacity" aria-label={`${agent.name} senior-equivalent planning capacity`}>
+                  <strong>{agent.averageCapacity}/{agent.optimisedCapacity}</strong>
+                  <span>
+                    <b>Average / optimised</b>
+                    {" "}
+                    {agent.capacityRole}
+                  </span>
                 </div>
+                <p>{agent.description}</p>
+              </div>
+              <div className="ai-agent-workpack">
+                <strong>{agent.workpackName}</strong>
+                <ul aria-label={`${agent.name} workpack outputs`}>
+                  {agent.workpackOutputs.map((output) => <li key={output}>{output}</li>)}
+                </ul>
               </div>
             </article>
           ))}

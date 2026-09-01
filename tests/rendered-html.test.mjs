@@ -438,6 +438,7 @@ test("presents the supervised AI agent team with internal FST profile links and 
   const response = await render("/ai-agent-team");
   assert.equal(response.status, 200);
   const html = await response.text();
+  const visibleTeam = visibleBodyText(html);
   assert.match(html, /Meet our AI agent team\./i);
   assert.match(html, /FST uses supervised AI to increase capacity, strengthen evidence and keep professional judgement in human hands\./i);
   assert.match(html, /More capacity for client work/i);
@@ -462,7 +463,30 @@ test("presents the supervised AI agent team with internal FST profile links and 
     "Corporate and regulatory pack",
     "Insurance regulatory pack",
   ]) assert.match(html, new RegExp(pack, "i"));
-  assert.match(html, /Meet the team and the workpacks they prepare\./i);
+  assert.match(html, /Five specialist workstreams\. One governed delivery bench\./i);
+  assert.match(html, /Professional-firm outsourcing/i);
+  assert.match(html, /Managed outsourced services/i);
+  assert.match(html, />168</i);
+  assert.match(html, />543</i);
+  assert.match(html, />102\/102</i);
+  assert.match(html, /44(?:<!-- -->)? workflows/i);
+  assert.match(html, /147(?:<!-- -->)? deliverables/i);
+  assert.match(html, /20(?:<!-- -->)? workflows/i);
+  assert.match(html, /72(?:<!-- -->)? deliverables/i);
+  assert.match(visibleTeam, /Senior-equivalent capacity/i);
+  assert.match(visibleTeam, /129\s*\/\s*258/i);
+  for (const capacity of [
+    ["Patrick", 35, 70, "audit-senior equivalents"],
+    ["Sofia", 27, 55, "senior-accountant equivalents"],
+    ["Matthew", 22, 43, "tax-senior equivalents"],
+    ["Claire", 28, 56, "legal/regulatory-associate equivalents"],
+    ["Emma", 17, 34, "insurance/Solvency II specialist equivalents"],
+  ]) {
+    const [name, average, optimised, role] = capacity;
+    assert.match(visibleTeam, new RegExp(`${name}[\\s\\S]{0,700}${average}\\s*/\\s*${optimised}[\\s\\S]{0,200}Average / optimised[\\s\\S]{0,200}${role}`, "i"));
+  }
+  assert.doesNotMatch(visibleTeam, /\d+ AVG · \d+ OPT/i);
+  assert.match(visibleTeam, /not staff headcount, professional authority or guaranteed throughput/i);
   assert.doesNotMatch(html, />Prepared workpack<|class="ai-workpacks|Structured workpacks for the work that slows teams down/i);
   assert.match(html, /do not sign reports, issue opinions, approve filings/i);
   assert.match(html, /Final judgement, approval and accountability remain human/i);
@@ -968,7 +992,7 @@ test("keeps Rwanda service content free of an unsupported physical-office claim"
   assert.match(sitemap, /<loc>https:\/\/fst\.ikanisa\.com\/rw<\/loc>\s*<lastmod>2026-08-27T00:00:00\.000Z<\/lastmod>/i);
 });
 
-test("connects the Malta service area to the verified SOHO The Strand address", async () => {
+test("connects the Malta service area to the public Gżira address without a venue brand", async () => {
   const [homeResponse, contactResponse, serviceResponse, sitemapResponse] = await Promise.all([
     render("/mt"),
     render("/mt/contact"),
@@ -983,17 +1007,19 @@ test("connects the Malta service area to the verified SOHO The Strand address", 
   ]);
 
   assert.match(home, /<title>Professional Services in Malta \| FST<\/title>/i);
-  assert.match(visibleBodyText(home), /FST at SOHO The Strand/i);
-  assert.match(home, /SOHO The Strand, Fawwara Building, Triq l-Imsida, Gżira GZR 1401, Malta/i);
+  assert.match(visibleBodyText(home), /FST at Gżira/i);
+  assert.match(home, /Fawwara Building, Triq l-Imsida, Gżira GZR 1401, Malta/i);
+  assert.doesNotMatch(home, /SOHO/i);
   assert.match(home, /businesses, organisations and finance teams across Malta and Gozo/i);
-  assert.match(home, /google\.com\/maps\/search\/\?api=1&amp;query=SOHO\+The\+Strand/i);
+  assert.match(home, /google\.com\/maps\/search\/\?api=1&amp;query=Fawwara\+Building/i);
   assert.match(home, /name="geo\.region" content="MT-12"/i);
   assert.match(home, /"@type":"ProfessionalService"/i);
-  assert.match(home, /"streetAddress":"SOHO The Strand, Fawwara Building, Triq l-Imsida"/i);
+  assert.match(home, /"streetAddress":"Fawwara Building, Triq l-Imsida"/i);
   assert.match(home, /"addressCountry":"MT"/i);
   assert.match(home, /"areaServed":\{"@type":"Country","name":"Malta"\}/i);
 
-  assert.match(contact, /Contact FST at SOHO The Strand/i);
+  assert.match(contact, /Contact FST at Gżira/i);
+  assert.doesNotMatch(contact, /SOHO/i);
   assert.match(contact, /Office · by appointment/i);
   assert.match(contact, /Fawwara Building, Triq l-Imsida/i);
   assert.match(service, /"provider":\{"@id":"https:\/\/fst\.ikanisa\.com\/mt#professional-service"\}/i);
@@ -1044,10 +1070,10 @@ test("publishes one add-to-order package card per industry on each main catalogu
       ["engineering-practices", "Construction Finance, Tender &amp; Administration", "RWF 25,000"],
     ],
     mt: [
-      ["restaurants-and-cafes", "Restaurant Finance, VAT &amp; Payroll", "€300"],
-      ["self-employed", "Self-Employed Finance &amp; Tax", "€180"],
-      ["retail-shops", "Retail Finance, VAT &amp; Stock", "€250"],
-      ["csp-firms", "Accounting, Tax &amp; Compliance Outsourcing", "€450"],
+      ["restaurants-and-cafes", "Restaurant Finance, VAT &amp; Payroll", "€150"],
+      ["self-employed", "Self-Employed Finance &amp; Tax", "€120"],
+      ["retail-shops", "Retail Finance, VAT &amp; Stock", "€135"],
+      ["csp-firms", "Accounting, Tax &amp; Compliance Outsourcing", "€200"],
     ],
   };
 
@@ -1063,6 +1089,13 @@ test("publishes one add-to-order package card per industry on each main catalogu
       assert.match(catalogue, new RegExp(`aria-label="Add [^"]+ to order"`, "i"));
     }
     if (jurisdiction === "mt") {
+      assert.match(visibleCatalogue, /CSPs/);
+      assert.doesNotMatch(visibleCatalogue, /\bCSPS\b/);
+      assert.match(visibleCatalogue, /From €150/i);
+      assert.match(visibleCatalogue, /From €120/i);
+      assert.match(visibleCatalogue, /From €135/i);
+      assert.match(visibleCatalogue, /From €200/i);
+      assert.doesNotMatch(visibleCatalogue, /Restaurant Finance, VAT & Payroll|Self-Employed Finance & Tax|Retail Finance, VAT & Stock|Accounting, Tax & Compliance Outsourcing/i);
       assert.match(visibleCatalogue, /per client \/ month/i);
       assert.match(visibleCatalogue, /regulatory, KYC and AML\/CFT evidence administration for CSP review/i);
       assert.doesNotMatch(visibleCatalogue, /CSP firm's own|firm's own company/i);
@@ -1087,6 +1120,11 @@ test("stacks industry packages as readable full-width cards on small screens", a
   assert.doesNotMatch(mobileCatalogue, /\.catalogue-industry-grid\s*\{[^}]*grid-auto-flow:\s*column;/s);
 });
 
+test("uses prominent industry labels on package cards", async () => {
+  const css = await readFile(path.join(root, "app/globals.css"), "utf8");
+  assert.match(css, /\.catalogue-industry-sector-label\s*\{[^}]*font-size:\s*18px\s*!important;[^}]*font-weight:\s*800;[^}]*text-transform:\s*none;/s);
+});
+
 test("sector package APIs expose current versions and return a non-binding fit result", async () => {
   for (const jurisdiction of ["rw", "mt"]) {
     const response = await render(`/api/v1/sector-packages?jurisdiction=${jurisdiction}`);
@@ -1094,7 +1132,7 @@ test("sector package APIs expose current versions and return a non-binding fit r
     const body = await response.json();
     assert.equal(body.jurisdiction, jurisdiction);
     assert.equal(body.count, 4);
-    assert.ok(body.packages.every((item) => item.version === "2026-08-26"));
+    assert.ok(body.packages.every((item) => item.version === "2026-09-01"));
     assert.ok(body.packages.every((item) => item.catalogueEntries.length === 1));
     assert.ok(body.packages.every((item) => item.catalogueEntries[0].includes.length === 5));
     assert.ok(body.packages.every((item) => item.officialCostsExcluded === true));
@@ -1110,14 +1148,14 @@ test("sector package APIs expose current versions and return a non-binding fit r
   const maltaRestaurantDetail = await render("/api/v1/sector-packages/restaurants-and-cafes?jurisdiction=mt");
   assert.equal(maltaRestaurantDetail.status, 200);
   const maltaRestaurant = await maltaRestaurantDetail.json();
-  assert.equal(maltaRestaurant.monthlyFrom, 300);
-  assert.deepEqual(maltaRestaurant.catalogueEntries.map(({ id, from }) => [id, from]), [["finance-routine", 300]]);
+  assert.equal(maltaRestaurant.monthlyFrom, 150);
+  assert.deepEqual(maltaRestaurant.catalogueEntries.map(({ id, from }) => [id, from]), [["finance-routine", 150]]);
   assert.equal((await render("/api/v1/sector-packages/pharmacies?jurisdiction=mt")).status, 404);
 
   const entry = await post("/api/v1/package-scope", {
     jurisdiction: "rw",
     packageSlug: "pharmacies",
-    packageVersion: "2026-08-26",
+    packageVersion: "2026-09-01",
     locations: 1,
     employees: "1-5",
     workload: "entry",
@@ -1134,7 +1172,7 @@ test("sector package APIs expose current versions and return a non-binding fit r
   const complex = await post("/api/v1/package-scope", {
     jurisdiction: "rw",
     packageSlug: "engineering-practices",
-    packageVersion: "2026-08-26",
+    packageVersion: "2026-09-01",
     locations: 2,
     employees: "11-20",
     workload: "complex",
@@ -1212,7 +1250,7 @@ test("sector package enquiry stores the canonical package, scope and underlying 
     message: "We need the recurring finance package and catch-up bookkeeping.",
     serviceIds: [],
     packageId: "mt-restaurant-finance-desk",
-    packageVersion: "2026-08-26",
+    packageVersion: "2026-09-01",
     packageEntryId: "finance-routine",
     scopeAnswers: { locations: "1", employees: "1-5", workload: "entry", records: "clean", regulatedEvent: true },
     addonIds: ["catch-up-books", "invalid-addon"],
@@ -1225,7 +1263,7 @@ test("sector package enquiry stores the canonical package, scope and underlying 
   assert.equal(writes.length, 1);
   assert.match(writes[0].sql, /package_id, package_version, package_entry_id, scope_answers_json/i);
   assert.ok(writes[0].values.includes("mt-restaurant-finance-desk"));
-  assert.ok(writes[0].values.includes("2026-08-26"));
+  assert.ok(writes[0].values.includes("2026-09-01"));
   assert.ok(writes[0].values.includes("finance-routine"));
   assert.ok(writes[0].values.includes('["catch-up-books"]'));
   assert.ok(writes[0].values.includes('["monthly-bookkeeping","management-accounts","vat-return","monthly-payroll","fss-filings"]'));

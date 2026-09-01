@@ -68,7 +68,7 @@ export type SectorPackage = {
   };
 };
 
-const version = "2026-08-26";
+const version = "2026-09-01";
 
 const activePackageSlugsByJurisdiction: Record<JurisdictionCode, readonly SectorPackageSlug[]> = {
   rw: ["pharmacies", "shops", "restaurants-and-hospitality", "engineering-practices"],
@@ -313,7 +313,7 @@ const packagesByJurisdiction: Record<JurisdictionCode, SectorPackage[]> = {
       summary: "A recurring finance package for independent restaurants and cafés that connects POS and delivery-platform sales to VAT, payroll, supplier and margin controls.",
       fitStatement: "Designed for one owner-managed outlet with usable POS, purchase, bank and payroll records.",
       setupFrom: 180,
-      monthlyFrom: 300,
+      monthlyFrom: 150,
       monthlyUnit: "month",
       accent: "orange",
       image: "/sector-mt-restaurants.webp",
@@ -344,7 +344,7 @@ const packagesByJurisdiction: Record<JurisdictionCode, SectorPackage[]> = {
       summary: "A lean monthly finance package for consultants, freelancers and independent professionals who need clear records, tax workpacks and a practical cash view.",
       fitStatement: "Designed for one individual trade or professional activity with clean bank and invoicing records.",
       setupFrom: 100,
-      monthlyFrom: 180,
+      monthlyFrom: 120,
       monthlyUnit: "month",
       accent: "cobalt",
       image: "/fst-consultation.webp",
@@ -375,7 +375,7 @@ const packagesByJurisdiction: Record<JurisdictionCode, SectorPackage[]> = {
       summary: "A recurring package for independent shops that joins retail bookkeeping, VAT, payroll, supplier balances, stock margin and company administration.",
       fitStatement: "Designed for one retail outlet with usable POS, purchase, bank and stock records.",
       setupFrom: 140,
-      monthlyFrom: 250,
+      monthlyFrom: 135,
       monthlyUnit: "month",
       accent: "blue",
       image: "/sector-mt-hardware.webp",
@@ -406,7 +406,7 @@ const packagesByJurisdiction: Record<JurisdictionCode, SectorPackage[]> = {
       summary: "A per-client outsourcing package that gives a CSP scalable production capacity for accounting, tax workpacks, company compliance and regulatory evidence while the CSP retains the client relationship, review and approval.",
       fitStatement: "Designed for a CSP outsourcing repeatable production work for one underlying client with a defined scope, usable records and an internal reviewer.",
       setupFrom: 250,
-      monthlyFrom: 450,
+      monthlyFrom: 200,
       monthlyUnit: "client / month",
       accent: "violet",
       image: "/fst-corporate.webp",
@@ -789,7 +789,7 @@ const catalogueEntriesByPackageId: Record<string, SectorCatalogueEntryDefinition
       title: "Restaurant Finance, VAT & Payroll",
       description: "A monthly package for an independent restaurant or café, built around daily takings, supplier costs, payroll and cash.",
       bestFor: "One owner-managed food-service outlet with usable POS and bank records.",
-      from: 300,
+      from: 150,
       setupFrom: 180,
       billingUnit: "month",
       includes: [
@@ -807,7 +807,7 @@ const catalogueEntriesByPackageId: Record<string, SectorCatalogueEntryDefinition
       title: "Self-Employed Finance & Tax",
       description: "A lean monthly package for an independent professional's income, costs, tax position and cash decisions.",
       bestFor: "A consultant, freelancer or independent professional with one activity and clean records.",
-      from: 180,
+      from: 120,
       setupFrom: 100,
       billingUnit: "month",
       includes: [
@@ -825,7 +825,7 @@ const catalogueEntriesByPackageId: Record<string, SectorCatalogueEntryDefinition
       title: "Retail Finance, VAT & Stock",
       description: "A monthly package for an independent shop's POS settlements, suppliers, stock margin, payroll and statutory cycle.",
       bestFor: "One retail outlet with usable POS, purchase, bank and stock records.",
-      from: 250,
+      from: 135,
       setupFrom: 140,
       billingUnit: "month",
       includes: [
@@ -843,7 +843,7 @@ const catalogueEntriesByPackageId: Record<string, SectorCatalogueEntryDefinition
       title: "Accounting, Tax & Compliance Outsourcing",
       description: "Per-client accounting, tax and regulatory-compliance production for CSPs that need scalable delivery capacity.",
       bestFor: "A CSP outsourcing repeatable production work for one underlying client with usable records and an internal reviewer.",
-      from: 450,
+      from: 200,
       setupFrom: 250,
       billingUnit: "client / month",
       includes: [

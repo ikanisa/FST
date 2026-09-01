@@ -86,7 +86,7 @@ export const jurisdictionConfig: Record<JurisdictionCode, JurisdictionConfig> = 
     seo: {
       homeTitle: "Professional Services in Malta",
       homeDescription:
-        "FST provides management, accounting, tax, governance, assurance and funding support from SOHO The Strand to organisations across Malta.",
+        "FST provides management, accounting, tax, governance, assurance and funding support to organisations across Malta.",
     },
     hero: {
       title: "Turn ambition into an executable plan.",
@@ -109,15 +109,15 @@ export const jurisdictionConfig: Record<JurisdictionCode, JurisdictionConfig> = 
       { title: "NGOs and international programmes", description: "Evidence-led financial, donor, governance and project-accountability work." },
     ],
     location: {
-      name: "SOHO The Strand",
+      name: "Gżira",
       eyebrow: "Gżira office · Malta-wide service",
-      headline: "Meet us at SOHO The Strand or work with us from anywhere in Malta.",
-      streetAddress: "SOHO The Strand, Fawwara Building, Triq l-Imsida",
+      headline: "Meet us in Gżira or work with us from anywhere in Malta.",
+      streetAddress: "Fawwara Building, Triq l-Imsida",
       addressLocality: "Gżira",
       addressRegion: "Central Region",
       addressCountry: "MT",
-      postalLabel: "SOHO The Strand, Fawwara Building, Triq l-Imsida, Gżira GZR 1401, Malta",
-      mapUrl: "https://www.google.com/maps/search/?api=1&query=SOHO+The+Strand%2C+Fawwara+Building%2C+Triq+l-Imsida%2C+Gzira+GZR+1401%2C+Malta",
+      postalLabel: "Fawwara Building, Triq l-Imsida, Gżira GZR 1401, Malta",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Fawwara+Building%2C+Triq+l-Imsida%2C+Gzira+GZR+1401%2C+Malta",
       latitude: 35.9023513,
       longitude: 14.4938964,
       geoRegion: "MT-12",
