@@ -109,6 +109,13 @@ export function AiAgentShowcase({ agents, teamPath }: AiAgentShowcaseProps) {
             key={agent.name}
             aria-label={`${agent.name}, ${agent.practice}`}
           >
+            <Link
+              className="ai-agent-card-link"
+              href={`${teamPath}/${agent.slug}`}
+              aria-label={`Open ${agent.name}'s AI specialist profile`}
+            >
+              <span className="sr-only">Open {agent.name}&apos;s AI specialist profile</span>
+            </Link>
             <img
               src={agent.image}
               alt={`${agent.name}, FST ${agent.practice} AI agent`}
@@ -124,10 +131,6 @@ export function AiAgentShowcase({ agents, teamPath }: AiAgentShowcaseProps) {
                   <h3>{agent.name}</h3>
                   <small>{agent.workflowCount} workflows · {agent.deliverableCount} deliverables</small>
                 </div>
-                <Link href={`${teamPath}/${agent.slug}`} aria-label={`Meet ${agent.name} on FST`}>
-                  Profile
-                  <ArrowRight size={16} weight="regular" aria-hidden="true" />
-                </Link>
               </div>
               <div className="ai-agent-capacity" aria-label={`${agent.name} senior-equivalent planning capacity`}>
                 <strong>{agent.averageCapacity}/{agent.optimisedCapacity}</strong>
@@ -138,12 +141,6 @@ export function AiAgentShowcase({ agents, teamPath }: AiAgentShowcaseProps) {
                 </span>
               </div>
               <p>{agent.description}</p>
-            </div>
-            <div className="ai-agent-workpack">
-              <strong>{agent.workpackName}</strong>
-              <ul aria-label={`${agent.name} workpack outputs`}>
-                {agent.workpackOutputs.map((output) => <li key={output}>{output}</li>)}
-              </ul>
             </div>
           </article>
         ))}

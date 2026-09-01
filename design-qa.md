@@ -33,4 +33,43 @@
 2. No remaining P0, P1 or P2 visual defects were observed in the recorded desktop and mobile states.
 3. Browser console check after interaction returned no warnings or errors.
 
+## Workpack removal iteration — 2026-09-01
+
+- Live pre-change reference: `/Users/jeanbosco/.codex/visualizations/2026/09/01/01a05ca8-6994-7a03-ad6d-68989b1a9b3b/fst-ai-team-pack-removal/source-live-with-packs.png` (1437 × 832).
+- Revised desktop capture: `/Users/jeanbosco/.codex/visualizations/2026/09/01/01a05ca8-6994-7a03-ad6d-68989b1a9b3b/fst-ai-team-pack-removal/implementation-local-without-packs-desktop.png` (1437 × 832).
+- Revised mobile capture: `/Users/jeanbosco/.codex/visualizations/2026/09/01/01a05ca8-6994-7a03-ad6d-68989b1a9b3b/fst-ai-team-pack-removal/implementation-local-without-packs-mobile.png` (375 × 812).
+- The five generic workpack blocks and output chips are absent from the team carousel. Agent names, practice areas, workflow and deliverable counts, capacity figures, descriptions and profile links remain visible.
+- Dedicated profile pages retain their detailed workpack information; the change is scoped to the front-end carousel requested in the annotation.
+- Desktop cards were reduced from a 338px to 286px minimum height; the mobile minimum was reduced from 350px to 300px. Rendered cards remain equal-height at each viewport with balanced lower padding.
+- Desktop verification at 1452 × 841 and mobile verification at 390 × 844 found zero page-level horizontal overflow. The rail retained five cards, and the next control advanced from Patrick to Sofia with Sofia marked `aria-current="true"`.
+- Production build, focused lint, 55 rendered-output and route tests, and `git diff --check` passed. Browser logs contained no warnings or errors.
+- No remaining P0, P1 or P2 defects were observed in this iteration.
+
+## Full-card link iteration — 2026-09-01
+
+- Source visual truth: `/Users/jeanbosco/.codex/visualizations/2026/09/01/01a05ca8-6994-7a03-ad6d-68989b1a9b3b/fst-ai-team-pack-removal/implementation-local-without-packs-desktop.png` (1437 × 832), captured before this annotation with the visible `Profile` controls.
+- Revised desktop capture: `/Users/jeanbosco/.codex/visualizations/2026/09/01/01a05ca8-6994-7a03-ad6d-68989b1a9b3b/fst-ai-team-card-link/implementation-full-card-links-desktop-normalized.png` (1437 × 832).
+- Revised mobile capture: `/Users/jeanbosco/.codex/visualizations/2026/09/01/01a05ca8-6994-7a03-ad6d-68989b1a9b3b/fst-ai-team-card-link/implementation-full-card-links-mobile.png` (375 × 812).
+- Comparison state: Patrick selected, desktop viewport override 1452 × 841 and mobile override 390 × 844. The source and desktop implementation use matching CSS viewport, carousel state and output density.
+- Full-view and focused carousel comparison: all visible `Profile` labels and arrows are gone; typography, campaign colour tokens, portraits, card spacing, capacity data and descriptions remain consistent. The carousel region itself is the focused evidence because the removed control and card edges are legible at full captured resolution.
+- Each of the five cards contains one native anchor whose hit area covers the card interior within its 1px border. A pointer click in Patrick's description area opened `/mt/ai-agent-team/patrick`.
+- Keyboard accessibility: every card link is natively focusable, carries a specific accessible name and destination, and shows a 3px tone-matched focus outline. The browser test harness did not dispatch Enter activation for either card links or existing navigation links, so keyboard activation is not claimed from that harness.
+- Responsive and interaction checks: five cards and five card links render at both viewports, no page-level horizontal overflow was found, and the next control still advanced from Patrick to Sofia with `aria-current="true"`.
+- Fonts/typography, spacing/layout rhythm, colours/tokens, image quality and card copy all passed visual comparison. No asset, route or content changes were introduced.
+- Focused lint, production build, 55 tests, `git diff --check` and browser-console inspection passed with no errors or warnings.
+- No remaining P0, P1 or P2 defects were observed in this iteration.
+
+## Narrow-card spacing iteration — 2026-09-01
+
+- Source visual truth: `/Users/jeanbosco/.codex/visualizations/2026/09/01/01a05ca8-6994-7a03-ad6d-68989b1a9b3b/fst-ai-team-mobile-spacing/source-empty-left-column.png` (728 × 824), captured from the user-annotated 743 × 841 CSS viewport with Patrick selected.
+- Revised narrow capture: `/Users/jeanbosco/.codex/visualizations/2026/09/01/01a05ca8-6994-7a03-ad6d-68989b1a9b3b/fst-ai-team-mobile-spacing/implementation-full-width-card-content.png` (728 × 824), captured at the same viewport, scroll position and carousel state.
+- Revised desktop capture: `/Users/jeanbosco/.codex/visualizations/2026/09/01/01a05ca8-6994-7a03-ad6d-68989b1a9b3b/fst-ai-team-mobile-spacing/implementation-full-width-card-content-desktop.png` (1437 × 832) at a 1452 × 841 CSS viewport.
+- P2 finding: portrait and all remaining content occupied two permanent grid columns, leaving an unusable blank column below the portrait on narrow cards.
+- Fix: retained the portrait and identity as the two-column header, then allowed the capacity band and description to span the complete card width. This reduced the narrow rendered card height from 349px to 303px without removing content.
+- Post-fix visual comparison: the annotated void is gone, all five narrow cards remain equal-height, and desktop cards remain balanced at 286px. Typography, colour tokens, portraits, copy and full-card link affordances remain unchanged.
+- Interaction and accessibility: five full-card links remain present; a pointer click in Patrick's lower content opened the Patrick route; the next carousel control advanced to Sofia with `aria-current="true"`.
+- Responsive checks found zero page-level horizontal overflow at both viewports. Browser logs contained no errors or warnings.
+- Focused lint, production build, 55 tests and `git diff --check` passed.
+- No remaining P0, P1 or P2 defects were observed in this iteration.
+
 final result: passed

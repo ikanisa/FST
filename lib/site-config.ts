@@ -6,7 +6,7 @@ export const siteConfig = {
   legalName: process.env.NEXT_PUBLIC_LEGAL_NAME || "FST Management Services Limited",
   companyRegistrationNumber: process.env.NEXT_PUBLIC_COMPANY_REGISTRATION_NUMBER || "C 21500",
   vatNumber: process.env.NEXT_PUBLIC_VAT_NUMBER || "MT 1409 8221",
-  registeredAddress: process.env.NEXT_PUBLIC_REGISTERED_ADDRESS || "144/9, Palazzo Marian, Marina Street, Pietà PTA 9043, Malta",
+  registeredAddress: process.env.NEXT_PUBLIC_REGISTERED_ADDRESS || "144/9 Palazzo Marina, Marina Street, Pietà PTA 9043, Malta",
   contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "info@ikanisa.com",
   complaintsEmail: process.env.NEXT_PUBLIC_COMPLAINTS_EMAIL || "info@ikanisa.com",
   accountancyBoardRegistration: process.env.NEXT_PUBLIC_ACCOUNTANCY_BOARD_REGISTRATION || "Registered with the Malta Accountancy Board",

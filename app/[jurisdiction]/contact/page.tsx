@@ -105,7 +105,7 @@ export default async function JurisdictionContactPage({ params, searchParams }: 
           <div className="contact-options" aria-label="Direct contact options">
             {config.whatsappUrl && <TrackedLink href={config.whatsappUrl} event="contact_whatsapp_click" target="_blank" rel="noreferrer"><span>WhatsApp enquiries</span><strong>{config.whatsappDisplay}</strong></TrackedLink>}
             {config.contactEmail && <a href={`mailto:${config.contactEmail}`}><span>Email enquiries</span><strong>{config.contactEmail}</strong></a>}
-            {config.location && <a href={config.location.mapUrl} target="_blank" rel="noreferrer"><span>Gżira meeting location</span><strong>{config.location.postalLabel}</strong></a>}
+            {config.location && <a href={config.location.mapUrl} target="_blank" rel="noreferrer"><span>Registered office</span><strong>{config.location.postalLabel}</strong></a>}
             <div><span>Response and meeting hours</span><strong>Local business hours</strong></div>
           </div>
           <p className="contact-legal-note">Do not send confidential client records through the first-contact form. Read the <a href={marketPath(config.code, "/legal-information")}>legal and provider information</a> first.</p>

@@ -456,13 +456,16 @@ test("presents the supervised AI agent team with internal FST profile links and 
     assert.match(html, new RegExp(`>${name}<`, "i"));
     assert.match(html, new RegExp(`href="/ai-agent-team/${route}"`, "i"));
   }
+  assert.equal((html.match(/class="ai-agent-card-link"/gi) || []).length, 5);
+  assert.doesNotMatch(html, />\s*Profile\s*</i);
   for (const pack of [
     "Audit file pack",
     "Accounting close pack",
     "Tax and VAT evidence pack",
     "Corporate and regulatory pack",
     "Insurance regulatory pack",
-  ]) assert.match(html, new RegExp(pack, "i"));
+  ]) assert.doesNotMatch(visibleTeam, new RegExp(pack, "i"));
+  assert.doesNotMatch(html, /class="ai-agent-workpack"/i);
   assert.match(html, /Five specialist workstreams\. One governed delivery bench\./i);
   assert.match(html, /Professional-firm outsourcing/i);
   assert.match(html, /Managed outsourced services/i);
@@ -743,7 +746,7 @@ test("contact, SEO and discovery routes render production signals", async () => 
   assert.match(contact, /separate service-request channel/i);
   assert.match(contact, /href="\/legal-information"/i);
   assert.match(contact, /mailto:info@ikanisa\.com/i);
-  assert.match(contact, /144\/9, Palazzo Marian, Marina Street, Pietà PTA 9043, Malta/i);
+  assert.match(contact, /144\/9 Palazzo Marina, Marina Street, Pietà PTA 9043, Malta/i);
   assert.doesNotMatch(contact, /tel:/i);
   assert.doesNotMatch(contact, /Open FST WhatsApp/i);
   assert.doesNotMatch(contact, /7942\s*8604|79428604/);
@@ -992,7 +995,7 @@ test("keeps Rwanda service content free of an unsupported physical-office claim"
   assert.match(sitemap, /<loc>https:\/\/fst\.ikanisa\.com\/rw<\/loc>\s*<lastmod>2026-08-27T00:00:00\.000Z<\/lastmod>/i);
 });
 
-test("connects the Malta service area to the public Gżira address without a venue brand", async () => {
+test("connects the Malta service area to the registered Pietà office", async () => {
   const [homeResponse, contactResponse, serviceResponse, sitemapResponse] = await Promise.all([
     render("/mt"),
     render("/mt/contact"),
@@ -1007,21 +1010,21 @@ test("connects the Malta service area to the public Gżira address without a ven
   ]);
 
   assert.match(home, /<title>Professional Services in Malta \| FST<\/title>/i);
-  assert.match(visibleBodyText(home), /FST at Gżira/i);
-  assert.match(home, /Fawwara Building, Triq l-Imsida, Gżira GZR 1401, Malta/i);
-  assert.doesNotMatch(home, /SOHO/i);
+  assert.match(visibleBodyText(home), /FST at Pietà/i);
+  assert.match(home, /144\/9 Palazzo Marina, Marina Street, Pietà PTA 9043, Malta/i);
+  assert.doesNotMatch(home, /SOHO|Fawwara Building|Triq l-Imsida|Gżira GZR 1401|Palazzo Marian/i);
   assert.match(home, /businesses, organisations and finance teams across Malta and Gozo/i);
-  assert.match(home, /google\.com\/maps\/search\/\?api=1&amp;query=Fawwara\+Building/i);
-  assert.match(home, /name="geo\.region" content="MT-12"/i);
+  assert.match(home, /google\.com\/maps\/search\/\?api=1&amp;query=144%2F9\+Palazzo\+Marina/i);
+  assert.match(home, /name="geo\.region" content="MT-41"/i);
   assert.match(home, /"@type":"ProfessionalService"/i);
-  assert.match(home, /"streetAddress":"Fawwara Building, Triq l-Imsida"/i);
+  assert.match(home, /"streetAddress":"144\/9 Palazzo Marina, Marina Street"/i);
   assert.match(home, /"addressCountry":"MT"/i);
   assert.match(home, /"areaServed":\{"@type":"Country","name":"Malta"\}/i);
 
-  assert.match(contact, /Contact FST at Gżira/i);
-  assert.doesNotMatch(contact, /SOHO/i);
-  assert.match(contact, /Gżira meeting location/i);
-  assert.match(contact, /Fawwara Building, Triq l-Imsida/i);
+  assert.match(contact, /Contact FST at Pietà/i);
+  assert.doesNotMatch(contact, /SOHO|Fawwara Building|Triq l-Imsida|Gżira meeting location|Palazzo Marian/i);
+  assert.match(contact, /Registered office/i);
+  assert.match(contact, /144\/9 Palazzo Marina, Marina Street/i);
   assert.match(service, /"provider":\{"@id":"https:\/\/fst\.ikanisa\.com\/mt#professional-service"\}/i);
   assert.match(service, /"areaServed":\[\{"@type":"Country","name":"Malta"\}\]/i);
   assert.match(sitemap, /<loc>https:\/\/fst\.ikanisa\.com\/mt<\/loc>\s*<lastmod>2026-08-27T00:00:00\.000Z<\/lastmod>/i);

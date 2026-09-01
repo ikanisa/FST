@@ -4287,25 +4287,6 @@ h1 {
   text-transform: uppercase;
 }
 
-.ai-agent-intro > a {
-  display: inline-flex;
-  flex: 0 0 auto;
-  align-items: center;
-  gap: 5px;
-  margin-top: 7px;
-  color: var(--cobalt);
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  transition: color 180ms ease, transform 180ms ease;
-}
-
-.ai-agent-intro > a:hover {
-  color: var(--coral-dark);
-  transform: translateX(3px);
-}
-
 .ai-agent-workpack {
   grid-column: 1 / -1;
   align-self: end;
@@ -4892,8 +4873,6 @@ h1 {
   .ai-agent-row h3 { font-size: 30px; }
   .ai-agent-row p { font-size: 12px; line-height: 1.55; }
   .ai-agent-intro { align-items: start; }
-  .ai-agent-intro > a { margin-top: 8px; font-size: 8px; gap: 4px; }
-  .ai-agent-intro > a svg { width: 17px; height: 17px; }
   .ai-agent-workpack {
     padding-top: 12px;
   }
@@ -5807,11 +5786,11 @@ h1 {
   --agent-accent: var(--ai-periwinkle);
   --agent-tint: var(--ai-periwinkle-light);
   position: relative;
-  min-height: 338px;
+  min-height: 286px;
   padding: 24px;
   grid-column: auto;
   grid-template-columns: 70px minmax(0, 1fr);
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto;
   gap: 18px;
   overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--agent-accent) 28%, transparent);
@@ -5840,6 +5819,20 @@ h1 {
   border-color: color-mix(in srgb, var(--agent-accent) 48%, transparent);
   box-shadow: 0 26px 58px rgba(24, 52, 73, 0.14), inset 0 1px 0 #fff;
   transform: translateY(-5px);
+}
+
+.ai-team-page .ai-agent-row { cursor: pointer; }
+
+.ai-team-page .ai-agent-card-link {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.ai-team-page .ai-agent-card-link:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--agent-accent) 72%, #183449);
+  outline-offset: -5px;
 }
 
 .ai-team-page .ai-agent-row[data-tone="blue"] {
@@ -5876,24 +5869,28 @@ h1 {
   transition: transform 260ms ease;
 }
 
+.ai-team-page .ai-agent-details { display: contents; }
+
+.ai-team-page .ai-agent-intro {
+  grid-column: 2;
+  min-width: 0;
+}
+
+.ai-team-page .ai-agent-capacity,
+.ai-team-page .ai-agent-details > p {
+  grid-column: 1 / -1;
+  margin-top: 0;
+}
+
 .ai-team-page .ai-agent-row:hover > img { transform: scale(1.035); }
 
 .ai-team-page .ai-agent-intro > div > span,
-.ai-team-page .ai-agent-intro > a,
 .ai-team-page .ai-agent-capacity strong,
-.ai-team-page .ai-agent-capacity > span b,
-.ai-team-page .ai-agent-workpack strong { color: color-mix(in srgb, var(--agent-accent) 72%, #183449); }
+.ai-team-page .ai-agent-capacity > span b { color: color-mix(in srgb, var(--agent-accent) 72%, #183449); }
 
 .ai-team-page .ai-agent-capacity {
   background: #f8faff;
   background: color-mix(in srgb, var(--agent-accent) 10%, white);
-}
-
-.ai-team-page .ai-agent-workpack { border-color: color-mix(in srgb, var(--agent-accent) 20%, transparent); }
-
-.ai-team-page .ai-agent-workpack li {
-  background: rgba(255, 255, 255, 0.72);
-  border: 1px solid color-mix(in srgb, var(--agent-accent) 17%, transparent);
 }
 
 .ai-agent-pagination {
@@ -6128,7 +6125,7 @@ h1 {
   .ai-agent-showcase-controls button { width: 40px; height: 40px; }
   .ai-team-page .ai-agent-list { margin-right: -18px; grid-auto-columns: minmax(286px, 84vw); }
   .ai-team-page .ai-agent-row,
-  .ai-team-page .ai-agent-row:nth-child(n + 4) { min-height: 350px; padding: 21px; grid-template-columns: 64px minmax(0, 1fr); }
+  .ai-team-page .ai-agent-row:nth-child(n + 4) { min-height: 300px; padding: 21px; grid-template-columns: 64px minmax(0, 1fr); }
   .ai-team-page .ai-agent-row > img { width: 64px; height: 64px; }
   .ai-team-page .ai-pressure { padding-top: 96px; }
 }
